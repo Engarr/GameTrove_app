@@ -1,11 +1,22 @@
 import React from 'react';
-import { useGetGamesQuery } from '../../store/api/feedSlice';
+import { Outlet } from 'react-router-dom';
+import { IoGameControllerOutline } from 'react-icons/io5';
+import classes from './RootLayout.module.scss';
+import NavBarLeft from '../../components/Nav/NavBarLeft/NavBarLeft';
+import NavBarRight from '../../components/Nav/NavBarRight/NavBarRight';
 
 const RootLayout = () => {
-  const { data } = useGetGamesQuery();
-  console.log(data);
-
-  return <div>RootLayout</div>;
+  return (
+    <div className="dark">
+      <div className={classes.logo}>
+        <p>GameTrove</p>
+        <IoGameControllerOutline className={classes.logo__icon} />
+      </div>
+      <NavBarLeft />
+      <NavBarRight />
+      <Outlet />
+    </div>
+  );
 };
 
 export default RootLayout;

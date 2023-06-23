@@ -1,0 +1,37 @@
+*,
+html {
+  margin: 0;
+  padding: 0;
+}
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  position: relative;
+
+  font-family: 'Bai Jamjuree', 'Passion One', 'cursive', sans-serif;
+
+  background-color: var(--background-color);
+  color: var(--color);
+}
+a {
+  text-decoration: none;
+}
+ul {
+  list-style: none;
+}
+:root {
+  --background-color: rgb(68, 73, 80);
+  --logo-hover: rgba(255, 255, 255, 0.4);
+  --color: rgb(236, 236, 241);
+  --nav-border: rgba(217, 217, 217, 0.3);
+}
+.dark {
+  --background-color: rgb(68, 73, 80);
+  --background-color-menu: rgb(48, 52, 58);
+  --color: rgb(236, 236, 241);
+}
+.light {
+  --background-color: rgb(241, 236, 236);
+  --color: rgba(52, 53, 65);
+  --background-color-menu: rgb(242, 242, 242);
+}

@@ -3,7 +3,7 @@ import axios from 'axios';
 // eslint-disable-next-line import/prefer-default-export
 export const getGames = async (req, res, next) => {
   const { token } = req;
-
+  console.log(token);
   try {
     const url = 'https://api.twitch.tv/helix/games/top';
     const params = {

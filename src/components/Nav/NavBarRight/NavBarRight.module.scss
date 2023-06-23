@@ -1,0 +1,40 @@
+.nav {
+  position: relative;
+  top: 0;
+  right: 0;
+  overflow: hidden;
+  z-index: 100;
+  &__container {
+    position: fixed;
+    right: 0%;
+    top: 52px;
+    height: 250px;
+    width: 200px;
+    transform: translateY(-100%);
+    color: var(--color);
+    background-color: var(--background-color-menu);
+    transition: transform 0.3s;
+    box-shadow: 0 0 2px 1px greenyellow;
+  }
+ 
+}
+.active {
+  transform: translate(0);
+}
+.arrow {
+  position: absolute;
+  font-size: 1.4em;
+  right: 0%;
+  bottom: -32px;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 5px;
+  transition: transform 0.1s, background-color 0.3s;
+  cursor: pointer;
+  transform: rotateX(180deg);
+}
+.arrow:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.arrowRotate {
+  transform: rotateX(0deg);
+}
