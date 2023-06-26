@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, Link } from 'react-router-dom';
 import { IoGameControllerOutline } from 'react-icons/io5';
 import classes from './RootLayout.module.scss';
 import NavBarLeft from '../../components/Nav/NavBarLeft/NavBarLeft';
@@ -9,8 +9,10 @@ const RootLayout = () => {
   return (
     <div className="dark">
       <div className={classes.logo}>
-        <p>GameTrove</p>
-        <IoGameControllerOutline className={classes.logo__icon} />
+        <Link to="/">
+          <p>GameTrove</p>
+          <IoGameControllerOutline className={classes.logo__icon} />
+        </Link>
       </div>
       <NavBarLeft />
       <NavBarRight />

@@ -8,15 +8,46 @@
     position: fixed;
     right: 0%;
     top: 52px;
-    height: 250px;
-    width: 200px;
     transform: translateY(-100%);
     color: var(--color);
     background-color: var(--background-color-menu);
     transition: transform 0.3s;
     box-shadow: 0 0 2px 1px greenyellow;
   }
- 
+  &__buttons {
+    text-align: center;
+    padding: 10px 20px;
+    button {
+      font-family: 'Passion One', sans-serif;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px 20px;
+      width: 100%;
+      width: 200px;
+      background-color: rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--color);
+      color: var(--color);
+      margin-bottom: 1em;
+      font-size: 1em;
+      cursor: pointer;
+      transition: color 0.3s, background-color 0.3s;
+    }
+    button:hover {
+      background-color: var(--color);
+      color: var(--background-color);
+    }
+    button:hover &--icon {
+      color: rgb(92, 143, 15);
+    }
+    &--icon {
+      margin-left: 0.2em;
+      font-size: 1.4em;
+      color: greenyellow;
+      transition: color 0.3s;
+    }
+  }
 }
 .active {
   transform: translate(0);
@@ -25,9 +56,10 @@
   position: absolute;
   font-size: 1.4em;
   right: 0%;
-  bottom: -32px;
+  bottom: -35px;
   background-color: rgba(0, 0, 0, 0.2);
   padding: 5px;
+  width: 25%;
   transition: transform 0.1s, background-color 0.3s;
   cursor: pointer;
   transform: rotateX(180deg);
@@ -37,4 +69,34 @@
 }
 .arrowRotate {
   transform: rotateX(0deg);
+}
+@media only screen and (max-width: 1024px) {
+  .nav {
+    &__container {
+      position: fixed;
+      right: 0%;
+      top: 46px;
+    }
+    &__buttons {
+      button {
+        width: 150px;
+        margin-bottom: 0.5em;
+      }
+
+      &--icon {
+        margin-left: 0.3em;
+        font-size: 1.2em;
+      }
+    }
+  }
+  .active {
+    transform: translate(0);
+  }
+  .arrow {
+    width: 30%;
+    transform: rotateX(180deg);
+  }
+  .arrowRotate {
+    transform: rotateX(0deg);
+  }
 }
