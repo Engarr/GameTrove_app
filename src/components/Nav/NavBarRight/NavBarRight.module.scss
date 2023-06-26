@@ -60,15 +60,18 @@
   background-color: rgba(0, 0, 0, 0.2);
   padding: 5px;
   width: 25%;
-  transition: transform 0.1s, background-color 0.3s;
+  transition:  background-color 0.3s;
   cursor: pointer;
   transform: rotateX(180deg);
+  border-top-left-radius: 20px;
 }
 .arrow:hover {
   background-color: rgba(0, 0, 0, 0.6);
 }
 .arrowRotate {
   transform: rotateX(0deg);
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 20px;
 }
 @media only screen and (max-width: 1024px) {
   .nav {
