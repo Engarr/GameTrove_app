@@ -1,4 +1,3 @@
-import React from 'react';
 import { Outlet, Link } from 'react-router-dom';
 import { IoGameControllerOutline } from 'react-icons/io5';
 import classes from './RootLayout.module.scss';
@@ -16,6 +15,7 @@ const RootLayout = () => {
       </div>
       <NavBarLeft />
       <NavBarRight />
+
       <Outlet />
     </div>
   );
