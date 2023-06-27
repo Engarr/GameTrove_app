@@ -7,9 +7,9 @@ interface PlatformType {
   platform: string;
 }
 export const gameCategories: CategoryType[] = [
-  { id: 1, category: 'Action' },
-  { id: 2, category: 'Adventure' },
-  { id: 3, category: 'Shooter' },
+  { id: 1, category: 'action' },
+  { id: 2, category: 'adventure' },
+  { id: 3, category: 'shooter' },
   { id: 4, category: 'RPG (Role-Playing Game)' },
   { id: 5, category: 'Platform' },
   { id: 6, category: 'Racing' },

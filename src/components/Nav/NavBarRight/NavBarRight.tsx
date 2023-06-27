@@ -1,20 +1,22 @@
-import { useState } from 'react';
 import { IoIosArrowUp } from 'react-icons/io';
 import { PiUserPlusFill, PiUserFill } from 'react-icons/pi';
 import classes from './NavBarRight.module.scss';
 import Modal from '../../Modal/Modal';
 
-const NavBarRight = () => {
-  const [isAcite, setIsAcite] = useState(false);
+interface PropsType {
+  isActiveRightBar: boolean;
+  setIsActiveRightBar: React.Dispatch<React.SetStateAction<boolean>>;
+}
+const NavBarRight = ({ isActiveRightBar, setIsActiveRightBar }: PropsType) => {
   const activeHandler = () => {
-    setIsAcite((prev) => !prev);
+    setIsActiveRightBar((prev) => !prev);
   };
   return (
     <>
       <div className={classes.nav}>
         <div
           className={`${classes.nav__container} ${
-            isAcite ? classes.active : ''
+            isActiveRightBar ? classes.active : ''
           }`}
         >
           <div className={classes.nav__buttons}>
@@ -32,12 +34,14 @@ const NavBarRight = () => {
             </div>
           </div>
           <IoIosArrowUp
-            className={`${classes.arrow} ${isAcite ? classes.arrowRotate : ''}`}
+            className={`${classes.arrow} ${
+              isActiveRightBar ? classes.arrowRotate : ''
+            }`}
             onClick={activeHandler}
           />
         </div>
       </div>
-      <Modal show={isAcite} handler={activeHandler} />
+      <Modal show={isActiveRightBar} handler={activeHandler} />
     </>
   );
 };

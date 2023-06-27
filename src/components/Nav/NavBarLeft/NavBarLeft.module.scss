@@ -25,12 +25,14 @@
       text-transform: uppercase;
       font-size: 1.2em;
     }
+    &--categorys {
+      overflow-x: hidden;
+      overflow-y: scroll;
+      height: 350px;
+    }
     &--categorys,
     &--platforms {
       padding: 10px 20px;
-      height: 350px;
-      overflow-x: hidden;
-      overflow-y: scroll;
 
       button {
         padding: 5px 10px;
@@ -51,9 +53,19 @@
         background-color: var(--color);
         color: var(--background-color);
       }
+      &--platforms {
+        overflow: visible;
+      }
     }
-    &--platforms {
-      overflow: auto;
+  }
+
+  .activeButton {
+    button {
+      color: greenyellow;
+    }
+    button:hover {
+      background-color: var(--color);
+      color: var(--background-color);
     }
   }
 }
