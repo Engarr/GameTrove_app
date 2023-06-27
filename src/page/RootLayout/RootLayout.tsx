@@ -7,8 +7,8 @@ import NavBarLeft from '../../components/Nav/NavBarLeft/NavBarLeft';
 import NavBarRight from '../../components/Nav/NavBarRight/NavBarRight';
 
 const RootLayout = () => {
-  const [isActiveLeftBar, setIsActiveLeftBar] = useState(true);
-  const [isActiveRightBar, setIsActiveRightBar] = useState(true);
+  const [isActiveLeftBar, setIsActiveLeftBar] = useState(false);
+  const [isActiveRightBar, setIsActiveRightBar] = useState(false);
 
   return (
     <div className="dark">
@@ -25,12 +25,16 @@ const RootLayout = () => {
         </Link>
       </div>
       <NavBarLeft
-        setIsActiveLeftBar={setIsActiveLeftBar}
+        isActiveRightBar={isActiveRightBar}
+        setIsActiveRightBar={setIsActiveRightBar}
         isActiveLeftBar={isActiveLeftBar}
+        setIsActiveLeftBar={setIsActiveLeftBar}
       />
       <NavBarRight
         isActiveRightBar={isActiveRightBar}
         setIsActiveRightBar={setIsActiveRightBar}
+        isActiveLeftBar={isActiveLeftBar}
+        setIsActiveLeftBar={setIsActiveLeftBar}
       />
 
       <Outlet />

@@ -8,8 +8,13 @@ const productsApiSlice = apiSlice.injectEndpoints({
         method: 'POST',
       }),
     }),
+    getNotReleased: builder.query<void, void>({
+      query: () => ({
+        url: 'feed/notReleased',
+        method: 'POST',
+      }),
+    }),
   }),
 });
 
-// eslint-disable-next-line import/prefer-default-export
-export const { useGetGamesQuery } = productsApiSlice;
+export const { useGetGamesQuery, useGetNotReleasedQuery } = productsApiSlice;

@@ -4,12 +4,22 @@ import classes from './NavBarRight.module.scss';
 import Modal from '../../Modal/Modal';
 
 interface PropsType {
+  isActiveLeftBar: boolean;
   isActiveRightBar: boolean;
   setIsActiveRightBar: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsActiveLeftBar: React.Dispatch<React.SetStateAction<boolean>>;
 }
-const NavBarRight = ({ isActiveRightBar, setIsActiveRightBar }: PropsType) => {
+const NavBarRight = ({
+  isActiveRightBar,
+  setIsActiveRightBar,
+  isActiveLeftBar,
+  setIsActiveLeftBar,
+}: PropsType) => {
   const activeHandler = () => {
     setIsActiveRightBar((prev) => !prev);
+    if (isActiveLeftBar) {
+      setIsActiveLeftBar(false);
+    }
   };
   return (
     <>

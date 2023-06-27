@@ -7,10 +7,17 @@ import { gameCategories, gamePlatforms } from '../../../util/db';
 
 interface PropsType {
   isActiveLeftBar: boolean;
+  isActiveRightBar: boolean;
+  setIsActiveRightBar: React.Dispatch<React.SetStateAction<boolean>>;
   setIsActiveLeftBar: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const NavBarLeft = ({ isActiveLeftBar, setIsActiveLeftBar }: PropsType) => {
+const NavBarLeft = ({
+  isActiveLeftBar,
+  setIsActiveLeftBar,
+  isActiveRightBar,
+  setIsActiveRightBar,
+}: PropsType) => {
   const location = useLocation();
   const [activeCategory, setActiveCategory] = useState<null | string>(null);
   const [activePlatform, setActivePlatform] = useState<null | string>(null);
@@ -26,6 +33,9 @@ const NavBarLeft = ({ isActiveLeftBar, setIsActiveLeftBar }: PropsType) => {
 
   const activeHandler = () => {
     setIsActiveLeftBar((prev) => !prev);
+    if (isActiveRightBar) {
+      setIsActiveRightBar(false);
+    }
   };
 
   return (
