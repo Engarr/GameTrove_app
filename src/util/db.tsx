@@ -32,5 +32,4 @@ export const gamePlatforms: PlatformType[] = [
   { id: 2, platform: 'PlayStation' },
   { id: 3, platform: 'Xbox' },
   { id: 4, platform: 'Nintendo Switch' },
-  // Dodaj tutaj inne platformy gier według potrzeb
 ];

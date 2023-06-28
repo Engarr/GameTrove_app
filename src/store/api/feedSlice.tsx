@@ -8,13 +8,13 @@ const productsApiSlice = apiSlice.injectEndpoints({
         method: 'POST',
       }),
     }),
-    getNotReleased: builder.query<void, void>({
+    getBannerGames: builder.query<void, void>({
       query: () => ({
-        url: 'feed/notReleased',
+        url: 'feed/bannerGames',
         method: 'POST',
       }),
     }),
   }),
 });
 
-export const { useGetGamesQuery, useGetNotReleasedQuery } = productsApiSlice;
+export const { useGetGamesQuery, useGetBannerGamesQuery } = productsApiSlice;

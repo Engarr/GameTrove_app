@@ -26,34 +26,40 @@ export const getGames = async (req, res, next) => {
 
     res.status(200).json(games);
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error('Wystąpił błąd:', error);
   }
 };
 
-export const getNotReleased = async (req, res, next) => {
+export const getBannerGames = async (req, res, next) => {
   const { token } = req;
+  const offset = Math.floor(Math.random() * 10);
+
   try {
-    const url = 'https://api.igdb.com/v4/games';
-    const fields = 'name, cover';
-    const sort = 'rating desc';
-    const limit = 100;
-    const body = `fields ${fields}; sort ${sort}; limit ${limit};`;
+    const query = `
+    fields name, release_dates.date, cover.url, first_release_date, aggregated_rating, aggregated_rating_count, rating_count, rating;
+    where cover.url != null & first_release_date > ${Math.floor(
+      new Date('2023-01-01').getTime() / 1000
+    )} & aggregated_rating != null;
+    sort total_rating desc;
+    limit 3;
+    offset ${offset};
+    `;
 
-    const gamesResponse = await axios.post(url, body, {
-      headers: {
-        'Client-ID': process.env.VITE_CLIENT_ID,
-        Authorization: `Bearer ${token}`,
-      },
+    const headers = {
+      'Client-ID': process.env.VITE_CLIENT_ID,
+      Authorization: `Bearer ${token}`,
+    };
+
+    const response = await axios.post('https://api.igdb.com/v4/games', query, {
+      headers,
     });
-    const games = gamesResponse.data;
-    console.log(games);
-    const imageIds = games
-      .filter((game) => game.cover)
-      .map((game) => game.cover.id);
+    const newGames = response.data;
 
-    console.log(imageIds);
-    // res.status(200).json(games.data);
+    res.status(200).json(newGames);
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error('Wystąpił błąd:', error);
+    throw error;
   }
 };

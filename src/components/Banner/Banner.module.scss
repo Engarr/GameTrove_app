@@ -1,0 +1,158 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  height: 450px;
+  &__arrowRight,
+  &__arrowLeft {
+    position: absolute;
+    font-size: 2em;
+    color: var(--color);
+    top: 50%;
+    cursor: pointer;
+    transition: font-size 0.3s;
+    z-index: 20;
+  }
+  &__arrowRight:hover,
+  &__arrowLeft:hover {
+    font-size: 2.2em;
+  }
+  &__arrowRight {
+    right: 7%;
+  }
+  &__arrowLeft {
+    left: 7%;
+  }
+}
+.banner {
+  position: absolute;
+  top: 0%;
+  left: 50%;
+  transform: translate(-50%);
+  width: 100%;
+  height: 450px;
+  background-attachment: fixed;
+  background-position: 50% 20%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition: transform 0.3s, opacity 0.3s;
+  &__shadow {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.692);
+    z-index: 10;
+  }
+  &__name {
+    position: absolute;
+    z-index: 15;
+    top: 75%;
+    left: 2%;
+    padding: 10px 0px;
+    p {
+      text-transform: uppercase;
+      color: var(--color);
+      font-size: 2.2em;
+      font-weight: bold;
+    }
+    p::after {
+      content: '';
+      position: absolute;
+      left: 2%;
+      bottom: 0;
+      border-bottom: 2px solid greenyellow;
+      width: 100%;
+    }
+  }
+  &__rating {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    z-index: 15;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    p {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: greenyellow;
+      color: black;
+      font-weight: bold;
+      padding: 2px;
+      font-size: 1.2em;
+      border-radius: 50%;
+    }
+    span {
+      font-size: 0.6em;
+      margin-top: 0.2em;
+    }
+  }
+}
+
+.activeBaner {
+  opacity: 1;
+}
+.inactiveBanner {
+  opacity: 0;
+}
+.dotBox {
+  position: absolute;
+  z-index: 20;
+  display: flex;
+  bottom: 0%;
+  cursor: pointer;
+  transition: color 0.3s;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  div {
+    padding: 10px 10px;
+    font-size: 1.2em;
+  }
+}
+.activeDot {
+  color: greenyellow;
+}
+@media only screen and (max-width: 1024px) {
+  .wrapper {
+    width: 100%;
+    height: 300px;
+  }
+  .banner {
+    width: 100%;
+    height: 300px;
+
+    &__name {
+      top: 72%;
+
+      p {
+        text-transform: uppercase;
+        color: var(--color);
+
+        font-size: 1.2em;
+      }
+      p::after {
+        border-bottom: 1px solid greenyellow;
+      }
+    }
+    &__rating {
+      top: 10%;
+      right: 0%;
+    }
+  }
+
+  .dotBox {
+    div {
+      padding: 5px 10px;
+    }
+  }
+}

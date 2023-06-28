@@ -1,13 +1,12 @@
-import {
-  useGetNotReleasedQuery,
-  useGetGamesQuery,
-} from '../../store/api/feedSlice';
+import Banner from '../../components/Banner/Banner';
 import classes from './HomePage.module.scss';
 
 const HomePage = () => {
-  const { data } = useGetNotReleasedQuery();
-  // console.log(data);
-  return <section className={classes.wrapper}>Home</section>;
+  return (
+    <section className={classes.wrapper}>
+      <Banner />
+    </section>
+  );
 };
 
 export default HomePage;
