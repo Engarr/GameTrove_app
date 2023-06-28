@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 import { useGetBannerGamesQuery } from '../../store/api/feedSlice';
 import classes from './Banner.module.scss';
@@ -42,52 +43,54 @@ const Banner = () => {
   } else if (data) {
     content = (
       <>
-        <div>
-          <IoIosArrowBack
-            className={classes.wrapper__arrowLeft}
-            onClick={handlePrevBanner}
-          />
-          {data.map((item, index) => {
-            const imageUrl = item.cover.url.replace('t_thumb', 't_1080p');
-            return (
-              <div
-                key={item.id}
-                className={`${classes.banner} 
+        <IoIosArrowBack
+          className={classes.wrapper__arrowLeft}
+          onClick={handlePrevBanner}
+        />
+        {data.map((item, index) => {
+          const imageUrl = item.cover.url.replace('t_thumb', 't_1080p');
+          return (
+            <div
+              key={item.id}
+              className={`${classes.banner} 
             ${
               index === currentIndex
                 ? classes.activeBaner
                 : classes.inactiveBanner
             }
             `}
-                style={{ backgroundImage: `url(${imageUrl})` }}
-              >
-                <div className={classes.banner__shadow} />
-                <div className={classes.banner__content}>
-                  <div className={classes[`banner__content--img`]}>
-                    <img src={imageUrl} alt="" />
+              style={{ backgroundImage: `url(${imageUrl})` }}
+            >
+              <div className={classes.banner__shadow} />
+              <div className={classes.banner__content}>
+                <div className={classes[`banner__content--img`]}>
+                  <img src={imageUrl} alt="" />
+                </div>
+                <div className={classes[`banner__content--infoBox`]}>
+                  <div className={classes[`banner__content--infoBox-rating`]}>
+                    <p>{item.aggregated_rating.toFixed(0)}</p>
+                    <span>
+                      Based on {item.aggregated_rating_count} critic ratings
+                    </span>
                   </div>
-                  <div className={classes[`banner__content--infoBox`]}>
-                    <div className={classes[`banner__content--infoBox-rating`]}>
-                      <p>{item.aggregated_rating.toFixed(0)}</p>
-                      <span>
-                        Based on {item.aggregated_rating_count} critic ratings
-                      </span>
-                    </div>
-                    <div className={classes[`banner__content--infoBox-name`]}>
-                      <p>{item.name}</p>
-                    </div>
+                  <div className={classes[`banner__content--infoBox-name`]}>
+                    <p>{item.name}</p>
+
+                    <button type="button">
+                      <Link to={`/game/${item.id}`}>Read more</Link>
+                    </button>
                   </div>
                 </div>
               </div>
-            );
-          })}
-          <IoIosArrowForward
-            className={classes.wrapper__arrowRight}
-            onClick={handleNextBanner}
-          />
-        </div>
+            </div>
+          );
+        })}
+        <IoIosArrowForward
+          className={classes.wrapper__arrowRight}
+          onClick={handleNextBanner}
+        />
 
-        <div className={classes.dotBox}>
+        {/* <div className={classes.dotBox}>
           {data.map((item, slideIndex) => (
             <div
               key={item.id}
@@ -104,7 +107,7 @@ const Banner = () => {
               ●
             </div>
           ))}
-        </div>
+        </div> */}
       </>
     );
   }

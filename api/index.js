@@ -34,7 +34,11 @@ app.use((error, req, res, next) => {
   res.status(status).json({ message, data });
 });
 
-app.listen(port, () => {
-  // eslint-disable-next-line no-console
-  console.log(`server running on port ${port}`);
-});
+if (process.env.VITE_API_PORT) {
+  app.listen(port, () => {
+    // eslint-disable-next-line no-console
+    console.log(`server running on port ${port}`);
+  });
+}
+
+export default app;
