@@ -62,14 +62,21 @@ const Banner = () => {
                 style={{ backgroundImage: `url(${imageUrl})` }}
               >
                 <div className={classes.banner__shadow} />
-                <div className={classes.banner__name}>
-                  <p>{item.name}</p>
-                </div>
-                <div className={classes.banner__rating}>
-                  <p>{item.aggregated_rating.toFixed(0)}</p>
-                  <span>
-                    Based on {item.aggregated_rating_count} critic ratings
-                  </span>
+                <div className={classes.banner__content}>
+                  <div className={classes[`banner__content--img`]}>
+                    <img src={imageUrl} alt="" />
+                  </div>
+                  <div className={classes[`banner__content--infoBox`]}>
+                    <div className={classes[`banner__content--infoBox-rating`]}>
+                      <p>{item.aggregated_rating.toFixed(0)}</p>
+                      <span>
+                        Based on {item.aggregated_rating_count} critic ratings
+                      </span>
+                    </div>
+                    <div className={classes[`banner__content--infoBox-name`]}>
+                      <p>{item.name}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             );
@@ -79,7 +86,7 @@ const Banner = () => {
             onClick={handleNextBanner}
           />
         </div>
-        ;
+
         <div className={classes.dotBox}>
           {data.map((item, slideIndex) => (
             <div
