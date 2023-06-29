@@ -63,6 +63,9 @@ const Banner = () => {
             >
               <div className={classes.banner__shadow} />
               <div className={classes.banner__content}>
+                <div className={classes.banner__rec}>
+                  <p>recommended</p>
+                </div>
                 <div className={classes[`banner__content--img`]}>
                   <img src={imageUrl} alt="" />
                 </div>

@@ -33,7 +33,7 @@ export const getGames = async (req, res, next) => {
 
 export const getBannerGames = async (req, res, next) => {
   const { token } = req;
-  const offset = Math.floor(Math.random() * 10);
+  const offset = Math.floor(Math.random() * 20);
 
   try {
     const query = `
