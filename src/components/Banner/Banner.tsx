@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 import { useGetBannerGamesQuery } from '../../store/api/feedSlice';
@@ -35,6 +35,23 @@ const Banner = () => {
   const handlePrevBanner = () => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + data.length) % data.length);
   };
+  const changeBanner = () => {
+    if (data && currentIndex >= data.length) {
+      setCurrentIndex(0);
+    } else if (data) {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % data.length);
+    }
+  };
+
+  useEffect(() => {
+    const interval = setInterval(changeBanner, 5000);
+
+    return () => {
+      clearInterval(interval);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentIndex, data]);
+
   let content;
   if (isLoading) {
     content = <Spiner message="Loading..." />;
