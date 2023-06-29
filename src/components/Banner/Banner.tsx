@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 import { useGetBannerGamesQuery } from '../../store/api/feedSlice';
 import classes from './Banner.module.scss';
 import Spiner from '../Spinner/Spiner';
+import Card from './Card/Card';
 
 interface DataType {
   data: {
@@ -24,7 +25,7 @@ interface DataType {
 const Banner = () => {
   const { data, isLoading, isError } = useGetBannerGamesQuery<DataType>();
   const [currentIndex, setCurrentIndex] = useState(0);
-
+  const cardRef = useRef<HTMLDivElement>(null);
   const goToSlide = (slideIndex: number) => {
     setCurrentIndex(slideIndex);
   };
@@ -66,6 +67,7 @@ const Banner = () => {
         />
         {data.map((item, index) => {
           const imageUrl = item.cover.url.replace('t_thumb', 't_1080p');
+
           return (
             <div
               key={item.id}
@@ -79,13 +81,13 @@ const Banner = () => {
               style={{ backgroundImage: `url(${imageUrl})` }}
             >
               <div className={classes.banner__shadow} />
-              <div className={classes.banner__content}>
+              <div className={classes.banner__content} ref={cardRef}>
                 <div className={classes.banner__rec}>
                   <p>recommended</p>
                 </div>
-                <div className={classes[`banner__content--img`]}>
-                  <img src={imageUrl} alt="" />
-                </div>
+
+                <Card imageUrl={imageUrl} cardId={index} />
+
                 <div className={classes[`banner__content--infoBox`]}>
                   <div className={classes[`banner__content--infoBox-rating`]}>
                     <p>{item.aggregated_rating.toFixed(0)}</p>

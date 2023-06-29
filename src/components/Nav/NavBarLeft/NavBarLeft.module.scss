@@ -88,7 +88,7 @@
   border-bottom-right-radius: 20px;
 }
 .arrow:hover {
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(255, 255, 255, 0.7);
 }
 .arrowRotate {
   transform: rotateY(180deg);
@@ -139,7 +139,7 @@
     background-color: rgba(255, 255, 255, 0.5);
     color: black;
     padding: 5px;
-    height: 5%;
+    height: 7%;
     text-align: center;
     transition: transform 0.3s, background-color 0.3s;
     cursor: pointer;
@@ -152,6 +152,5 @@
     right: 0;
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 0px;
-    
   }
 }

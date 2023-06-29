@@ -1,0 +1,59 @@
+import { useEffect, useRef } from 'react';
+import classes from './Card.module.scss';
+
+interface PropsType {
+  imageUrl: string;
+  cardId: number;
+  // cardRef: RefObject<HTMLDivElement>;
+}
+
+const Card = ({ imageUrl, cardId }: PropsType) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const rotateElement = (event: MouseEvent) => {
+    if (cardRef.current) {
+      const cardRect = cardRef.current.getBoundingClientRect();
+      const offsetX =
+        ((event.pageX - cardRect.left) / cardRect.width - 0.5) * 50;
+      const offsetY =
+        ((event.pageY - cardRect.top) / cardRect.height - 0.5) * -50;
+
+      cardRef.current.style.setProperty('--rotateX', `${offsetY}deg`);
+      cardRef.current.style.setProperty('--rotateY', `${offsetX}deg`);
+      cardRef.current.style.setProperty('--reset', '0s');
+    }
+  };
+
+  const resetRotation = () => {
+    if (cardRef.current) {
+      cardRef.current.style.setProperty('--rotateX', '15deg');
+      cardRef.current.style.setProperty('--rotateY', '15deg');
+      cardRef.current.style.setProperty('--reset', '0.5s');
+    }
+  };
+
+  useEffect(() => {
+    const cardElement = cardRef.current;
+
+    if (cardElement) {
+      cardElement.addEventListener('mousemove', rotateElement);
+      cardElement.addEventListener('mouseleave', resetRotation);
+    }
+
+    return () => {
+      if (cardElement) {
+        cardElement.removeEventListener('mousemove', rotateElement);
+        cardElement.removeEventListener('mouseleave', resetRotation);
+      }
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return (
+    <div className={classes.img} id={`card-img-${cardId}`} ref={cardRef}>
+      <img src={imageUrl} alt="" />
+    </div>
+  );
+};
+
+export default Card;

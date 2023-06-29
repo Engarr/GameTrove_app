@@ -5,6 +5,7 @@
   background-color: rgba(0, 0, 0);
   z-index: 999;
   height: 52px;
+  text-shadow: 0 0 0.3em greenyellow;
   a {
     font-family: 'Passion One', sans-serif;
     padding: 5px 20px;
@@ -17,6 +18,7 @@
     transform: rotate(10deg);
     color: greenyellow;
   }
+
   p {
     font-size: 1.2em;
     letter-spacing: 2px;
