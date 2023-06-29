@@ -90,7 +90,7 @@ const Banner = () => {
           onClick={handleNextBanner}
         />
 
-        {/* <div className={classes.dotBox}>
+        <div className={classes.dotBox}>
           {data.map((item, slideIndex) => (
             <div
               key={item.id}
@@ -107,7 +107,7 @@ const Banner = () => {
               ●
             </div>
           ))}
-        </div> */}
+        </div>
       </>
     );
   }
