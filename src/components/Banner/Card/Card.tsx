@@ -1,17 +1,18 @@
-import { useEffect, useRef } from 'react';
+import { SetStateAction, useEffect, useRef } from 'react';
 import classes from './Card.module.scss';
 
 interface PropsType {
   imageUrl: string;
   cardId: number;
-  // cardRef: RefObject<HTMLDivElement>;
+  setIsActive: React.Dispatch<SetStateAction<boolean>>;
 }
 
-const Card = ({ imageUrl, cardId }: PropsType) => {
+const Card = ({ imageUrl, cardId, setIsActive }: PropsType) => {
   const cardRef = useRef<HTMLDivElement>(null);
 
   const rotateElement = (event: MouseEvent) => {
     if (cardRef.current) {
+      setIsActive(false);
       const cardRect = cardRef.current.getBoundingClientRect();
       const offsetX =
         ((event.pageX - cardRect.left) / cardRect.width - 0.5) * 50;
@@ -26,6 +27,7 @@ const Card = ({ imageUrl, cardId }: PropsType) => {
 
   const resetRotation = () => {
     if (cardRef.current) {
+      setIsActive(true);
       cardRef.current.style.setProperty('--rotateX', '15deg');
       cardRef.current.style.setProperty('--rotateY', '15deg');
       cardRef.current.style.setProperty('--reset', '0.5s');

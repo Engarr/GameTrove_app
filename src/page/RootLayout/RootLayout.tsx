@@ -1,17 +1,20 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import { Outlet, Link } from 'react-router-dom';
 import { IoGameControllerOutline } from 'react-icons/io5';
 import classes from './RootLayout.module.scss';
 import NavBarLeft from '../../components/Nav/NavBarLeft/NavBarLeft';
 import NavBarRight from '../../components/Nav/NavBarRight/NavBarRight';
+import { colorMode } from '../../store/slice/ThemeSlice';
 
 const RootLayout = () => {
   const [isActiveLeftBar, setIsActiveLeftBar] = useState(false);
   const [isActiveRightBar, setIsActiveRightBar] = useState(false);
+  const mode = useSelector(colorMode);
 
   return (
-    <div className="dark">
+    <div className={mode === 'light' ? 'light' : 'dark'}>
       <div className={classes.logo}>
         <Link
           to="/"

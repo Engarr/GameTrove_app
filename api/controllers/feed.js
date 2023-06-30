@@ -63,3 +63,46 @@ export const getBannerGames = async (req, res, next) => {
     throw error;
   }
 };
+
+export const getNewCategoryGames = async (req, res, next) => {
+  const { token } = req;
+  try {
+    const categoriesResponse = await axios.post(
+      'https://api.igdb.com/v4/genres',
+      'fields id, name; limit 100;',
+      {
+        headers: {
+          'Client-ID': process.env.VITE_CLIENT_ID,
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const categories = categoriesResponse.data;
+    const randomIndex = Math.floor(Math.random() * categories.length);
+    const randomCategory = categories[randomIndex];
+
+    const query = `fields name, release_dates.date, cover.url, first_release_date; 
+    where genres = ${
+      randomCategory.id
+    } & release_dates.date != null & cover.url != null & first_release_date > ${Math.floor(
+      new Date('2023-01-01').getTime() / 1000
+    )};
+    sort release_dates.date desc;
+    
+    limit 50;`;
+    const headers = {
+      'Client-ID': process.env.VITE_CLIENT_ID,
+      Authorization: `Bearer ${token}`,
+    };
+    const response = await axios.post('https://api.igdb.com/v4/games', query, {
+      headers,
+    });
+    const newsGames = response.data;
+    res.status(200).json({ newsGames, category: randomCategory });
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Wystąpił błąd:', error);
+    throw error;
+  }
+};

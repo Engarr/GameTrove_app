@@ -23,17 +23,20 @@
   opacity: 1;
 }
 .img::after {
-  inset: -0.1rem;
+  inset: -0.5rem;
   background: rgba(255, 255, 255, 0.445);
-  transform: translateZ(-40px);
+  transform: translateZ(-30px);
 }
 @media only screen and (max-width: 1024px) {
   .img {
     top: 10%;
-    transform: rotateY(5deg) rotateX(5deg);
-    transition: transform var(--reset);
+
     img {
       width: 120px;
     }
+  }
+
+  .img::after {
+    inset: -0.2rem;
   }
 }

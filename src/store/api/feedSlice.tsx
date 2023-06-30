@@ -14,7 +14,17 @@ const productsApiSlice = apiSlice.injectEndpoints({
         method: 'POST',
       }),
     }),
+    getNewCategoryGames: builder.query<void, void>({
+      query: () => ({
+        url: 'feed/randomGames',
+        method: 'POST',
+      }),
+    }),
   }),
 });
 
-export const { useGetGamesQuery, useGetBannerGamesQuery } = productsApiSlice;
+export const {
+  useGetGamesQuery,
+  useGetBannerGamesQuery,
+  useGetNewCategoryGamesQuery,
+} = productsApiSlice;

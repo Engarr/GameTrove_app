@@ -2,6 +2,7 @@ import { IoIosArrowUp } from 'react-icons/io';
 import { PiUserPlusFill, PiUserFill } from 'react-icons/pi';
 import classes from './NavBarRight.module.scss';
 import Modal from '../../Modal/Modal';
+import ThemeMode from '../../ThemeMode/ThemeMode';
 
 interface PropsType {
   isActiveLeftBar: boolean;
@@ -42,6 +43,7 @@ const NavBarRight = ({
                 <PiUserPlusFill className={classes[`nav__buttons--icon`]} />
               </button>
             </div>
+            <ThemeMode />
           </div>
           <IoIosArrowUp
             className={`${classes.arrow} ${

@@ -2,7 +2,9 @@
 html {
   margin: 0;
   padding: 0;
+  // box-sizing: border-box;
 }
+
 body {
   max-width: 100vw;
   overflow-x: hidden;
@@ -27,14 +29,23 @@ ul {
   --rotateY: 15deg;
   --rotateX: 15deg;
   --reset: 0.3s;
+  --slider-padding: 5rem;
+  --nav-background: black;
+  --black-white: black;
 }
 .dark {
   --background-color: rgb(68, 73, 80);
   --background-color-menu: rgb(48, 52, 58);
   --color: rgb(236, 236, 241);
+  --nav-background: black;
+  --black-white: white;
+  --logo: rgba(122, 216, 15, 0.986);
 }
 .light {
   --background-color: rgb(241, 236, 236);
   --color: rgba(52, 53, 65);
   --background-color-menu: rgb(242, 242, 242);
+  --nav-background: rgb(252, 251, 251);
+  --black-white: black;
+  --logo: black;
 }

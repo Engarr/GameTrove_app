@@ -10,7 +10,7 @@
   &__arrowLeft {
     position: absolute;
     font-size: 2em;
-    color: var(--color);
+    color: white;
     top: 50%;
     z-index: 20;
 
@@ -40,6 +40,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   transition: transform 0.3s, opacity 0.3s;
+
   &__rec {
     z-index: 20;
     position: absolute;
@@ -113,7 +114,7 @@
         padding: 10px 0px;
         p {
           text-transform: uppercase;
-          color: var(--color);
+          color: rgb(236, 236, 241);
           font-size: 2.2em;
           font-weight: bold;
         }
@@ -159,6 +160,7 @@
     transition: backdrop-filter 0.3s;
   }
 }
+
 .banner:hover .banner__content--infoBox-name button {
   opacity: 1;
 }
@@ -189,6 +191,7 @@
 .activeDot {
   color: greenyellow;
 }
+
 @media only screen and (max-width: 1024px) {
   .wrapper {
     width: 100%;
@@ -226,7 +229,6 @@
     }
 
     &__content {
-     
       &--infoBox {
         &-rating {
           position: absolute;

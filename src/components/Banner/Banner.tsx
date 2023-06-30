@@ -5,30 +5,17 @@ import { useGetBannerGamesQuery } from '../../store/api/feedSlice';
 import classes from './Banner.module.scss';
 import Spiner from '../Spinner/Spiner';
 import Card from './Card/Card';
+import { GameType } from '../../Types/types';
 
-interface DataType {
-  data: {
-    id: number;
-    name: string;
-    cover: {
-      id: number;
-      url: string;
-    };
-    first_release_date: number;
-    release_dates: { id: number; date: string }[];
-    aggregated_rating: number;
-    aggregated_rating_count: number;
-  }[];
-  isLoading: boolean;
-  isError: boolean;
-}
 const Banner = () => {
-  const { data, isLoading, isError } = useGetBannerGamesQuery<DataType>();
+  const { data, isLoading, isError } = useGetBannerGamesQuery<GameType>();
+  const [isActive, setIsActive] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
   const cardRef = useRef<HTMLDivElement>(null);
   const goToSlide = (slideIndex: number) => {
     setCurrentIndex(slideIndex);
   };
+
   const handleNextBanner = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % data.length);
   };
@@ -45,19 +32,28 @@ const Banner = () => {
   };
 
   useEffect(() => {
-    const interval = setInterval(changeBanner, 5000);
+    let interval: string | number | NodeJS.Timeout | undefined;
+
+    if (isActive) {
+      interval = setInterval(changeBanner, 5000);
+    }
 
     return () => {
       clearInterval(interval);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentIndex, data]);
+  }, [isActive]);
 
   let content;
   if (isLoading) {
     content = <Spiner message="Loading..." />;
   } else if (isError) {
-    content = <div>ERROR</div>;
+    content = (
+      <h3>
+        Error: There was a problem retrieving information. Try refreshing the
+        page
+      </h3>
+    );
   } else if (data) {
     content = (
       <>
@@ -86,7 +82,11 @@ const Banner = () => {
                   <p>recommended</p>
                 </div>
 
-                <Card imageUrl={imageUrl} cardId={index} />
+                <Card
+                  imageUrl={imageUrl}
+                  cardId={index}
+                  setIsActive={setIsActive}
+                />
 
                 <div className={classes[`banner__content--infoBox`]}>
                   <div className={classes[`banner__content--infoBox-rating`]}>
