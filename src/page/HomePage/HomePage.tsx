@@ -7,7 +7,7 @@ const HomePage = () => {
     <section className={classes.wrapper}>
       <Banner />
 
-      {/* <CategoryGameCard /> */}
+      <CategoryGameCard />
     </section>
   );
 };
