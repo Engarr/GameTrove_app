@@ -14,13 +14,15 @@ const CategoryGameCard = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const cardsContainerRef = useRef<HTMLDivElement>(null);
-  const isMobile = useMediaQuery({ maxWidth: 1024 });
+  const isMobile = useMediaQuery({ maxWidth: 736 });
+  const isMediumMobile = useMediaQuery({ maxWidth: 1024 });
   let divisor;
   // const mobileGamesThreshold = isMobile ? 1 : 2;
   const handleNextClick = () => {
     if (cardsContainerRef.current) {
       const containerWidth = cardsContainerRef.current.offsetWidth;
-      divisor = isMobile ? 1 : 2;
+      // eslint-disable-next-line no-nested-ternary
+      divisor = isMobile ? 1 : isMediumMobile ? 2 : 3;
 
       const cardWidth = containerWidth / divisor;
 
@@ -41,11 +43,12 @@ const CategoryGameCard = () => {
       }
     }
   };
-  console.log(data);
+
   const handlePrevClick = () => {
     if (cardsContainerRef.current) {
       const containerWidth = cardsContainerRef.current.offsetWidth;
-      divisor = isMobile ? 1 : 2;
+      // eslint-disable-next-line no-nested-ternary
+      divisor = isMobile ? 1 : isMediumMobile ? 2 : 3;
       const cardWidth = containerWidth / divisor;
       const newScrollPosition = Math.max(scrollPosition - cardWidth, 0);
 

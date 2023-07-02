@@ -49,7 +49,7 @@
 }
 .container {
   background-color: #fff;
-  height: 600px;
+  height: 800px;
   background-attachment: fixed;
   background-position: 50% 50%;
   background-size: cover;
@@ -74,37 +74,35 @@
   &__carouselBox {
     position: relative;
     z-index: 20;
-    width: 800px;
+    width: 60%;
   }
 
   &__preBtn,
   &__nextBtn {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: var(--greenYellow);
-    border: none;
-    padding: 20px;
-    border-radius: 50%;
     display: flex;
     justify-content: center;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    color: white;
+    border: none;
+    padding: 20px;
     align-items: center;
-    font-size: 1.2em;
-    transition: background-color 0.3s;
+    font-size: 3em;
+    transition: color 0.3s;
     cursor: pointer;
   }
   &__preBtn:hover,
   &__nextBtn:hover {
-    background-color: rgb(134, 212, 17);
+    color: var(--greenYellow);
   }
 
   &__nextBtn {
-    background-color: greenyellow;
-
-    right: -5%;
+    right: -7%;
   }
   &__preBtn {
-    left: -5%;
+    left: -7%;
   }
   &__cardsContainer {
     width: 100%;
@@ -117,10 +115,10 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 50%;
+
       flex-shrink: 0;
-      width: calc(100% / 2);
-      height: 500px;
+      width: calc(100% / 3);
+      height: 450px;
 
       margin: 0.2em 0;
 
@@ -136,7 +134,95 @@
     display: none;
   }
 }
-@media only screen and (max-width: 1024px) {
+@media only screen and (min-width: 737px) and (max-width: 1024px) {
+  .container {
+    background-color: #fff;
+    height: 400px;
+    background-attachment: fixed;
+    background-position: 50% 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__shadow {
+      position: absolute;
+      backdrop-filter: blur(10px);
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgb(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+    &__carouselBox {
+      position: relative;
+      z-index: 20;
+      width: 90%;
+    }
+
+    &__preBtn,
+    &__nextBtn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: var(--greenYellow);
+      border: none;
+      padding: 20px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.2em;
+      transition: background-color 0.3s;
+      cursor: pointer;
+    }
+    &__preBtn:hover,
+    &__nextBtn:hover {
+      background-color: rgb(134, 212, 17);
+    }
+
+    &__nextBtn {
+      background-color: greenyellow;
+
+      right: -5%;
+    }
+    &__preBtn {
+      left: -5%;
+    }
+    &__cardsContainer {
+      width: 100%;
+      overflow-x: auto;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+
+      &--card {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        width: 50%;
+        flex-shrink: 0;
+        width: calc(100% / 2);
+        height: 350px;
+        img {
+          border-radius: 5px;
+          height: 100%;
+        }
+      }
+    }
+    &__cardsContainer::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+@media only screen and (max-width: 736px) {
   .wrapper {
     margin-top: 72px;
     &__title {
@@ -200,7 +286,7 @@
     &__carouselBox {
       position: relative;
       z-index: 20;
-      width: 90%;
+      width: 50%;
     }
 
     &__preBtn,
