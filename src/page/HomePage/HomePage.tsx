@@ -6,7 +6,6 @@ const HomePage = () => {
   return (
     <section className={classes.wrapper}>
       <Banner />
-
       <CategoryGameCard />
     </section>
   );

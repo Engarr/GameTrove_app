@@ -1,15 +1,19 @@
 .wrapper {
+  top: 0;
+  position: relative;
   &__title {
     margin: 2em 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: var(--color);
-    width: 50%;
+    width: 80%;
     padding: 10px 20px;
     position: relative;
     left: 50%;
     transform: translate(-50%);
     text-align: center;
-    border-radius: 50px;
-
+    border-top-right-radius: 5px;
     h2 {
       padding: 10px 20px;
       letter-spacing: 1px;
@@ -20,11 +24,22 @@
         position: relative;
         font-weight: bold;
         margin-left: 0.5em;
-        color: orange;
+        color: var(--orange);
       }
     }
   }
+  &__title::before {
+    content: '';
+    position: absolute;
+    background-color: var(--background-color);
+    width: 147px;
+    height: 23px;
+    right: -31px;
+    top: 23px;
+    transform: rotate(45deg) translateY(-50%);
+  }
 }
+
 .spinnerContainer {
   margin-top: 2em;
   text-align: center;
@@ -102,12 +117,18 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 30%;
+      width: 50%;
       flex-shrink: 0;
-      width: calc(100% / 3);
+      width: calc(100% / 2);
+      height: 500px;
+
+      margin: 0.2em 0;
+
       img {
-        border-radius: 5px;
+        box-shadow: 0 0 5px var(--color);
+        border-radius: 10px;
         height: 100%;
+        width: 90%;
       }
     }
   }
@@ -117,13 +138,15 @@
 }
 @media only screen and (max-width: 1024px) {
   .wrapper {
-    
-    margin-top: 100px;
+    margin-top: 72px;
     &__title {
       width: 90%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
 
       h2 {
-        padding:5px ;
+        padding: 5px;
         letter-spacing: 1px;
         font-size: 1em;
         color: var(--background-color);
@@ -135,6 +158,12 @@
           color: orange;
         }
       }
+    }
+    &__title::before {
+      width: 147px;
+      height: 23px;
+      right: -53px;
+      top: 23px;
     }
   }
   .spinnerContainer {
@@ -215,8 +244,10 @@
         justify-content: center;
         align-items: center;
         width: 100%;
+        width: 50%;
         flex-shrink: 0;
-        // width: calc(100% / 1);
+        width: calc(100%);
+        height: 350px;
         img {
           border-radius: 5px;
           height: 100%;

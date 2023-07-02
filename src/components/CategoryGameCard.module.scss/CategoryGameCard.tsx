@@ -16,10 +16,11 @@ const CategoryGameCard = () => {
   const cardsContainerRef = useRef<HTMLDivElement>(null);
   const isMobile = useMediaQuery({ maxWidth: 1024 });
   let divisor;
+  // const mobileGamesThreshold = isMobile ? 1 : 2;
   const handleNextClick = () => {
     if (cardsContainerRef.current) {
       const containerWidth = cardsContainerRef.current.offsetWidth;
-      divisor = isMobile ? 1 : 3;
+      divisor = isMobile ? 1 : 2;
 
       const cardWidth = containerWidth / divisor;
 
@@ -40,11 +41,11 @@ const CategoryGameCard = () => {
       }
     }
   };
-
+  console.log(data);
   const handlePrevClick = () => {
     if (cardsContainerRef.current) {
       const containerWidth = cardsContainerRef.current.offsetWidth;
-      divisor = isMobile ? 1 : 3;
+      divisor = isMobile ? 1 : 2;
       const cardWidth = containerWidth / divisor;
       const newScrollPosition = Math.max(scrollPosition - cardWidth, 0);
 
@@ -61,7 +62,7 @@ const CategoryGameCard = () => {
     }
   };
 
-  if (data && data.newsGames[currentIndex].cover) {
+  if (data && data.newsGames[currentIndex]?.cover) {
     bacgroundImg = data.newsGames[currentIndex].cover.url.replace(
       't_thumb',
       't_1080p'
@@ -99,7 +100,7 @@ const CategoryGameCard = () => {
               <IoIosArrowBack className={classes[`container__preBtn--icon`]} />
             </button>
           )}
-          {currentIndex !== data.newsGames.length && (
+          {currentIndex + 1 < data.newsGames.length && (
             <button
               type="button"
               className={classes.container__nextBtn}

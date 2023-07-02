@@ -46,7 +46,7 @@
     position: absolute;
     bottom: 18px;
     right: -58px;
-    background-color: orange;
+    background-color: var(--orange);
     padding: 20px 5px;
     width: 200px;
     text-align: center;
@@ -59,7 +59,7 @@
     position: absolute;
     content: '';
     left: 0;
-    background-color: orange;
+    background-color: var(--orange);
     height: 100px;
     width: 200px;
     z-index: -1;
@@ -108,7 +108,7 @@
       }
       &-name {
         position: absolute;
-
+        min-width: 150px;
         top: 50%;
         left: 32%;
         padding: 10px 0px;
@@ -222,7 +222,7 @@
       position: absolute;
       content: '';
       left: 0;
-      background-color: orange;
+      background-color: var(--orange);
       height: 50px;
       width: 200px;
       z-index: -1;

@@ -5,9 +5,8 @@ html {
   // box-sizing: border-box;
 }
 
-
 body {
-  max-width: 100vw;
+  // max-width: 100vw;
   overflow-x: hidden;
   position: relative;
 
@@ -33,6 +32,7 @@ ul {
   --slider-padding: 5rem;
   --nav-background: black;
   --black-white: black;
+  --orange: orange;
 }
 .dark {
   --background-color: rgb(68, 73, 80);
@@ -42,6 +42,7 @@ ul {
   --black-white: white;
   --logo: rgba(122, 216, 15, 0.986);
   --greenYellow: greenyellow;
+  --orange: orange;
 }
 .light {
   --background-color: rgb(241, 236, 236);
@@ -51,4 +52,5 @@ ul {
   --black-white: black;
   --logo: black;
   --greenYellow: rgb(96, 155, 8);
+  --orange: orange;
 }
