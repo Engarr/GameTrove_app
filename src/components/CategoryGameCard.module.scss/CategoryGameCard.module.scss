@@ -1,22 +1,32 @@
 .wrapper {
-  h2 {
-    margin-top: 2em;
+  &__title {
+    margin: 2em 0;
+    background-color: var(--color);
+    width: 50%;
     padding: 10px 20px;
-    letter-spacing: 2px;
-    font-size: 2em;
-    color: var(--color);
-    z-index: 20;
-    span {
-      position: relative;
-      font-weight: bold;
-      margin-left: 0.5em;
-      color: var(--greenYellow);
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+    text-align: center;
+    border-radius: 50px;
+
+    h2 {
+      padding: 10px 20px;
+      letter-spacing: 1px;
+      font-size: 1.4em;
+      color: var(--background-color);
+      z-index: 20;
+      span {
+        position: relative;
+        font-weight: bold;
+        margin-left: 0.5em;
+        color: orange;
+      }
     }
   }
 }
 .spinnerContainer {
   margin-top: 2em;
-
   text-align: center;
   display: flex;
   justify-content: center;
@@ -24,7 +34,7 @@
 }
 .container {
   background-color: #fff;
-  height: 800px;
+  height: 600px;
   background-attachment: fixed;
   background-position: 50% 50%;
   background-size: cover;
@@ -36,7 +46,7 @@
 
   &__shadow {
     position: absolute;
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(10px);
     top: 0;
     bottom: 0;
     left: 0;
@@ -49,7 +59,7 @@
   &__carouselBox {
     position: relative;
     z-index: 20;
-    width: 60%;
+    width: 800px;
   }
 
   &__preBtn,
@@ -100,11 +110,121 @@
         height: 100%;
       }
     }
-    // &--card:nth-of-type(1) {
-    //   margin-left: 1em;
-    // }
   }
   &__cardsContainer::-webkit-scrollbar {
     display: none;
+  }
+}
+@media only screen and (max-width: 1024px) {
+  .wrapper {
+    
+    margin-top: 100px;
+    &__title {
+      width: 90%;
+
+      h2 {
+        padding:5px ;
+        letter-spacing: 1px;
+        font-size: 1em;
+        color: var(--background-color);
+        z-index: 20;
+        span {
+          position: relative;
+          font-weight: bold;
+          margin-left: 0.5em;
+          color: orange;
+        }
+      }
+    }
+  }
+  .spinnerContainer {
+    margin-top: 2em;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .container {
+    background-color: #fff;
+    height: 400px;
+    background-attachment: fixed;
+    background-position: 50% 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__shadow {
+      position: absolute;
+      backdrop-filter: blur(10px);
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgb(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+    &__carouselBox {
+      position: relative;
+      z-index: 20;
+      width: 90%;
+    }
+
+    &__preBtn,
+    &__nextBtn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: var(--greenYellow);
+      border: none;
+      padding: 20px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.2em;
+      transition: background-color 0.3s;
+      cursor: pointer;
+    }
+    &__preBtn:hover,
+    &__nextBtn:hover {
+      background-color: rgb(134, 212, 17);
+    }
+
+    &__nextBtn {
+      background-color: greenyellow;
+
+      right: -5%;
+    }
+    &__preBtn {
+      left: -5%;
+    }
+    &__cardsContainer {
+      width: 100%;
+      overflow-x: auto;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+
+      &--card {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        flex-shrink: 0;
+        // width: calc(100% / 1);
+        img {
+          border-radius: 5px;
+          height: 100%;
+        }
+      }
+    }
+    &__cardsContainer::-webkit-scrollbar {
+      display: none;
+    }
   }
 }

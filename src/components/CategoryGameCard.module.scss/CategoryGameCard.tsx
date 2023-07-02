@@ -1,4 +1,5 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
+import { useMediaQuery } from 'react-responsive';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 import classes from './CategoryGameCard.module.scss';
 import { useGetNewCategoryGamesQuery } from '../../store/api/feedSlice';
@@ -13,11 +14,15 @@ const CategoryGameCard = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const cardsContainerRef = useRef<HTMLDivElement>(null);
-
+  const isMobile = useMediaQuery({ maxWidth: 1024 });
+  let divisor;
   const handleNextClick = () => {
     if (cardsContainerRef.current) {
       const containerWidth = cardsContainerRef.current.offsetWidth;
-      const cardWidth = containerWidth / 3;
+      divisor = isMobile ? 1 : 3;
+
+      const cardWidth = containerWidth / divisor;
+
       const maxScrollPosition =
         cardsContainerRef.current.scrollWidth - containerWidth;
       const newScrollPosition = Math.min(
@@ -39,7 +44,8 @@ const CategoryGameCard = () => {
   const handlePrevClick = () => {
     if (cardsContainerRef.current) {
       const containerWidth = cardsContainerRef.current.offsetWidth;
-      const cardWidth = containerWidth / 3;
+      divisor = isMobile ? 1 : 3;
+      const cardWidth = containerWidth / divisor;
       const newScrollPosition = Math.max(scrollPosition - cardWidth, 0);
 
       setScrollPosition(newScrollPosition);
@@ -135,10 +141,12 @@ const CategoryGameCard = () => {
 
   return (
     <div className={classes.wrapper}>
-      <h2>
-        Game news in the category:
-        <span>{data ? data.category.name : ' Loading...'}</span>
-      </h2>
+      <div className={classes.wrapper__title}>
+        <h2>
+          Game news in the category:
+          <span>{data ? data.category.name : ' Loading...'}</span>
+        </h2>
+      </div>
 
       {content}
     </div>
