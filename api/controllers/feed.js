@@ -66,7 +66,7 @@ export const getBannerGames = async (req, res, next) => {
 
 export const getCategoryGames = async (req, res, next) => {
   const { token } = req;
-  const offset = Math.floor(Math.random() * 10);
+  const offset = Math.floor(Math.random() * 50);
 
   try {
     const categoriesResponse = await axios.post(
@@ -81,22 +81,22 @@ export const getCategoryGames = async (req, res, next) => {
     );
 
     const categories = categoriesResponse.data;
-    const numbersToReject = [33, 2, 9, 26, 34, 11, 4];
+    const numbersToReject = [33, 2, 9, 26, 34, 11, 4, 30, 36, 24];
     const newArr = categories.filter(
       (number) => !numbersToReject.includes(number.id)
     );
 
     const randomIndex = Math.floor(Math.random() * newArr.length);
-    const randomCategory = categories[randomIndex];
-
+    const randomCategory = newArr[randomIndex];
     const query = `
-    'fields name, cover.url, rating_count, rating; 
-    where genres = ${randomCategory.id} & first_release_date > 0 & cover.url != null & rating_count != null & rating != null; 
-    sort rating desc; 
-    limit 9;
     
-
-    '`;
+    fields name, cover.url, rating_count, rating;
+    where genres = ${randomCategory.id} & release_dates.date > 1538129354 & cover.url != null & rating_count != null & rating != null & themes != (42);
+    sort rating desc;
+    limit 9;
+     offset ${offset};
+    
+    `;
     const headers = {
       'Client-ID': process.env.VITE_CLIENT_ID,
       Authorization: `Bearer ${token}`,
@@ -105,7 +105,6 @@ export const getCategoryGames = async (req, res, next) => {
       headers,
     });
     const newsGames = response.data;
-
     res.status(200).json({ newsGames, category: randomCategory });
   } catch (error) {
     // eslint-disable-next-line no-console
