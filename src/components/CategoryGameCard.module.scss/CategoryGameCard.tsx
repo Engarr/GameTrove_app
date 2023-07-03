@@ -2,29 +2,31 @@ import { useState, useRef } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 import classes from './CategoryGameCard.module.scss';
-import { useGetNewCategoryGamesQuery } from '../../store/api/feedSlice';
+import { useGetCategoryGamesQuery } from '../../store/api/feedSlice';
 import { CategoryGameData } from '../../Types/types';
 import Spiner from '../Spinner/Spiner';
 
 const CategoryGameCard = () => {
   const { data, isLoading, isError } =
-    useGetNewCategoryGamesQuery<CategoryGameData>();
+    useGetCategoryGamesQuery<CategoryGameData>();
+  console.log(data);
   let bacgroundImg =
     'https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg';
   const [scrollPosition, setScrollPosition] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const cardsContainerRef = useRef<HTMLDivElement>(null);
-  const isMobile = useMediaQuery({ maxWidth: 736 });
-  const isMediumMobile = useMediaQuery({ maxWidth: 1024 });
-  let divisor;
+  // const isMobile = useMediaQuery({ maxWidth: 736 });
+  // const isMediumMobile = useMediaQuery({ maxWidth: 1024 });
+  // let divisor;
   // const mobileGamesThreshold = isMobile ? 1 : 2;
+
   const handleNextClick = () => {
     if (cardsContainerRef.current) {
       const containerWidth = cardsContainerRef.current.offsetWidth;
       // eslint-disable-next-line no-nested-ternary
-      divisor = isMobile ? 1 : isMediumMobile ? 2 : 3;
+      // divisor = isMobile ? 1 : isMediumMobile ? 2 : 3;
 
-      const cardWidth = containerWidth / divisor;
+      const cardWidth = containerWidth;
 
       const maxScrollPosition =
         cardsContainerRef.current.scrollWidth - containerWidth;
@@ -39,7 +41,7 @@ const CategoryGameCard = () => {
         behavior: 'smooth',
       });
       if (currentIndex < data.newsGames.length - 1) {
-        setCurrentIndex((prev) => prev + 1);
+        setCurrentIndex((prev) => prev + 3);
       }
     }
   };
@@ -48,8 +50,8 @@ const CategoryGameCard = () => {
     if (cardsContainerRef.current) {
       const containerWidth = cardsContainerRef.current.offsetWidth;
       // eslint-disable-next-line no-nested-ternary
-      divisor = isMobile ? 1 : isMediumMobile ? 2 : 3;
-      const cardWidth = containerWidth / divisor;
+      // divisor = isMobile ? 1 : isMediumMobile ? 2 : 3;
+      const cardWidth = containerWidth;
       const newScrollPosition = Math.max(scrollPosition - cardWidth, 0);
 
       setScrollPosition(newScrollPosition);
@@ -58,7 +60,7 @@ const CategoryGameCard = () => {
         behavior: 'smooth',
       });
       if (currentIndex !== 0 && currentIndex < data.newsGames.length) {
-        setCurrentIndex((prev) => prev - 1);
+        setCurrentIndex((prev) => prev - 3);
       } else if (currentIndex === 0) {
         setCurrentIndex((prev) => prev);
       }
@@ -103,7 +105,7 @@ const CategoryGameCard = () => {
               <IoIosArrowBack className={classes[`container__preBtn--icon`]} />
             </button>
           )}
-          {currentIndex + 1 < data.newsGames.length && (
+          {currentIndex + 3 < data.newsGames.length && (
             <button
               type="button"
               className={classes.container__nextBtn}
@@ -138,6 +140,23 @@ const CategoryGameCard = () => {
               );
             })}
           </div>
+          <div>
+            {/* {data.newsGames.map((item) => {
+              <div
+                key={item.id}
+                onClick={() => goToSlide(slideIndex)}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter') {
+                    goToSlide(slideIndex);
+                  }
+                }}
+                role="button"
+                tabIndex={0}
+              >
+                ●
+              </div>;
+            })} */}
+          </div>
         </div>
       </div>
     );
@@ -146,10 +165,15 @@ const CategoryGameCard = () => {
   return (
     <div className={classes.wrapper}>
       <div className={classes.wrapper__title}>
-        <h2>
-          Game news in the category:
-          <span>{data ? data.category.name : ' Loading...'}</span>
-        </h2>
+        <div>
+          <h2>
+            Top games in the category:
+            <span>{data ? data.category.name : ' Loading...'}</span>
+          </h2>
+        </div>
+        <div>
+          <p>According to user reviews</p>
+        </div>
       </div>
 
       {content}

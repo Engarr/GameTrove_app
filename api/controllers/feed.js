@@ -33,7 +33,7 @@ export const getGames = async (req, res, next) => {
 
 export const getBannerGames = async (req, res, next) => {
   const { token } = req;
-  const offset = Math.floor(Math.random() * 50);
+  const offset = Math.floor(Math.random() * 100);
 
   try {
     const query = `
@@ -42,7 +42,7 @@ export const getBannerGames = async (req, res, next) => {
       new Date('2023-01-01').getTime() / 1000
     )} & aggregated_rating != null;
     sort total_rating desc;
-    limit 3;
+    limit 5;
     offset ${offset};
     `;
 
@@ -64,8 +64,10 @@ export const getBannerGames = async (req, res, next) => {
   }
 };
 
-export const getNewCategoryGames = async (req, res, next) => {
+export const getCategoryGames = async (req, res, next) => {
   const { token } = req;
+  const offset = Math.floor(Math.random() * 10);
+
   try {
     const categoriesResponse = await axios.post(
       'https://api.igdb.com/v4/genres',
@@ -79,18 +81,22 @@ export const getNewCategoryGames = async (req, res, next) => {
     );
 
     const categories = categoriesResponse.data;
-    const randomIndex = Math.floor(Math.random() * categories.length);
+    const numbersToReject = [33, 2, 9, 26, 34, 11, 4];
+    const newArr = categories.filter(
+      (number) => !numbersToReject.includes(number.id)
+    );
+
+    const randomIndex = Math.floor(Math.random() * newArr.length);
     const randomCategory = categories[randomIndex];
 
-    const query = `fields name, release_dates.date, cover.url, first_release_date; 
-    where genres = ${
-      randomCategory.id
-    } & release_dates.date != null & cover.url != null & first_release_date > ${Math.floor(
-      new Date('2023-01-01').getTime() / 1000
-    )};
-    sort release_dates.date desc;
+    const query = `
+    'fields name, cover.url, rating_count, rating; 
+    where genres = ${randomCategory.id} & first_release_date > 0 & cover.url != null & rating_count != null & rating != null; 
+    sort rating desc; 
+    limit 9;
     
-    limit 50;`;
+
+    '`;
     const headers = {
       'Client-ID': process.env.VITE_CLIENT_ID,
       Authorization: `Bearer ${token}`,
@@ -99,6 +105,7 @@ export const getNewCategoryGames = async (req, res, next) => {
       headers,
     });
     const newsGames = response.data;
+
     res.status(200).json({ newsGames, category: randomCategory });
   } catch (error) {
     // eslint-disable-next-line no-console
