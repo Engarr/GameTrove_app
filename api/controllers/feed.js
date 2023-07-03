@@ -81,7 +81,7 @@ export const getCategoryGames = async (req, res, next) => {
     );
 
     const categories = categoriesResponse.data;
-    const numbersToReject = [33, 2, 9, 26, 34, 11, 4, 30, 36, 24];
+    const numbersToReject = [33, 2, 9, 26, 34, 11, 4, 30, 36, 24, 25, 35];
     const newArr = categories.filter(
       (number) => !numbersToReject.includes(number.id)
     );
@@ -91,8 +91,8 @@ export const getCategoryGames = async (req, res, next) => {
     const query = `
     
     fields name, cover.url, rating_count, rating;
-    where genres = ${randomCategory.id} & release_dates.date > 1538129354 & cover.url != null & rating_count != null & rating != null & themes != (42);
-    sort rating desc;
+    where genres = ${randomCategory.id} & release_dates.date > 1438129354 & cover.url != null & rating_count != null & rating != null & themes != (42) & total_rating > 75;
+   
     limit 9;
      offset ${offset};
     

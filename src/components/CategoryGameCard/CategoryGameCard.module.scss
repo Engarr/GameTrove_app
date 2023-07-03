@@ -110,35 +110,6 @@
   &__preBtn {
     left: -7%;
   }
-  &__cardsContainer {
-    width: 100%;
-    overflow-x: auto;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-
-    &--card {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      flex-shrink: 0;
-      width: calc(100% / 3);
-      height: 450px;
-
-      margin: 0.2em 0;
-
-      img {
-        box-shadow: 0 0 5px var(--color);
-        border-radius: 10px;
-        height: 100%;
-        width: 90%;
-      }
-    }
-  }
-  &__cardsContainer::-webkit-scrollbar {
-    display: none;
-  }
 }
 @keyframes show {
   0% {
@@ -151,9 +122,12 @@
   }
 }
 @media only screen and (min-width: 737px) and (max-width: 1024px) {
+  .wrapper {
+    margin-top: 72px;
+  }
   .container {
     background-color: #fff;
-    height: 400px;
+    height: 600px;
     background-attachment: fixed;
     background-position: 50% 50%;
     background-size: cover;
@@ -210,31 +184,6 @@
     &__preBtn {
       left: -5%;
     }
-    &__cardsContainer {
-      width: 100%;
-      overflow-x: auto;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-
-      &--card {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        width: 50%;
-        flex-shrink: 0;
-        width: calc(100% / 2);
-        height: 350px;
-        img {
-          border-radius: 5px;
-          height: 100%;
-        }
-      }
-    }
-    &__cardsContainer::-webkit-scrollbar {
-      display: none;
-    }
   }
 }
 
@@ -282,7 +231,7 @@
   }
   .container {
     background-color: #fff;
-    height: 400px;
+    height: 500px;
     background-attachment: fixed;
     background-position: 50% 50%;
     background-size: cover;
@@ -338,31 +287,6 @@
     }
     &__preBtn {
       left: -12%;
-    }
-    &__cardsContainer {
-      width: 100%;
-      overflow-x: auto;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-
-      &--card {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        width: 50%;
-        flex-shrink: 0;
-        width: calc(100%);
-        height: 350px;
-        img {
-          border-radius: 5px;
-          height: 100%;
-        }
-      }
-    }
-    &__cardsContainer::-webkit-scrollbar {
-      display: none;
     }
   }
 }

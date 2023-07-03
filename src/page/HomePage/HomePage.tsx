@@ -1,5 +1,5 @@
 import Banner from '../../components/Banner/Banner';
-import CategoryGameCard from '../../components/CategoryGameCard.module.scss/CategoryGameCard';
+import CategoryGameCard from '../../components/CategoryGameCard/CategoryGameCard';
 import classes from './HomePage.module.scss';
 
 const HomePage = () => {

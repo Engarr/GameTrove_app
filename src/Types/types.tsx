@@ -26,6 +26,7 @@ export interface CategoryGameData {
         url: string;
       };
       release_dates: { id: number; date: string };
+      rating: number;
     }[];
     category: {
       id: number;

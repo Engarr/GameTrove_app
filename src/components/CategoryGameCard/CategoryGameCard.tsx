@@ -1,15 +1,16 @@
-import { useState, useRef } from 'react';
-import { useMediaQuery } from 'react-responsive';
+import { useState, useRef, useEffect } from 'react';
+// import { useMediaQuery } from 'react-responsive';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
+import Card from './Card/Card';
 import classes from './CategoryGameCard.module.scss';
 import { useGetCategoryGamesQuery } from '../../store/api/feedSlice';
 import { CategoryGameData } from '../../Types/types';
 import Spiner from '../Spinner/Spiner';
 
 const CategoryGameCard = () => {
-  const { data, isLoading, isError } =
+  const { data, isLoading, isError, refetch } =
     useGetCategoryGamesQuery<CategoryGameData>();
-  console.log(data);
+
   let bacgroundImg =
     'https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg';
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -19,6 +20,12 @@ const CategoryGameCard = () => {
   // const isMediumMobile = useMediaQuery({ maxWidth: 1024 });
   // let divisor;
   // const mobileGamesThreshold = isMobile ? 1 : 2;
+
+  useEffect(() => {
+    if (!isLoading && data?.newsGames.length === 0) {
+      refetch();
+    }
+  }, [data, isLoading, refetch]);
 
   const handleNextClick = () => {
     if (cardsContainerRef.current) {
@@ -88,6 +95,12 @@ const CategoryGameCard = () => {
         page
       </h3>
     );
+  } else if (!isLoading && data?.newsGames.length === 0) {
+    content = (
+      <div className={classes.spinnerContainer}>
+        <Spiner message="Loading" />
+      </div>
+    );
   } else if (data) {
     content = (
       <div
@@ -116,47 +129,7 @@ const CategoryGameCard = () => {
               />
             </button>
           )}
-
-          <div
-            className={classes.container__cardsContainer}
-            ref={cardsContainerRef}
-          >
-            {data.newsGames.map((game) => {
-              const imageUrl = game.cover
-                ? game.cover.url.replace('t_thumb', 't_720p')
-                : '';
-
-              return (
-                <div
-                  className={classes[`container__cardsContainer--card`]}
-                  key={game.id}
-                >
-                  {game.cover ? (
-                    <img src={imageUrl} alt={game.name} width={250} />
-                  ) : (
-                    <div>No cover image</div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-          <div>
-            {/* {data.newsGames.map((item) => {
-              <div
-                key={item.id}
-                onClick={() => goToSlide(slideIndex)}
-                onKeyDown={(event) => {
-                  if (event.key === 'Enter') {
-                    goToSlide(slideIndex);
-                  }
-                }}
-                role="button"
-                tabIndex={0}
-              >
-                ●
-              </div>;
-            })} */}
-          </div>
+          <Card cardsContainerRef={cardsContainerRef} data={data} />
         </div>
       </div>
     );
