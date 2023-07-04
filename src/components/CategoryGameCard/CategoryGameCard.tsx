@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
-// import { useMediaQuery } from 'react-responsive';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
+import { useMediaQuery } from 'react-responsive';
 import Card from './Card/Card';
 import classes from './CategoryGameCard.module.scss';
 import { useGetCategoryGamesQuery } from '../../store/api/feedSlice';
@@ -14,12 +14,18 @@ const CategoryGameCard = () => {
   let bacgroundImg =
     'https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg';
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [activePosition, setActivePosition] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const cardsContainerRef = useRef<HTMLDivElement>(null);
-  // const isMobile = useMediaQuery({ maxWidth: 736 });
-  // const isMediumMobile = useMediaQuery({ maxWidth: 1024 });
-  // let divisor;
-  // const mobileGamesThreshold = isMobile ? 1 : 2;
+  const isMobile = useMediaQuery({ maxWidth: 736 });
+  const isMediumMobile = useMediaQuery({ maxWidth: 1024 });
+  let diverse = 3;
+
+  if (isMobile) {
+    diverse = 1;
+  } else if (isMediumMobile) {
+    diverse = 2;
+  }
 
   useEffect(() => {
     if (!isLoading && data?.newsGames.length === 0) {
@@ -30,13 +36,12 @@ const CategoryGameCard = () => {
   const handleNextClick = () => {
     if (cardsContainerRef.current) {
       const containerWidth = cardsContainerRef.current.offsetWidth;
-      // eslint-disable-next-line no-nested-ternary
-      // divisor = isMobile ? 1 : isMediumMobile ? 2 : 3;
 
       const cardWidth = containerWidth;
 
       const maxScrollPosition =
         cardsContainerRef.current.scrollWidth - containerWidth;
+
       const newScrollPosition = Math.min(
         scrollPosition + cardWidth,
         maxScrollPosition
@@ -48,16 +53,28 @@ const CategoryGameCard = () => {
         behavior: 'smooth',
       });
       if (currentIndex < data.newsGames.length - 1) {
-        setCurrentIndex((prev) => prev + 3);
+        setCurrentIndex((prev) => prev + diverse);
+        setActivePosition((prev) => prev + 1);
       }
+    }
+  };
+  const barSlider = (index: number) => {
+    if (cardsContainerRef.current) {
+      const containerWidth = cardsContainerRef.current.offsetWidth;
+      setCurrentIndex(index * diverse);
+      setActivePosition(index);
+      setScrollPosition(containerWidth * index);
+      cardsContainerRef.current.scrollTo({
+        left: containerWidth * index + diverse,
+        behavior: 'smooth',
+      });
     }
   };
 
   const handlePrevClick = () => {
     if (cardsContainerRef.current) {
       const containerWidth = cardsContainerRef.current.offsetWidth;
-      // eslint-disable-next-line no-nested-ternary
-      // divisor = isMobile ? 1 : isMediumMobile ? 2 : 3;
+
       const cardWidth = containerWidth;
       const newScrollPosition = Math.max(scrollPosition - cardWidth, 0);
 
@@ -67,9 +84,11 @@ const CategoryGameCard = () => {
         behavior: 'smooth',
       });
       if (currentIndex !== 0 && currentIndex < data.newsGames.length) {
-        setCurrentIndex((prev) => prev - 3);
+        setCurrentIndex((prev) => prev - diverse);
+        setActivePosition((prev) => prev - 1);
       } else if (currentIndex === 0) {
         setCurrentIndex((prev) => prev);
+        setActivePosition((prev) => prev);
       }
     }
   };
@@ -102,6 +121,11 @@ const CategoryGameCard = () => {
       </div>
     );
   } else if (data) {
+    const totalCards = data.newsGames.length;
+    const dotItems = Array.from({
+      length: Math.ceil(totalCards / diverse),
+    }).map((_, index) => ({ id: index + 1 }));
+
     content = (
       <div
         className={classes.container}
@@ -118,7 +142,7 @@ const CategoryGameCard = () => {
               <IoIosArrowBack className={classes[`container__preBtn--icon`]} />
             </button>
           )}
-          {currentIndex + 3 < data.newsGames.length && (
+          {currentIndex + diverse < data.newsGames.length && (
             <button
               type="button"
               className={classes.container__nextBtn}
@@ -130,6 +154,28 @@ const CategoryGameCard = () => {
             </button>
           )}
           <Card cardsContainerRef={cardsContainerRef} data={data} />
+
+          <div className={classes.rectangleBox}>
+            {dotItems.map((dot, index) => (
+              <div
+                key={dot.id}
+                className={`${classes.rectangleBox__dot} ${
+                  index === activePosition ? classes.active : ''
+                } `}
+                onClick={() => {
+                  barSlider(index);
+                }}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter') {
+                    barSlider(index);
+                  }
+                }}
+                role="button"
+                tabIndex={0}
+                aria-label={`Dot ${dot.id}`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     );

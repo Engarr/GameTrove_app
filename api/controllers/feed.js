@@ -90,11 +90,10 @@ export const getCategoryGames = async (req, res, next) => {
     const randomCategory = newArr[randomIndex];
     const query = `
     
-    fields name, cover.url, rating_count, rating;
-    where genres = ${randomCategory.id} & release_dates.date > 1438129354 & cover.url != null & rating_count != null & rating != null & themes != (42) & total_rating > 75;
+    fields name, cover.url, rating_count, rating, first_release_date;
+    where genres = ${randomCategory.id} & first_release_date > 1500000000 & cover.url != null & rating_count != null & rating != null & themes != (42) & total_rating > 75;
    
     limit 9;
-     offset ${offset};
     
     `;
     const headers = {
