@@ -17,11 +17,10 @@
     cursor: pointer;
     overflow: hidden;
     // background-color: #fff;
-    
 
     img {
       position: relative;
-      border-radius: 10px;
+
       height: 100%;
       width: 90%;
     }
@@ -76,7 +75,6 @@
   width: 100%;
   background-color: rgba(0, 0, 0, 0.692);
   z-index: 1;
-  border-radius: 10px;
   height: 100%;
   width: 90%;
   backdrop-filter: blur(1px);
@@ -87,52 +85,44 @@
 .cardsContainer::-webkit-scrollbar {
   display: none;
 }
-
-@media only screen and (min-width: 737px) and (max-width: 1024px) {
+@media only screen and (max-width: 1024px) {
   .cardsContainer {
-    width: 100%;
-    overflow-x: auto;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-
     &--card {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      width: 50%;
-      flex-shrink: 0;
-      width: calc(100% / 2);
       height: 350px;
       img {
-        border-radius: 5px;
+        position: relative;
+        border-radius: 0px;
         height: 100%;
+        width: 90%;
       }
+      &-rating {
+        padding: 15px;
+        opacity: 1;
+      }
+      &-name {
+        background-color: rgb(173, 255, 47, 0.6);
+        height: 10px;
+        padding: 50px 0px;
+        opacity: 1;
+      }
+    }
+  }
+  .shadow {
+    height: 0%;
+    width: 0%;
+  }
+}
+@media only screen and (min-width: 737px) and (max-width: 1024px) {
+  .cardsContainer {
+    &--card {
+      width: calc(100% / 2);
     }
   }
 }
 @media only screen and (max-width: 736px) {
   .cardsContainer {
-    width: 100%;
-    overflow-x: auto;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-
     &--card {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      width: 50%;
-      flex-shrink: 0;
       width: calc(100%);
-      height: 350px;
-      img {
-        border-radius: 5px;
-        height: 100%;
-      }
     }
   }
 }
