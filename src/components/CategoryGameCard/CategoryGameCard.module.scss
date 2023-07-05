@@ -152,7 +152,14 @@
   }
   .container {
     height: 600px;
-
+    &__img {
+      &--top {
+        height: 30px;
+      }
+      &--bottom {
+        height: 30px;
+      }
+    }
     &__carouselBox {
       width: 90%;
     }
@@ -196,6 +203,15 @@
 
   .container {
     height: 500px;
+    &__img {
+      &--top {
+        height: 30px;
+      }
+      &--bottom {
+        height: 30px;
+      }
+    }
+
     &__carouselBox {
       width: 80%;
     }
