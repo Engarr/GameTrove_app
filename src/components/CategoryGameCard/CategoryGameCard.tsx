@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 import { useMediaQuery } from 'react-responsive';
 import Card from './Card/Card';
@@ -6,11 +7,14 @@ import classes from './CategoryGameCard.module.scss';
 import { useGetCategoryGamesQuery } from '../../store/api/feedSlice';
 import { CategoryGameData } from '../../Types/types';
 import Spiner from '../Spinner/Spiner';
+import bgc from '../../asset/bgc.png';
+import bgcLight from '../../asset/bgc-light.png';
+import { colorMode } from '../../store/slice/ThemeSlice';
 
 const CategoryGameCard = () => {
   const { data, isLoading, isError, refetch } =
     useGetCategoryGamesQuery<CategoryGameData>();
-
+  const mode = useSelector(colorMode);
   let bacgroundImg =
     'https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg';
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -131,6 +135,12 @@ const CategoryGameCard = () => {
         className={classes.container}
         style={{ backgroundImage: `url(${bacgroundImg})` }}
       >
+        <img
+          src={mode === 'dark' ? bgc : bgcLight}
+          alt=""
+          height={60}
+          className={classes.container__img}
+        />
         <div className={classes.container__shadow} />
         <div className={classes.container__carouselBox}>
           {scrollPosition !== 0 && (

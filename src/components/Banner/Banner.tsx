@@ -1,4 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
+import { useSelector } from 'react-redux';
+
 import { Link } from 'react-router-dom';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 import { useGetBannerGamesQuery } from '../../store/api/feedSlice';
@@ -6,9 +8,14 @@ import classes from './Banner.module.scss';
 import Spiner from '../Spinner/Spiner';
 import Card from './Card/Card';
 import { GameType } from '../../Types/types';
+import bgc from '../../asset/bgc.png';
+import bgcLight from '../../asset/bgc-light.png';
+import { colorMode } from '../../store/slice/ThemeSlice';
 
 const Banner = () => {
   const { data, isLoading, isError } = useGetBannerGamesQuery<GameType>();
+  const mode = useSelector(colorMode);
+
   const [isActive, setIsActive] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -77,6 +84,12 @@ const Banner = () => {
               style={{ backgroundImage: `url(${imageUrl})` }}
             >
               <div className={classes.banner__shadow} />
+              <img
+                src={mode === 'dark' ? bgc : bgcLight}
+                alt=""
+                height={20}
+                className={classes.banner__img}
+              />
               <div className={classes.banner__content} ref={cardRef}>
                 <div className={classes.banner__rec}>
                   <p>recommended</p>
