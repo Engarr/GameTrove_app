@@ -24,8 +24,7 @@
       letter-spacing: 1px;
       font-size: 1.8em;
       color: var(--color);
-      z-index: 20;
-      // text-shadow: 0 0 0.2em var(--color);
+      z-index: 60;
 
       span {
         position: relative;
@@ -80,7 +79,9 @@
       position: absolute;
       width: 100%;
       z-index: 50;
-      top: -5px;
+      top: -10px;
+      animation: show 0.2s forwards linear;
+      
     }
     &--bottom {
       position: absolute;
@@ -88,6 +89,7 @@
       z-index: 50;
       bottom: 0;
       transform: rotate(180deg);
+      animation: show 0.2s forwards linear;
     }
   }
 
