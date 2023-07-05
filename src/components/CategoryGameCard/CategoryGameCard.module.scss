@@ -76,10 +76,19 @@
   justify-content: center;
   align-items: center;
   &__img {
-    position: absolute;
-    width: 100%;
-    z-index: 50;
-    top: -5px;
+    &--top {
+      position: absolute;
+      width: 100%;
+      z-index: 50;
+      top: -5px;
+    }
+    &--bottom {
+      position: absolute;
+      width: 100%;
+      z-index: 50;
+      bottom: 0;
+      transform: rotate(180deg);
+    }
   }
 
   &__shadow {

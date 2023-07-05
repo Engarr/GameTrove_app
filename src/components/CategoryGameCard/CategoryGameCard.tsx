@@ -139,7 +139,13 @@ const CategoryGameCard = () => {
           src={mode === 'dark' ? bgc : bgcLight}
           alt=""
           height={60}
-          className={classes.container__img}
+          className={classes[`container__img--top`]}
+        />
+        <img
+          src={mode === 'dark' ? bgc : bgcLight}
+          alt=""
+          height={60}
+          className={classes[`container__img--bottom`]}
         />
         <div className={classes.container__shadow} />
         <div className={classes.container__carouselBox}>
