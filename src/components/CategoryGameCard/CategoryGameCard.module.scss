@@ -2,6 +2,7 @@
   top: 0;
   position: relative;
   background-color: var(--background-color);
+  font-family: 'Bai Jamjuree', sans-serif;
 
   &__title {
     margin: 2em 0;
@@ -44,8 +45,9 @@
   &__dot {
     margin: 10px 5px;
     width: 30px;
-    height: 10px;
-    background-color: rgb(173, 255, 47, 0.2);
+    height: 7px;
+    background-color: rgb(173, 255, 47, 0.1);
+    border-radius: 2px;
     cursor: pointer;
     transition: 0.3s;
   }
@@ -81,7 +83,6 @@
       z-index: 50;
       top: -10px;
       animation: show 0.2s forwards linear;
-      
     }
     &--bottom {
       position: absolute;

@@ -4,7 +4,7 @@ import classes from './Card.module.scss';
 interface PropsType {
   imageUrl: string;
   cardId: number;
-  setIsActive: React.Dispatch<SetStateAction<boolean>>;
+  setIsActive?: React.Dispatch<SetStateAction<boolean>>;
 }
 
 const Card = ({ imageUrl, cardId, setIsActive }: PropsType) => {
@@ -12,7 +12,9 @@ const Card = ({ imageUrl, cardId, setIsActive }: PropsType) => {
 
   const rotateElement = (event: MouseEvent) => {
     if (cardRef.current) {
-      setIsActive(false);
+      if (setIsActive) {
+        setIsActive(false);
+      }
       const cardRect = cardRef.current.getBoundingClientRect();
       const offsetX =
         ((event.pageX - cardRect.left) / cardRect.width - 0.5) * 50;
@@ -27,7 +29,9 @@ const Card = ({ imageUrl, cardId, setIsActive }: PropsType) => {
 
   const resetRotation = () => {
     if (cardRef.current) {
-      setIsActive(true);
+      if (setIsActive) {
+        setIsActive(true);
+      }
       cardRef.current.style.setProperty('--rotateX', '15deg');
       cardRef.current.style.setProperty('--rotateY', '15deg');
       cardRef.current.style.setProperty('--reset', '0.5s');
@@ -56,6 +60,9 @@ const Card = ({ imageUrl, cardId, setIsActive }: PropsType) => {
       <img src={imageUrl} alt="game_picture" />
     </div>
   );
+};
+Card.defaultProps = {
+  setIsActive: undefined,
 };
 
 export default Card;

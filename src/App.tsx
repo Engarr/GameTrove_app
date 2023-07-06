@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import RootLayout from './page/RootLayout/RootLayout';
 import Home from './page/HomePage/HomePage';
+import GameDetail from './page/GameDetailPage/GameDetail';
 
 const App = () => {
   const router = createBrowserRouter([
@@ -13,6 +14,7 @@ const App = () => {
           index: true,
           element: <Home />,
         },
+        { path: 'game/:gameId', element: <GameDetail /> },
       ],
     },
   ]);

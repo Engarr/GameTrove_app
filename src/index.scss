@@ -6,12 +6,10 @@ html {
 }
 
 body {
-  // max-width: 100vw;
+  max-width: 100vw;
   overflow-x: hidden;
   position: relative;
-
-  font-family: 'Bai Jamjuree', 'Passion One', 'cursive', sans-serif;
-
+  font-family: 'Bai Jamjuree', 'Oswald', 'Passion One', cursive sans-serif;
   background-color: var(--background-color);
   color: var(--color);
 }
@@ -34,6 +32,8 @@ ul {
   --black-white: black;
   --orange: orange;
   --margin: 0.5rem;
+  --blue: #25b8fe;
+  --blue-hover: #089de2;
 }
 .dark {
   --background-color: rgb(68, 73, 80);

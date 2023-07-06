@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
-
 import { Link } from 'react-router-dom';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 import { useGetBannerGamesQuery } from '../../store/api/feedSlice';

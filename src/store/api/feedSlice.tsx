@@ -1,3 +1,4 @@
+import { GameDetailType } from '../../Types/types';
 import apiSlice from './apiSlice';
 
 const productsApiSlice = apiSlice.injectEndpoints({
@@ -20,6 +21,12 @@ const productsApiSlice = apiSlice.injectEndpoints({
         method: 'POST',
       }),
     }),
+    getGameDetails: builder.query<GameDetailType, string>({
+      query: (gameId) => ({
+        url: `feed/game/${gameId}`,
+        method: 'POST',
+      }),
+    }),
   }),
 });
 
@@ -27,4 +34,5 @@ export const {
   useGetGamesQuery,
   useGetBannerGamesQuery,
   useGetCategoryGamesQuery,
+  useGetGameDetailsQuery,
 } = productsApiSlice;

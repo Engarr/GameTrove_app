@@ -111,3 +111,42 @@ export const getCategoryGames = async (req, res, next) => {
     throw error;
   }
 };
+export const getGameDetails = async (req, res, next) => {
+  const { gameId } = req.params;
+  const { token } = req;
+  try {
+    const query = `
+    fields
+    name, cover.url, aggregated_rating, aggregated_rating_count, first_release_date, follows, genres.name, rating, rating_count, screenshots.url, storyline, summary;
+    where id = ${gameId};
+    `;
+    const headers = {
+      'Client-ID': process.env.VITE_CLIENT_ID,
+      Authorization: `Bearer ${token}`,
+    };
+    const response = await axios.post('https://api.igdb.com/v4/games', query, {
+      headers,
+    });
+    const gameDetails = response.data;
+    console.log(gameDetails.summary);
+    res.status(200).json(gameDetails[0]);
+    // console.log(gameDetails[0].age_ratings);
+
+    // const ageResponse = await axios.post(
+    //   'https://api.igdb.com/v4/age_ratings',
+    //   `fields *; where id = ${gameDetails[0].age_ratings};`,
+    //   {
+    //     headers: {
+    //       'Client-ID': process.env.VITE_CLIENT_ID,
+    //       Authorization: `Bearer ${token}`,
+    //     },
+    //   }
+    // );
+    // console.log(ageResponse);
+    // res.status(200).json(ageResponse);
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Wystąpił błąd:', error);
+    throw error;
+  }
+};

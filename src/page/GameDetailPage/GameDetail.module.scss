@@ -1,0 +1,237 @@
+.wrapper {
+  position: relative;
+  top: 52px;
+  background-color: var(--background-color);
+  font-family: 'Bai Jamjuree', sans-serif;
+  color: var(--color);
+  min-height: 1000px;
+}
+.spinnerContainer {
+  margin-top: 4em;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.errorContainer {
+  margin-top: 4em;
+  position: relative;
+  width: 50%;
+  left: 50%;
+  top: 50%;
+
+  font-size: 1.8rem;
+  transform: translate(-50%);
+  text-align: center;
+  span {
+    color: red;
+    margin-right: 0.3em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+}
+.productContainer {
+  &__background {
+    position: relative;
+    background-attachment: fixed;
+    background-position: 50% 60%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 450px;
+    &--shadow {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      background-color: rgb(0, 0, 0, 0.8);
+    }
+  }
+  &__name {
+    position: absolute;
+    top: 70%;
+    left: calc(5% + 250px);
+    padding: 0 10px;
+    z-index: 60;
+    h1 {
+      margin-bottom: 0.5em;
+      letter-spacing: 1px;
+    }
+
+    p {
+      margin-top: 1em;
+      span {
+        letter-spacing: 2px;
+        font-weight: bold;
+      }
+    }
+    &--heart {
+      font-size: 1.4em;
+      padding: 10px 0;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    &--heart:hover {
+      color: red;
+    }
+  }
+  &__transition {
+    position: absolute;
+    bottom: 0;
+    transform: rotate(180deg);
+    width: 100%;
+    z-index: 50;
+  }
+  &__cardBox {
+    z-index: 60;
+    position: absolute;
+    bottom: 60%;
+    left: 5%;
+  }
+  &__descriptionBox {
+    position: relative;
+    left: calc(5% + 270px);
+    width: 60%;
+    h2 {
+      letter-spacing: 1px;
+      position: relative;
+    }
+    h2:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      border: 1px solid var(--blue);
+      width: 100%;
+    }
+
+    div {
+      display: flex;
+    }
+    &--genre {
+      margin: 0.5em 0;
+
+      a {
+        color: var(--blue);
+        margin-right: 0.2em;
+        transition: color 0.3s;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 0.2em;
+      }
+      a:hover {
+        color: var(--blue-hover);
+      }
+      a::after {
+        content: ', ';
+      }
+      a:last-of-type::after {
+        content: '';
+      }
+    }
+    &--storyline {
+      display: flex;
+      flex-direction: column;
+      height: 200px;
+      h3 {
+        margin-right: 0.2em;
+        margin-bottom: 0.5em;
+      }
+      &-box {
+        overflow-y: auto;
+        p {
+          padding: 10px 20px 0 0;
+          font-family: 'Oswald', sans-serif;
+        }
+      }
+    }
+    ::-webkit-scrollbar {
+      width: 0.4em;
+      background-color: var(--color);
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: var(--blue);
+      border-radius: 5px;
+    }
+  }
+}
+@media only screen and (max-width: 1024px) {
+  .errorContainer {
+    top: 4em;
+    width: 90%;
+    font-size: 1em;
+  }
+  .productContainer {
+    &__background {
+      height: 400px;
+    }
+    &__name {
+      top: 65%;
+      left: 0;
+
+      h1 {
+        font-size: 1.2em;
+        margin-bottom: 0.1em;
+        letter-spacing: 1px;
+      }
+
+      p {
+        margin-top: 0.5em;
+        font-size: 0.9em;
+        span {
+          letter-spacing: 1px;
+        }
+      }
+      &--heart {
+        font-size: 1.2em;
+      }
+      &--heart:hover {
+        color: white;
+      }
+    }
+    &__transition {
+      bottom: -5px;
+    }
+    &__cardBox {
+      top: 17%;
+      left: 5%;
+    }
+    &__descriptionBox {
+      left: 0;
+      width: 100%;
+      padding: 0px;
+      h2 {
+        letter-spacing: 0.5px;
+        position: relative;
+        padding: 0px 0px 5px 5px;
+      }
+      h2:after {
+        width: 70%;
+      }
+
+      &--genre {
+        margin: 0.5em 0;
+        display: flex;
+        flex-direction: column;
+        padding: 0 5px;
+
+        a {
+          margin-right: 0em;
+          justify-content: flex-start;
+        }
+      }
+      &--storyline {
+        h3 {
+          padding-left: 5px;
+        }
+
+        &-box {
+          overflow-y: auto;
+          p {
+            padding: 0 5px;
+            font-family: 'Oswald', sans-serif;
+          }
+        }
+      }
+    }
+  }
+}

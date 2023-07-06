@@ -37,3 +37,27 @@ export interface CategoryGameData {
   isLoading: boolean;
   isError: boolean;
 }
+export interface GameDetailType {
+  id: number;
+  name: string;
+  aggregated_rating: number;
+  aggregated_rating_count: number;
+  cover: {
+    id: number;
+    url: string;
+  };
+  first_release_date: number;
+  follows: number;
+  genres: {
+    id: number;
+    name: string;
+  }[];
+  rating: number;
+  rating_count: number;
+  screenshots: {
+    id: number;
+    url: string;
+  }[];
+  storyline: string;
+  summary: string;
+}

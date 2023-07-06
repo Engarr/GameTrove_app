@@ -16,11 +16,9 @@
     height: 450px;
     cursor: pointer;
     overflow: hidden;
-    // background-color: #fff;
 
     img {
       position: relative;
-
       height: 100%;
       width: 90%;
     }
@@ -52,11 +50,16 @@
       padding: 50px 0px;
       font-weight: bold;
       text-align: center;
-      // border-top-left-radius: 30px;
-      // border-top-right-radius: 30px;
       font-size: 1.1em;
       opacity: 0;
       transition: opacity 0.3s, height 0.5s;
+      a {
+        color: var(--blue);
+        transition: color 0.3s;
+      }
+      a:hover {
+        color: black;
+      }
     }
   }
   &--card:hover &--card-rating,
@@ -100,7 +103,7 @@
         opacity: 1;
       }
       &-name {
-        background-color: rgb(173, 255, 47, 0.6);
+        background-color: var(--greenYellow);
         height: 10px;
         padding: 50px 0px;
         opacity: 1;

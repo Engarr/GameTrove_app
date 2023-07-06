@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import classes from './Card.module.scss';
 
 interface PropsType {
@@ -48,6 +49,14 @@ const Card = ({ cardsContainerRef, data }: PropsType) => {
                   <p>
                     Date: {month > 9 ? month : `0${month}`} {year}
                   </p>
+                  <Link
+                    to={`/game/${game.id}`}
+                    onClick={() => {
+                      window.scrollTo(0, 0);
+                    }}
+                  >
+                    Read more
+                  </Link>
                 </div>
               </div>
             );
