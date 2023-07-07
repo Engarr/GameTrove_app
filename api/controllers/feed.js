@@ -128,22 +128,8 @@ export const getGameDetails = async (req, res, next) => {
       headers,
     });
     const gameDetails = response.data;
-    console.log(gameDetails.summary);
-    res.status(200).json(gameDetails[0]);
-    // console.log(gameDetails[0].age_ratings);
 
-    // const ageResponse = await axios.post(
-    //   'https://api.igdb.com/v4/age_ratings',
-    //   `fields *; where id = ${gameDetails[0].age_ratings};`,
-    //   {
-    //     headers: {
-    //       'Client-ID': process.env.VITE_CLIENT_ID,
-    //       Authorization: `Bearer ${token}`,
-    //     },
-    //   }
-    // );
-    // console.log(ageResponse);
-    // res.status(200).json(ageResponse);
+    res.status(200).json(gameDetails[0]);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Wystąpił błąd:', error);

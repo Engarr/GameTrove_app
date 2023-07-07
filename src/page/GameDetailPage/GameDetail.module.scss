@@ -4,7 +4,7 @@
   background-color: var(--background-color);
   font-family: 'Bai Jamjuree', sans-serif;
   color: var(--color);
-  min-height: 1000px;
+  height: 10000px;
 }
 .spinnerContainer {
   margin-top: 4em;
@@ -38,6 +38,8 @@
     background-size: cover;
     background-repeat: no-repeat;
     height: 450px;
+    opacity: 0;
+    animation: show 1s forwards linear;
     &--shadow {
       position: absolute;
       height: 100%;
@@ -153,6 +155,88 @@
       background-color: var(--blue);
       border-radius: 5px;
     }
+  }
+}
+.screenshotsContainer {
+  display: flex;
+  padding: 10px 0px;
+  margin-top: 2em;
+  position: relative;
+
+  overflow: hidden;
+  width: 100%;
+  height: 400px;
+  justify-content: center;
+  align-items: center;
+  &__box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      height: 350px;
+    }
+  }
+}
+.leftImgPrev {
+  position: absolute;
+  left: 10%;
+  transform: translateX(0%) scale(0.8);
+  transition: left 1s, transform 1s, opacity 1s;
+  z-index: 1;
+
+  opacity: 0.5;
+}
+.centerImgActive {
+  position: absolute;
+  transform: translateX(0);
+  left: 50%;
+  transform: translate(-50%) scale(1);
+  transition: right 0.5s, left 0.5s, transform 0.5s, opacity 0.5s;
+  z-index: 20;
+}
+
+.rightImgNext {
+  position: absolute;
+  right: 10%;
+  transform: translateX(0%) scale(0.8);
+  transition: right 1s, transform 1s, opacity 1s;
+  z-index: 1;
+  opacity: 0.5;
+}
+
+.inactive {
+  display: none;
+}
+.button__prev,
+.button__next {
+  position: absolute;
+  z-index: 100;
+  top: 50%;
+  padding: 10px 20px;
+  font-size: 2.5em;
+  color: var(--color);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+.button__prev:hover,
+.button__next:hover {
+  color: var(--greenYellow);
+}
+.button__prev {
+  right: 100px;
+}
+.button__next {
+  left: 100px;
+}
+@keyframes show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 @media only screen and (max-width: 1024px) {

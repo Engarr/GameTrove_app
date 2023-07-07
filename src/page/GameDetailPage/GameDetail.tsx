@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 import { AiFillHeart } from 'react-icons/ai';
 import { useGetGameDetailsQuery } from '../../store/api/feedSlice';
 import classes from './GameDetail.module.scss';
@@ -18,101 +19,148 @@ interface DataType {
 }
 
 const GameDetail = () => {
-  const [content, setContent] = useState<React.ReactNode>(null);
+  // const [content, setContent] = useState<React.ReactNode>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
   const param = useParams();
   const { gameId } = param;
   const mode = useSelector(colorMode);
+  let content;
 
   const { data, isLoading, isError } = useGetGameDetailsQuery<DataType>(
     gameId as string
   );
 
-  useEffect(() => {
-    if (isLoading) {
-      setContent(
-        <div className={classes.spinnerContainer}>
-          <Spiner message="Loading..." />
+  const handlePrev = () => {
+    setActiveIndex((prev) => prev + 1);
+  };
+  const handleNext = () => {
+    setActiveIndex((prev) => prev - 1);
+  };
+  if (isLoading) {
+    content = (
+      <div className={classes.spinnerContainer}>
+        <Spiner message="Loading..." />
+      </div>
+    );
+  } else if (isError) {
+    content = (
+      <div className={classes.errorContainer}>
+        <h3>
+          <span>Error:</span>
+          There was a problem retrieving information. Try refreshing the page
+        </h3>
+      </div>
+    );
+  } else if (data) {
+    const imageUrl = data.cover.url.replace('t_thumb', 't_1080p');
+    const timestamp = data.first_release_date;
+    const date = new Date(timestamp * 1000);
+    const month = date.toLocaleString('en-US', { month: 'long' });
+    const year = date.getFullYear();
+    const screenshotsUrl = data.screenshots.map((screen) => ({
+      id: screen.id,
+      url: screen.url.replace('t_thumb', 't_1080p'),
+    }));
+
+    content = (
+      <div className={classes.productContainer}>
+        <div
+          style={{ backgroundImage: `url(${imageUrl})` }}
+          className={classes.productContainer__background}
+        >
+          <div className={classes[`productContainer__background--shadow`]} />
+          <img
+            src={mode === 'dark' ? bgc : bgcLight}
+            alt=""
+            height={30}
+            className={classes.productContainer__transition}
+          />
+          <div className={classes.productContainer__cardBox}>
+            <Card imageUrl={imageUrl} cardId={data.cover.id} />
+          </div>
+          <div className={classes.productContainer__name}>
+            <h1>{data.name}</h1>
+
+            <p>
+              <span>Release date:</span> {month} {year}
+            </p>
+
+            <AiFillHeart className={classes[`productContainer__name--heart`]} />
+          </div>
         </div>
-      );
-    } else if (isError) {
-      setContent(
-        <div className={classes.errorContainer}>
-          <h3>
-            <span>Error:</span>
-            There was a problem retrieving information. Try refreshing the page
-          </h3>
-        </div>
-      );
-    } else if (data) {
-      const imageUrl = data.cover.url.replace('t_thumb', 't_1080p');
-      const timestamp = data.first_release_date;
-      const date = new Date(timestamp * 1000);
-      const month = date.toLocaleString('en-US', { month: 'long' });
-      const year = date.getFullYear();
-      setContent(
-        <div className={classes.productContainer}>
+        <div className={classes.productContainer__descriptionBox}>
+          <h2>About the game:</h2>
+          <div className={classes[`productContainer__descriptionBox--genre`]}>
+            <h3>Genre: </h3>
+            {data.genres.map((genre) => (
+              <Link to="/" key={genre.id}>
+                {genre.name}
+              </Link>
+            ))}
+          </div>
+
           <div
-            style={{ backgroundImage: `url(${imageUrl})` }}
-            className={classes.productContainer__background}
+            className={classes[`productContainer__descriptionBox--storyline`]}
           >
-            <div className={classes[`productContainer__background--shadow`]} />
-            <img
-              src={mode === 'dark' ? bgc : bgcLight}
-              alt=""
-              height={30}
-              className={classes.productContainer__transition}
-            />
-            <div className={classes.productContainer__cardBox}>
-              <Card imageUrl={imageUrl} cardId={data.cover.id} />
-            </div>
-            <div className={classes.productContainer__name}>
-              <h1>{data.name}</h1>
-
-              <p>
-                <span>Release date:</span> {month} {year}
-              </p>
-
-              <AiFillHeart
-                className={classes[`productContainer__name--heart`]}
-              />
-            </div>
-          </div>
-          <div className={classes.productContainer__descriptionBox}>
-            <h2>About the game:</h2>
-            <div className={classes[`productContainer__descriptionBox--genre`]}>
-              <h3>Genre: </h3>
-              {data.genres.map((genre) => (
-                <Link to="/" key={genre.id}>
-                  {genre.name}
-                </Link>
-              ))}
-            </div>
-
+            <h3>Storyline:</h3>
             <div
-              className={classes[`productContainer__descriptionBox--storyline`]}
+              className={
+                classes[`productContainer__descriptionBox--storyline-box`]
+              }
             >
-              <h3>Storyline:</h3>
-              <div
-                className={
-                  classes[`productContainer__descriptionBox--storyline-box`]
-                }
-              >
-                {data.storyline ? (
-                  <p>{data.storyline}</p>
-                ) : (
-                  <p>
-                    Unfortunately, the game does not have a plot description
-                    yet.
-                  </p>
-                )}
-              </div>
+              {data.storyline ? (
+                <p>{data.storyline}</p>
+              ) : (
+                <p>
+                  Unfortunately, the game does not have a plot description yet.
+                </p>
+              )}
             </div>
           </div>
-          <div className={classes.screenshotsContainer}>tu</div>
         </div>
-      );
-    }
-  }, [isLoading, isError, data, mode]);
+        <div className={classes.screenshotsContainer}>
+          {activeIndex + 2 <= data.screenshots.length && (
+            <button
+              type="button"
+              onClick={handlePrev}
+              className={classes.button__prev}
+            >
+              <IoIosArrowForward />
+            </button>
+          )}
+          {activeIndex !== 0 && (
+            <button
+              type="button"
+              onClick={handleNext}
+              className={classes.button__next}
+            >
+              <IoIosArrowBack />
+            </button>
+          )}
+          {screenshotsUrl.map((screen, index) => {
+            let containerClasses = classes.inactive;
+
+            if (index === activeIndex) {
+              containerClasses = classes.centerImgActive;
+            } else if (index === activeIndex + 1) {
+              containerClasses = classes.rightImgNext;
+            } else if (index === activeIndex - 1) {
+              containerClasses = classes.leftImgPrev;
+            }
+
+            return (
+              <div
+                key={screen.id}
+                className={`${classes.screenshotsContainer__box} ${containerClasses}`}
+              >
+                <img src={screen.url} alt={`screenshot_${screen.id}`} />
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
 
   return <section className={classes.wrapper}>{content}</section>;
 };
