@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 import { AiFillHeart } from 'react-icons/ai';
 import { useGetGameDetailsQuery } from '../../store/api/feedSlice';
 import classes from './GameDetail.module.scss';
@@ -11,6 +10,7 @@ import Card from '../../components/Banner/Card/Card';
 import bgc from '../../asset/bgc.png';
 import bgcLight from '../../asset/bgc-light.png';
 import { colorMode } from '../../store/slice/ThemeSlice';
+import Slider from '../../components/Slider/Slider';
 
 interface DataType {
   data: GameDetailType;
@@ -19,8 +19,7 @@ interface DataType {
 }
 
 const GameDetail = () => {
-  // const [content, setContent] = useState<React.ReactNode>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(1);
   const param = useParams();
   const { gameId } = param;
   const mode = useSelector(colorMode);
@@ -30,12 +29,6 @@ const GameDetail = () => {
     gameId as string
   );
 
-  const handlePrev = () => {
-    setActiveIndex((prev) => prev + 1);
-  };
-  const handleNext = () => {
-    setActiveIndex((prev) => prev - 1);
-  };
   if (isLoading) {
     content = (
       <div className={classes.spinnerContainer}>
@@ -118,46 +111,12 @@ const GameDetail = () => {
             </div>
           </div>
         </div>
-        <div className={classes.screenshotsContainer}>
-          {activeIndex + 2 <= data.screenshots.length && (
-            <button
-              type="button"
-              onClick={handlePrev}
-              className={classes.button__prev}
-            >
-              <IoIosArrowForward />
-            </button>
-          )}
-          {activeIndex !== 0 && (
-            <button
-              type="button"
-              onClick={handleNext}
-              className={classes.button__next}
-            >
-              <IoIosArrowBack />
-            </button>
-          )}
-          {screenshotsUrl.map((screen, index) => {
-            let containerClasses = classes.inactive;
-
-            if (index === activeIndex) {
-              containerClasses = classes.centerImgActive;
-            } else if (index === activeIndex + 1) {
-              containerClasses = classes.rightImgNext;
-            } else if (index === activeIndex - 1) {
-              containerClasses = classes.leftImgPrev;
-            }
-
-            return (
-              <div
-                key={screen.id}
-                className={`${classes.screenshotsContainer__box} ${containerClasses}`}
-              >
-                <img src={screen.url} alt={`screenshot_${screen.id}`} />
-              </div>
-            );
-          })}
-        </div>
+        <Slider
+          setActiveIndex={setActiveIndex}
+          screenShotsLength={data.screenshots.length}
+          activeIndex={activeIndex}
+          screenshotsUrl={screenshotsUrl}
+        />
       </div>
     );
   }
