@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { AiFillHeart } from 'react-icons/ai';
@@ -17,6 +18,7 @@ interface DataType {
 }
 
 const GameDetail = () => {
+  const [content, setContent] = useState<React.ReactNode>(null);
   const param = useParams();
   const { gameId } = param;
   const mode = useSelector(colorMode);
@@ -25,88 +27,93 @@ const GameDetail = () => {
     gameId as string
   );
 
-  let content;
-  if (isLoading) {
-    content = (
-      <div className={classes.spinnerContainer}>
-        <Spiner message="Loading..." />
-      </div>
-    );
-  }
-  if (isError) {
-    content = (
-      <div className={classes.errorContainer}>
-        <h3>
-          <span>Error:</span>
-          There was a problem retrieving information. Try refreshing the page
-        </h3>
-      </div>
-    );
-  } else if (data) {
-    const imageUrl = data.cover.url.replace('t_thumb', 't_1080p');
-    const timestamp = data.first_release_date;
-    const date = new Date(timestamp * 1000);
-    const month = date.toLocaleString('en-US', { month: 'long' });
-    const year = date.getFullYear();
-    content = (
-      <div className={classes.productContainer}>
-        <div
-          style={{ backgroundImage: `url(${imageUrl})` }}
-          className={classes.productContainer__background}
-        >
-          <div className={classes[`productContainer__background--shadow`]} />
-          <img
-            src={mode === 'dark' ? bgc : bgcLight}
-            alt=""
-            height={30}
-            className={classes.productContainer__transition}
-          />
-          <div className={classes.productContainer__cardBox}>
-            <Card imageUrl={imageUrl} cardId={data.cover.id} />
-          </div>
-          <div className={classes.productContainer__name}>
-            <h1>{data.name}</h1>
-
-            <p>
-              <span>Release date:</span> {month} {year}
-            </p>
-
-            <AiFillHeart className={classes[`productContainer__name--heart`]} />
-          </div>
+  useEffect(() => {
+    if (isLoading) {
+      setContent(
+        <div className={classes.spinnerContainer}>
+          <Spiner message="Loading..." />
         </div>
-        <div className={classes.productContainer__descriptionBox}>
-          <h2>About the game:</h2>
-          <div className={classes[`productContainer__descriptionBox--genre`]}>
-            <h3>Genre: </h3>
-            {data.genres.map((genre) => (
-              <Link to="/" key={genre.id}>
-                {genre.name}
-              </Link>
-            ))}
-          </div>
-
+      );
+    } else if (isError) {
+      setContent(
+        <div className={classes.errorContainer}>
+          <h3>
+            <span>Error:</span>
+            There was a problem retrieving information. Try refreshing the page
+          </h3>
+        </div>
+      );
+    } else if (data) {
+      const imageUrl = data.cover.url.replace('t_thumb', 't_1080p');
+      const timestamp = data.first_release_date;
+      const date = new Date(timestamp * 1000);
+      const month = date.toLocaleString('en-US', { month: 'long' });
+      const year = date.getFullYear();
+      setContent(
+        <div className={classes.productContainer}>
           <div
-            className={classes[`productContainer__descriptionBox--storyline`]}
+            style={{ backgroundImage: `url(${imageUrl})` }}
+            className={classes.productContainer__background}
           >
-            <h3>Storyline:</h3>
-            <div
-              className={
-                classes[`productContainer__descriptionBox--storyline-box`]
-              }
-            >
-              {data.storyline ? (
-                <p>{data.storyline}</p>
-              ) : (
-                <p>
-                  Unfortunately, the game does not have a plot description yet.
-                </p>
-              )}
+            <div className={classes[`productContainer__background--shadow`]} />
+            <img
+              src={mode === 'dark' ? bgc : bgcLight}
+              alt=""
+              height={30}
+              className={classes.productContainer__transition}
+            />
+            <div className={classes.productContainer__cardBox}>
+              <Card imageUrl={imageUrl} cardId={data.cover.id} />
+            </div>
+            <div className={classes.productContainer__name}>
+              <h1>{data.name}</h1>
+
+              <p>
+                <span>Release date:</span> {month} {year}
+              </p>
+
+              <AiFillHeart
+                className={classes[`productContainer__name--heart`]}
+              />
             </div>
           </div>
+          <div className={classes.productContainer__descriptionBox}>
+            <h2>About the game:</h2>
+            <div className={classes[`productContainer__descriptionBox--genre`]}>
+              <h3>Genre: </h3>
+              {data.genres.map((genre) => (
+                <Link to="/" key={genre.id}>
+                  {genre.name}
+                </Link>
+              ))}
+            </div>
+
+            <div
+              className={classes[`productContainer__descriptionBox--storyline`]}
+            >
+              <h3>Storyline:</h3>
+              <div
+                className={
+                  classes[`productContainer__descriptionBox--storyline-box`]
+                }
+              >
+                {data.storyline ? (
+                  <p>{data.storyline}</p>
+                ) : (
+                  <p>
+                    Unfortunately, the game does not have a plot description
+                    yet.
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+          <div className={classes.screenshotsContainer}>tu</div>
         </div>
-      </div>
-    );
-  }
+      );
+    }
+  }, [isLoading, isError, data, mode]);
+
   return <section className={classes.wrapper}>{content}</section>;
 };
 
