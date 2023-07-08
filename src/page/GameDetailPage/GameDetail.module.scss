@@ -31,6 +31,7 @@
   }
 }
 .productContainer {
+ 
   &__background {
     position: relative;
     background-attachment: fixed;
@@ -39,6 +40,7 @@
     background-repeat: no-repeat;
     height: 450px;
     opacity: 0;
+
     animation: show 1s forwards linear;
     &--shadow {
       position: absolute;
@@ -92,6 +94,9 @@
     position: relative;
     left: calc(5% + 270px);
     width: 60%;
+    min-height: 300px;
+    
+
     h2 {
       letter-spacing: 1px;
       position: relative;
@@ -133,7 +138,9 @@
     &--summary {
       display: flex;
       flex-direction: column;
-      height: 200px;
+      height: auto;
+
+      transform: height 0.3s;
       h3 {
         margin-right: 0.2em;
         margin-bottom: 0.5em;
@@ -180,6 +187,7 @@
     font-size: 1em;
   }
   .productContainer {
+   
     &__background {
       height: 400px;
     }
@@ -218,6 +226,7 @@
       left: 0;
       width: 100%;
       padding: 0px;
+      min-height: 200px;
       h2 {
         letter-spacing: 0.5px;
         position: relative;

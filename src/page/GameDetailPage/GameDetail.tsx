@@ -42,7 +42,7 @@ const GameDetail = () => {
       } else {
         clearInterval(animationInterval);
       }
-    }, 12);
+    }, 5);
 
     return () => {
       clearInterval(animationInterval);
@@ -137,18 +137,20 @@ const GameDetail = () => {
                 <p>
                   {data.summary.substring(0, 100)}
                   {animatedText}
-                  <span
-                    onClick={substringHandler}
-                    onKeyDown={(event) => {
-                      if (event.key === 'Enter') {
-                        substringHandler();
-                      }
-                    }}
-                    role="button"
-                    tabIndex={0}
-                  >
-                    {substring !== descLength ? 'read more.' : '<-'}
-                  </span>
+                  {descLength > 100 && (
+                    <span
+                      onClick={substringHandler}
+                      onKeyDown={(event) => {
+                        if (event.key === 'Enter') {
+                          substringHandler();
+                        }
+                      }}
+                      role="button"
+                      tabIndex={0}
+                    >
+                      {substring === descLength ? '<-' : 'read more..'}
+                    </span>
+                  )}
                 </p>
               ) : (
                 <p>Unfortunately, the game does not have a description yet.</p>
