@@ -111,7 +111,12 @@ const Banner = () => {
                     <p>{item.name}</p>
 
                     <button type="button">
-                      <Link to={`/game/${item.id}`}>Read more</Link>
+                      <Link
+                        to={`/game/${item.id}`}
+                        onClick={() => window.scroll(0, 0)}
+                      >
+                        Read more
+                      </Link>
                     </button>
                   </div>
                 </div>

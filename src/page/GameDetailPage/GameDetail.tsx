@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { AiFillHeart } from 'react-icons/ai';
@@ -20,6 +20,8 @@ interface DataType {
 
 const GameDetail = () => {
   const [activeIndex, setActiveIndex] = useState(1);
+  const [substring, setSubstring] = useState(100);
+  const [animatedText, setAnimatedText] = useState('');
   const param = useParams();
   const { gameId } = param;
   const mode = useSelector(colorMode);
@@ -29,6 +31,37 @@ const GameDetail = () => {
     gameId as string
   );
 
+  const animateText = (text: string) => {
+    let currentText = '';
+    let currentIndex = 0;
+    const animationInterval = setInterval(() => {
+      if (currentIndex < text.length) {
+        currentText += text[currentIndex];
+        setAnimatedText(currentText);
+        currentIndex += 1;
+      } else {
+        clearInterval(animationInterval);
+      }
+    }, 12);
+
+    return () => {
+      clearInterval(animationInterval);
+    };
+  };
+
+  useEffect(() => {
+    if (data) {
+      animateText(data.summary.substring(100, substring));
+    }
+  }, [data, substring]);
+  const substringHandler = () => {
+    if (substring === 100) {
+      setSubstring(data?.summary.length || 0);
+    } else {
+      setSubstring(100);
+      setAnimatedText('');
+    }
+  };
   if (isLoading) {
     content = (
       <div className={classes.spinnerContainer}>
@@ -54,6 +87,7 @@ const GameDetail = () => {
       id: screen.id,
       url: screen.url.replace('t_thumb', 't_1080p'),
     }));
+    const descLength = data.summary.length;
 
     content = (
       <div className={classes.productContainer}>
@@ -92,21 +126,32 @@ const GameDetail = () => {
             ))}
           </div>
 
-          <div
-            className={classes[`productContainer__descriptionBox--storyline`]}
-          >
-            <h3>Storyline:</h3>
+          <div className={classes[`productContainer__descriptionBox--summary`]}>
+            <h3>Description:</h3>
             <div
               className={
-                classes[`productContainer__descriptionBox--storyline-box`]
+                classes[`productContainer__descriptionBox--summary-box`]
               }
             >
-              {data.storyline ? (
-                <p>{data.storyline}</p>
-              ) : (
+              {data.summary ? (
                 <p>
-                  Unfortunately, the game does not have a plot description yet.
+                  {data.summary.substring(0, 100)}
+                  {animatedText}
+                  <span
+                    onClick={substringHandler}
+                    onKeyDown={(event) => {
+                      if (event.key === 'Enter') {
+                        substringHandler();
+                      }
+                    }}
+                    role="button"
+                    tabIndex={0}
+                  >
+                    {substring !== descLength ? 'read more.' : '<-'}
+                  </span>
                 </p>
+              ) : (
+                <p>Unfortunately, the game does not have a description yet.</p>
               )}
             </div>
           </div>

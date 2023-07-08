@@ -130,7 +130,7 @@
         content: '';
       }
     }
-    &--storyline {
+    &--summary {
       display: flex;
       flex-direction: column;
       height: 200px;
@@ -144,6 +144,12 @@
           font-size: 1.2em;
           padding: 10px 20px 0 0;
           font-family: 'Oswald', sans-serif;
+
+          span {
+            padding-left: 5px;
+            color: var(--blue);
+            cursor: pointer;
+          }
         }
       }
     }
@@ -232,7 +238,7 @@
           justify-content: flex-start;
         }
       }
-      &--storyline {
+      &--summary {
         h3 {
           padding-left: 5px;
         }

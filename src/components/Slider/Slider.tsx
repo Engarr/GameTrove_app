@@ -24,19 +24,19 @@ const Slider = ({
   };
   return (
     <div className={classes.screenshotsContainer}>
-      {activeIndex !== 0 && (
+      {activeIndex + 2 <= screenShotsLength && (
         <button
           type="button"
           className={classes.button__next}
-          onClick={handleNext}
+          onClick={handlePrev}
         >
           <IoIosArrowForward />
         </button>
       )}
-      {activeIndex + 2 <= screenShotsLength && (
+      {activeIndex !== 0 && (
         <button
           type="button"
-          onClick={handlePrev}
+          onClick={handleNext}
           className={classes.button__prev}
         >
           <IoIosArrowBack />
