@@ -31,7 +31,6 @@
   }
 }
 .productContainer {
- 
   &__background {
     position: relative;
     background-attachment: fixed;
@@ -52,9 +51,10 @@
   &__name {
     position: absolute;
     top: 70%;
-    left: calc(5% + 250px);
+    left: calc(5% + 260px);
     padding: 0 10px;
     z-index: 60;
+    color: white;
     h1 {
       margin-bottom: 0.5em;
       letter-spacing: 1px;
@@ -95,7 +95,6 @@
     left: calc(5% + 270px);
     width: 60%;
     min-height: 300px;
-    
 
     h2 {
       letter-spacing: 1px;
@@ -187,7 +186,6 @@
     font-size: 1em;
   }
   .productContainer {
-   
     &__background {
       height: 400px;
     }
