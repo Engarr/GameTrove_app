@@ -1,0 +1,136 @@
+.spinnerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4em;
+  width: 100%;
+  position: relative;
+}
+.errorContainer {
+  position: relative;
+  margin-top: 4em;
+  width: 50%;
+  left: 50%;
+  top: 50%;
+  font-size: 1.8rem;
+  transform: translate(-50%);
+  text-align: center;
+  span {
+    color: red;
+    margin-right: 0.3em;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+  }
+}
+.productContainer {
+  &__background {
+    font-family: 'Bai Jamjuree', sans-serif;
+    position: relative;
+    background-attachment: fixed;
+    background-position: 50% 60%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 450px;
+    opacity: 0;
+    animation: show 1s forwards linear;
+    &--shadow {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      background-color: rgb(0, 0, 0, 0.8);
+    }
+  }
+  &__name {
+    position: absolute;
+    top: 70%;
+    left: calc(5% + 260px);
+    padding: 0 10px;
+    z-index: 60;
+    color: white;
+    h1 {
+      margin-bottom: 0.5em;
+      letter-spacing: 1px;
+    }
+
+    p {
+      margin-top: 1em;
+      span {
+        letter-spacing: 2px;
+        font-weight: bold;
+      }
+    }
+    &--heart {
+      font-size: 1.4em;
+      padding: 10px 0;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    &--heart:hover {
+      color: red;
+    }
+  }
+  &__transition {
+    position: absolute;
+    bottom: 0;
+    transform: rotate(180deg);
+    width: 100%;
+    z-index: 50;
+  }
+  &__cardBox {
+    z-index: 60;
+    position: absolute;
+    bottom: 60%;
+    left: 5%;
+  }
+}
+@keyframes show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@media only screen and (max-width: 1024px) {
+  .errorContainer {
+    top: 4em;
+    width: 90%;
+    font-size: 1em;
+  }
+  .productContainer {
+    &__background {
+      height: 400px;
+    }
+    &__name {
+      top: 65%;
+      left: 0;
+
+      h1 {
+        font-size: 1.2em;
+        margin-bottom: 0.1em;
+        letter-spacing: 1px;
+      }
+
+      p {
+        margin-top: 0.5em;
+        font-size: 0.9em;
+        span {
+          letter-spacing: 1px;
+        }
+      }
+      &--heart {
+        font-size: 1.2em;
+      }
+      &--heart:hover {
+        color: white;
+      }
+    }
+    &__transition {
+      bottom: -5px;
+    }
+    &__cardBox {
+      top: 17%;
+      left: 5%;
+    }
+  }
+}

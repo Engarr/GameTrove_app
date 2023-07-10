@@ -1,7 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet, Link, useLocation } from 'react-router-dom';
 import { IoGameControllerOutline } from 'react-icons/io5';
 import classes from './RootLayout.module.scss';
 import NavBarLeft from '../../components/Nav/NavBarLeft/NavBarLeft';
@@ -13,8 +12,14 @@ const RootLayout = () => {
   const [isActiveRightBar, setIsActiveRightBar] = useState(false);
   const mode = useSelector(colorMode);
 
+  const location = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
   return (
-    <div className={mode === 'light' ? 'light' : 'dark'}>
+    <section
+      className={`${mode === 'light' ? 'light' : 'dark'} ${classes.background}`}
+    >
       <div className={classes.logo}>
         <Link
           to="/"
@@ -41,7 +46,7 @@ const RootLayout = () => {
       />
 
       <Outlet />
-    </div>
+    </section>
   );
 };
 

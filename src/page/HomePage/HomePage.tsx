@@ -4,7 +4,7 @@ import classes from './HomePage.module.scss';
 
 const HomePage = () => {
   return (
-    <section className={classes.wrapper}>
+    <section className={classes.homeWrapper}>
       <Banner />
       <CategoryGameCard />
     </section>

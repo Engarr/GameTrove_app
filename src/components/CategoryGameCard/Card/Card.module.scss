@@ -5,6 +5,8 @@
   justify-content: flex-start;
   align-items: center;
   position: relative;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
 
   &--card {
     position: relative;
