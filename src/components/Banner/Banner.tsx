@@ -16,6 +16,7 @@ const Banner = () => {
   const mode = useSelector(colorMode);
 
   const [isActive, setIsActive] = useState(true);
+  const [isHovered, setIsHovered] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const cardRef = useRef<HTMLDivElement>(null);
   const goToSlide = (slideIndex: number) => {
@@ -39,7 +40,12 @@ const Banner = () => {
 
   useEffect(() => {
     let interval: string | number | NodeJS.Timeout | undefined;
-
+    if (isHovered) {
+      setIsActive(false);
+    }
+    if (!isHovered) {
+      setIsActive(true);
+    }
     if (isActive) {
       interval = setInterval(changeBanner, 5000);
     }
@@ -48,7 +54,7 @@ const Banner = () => {
       clearInterval(interval);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isActive]);
+  }, [isActive, isHovered]);
 
   let content;
   if (isLoading) {
@@ -80,6 +86,8 @@ const Banner = () => {
                 : classes.inactiveBanner
             }
             `}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
               style={{ backgroundImage: `url(${imageUrl})` }}
             >
               <div className={classes.banner__shadow} />

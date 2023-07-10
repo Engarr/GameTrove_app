@@ -9,7 +9,6 @@ interface PropsType {
 
 const Card = ({ imageUrl, cardId, setIsActive }: PropsType) => {
   const cardRef = useRef<HTMLDivElement>(null);
-
   const rotateElement = (event: MouseEvent) => {
     if (cardRef.current) {
       if (setIsActive) {
