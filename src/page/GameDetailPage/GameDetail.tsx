@@ -26,9 +26,7 @@ const GameDetail = () => {
       <GameDetailBanner data={data} isLoading={isLoading} isError={isError} />
       <GameDetailDesc data={data} isLoading={isLoading} />
       <Slider data={data} isLoading={isLoading} isError={isError} />
-      {data && data.videos && (
-        <VideoSlider data={data} isLoading={isLoading} isError={isError} />
-      )}
+      {data && data.videos && <VideoSlider data={data} isLoading={isLoading} />}
     </section>
   );
 };

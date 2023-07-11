@@ -1,5 +1,18 @@
 .videoWrapper {
-  position: relative;
+  margin-bottom: 2em;
+  h2 {
+    position: relative;
+    padding: 10px 5px;
+    text-transform: uppercase;
+  }
+  h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-bottom: 1px solid var(--blue);
+    width: 100%;
+  }
 }
 .videoContainer {
   position: relative;

@@ -126,7 +126,7 @@ const PhotoSlider = ({ data, isLoading, isError }: PropsType) => {
     );
   }
   return (
-    <div>
+    <div className={classes.photoWrapper}>
       <h2>Screenshots of the game</h2>
       {content}
     </div>

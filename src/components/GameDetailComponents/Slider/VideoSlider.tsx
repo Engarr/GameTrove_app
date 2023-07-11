@@ -6,10 +6,9 @@ import { GameDetailType } from '../../../Types/types';
 interface PropsType {
   data: GameDetailType;
   isLoading: boolean;
-  isError: boolean;
 }
 
-const VideoSlider = ({ data, isLoading, isError }: PropsType) => {
+const VideoSlider = ({ data, isLoading }: PropsType) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const handlePrev = () => {
     setActiveIndex((prev: number) => prev + 1);
