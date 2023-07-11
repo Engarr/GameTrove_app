@@ -1,9 +1,35 @@
+.spinnerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 50%;
+  width: 100%;
+  height: 400px;
+  position: relative;
+}
+.errorContainer {
+  position: relative;
+  margin-top: 4em;
+  width: 50%;
+  left: 50%;
+  top: 50%;
+  font-size: 1.8rem;
+  transform: translate(-50%);
+  text-align: center;
+  span {
+    color: red;
+    margin-right: 0.3em;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+  }
+}
 .screenshotsContainer {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 3em;
+
   width: 100%;
   height: 400px;
   &__box {
@@ -47,6 +73,18 @@
   &__zoom:hover {
     color: var(--blue-hover);
     transform: scale(0.9);
+  }
+  &__counter {
+    margin-bottom: 2em;
+    padding: 20px 20px;
+    width: 100%;
+    text-align: center;
+    font-size: 1.2em;
+    font-family: 'Bai Jamjuree' sans-serif;
+    span {
+      color: var(--blue);
+      font-weight: bold;
+    }
   }
 }
 @keyframes show {
@@ -121,7 +159,6 @@
 
     height: 200px;
     &__box {
-      
       max-width: 100%;
       img {
         height: 150px;
@@ -174,7 +211,7 @@
     position: absolute;
     transform: translateX(0);
     left: 50%;
-    transform: translate(-50%) scale(1.4);
+    transform: translate(-50%) scale(1.2);
     transition: left 0.3s, transform 0.3s, opacity 0.3s;
     z-index: 20;
   }

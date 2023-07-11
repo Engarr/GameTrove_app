@@ -60,4 +60,5 @@ export interface GameDetailType {
   }[];
   storyline: string;
   summary: string;
+  videos: { id: number; video_id: string }[];
 }

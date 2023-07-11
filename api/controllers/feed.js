@@ -117,7 +117,7 @@ export const getGameDetails = async (req, res, next) => {
   try {
     const query = `
     fields
-    name, cover.url, aggregated_rating, aggregated_rating_count, first_release_date, follows, genres.name, rating, rating_count, screenshots.url, storyline, summary;
+    name, cover.url, aggregated_rating, aggregated_rating_count, first_release_date, follows, genres.name, rating, rating_count, screenshots.url, storyline, summary, videos.video_id;
     where id = ${gameId};
     `;
     const headers = {

@@ -2,9 +2,10 @@ import { useParams } from 'react-router-dom';
 import { useGetGameDetailsQuery } from '../../store/api/feedSlice';
 import classes from './GameDetail.module.scss';
 import { GameDetailType } from '../../Types/types';
-import Slider from '../../components/Slider/Slider';
+import Slider from '../../components/GameDetailComponents/Slider/PhotoSlider';
 import GameDetailBanner from '../../components/GameDetailComponents/GameDetailBanner';
-import GameDetailDesc from './GameDetailDesc';
+import GameDetailDesc from '../../components/GameDetailComponents/GameDetailDesc';
+import VideoSlider from '../../components/GameDetailComponents/Slider/VideoSlider';
 
 interface DataType {
   data: GameDetailType;
@@ -24,7 +25,10 @@ const GameDetail = () => {
     <section className={classes.detailWrapper}>
       <GameDetailBanner data={data} isLoading={isLoading} isError={isError} />
       <GameDetailDesc data={data} isLoading={isLoading} />
-      <Slider data={data} isLoading={isLoading} isError={isError} />;
+      <Slider data={data} isLoading={isLoading} isError={isError} />
+      {data && data.videos && (
+        <VideoSlider data={data} isLoading={isLoading} isError={isError} />
+      )}
     </section>
   );
 };
