@@ -1,18 +1,23 @@
+@import '../../../index.scss';
+
 .photoWrapper {
   h2 {
     position: relative;
-    padding: 10px 5px;
+    padding: 10px 15px;
     text-transform: uppercase;
+    transform: translateX(-100%);
   }
   h2::after {
     content: '';
     position: absolute;
     bottom: 0;
-    left: 0;
-    border-bottom: 1px solid var(--blue);
-    width: 100%;
+    left: 2%;
+    border-bottom: 2px solid var(--greenYellow);
+    width: 40%;
+    transform: translateX(-150%);
   }
 }
+
 .spinnerContainer {
   display: flex;
   justify-content: center;

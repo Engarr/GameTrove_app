@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
+import { useInView } from 'react-intersection-observer';
 import { FiZoomIn } from 'react-icons/fi';
 import { MdZoomInMap } from 'react-icons/md';
 import classes from './PhotoSlider.module.scss';
@@ -16,7 +17,11 @@ interface PropsType {
 
 const PhotoSlider = ({ data, isLoading, isError }: PropsType) => {
   const [activeIndex, setActiveIndex] = useState(1);
-
+  const options = {
+    threshold: 0,
+    triggerOnce: true,
+  };
+  const { ref: locationRef, inView } = useInView(options);
   const isMediumMobile = useMediaQuery({ maxWidth: 1024 });
   const [bigIsActive, setBigIsActive] = useState(false);
   const handlePrev = () => {
@@ -52,6 +57,9 @@ const PhotoSlider = ({ data, isLoading, isError }: PropsType) => {
     const screenShotsLength = data.screenshots.length;
     content = (
       <>
+        <h2 ref={locationRef} className={`${inView && 'showUp'}`}>
+          Screenshots of the game
+        </h2>
         <div className={classes.screenshotsContainer}>
           {activeIndex + 2 <= screenShotsLength && (
             <button
@@ -125,12 +133,7 @@ const PhotoSlider = ({ data, isLoading, isError }: PropsType) => {
       </>
     );
   }
-  return (
-    <div className={classes.photoWrapper}>
-      <h2>Screenshots of the game</h2>
-      {content}
-    </div>
-  );
+  return <div className={classes.photoWrapper}>{content}</div>;
 };
 
 export default PhotoSlider;
