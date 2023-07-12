@@ -24,10 +24,10 @@ const PhotoSlider = ({ data, isLoading, isError }: PropsType) => {
   const { ref: locationRef, inView } = useInView(options);
   const isMediumMobile = useMediaQuery({ maxWidth: 1024 });
   const [bigIsActive, setBigIsActive] = useState(false);
-  const handlePrev = () => {
+  const handleNext = () => {
     setActiveIndex((prev: number) => prev + 1);
   };
-  const handleNext = () => {
+  const handlePrev = () => {
     setActiveIndex((prev: number) => prev - 1);
   };
   const activeHandler = () => {
@@ -65,7 +65,7 @@ const PhotoSlider = ({ data, isLoading, isError }: PropsType) => {
             <button
               type="button"
               className={classes.button__next}
-              onClick={handlePrev}
+              onClick={handleNext}
             >
               <IoIosArrowForward />
             </button>
@@ -73,7 +73,7 @@ const PhotoSlider = ({ data, isLoading, isError }: PropsType) => {
           {activeIndex !== 0 && (
             <button
               type="button"
-              onClick={handleNext}
+              onClick={handlePrev}
               className={classes.button__prev}
             >
               <IoIosArrowBack />
@@ -113,6 +113,24 @@ const PhotoSlider = ({ data, isLoading, isError }: PropsType) => {
             <>
               <Modal show={bigIsActive} handler={activeHandler} />
               <div className={classes.screenshotsContainer__bigImg}>
+                {activeIndex + 2 <= screenShotsLength && (
+                  <button
+                    type="button"
+                    className={classes[`screenshotsContainer__bigImg--btnNext`]}
+                    onClick={handleNext}
+                  >
+                    <IoIosArrowForward />
+                  </button>
+                )}
+                {activeIndex !== 0 && (
+                  <button
+                    type="button"
+                    onClick={handlePrev}
+                    className={classes[`screenshotsContainer__bigImg--btnPrev`]}
+                  >
+                    <IoIosArrowBack />
+                  </button>
+                )}
                 <img src={screenshotsUrl[activeIndex].url} alt="" />
                 <button
                   type="button"
