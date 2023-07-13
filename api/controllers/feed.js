@@ -65,7 +65,7 @@ export const getBannerGames = async (req, res, next) => {
 
 export const getCategoryGames = async (req, res, next) => {
   const { token } = req;
-  const offset = Math.floor(Math.random() * 50);
+  // const offset = Math.floor(Math.random() * 50);
 
   try {
     const categoriesResponse = await axios.post(

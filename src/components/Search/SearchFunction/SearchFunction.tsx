@@ -30,7 +30,12 @@ const SearchFunction = ({ isHideHandler, searchInput }: PropsType) => {
   if (isLoading) {
     searchContent = (
       <div className={classes.searchLoading}>
-        <p>Searching...</p>
+        <p>
+          Searching
+          <span>.</span>
+          <span>.</span>
+          <span>.</span>
+        </p>
       </div>
     );
   } else if (isError) {
@@ -41,23 +46,28 @@ const SearchFunction = ({ isHideHandler, searchInput }: PropsType) => {
     );
   } else if (!isLoading && data && data.length === 0) {
     searchContent = (
-      <div>
-        <p>No results</p>
+      <div className={classes.noResults}>
+        <p>There is no such game</p>
       </div>
     );
   } else if (data && data.length !== 0) {
     searchContent = (
       <ul>
         {data.map((game) => {
-          let imageUrl;
+          let imageUrl =
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE3CETL_OertJKScoHfblxs6CBrKGVCmVESw&usqp=CAU';
           if (game.cover && game.cover.url) {
             imageUrl = game.cover.url.replace('t_thumb', 't_720p');
           }
           return (
             <li key={game.id}>
-              {imageUrl && <img src={imageUrl} alt={game.name} width={50} />}
+              {imageUrl && (
+                <Link to={`/game/${game.id}`} onClick={isHideHandler}>
+                  <img src={imageUrl} alt={game.name} width={100} />
+                </Link>
+              )}
               <Link to={`/game/${game.id}`} onClick={isHideHandler}>
-                {game.name}
+                <p>{game.name}</p>
               </Link>
             </li>
           );

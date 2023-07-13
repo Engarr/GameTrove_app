@@ -9,6 +9,7 @@
     padding-right: 10px;
     transition: transform 0.3s, color 0.3s;
     cursor: pointer;
+    color: var(--color);
   }
   &__icon:hover {
     color: var(--greenYellow);
@@ -16,13 +17,14 @@
   }
   &__inputBox {
     position: relative;
+    padding: 10px 20px;
     input {
+      padding: 10px 5px;
       width: 0px;
-      padding: 10px 20px;
       opacity: 0;
       border: none;
       color: greenyellow;
-      background-color: rgb(255, 255, 255, 0.4);
+      background-color: var(--color);
       transition: width 0.3s;
     }
     input::placeholder {
@@ -35,7 +37,7 @@
     overflow-y: auto;
     margin-top: 10px;
     background-color: var(--background-color);
-    padding: 10px 20px;
+    padding: 10px 5px;
     width: 400px;
     max-height: 400px;
   }
@@ -47,15 +49,47 @@
     background-color: greenyellow;
     border-radius: 5px;
   }
-  li {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 10px 0px;
-    a {
-      font-size: 0.8em;
-      padding-left: 5px;
-      color: var(--color);
+  ul {
+    width: 100%;
+    li {
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-end;
+      // padding: 10px 0px;
+      width: 100%;
+      img {
+        padding: 5px 10px;
+        height: 102px;
+        width: 82px;
+      }
+      a {
+        font-size: 0.8em;
+        color: var(--color);
+        position: relative;
+        p {
+          position: relative;
+          letter-spacing: 1px;
+          // padding: 10px 0px;
+        }
+        p::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 0%;
+          border-bottom: 1px solid var(--greenYellow);
+          transition: width 0.3s;
+        }
+        p:hover::after {
+          width: 100%;
+        }
+      }
+    }
+    li:nth-of-type(even) {
+      background-color: var(--background-color-hover);
+    }
+    a:nth-child(2) {
+      padding: 10px 0px;
     }
   }
 }
@@ -72,9 +106,30 @@
   }
 }
 .searchLoading {
-  font-size: 20px;
   color: var(--greenYellow);
   text-shadow: none;
+  font-size: 0.9em;
+  span {
+    opacity: 0;
+    padding-left: 2px;
+
+    animation: showDot 0.8s infinite linear;
+  }
+  span:nth-child(2) {
+    animation-delay: 0.1s;
+  }
+  span:nth-child(3) {
+    animation-delay: 0.2s;
+  }
+}
+
+@keyframes showDot {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .searchError {
   p {
@@ -82,4 +137,9 @@
     font-size: 20px;
     color: red;
   }
+}
+.noResults {
+  color: var(--greenYellow);
+  text-shadow: none;
+  font-size: 0.7em;
 }
