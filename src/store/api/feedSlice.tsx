@@ -27,6 +27,13 @@ const productsApiSlice = apiSlice.injectEndpoints({
         method: 'POST',
       }),
     }),
+    getSearchgame: builder.query<void, string>({
+      query: (searchValue) => ({
+        url: `feed/search?q=${searchValue}`,
+        method: 'POST',
+      }),
+      providesTags: [{ type: 'Search' }],
+    }),
   }),
 });
 
@@ -35,4 +42,5 @@ export const {
   useGetBannerGamesQuery,
   useGetCategoryGamesQuery,
   useGetGameDetailsQuery,
+  useGetSearchgameQuery,
 } = productsApiSlice;

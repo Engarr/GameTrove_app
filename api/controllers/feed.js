@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-// eslint-disable-next-line import/prefer-default-export
 export const getGames = async (req, res, next) => {
   const { token } = req;
 
@@ -59,7 +58,7 @@ export const getBannerGames = async (req, res, next) => {
     res.status(200).json(newGames);
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.error('Wystąpił błąd:', error);
+    console.error('An error occured:', error);
     throw error;
   }
 };
@@ -107,7 +106,7 @@ export const getCategoryGames = async (req, res, next) => {
     res.status(200).json({ newsGames, category: randomCategory });
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.error('Wystąpił błąd:', error);
+    console.error('An error occured:', error);
     throw error;
   }
 };
@@ -132,7 +131,32 @@ export const getGameDetails = async (req, res, next) => {
     res.status(200).json(gameDetails[0]);
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.error('Wystąpił błąd:', error);
+    console.error('An error occured:', error);
+    throw error;
+  }
+};
+export const searchGames = async (req, res, next) => {
+  const { token } = req;
+  const searchValue = req.query.q;
+
+  try {
+    const query = `
+    search "${searchValue}";
+    fields name, cover.url;
+    where name ~ "${searchValue}"*;
+    limit 10;
+    `;
+    const headers = {
+      'Client-ID': process.env.VITE_CLIENT_ID,
+      Authorization: `Bearer ${token}`,
+    };
+    const response = await axios.post('https://api.igdb.com/v4/games', query, {
+      headers,
+    });
+    const games = response.data;
+    res.status(200).json(games);
+  } catch (error) {
+    console.error('An error occured:', error);
     throw error;
   }
 };

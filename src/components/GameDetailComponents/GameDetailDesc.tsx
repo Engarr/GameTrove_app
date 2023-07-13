@@ -29,10 +29,11 @@ const GameDetailDesc = ({ data, isLoading }: PropsType) => {
   };
 
   useEffect(() => {
-    if (data) {
+    if (data && data.summary) {
       animateText(data.summary.substring(100, substring));
     }
   }, [data, substring]);
+
   const substringHandler = () => {
     if (substring === 100) {
       setSubstring(data?.summary.length || 0);
@@ -43,18 +44,22 @@ const GameDetailDesc = ({ data, isLoading }: PropsType) => {
   };
   let content;
   if (!isLoading && data) {
-    const descLength = data.summary.length;
+    let descLength;
+    if (data.summary) {
+      descLength = data.summary.length;
+    }
 
     content = (
       <div className={classes.productContainer__descriptionBox}>
         <h2>About the game:</h2>
         <div className={classes[`productContainer__descriptionBox--genre`]}>
           <h3>Genre: </h3>
-          {data.genres.map((genre) => (
-            <Link to="/" key={genre.id}>
-              {genre.name}
-            </Link>
-          ))}
+          {data.genres &&
+            data.genres.map((genre) => (
+              <Link to="/" key={genre.id}>
+                {genre.name}
+              </Link>
+            ))}
         </div>
 
         <div className={classes[`productContainer__descriptionBox--summary`]}>
@@ -62,7 +67,7 @@ const GameDetailDesc = ({ data, isLoading }: PropsType) => {
           <div
             className={classes[`productContainer__descriptionBox--summary-box`]}
           >
-            {data.summary ? (
+            {data.summary && descLength ? (
               <p>
                 {data.summary.substring(0, 100)}
                 {animatedText}

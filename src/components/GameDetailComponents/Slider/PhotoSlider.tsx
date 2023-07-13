@@ -16,7 +16,7 @@ interface PropsType {
 }
 
 const PhotoSlider = ({ data, isLoading, isError }: PropsType) => {
-  const [activeIndex, setActiveIndex] = useState(1);
+  const [activeIndex, setActiveIndex] = useState(0);
   const options = {
     threshold: 0,
     triggerOnce: true,
@@ -49,7 +49,7 @@ const PhotoSlider = ({ data, isLoading, isError }: PropsType) => {
         </h3>
       </div>
     );
-  } else if (data) {
+  } else if (data && data.screenshots) {
     const screenshotsUrl = data.screenshots.map((screen) => ({
       id: screen.id,
       url: screen.url.replace('t_thumb', 't_1080p'),
