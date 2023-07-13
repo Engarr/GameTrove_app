@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import { BsSearch } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
 import classes from './Search.module.scss';
 import Modal from '../Modal/Modal';
-import { useGetSearchgameQuery } from '../../store/api/feedSlice';
 import SearchFunction from './SearchFunction/SearchFunction';
 
 const Search = () => {
@@ -28,7 +26,7 @@ const Search = () => {
           }`}
         >
           <input
-            placeholder="Search.."
+            placeholder="Search..."
             value={searchInput}
             onChange={inputHandler}
           />
