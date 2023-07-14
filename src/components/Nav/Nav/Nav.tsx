@@ -26,7 +26,10 @@ const Nav = () => {
             />
           </Link>
         </div>
-        <Search />
+        <Search
+          setIsActiveRightBar={setIsActiveRightBar}
+          setIsActiveLeftBar={setIsActiveLeftBar}
+        />
       </div>
       <NavBarLeft
         isActiveRightBar={isActiveRightBar}
