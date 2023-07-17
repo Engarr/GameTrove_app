@@ -34,6 +34,7 @@ ul {
   --margin: 0.5rem;
   --blue: #25b8fe;
   --blue-hover: #089de2;
+  --card-background: rgb(236, 236, 241, 0.4);
 }
 .dark {
   --background-color: rgb(68, 73, 80);
@@ -45,6 +46,7 @@ ul {
   --logo: rgba(122, 216, 15, 0.986);
   --greenYellow: greenyellow;
   --orange: orange;
+  --card-background: rgb(236, 236, 241, 0.4);
 }
 .light {
   --background-color: rgb(241, 236, 236);
@@ -56,6 +58,7 @@ ul {
   --logo: rgb(92, 145, 14);
   --greenYellow: rgb(92, 145, 14);
   --orange: orange;
+  --card-background: rgb(52, 53, 65, 0.6);
 }
 .showUp {
   animation: slider-left-to-right linear forwards 0.5s;
