@@ -34,6 +34,7 @@ const PhotoSlider = ({ data, isLoading, isError }: PropsType) => {
     setBigIsActive((prev) => !prev);
   };
   let content;
+
   if (isLoading) {
     content = (
       <div className={classes.spinnerContainer}>
@@ -55,6 +56,7 @@ const PhotoSlider = ({ data, isLoading, isError }: PropsType) => {
       url: screen.url.replace('t_thumb', 't_1080p'),
     }));
     const screenShotsLength = data.screenshots.length;
+
     content = (
       <>
         <h2 ref={locationRef} className={`${inView && 'showUp'}`}>
@@ -131,7 +133,10 @@ const PhotoSlider = ({ data, isLoading, isError }: PropsType) => {
                     <IoIosArrowBack />
                   </button>
                 )}
-                <img src={screenshotsUrl[activeIndex].url} alt="" />
+                <img
+                  src={screenshotsUrl[activeIndex].url}
+                  alt="game_screenshot"
+                />
                 <button
                   type="button"
                   onClick={activeHandler}

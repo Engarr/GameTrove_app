@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { BsSearch } from 'react-icons/bs';
 import classes from './Search.module.scss';
-import Modal from '../Modal/Modal';
 import SearchFunction from './SearchFunction/SearchFunction';
 import SearchModal from '../Modal/SearchModal';
 

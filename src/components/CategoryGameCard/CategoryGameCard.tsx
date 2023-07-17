@@ -103,7 +103,6 @@ const CategoryGameCard = () => {
       't_1080p'
     );
   }
-
   let content;
   if (isLoading) {
     content = (
@@ -200,15 +199,21 @@ const CategoryGameCard = () => {
   return (
     <div className={classes.wrapper}>
       <div className={classes.wrapper__title}>
-        <div>
-          <h2>
-            Top games in the category:
-            <span>{data ? data.category.name : ' Loading...'}</span>
-          </h2>
-        </div>
-        <div>
-          <p>According to user reviews</p>
-        </div>
+        {!isError ? (
+          <>
+            <div>
+              <h2>
+                Top games in the category:
+                <span>{data ? data.category.name : ' Loading...'}</span>
+              </h2>
+            </div>
+            <div>
+              <p>According to user reviews</p>
+            </div>
+          </>
+        ) : (
+          <div />
+        )}
       </div>
 
       {content}

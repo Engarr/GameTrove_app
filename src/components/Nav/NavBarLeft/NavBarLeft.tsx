@@ -22,6 +22,23 @@ const NavBarLeft = ({
   const [activeCategory, setActiveCategory] = useState<null | string>(null);
   const [activePlatform, setActivePlatform] = useState<null | string>(null);
 
+  const [isPortrait, setIsPortrait] = useState(
+    window.matchMedia('(orientation: portrait)').matches
+  );
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(orientation: portrait)');
+
+    const handleOrientationChange = (event: MediaQueryListEvent) => {
+      setIsPortrait(event.matches);
+    };
+
+    mediaQuery.addEventListener('change', handleOrientationChange);
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleOrientationChange);
+    };
+  }, []);
+
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     const categoryParam = searchParams.get('category');
@@ -44,7 +61,8 @@ const NavBarLeft = ({
         <div
           className={`${classes.nav__container} ${
             isActiveLeftBar ? classes.active : ''
-          }`}
+          } `}
+          style={!isPortrait ? { display: 'block' } : {}}
         >
           <h3>Search games by category:</h3>
           <div className={classes[`nav__container--categorys`]}>
