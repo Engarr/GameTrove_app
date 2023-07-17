@@ -12,6 +12,21 @@
     background-color: greenyellow;
     border-radius: 5px;
   }
+  &__arrow {
+    position: fixed;
+    font-size: 2em;
+    top: 52px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-bottom-right-radius: 5px;
+    color: black;
+    padding: 5px;
+    text-align: center;
+    transition: background-color 0.3s;
+    cursor: pointer;
+  }
+  &__arrow:hover {
+    background-color: rgba(255, 255, 255, 0.7);
+  }
   &__container {
     height: 100vh;
     position: fixed;
@@ -20,11 +35,23 @@
     background-color: var(--background-color-menu);
     transition: transform 0.3s;
     box-shadow: 0 0 2px 0.2px greenyellow;
+    padding-top: 20px;
     h3 {
       padding: 10px 20px;
       margin: 0.5em;
       text-transform: uppercase;
       font-size: 1.2em;
+    }
+    &--close {
+      position: absolute;
+      right: 0;
+      top: 0;
+      font-size: 2.5em;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+    &--close:hover {
+      color: var(--greenYellow);
     }
     &--categorys {
       overflow-x: hidden;
@@ -40,7 +67,6 @@
         width: 100%;
         font-family: 'Passion One', sans-serif;
         background-color: rgba(0, 0, 0, 0.2);
-        // border: 1px solid var(--color);
         border: none;
         color: var(--color);
         margin-bottom: 0.3em;
@@ -73,48 +99,34 @@
 .active {
   transform: translate(0);
 }
-.arrow {
-  position: absolute;
-  font-size: 1.4em;
-  right: -33px;
-  top: 0%;
-  background-color: rgba(255, 255, 255, 0.5);
-  color: black;
-  padding: 5px;
-  height: 5%;
-  text-align: center;
-  transition: background-color 0.3s;
-  cursor: pointer;
 
-  border-bottom-right-radius: 20px;
-}
-.arrow:hover {
-  background-color: rgba(255, 255, 255, 0.7);
-}
-.arrowRotate {
-  transform: rotateY(180deg);
-  border-bottom-right-radius: 0px;
-  border-bottom-left-radius: 20px;
-}
 @media only screen and (max-width: 1024px) {
   .nav {
     top: 45px;
-    &__horizontally {
-      display: block;
-      overflow-y: auto;
+    &__arrow {
+      font-size: 1.4em;
     }
+
     &__container {
       width: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
       overflow-y: scroll;
+      padding-top: 0px;
       h3 {
         margin-top: 2.5em;
         text-align: center;
         font-size: 1.2em;
         padding: 5px 5px;
-        // width: 100%;
+      }
+      &--close {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        font-size: 2.5em;
+        cursor: pointer;
+        transition: color 0.3s;
       }
       &--categorys,
       &--platforms {
@@ -143,25 +155,8 @@
   .active {
     transform: translate(0);
   }
-  .arrow {
-    font-size: 1.6em;
-    right: -35px;
-    top: 6px;
-    background-color: rgba(255, 255, 255, 0.5);
-    color: black;
-    padding: 5px;
-    height: 7%;
-    text-align: center;
-    transition: transform 0.3s, background-color 0.3s;
-    cursor: pointer;
-  }
+
   .arrow:hover {
     background-color: rgba(255, 255, 255, 0.5);
-  }
-  .arrowRotate {
-    transform: rotateY(180deg);
-    right: 0;
-    border-bottom-right-radius: 20px;
-    border-bottom-left-radius: 0px;
   }
 }
