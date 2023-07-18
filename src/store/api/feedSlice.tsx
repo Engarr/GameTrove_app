@@ -34,6 +34,15 @@ const productsApiSlice = apiSlice.injectEndpoints({
       }),
       providesTags: [{ type: 'Search' }],
     }),
+    getSpecificGames: builder.query<
+      void,
+      { category: string; platform: string }
+    >({
+      query: ({ category, platform }) => ({
+        url: `feed/filteredGames?category=${category}&platform=${platform}`,
+        method: 'POST',
+      }),
+    }),
   }),
 });
 
@@ -43,4 +52,5 @@ export const {
   useGetCategoryGamesQuery,
   useGetGameDetailsQuery,
   useGetSearchgameQuery,
+  useGetSpecificGamesQuery,
 } = productsApiSlice;

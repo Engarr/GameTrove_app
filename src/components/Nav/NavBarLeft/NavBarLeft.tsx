@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { IoIosArrowForward, IoIosClose } from 'react-icons/io';
 import classes from './NavBarLeft.module.scss';
@@ -48,12 +48,12 @@ const NavBarLeft = ({
     setActivePlatform(platformParam);
   }, [location.search]);
 
-  const activeHandler = () => {
+  const activeHandler = useCallback(() => {
     setIsActiveLeftBar((prev) => !prev);
     if (isActiveRightBar) {
       setIsActiveRightBar(false);
     }
-  };
+  }, [isActiveRightBar, setIsActiveLeftBar, setIsActiveRightBar]);
 
   return (
     <>
@@ -87,22 +87,19 @@ const NavBarLeft = ({
           <div className={classes[`nav__container--categorys`]}>
             {gameCategories.map((category) => {
               const searchParams = new URLSearchParams(location.search);
-              searchParams.set('category', category.category);
-              const updatedSearch = `?${searchParams
-                .toString()
-                .toLocaleLowerCase()
-                .toString()}`;
+              searchParams.set('category', category.id.toString());
+              const updatedSearch = `?${searchParams.toString()}`;
 
               return (
                 <div
                   key={category.id}
                   className={
-                    activeCategory === category.category.toLocaleLowerCase()
+                    activeCategory === category.id.toString()
                       ? classes.activeButton
                       : ''
                   }
                 >
-                  <Link to={updatedSearch}>
+                  <Link to={`/games${updatedSearch}`}>
                     <button type="button">{category.category}</button>
                   </Link>
                 </div>
@@ -113,7 +110,7 @@ const NavBarLeft = ({
           <div className={classes[`nav__container--platforms`]}>
             {gamePlatforms.map((platform) => {
               const searchParams = new URLSearchParams(location.search);
-              searchParams.set('platform', platform.platform);
+              searchParams.set('platform', platform.id.toString());
               const updatedSearch = `?${searchParams
                 .toString()
                 .toLocaleLowerCase()}`;
@@ -122,12 +119,12 @@ const NavBarLeft = ({
                 <div
                   key={platform.id}
                   className={
-                    activePlatform === platform.platform.toLocaleLowerCase()
+                    activePlatform === platform.id.toString()
                       ? classes.activeButton
                       : ''
                   }
                 >
-                  <Link to={updatedSearch}>
+                  <Link to={`/games${updatedSearch}`}>
                     <button type="button">{platform.platform}</button>
                   </Link>
                 </div>

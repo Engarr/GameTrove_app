@@ -135,6 +135,7 @@ export const getGameDetails = async (req, res, next) => {
     throw error;
   }
 };
+
 export const searchGames = async (req, res, next) => {
   const { token } = req;
   const searchValue = req.query.q;
@@ -145,6 +146,36 @@ export const searchGames = async (req, res, next) => {
     fields name, cover.url;
     where name ~ "${searchValue}"*;
     limit 10;
+    `;
+    const headers = {
+      'Client-ID': process.env.VITE_CLIENT_ID,
+      Authorization: `Bearer ${token}`,
+    };
+    const response = await axios.post('https://api.igdb.com/v4/games', query, {
+      headers,
+    });
+    const games = response.data;
+    res.status(200).json(games);
+  } catch (error) {
+    console.error('An error occured:', error);
+    throw error;
+  }
+};
+export const getSpecificGames = async (req, res, next) => {
+  const { token } = req;
+  const { category } = req.query;
+  const { platform } = req.query;
+  const page = req.query.page || 1;
+  const pageSize = req.query.pageSize || 10;
+
+  try {
+    const offset = (page - 1) * pageSize;
+    const query = `
+    
+    fields name, cover.url, platforms.name, genres.name;
+    where platforms = ${platform} & genres = ${category};
+    offset ${offset};
+    limit ${pageSize};
     `;
     const headers = {
       'Client-ID': process.env.VITE_CLIENT_ID,
