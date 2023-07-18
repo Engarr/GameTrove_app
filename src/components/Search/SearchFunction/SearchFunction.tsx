@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useGetSearchgameQuery } from '../../../store/api/feedSlice';
 import classes from '../Search.module.scss';
@@ -25,6 +26,9 @@ const SearchFunction = ({ isHideHandler, searchInput }: PropsType) => {
       refetchOnMountOrArgChange: true,
     }
   );
+  const handleClickLink = useCallback(() => {
+    isHideHandler();
+  }, [isHideHandler]);
 
   let searchContent;
   if (isLoading) {
@@ -62,11 +66,11 @@ const SearchFunction = ({ isHideHandler, searchInput }: PropsType) => {
           return (
             <li key={game.id}>
               {imageUrl && (
-                <Link to={`/game/${game.id}`} onClick={isHideHandler}>
+                <Link to={`/game/${game.id}`} onClick={handleClickLink}>
                   <img src={imageUrl} alt={game.name} width={100} />
                 </Link>
               )}
-              <Link to={`/game/${game.id}`} onClick={isHideHandler}>
+              <Link to={`/game/${game.id}`} onClick={handleClickLink}>
                 <p>{game.name}</p>
               </Link>
             </li>

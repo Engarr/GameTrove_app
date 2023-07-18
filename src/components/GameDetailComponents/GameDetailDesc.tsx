@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import classes from './GameDetailDesc.module.scss';
 import { GameDetailType } from '../../Types/types';
@@ -10,7 +10,8 @@ interface PropsType {
 const GameDetailDesc = ({ data, isLoading }: PropsType) => {
   const [substring, setSubstring] = useState(100);
   const [animatedText, setAnimatedText] = useState('');
-  const animateText = (text: string) => {
+
+  const animateText = useCallback((text: string) => {
     let currentText = '';
     let currentIndex = 0;
     const animationInterval = setInterval(() => {
@@ -26,13 +27,13 @@ const GameDetailDesc = ({ data, isLoading }: PropsType) => {
     return () => {
       clearInterval(animationInterval);
     };
-  };
+  }, []);
 
   useEffect(() => {
     if (data && data.summary) {
       animateText(data.summary.substring(100, substring));
     }
-  }, [data, substring]);
+  }, [data, substring, animateText]);
 
   const substringHandler = () => {
     if (substring === 100) {
