@@ -9,6 +9,10 @@ export interface GameData {
   release_dates: { id: number; date: string }[];
   aggregated_rating: number;
   aggregated_rating_count: number;
+  genres: {
+    id: number;
+    name: string;
+  }[];
 }
 
 export interface GameType {

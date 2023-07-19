@@ -6,10 +6,14 @@ interface PropsType {
   name: string;
   img: string;
   id: number;
+  geners: {
+    id: number;
+    name: string;
+  }[];
 }
 
-const GamdeCard = ({ name, img, id }: PropsType) => {
-  const newImg = img.replace('t_thumb', 't_720p');
+const GamdeCard = ({ name, img, id, geners }: PropsType) => {
+  const newImg = img.replace('t_thumb', 't_1080p');
   return (
     <div className={classes.card}>
       <Link to={`/game/${id}`}>
@@ -17,9 +21,19 @@ const GamdeCard = ({ name, img, id }: PropsType) => {
           <img src={newImg} alt={name} width={400} height={190} />
         </div>
       </Link>
-      <Link to={`/game/${id}`}>
-        <p>{name}</p>
-      </Link>
+      <div>
+        <Link to={`/game/${id}`}>
+          <h2>{name}</h2>
+        </Link>
+        {geners && (
+          <div>
+            Geners:
+            {geners.map((g) => (
+              <p key={g.id}>{g.name}</p>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

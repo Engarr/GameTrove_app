@@ -165,18 +165,27 @@ export const getSpecificGames = async (req, res, next) => {
   const { token } = req;
   const { category } = req.query;
   const { platform } = req.query;
-  const page = req.query.page || 100;
+  const page = req.query.page || 1;
   const pageSize = req.query.pageSize || 10;
-
   try {
     const offset = (page - 1) * pageSize;
+    let genresFilter = 'genres != null';
+    let platformFilter = 'platforms != null';
+
+    if (category !== 'null') {
+      genresFilter += ` & genres = ${category}`;
+    }
+    if (platform !== 'null') {
+      platformFilter += ` & platforms = ${platform}`;
+    }
+
     const query = `
-    
-    fields name, cover.url, platforms.name, genres.name;
-    where platforms = ${platform} & genres = ${category};
-    offset ${offset};
-    limit ${pageSize};
+      fields name, cover.url, platforms.name, genres.name;
+      where ${platformFilter} & ${genresFilter};
+      offset ${offset};
+      limit ${pageSize};
     `;
+    // console.log(query);
     const headers = {
       'Client-ID': process.env.VITE_CLIENT_ID,
       Authorization: `Bearer ${token}`,

@@ -16,6 +16,7 @@ const GamesPage = () => {
   let content;
   const { data, isLoading, isError } =
     useGetSpecificGamesQuery<GameType>(queryParams);
+  console.log(data);
   if (isLoading) {
     content = <Spiner message="Loading" />;
   } else if (isError) {
@@ -35,6 +36,7 @@ const GamesPage = () => {
               key={game.id}
               id={game.id}
               name={game.name}
+              geners={game.genres}
               img={
                 game.cover
                   ? game.cover.url

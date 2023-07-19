@@ -1,8 +1,26 @@
 .card {
+  display: flex;
+  padding: 10px 5px;
+  width: 100%;
+  border-bottom: 1px solid var(--greenYellow);
+  a {
+    color: var(--color);
+    h2 {
+      padding: 10px 20px;
+    }
+  }
   &__img {
+    width: 200px;
+    height: 270px;
+    img {
+      height: 100%;
+      width: 100%;
+    }
   }
-  img {
-    width: 220px;
-    height: 100%;
-  }
+}
+.card:nth-of-type(even) {
+  background-color: var(--game-card-bgc);
+}
+.card:last-of-type {
+  border-bottom: none;
 }
