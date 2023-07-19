@@ -13,6 +13,7 @@ export interface GameData {
     id: number;
     name: string;
   }[];
+  summary: string;
 }
 
 export interface GameType {

@@ -180,7 +180,7 @@ export const getSpecificGames = async (req, res, next) => {
     }
 
     const query = `
-      fields name, cover.url, platforms.name, genres.name;
+      fields name, cover.url, platforms.name, genres.name, summary;
       where ${platformFilter} & ${genresFilter};
       offset ${offset};
       limit ${pageSize};

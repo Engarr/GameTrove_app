@@ -29,7 +29,10 @@ const GameDetailBanner = ({ data, isLoading, isError }: PropsType) => {
       <ErrorComponent message="Data loading error. Please try again later" />
     );
   } else if (data) {
-    const imageUrl = data.cover.url.replace('t_thumb', 't_1080p');
+    const imageUrl = data.cover
+      ? data.cover.url.replace('t_thumb', 't_1080p')
+      : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgxr1R7VtfzTnb7T1xo3RWbgrPNbf3RgvJ63abVkeyzxq1gLGb50lacEnZof8bSf4h4Ww&usqp=CAU';
+
     const timestamp = data.first_release_date;
     const date = new Date(timestamp * 1000);
     const month = date.toLocaleString('en-US', { month: 'long' });
@@ -48,7 +51,7 @@ const GameDetailBanner = ({ data, isLoading, isError }: PropsType) => {
           className={classes.productContainer__transition}
         />
         <div className={classes.productContainer__cardBox}>
-          <Card imageUrl={imageUrl} cardId={data.cover.id} />
+          <Card imageUrl={imageUrl} cardId={data.id} />
         </div>
         <div className={classes.productContainer__name}>
           <h1>{data.name}</h1>

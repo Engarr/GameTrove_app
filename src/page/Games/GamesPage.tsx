@@ -16,7 +16,7 @@ const GamesPage = () => {
   let content;
   const { data, isLoading, isError } =
     useGetSpecificGamesQuery<GameType>(queryParams);
-  console.log(data);
+
   if (isLoading) {
     content = <Spiner message="Loading" />;
   } else if (isError) {
@@ -30,21 +30,28 @@ const GamesPage = () => {
           categoryParam={categoryParam}
           platformParam={platformParam}
         />
-        <div className={classes.gamesContainer}>
-          {data.map((game) => (
-            <GamdeCard
-              key={game.id}
-              id={game.id}
-              name={game.name}
-              geners={game.genres}
-              img={
-                game.cover
-                  ? game.cover.url
-                  : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgxr1R7VtfzTnb7T1xo3RWbgrPNbf3RgvJ63abVkeyzxq1gLGb50lacEnZof8bSf4h4Ww&usqp=CAU'
-              }
-            />
-          ))}
-        </div>
+        {data.length !== 0 ? (
+          <div className={classes.gamesContainer}>
+            {data.map((game) => (
+              <GamdeCard
+                key={game.id}
+                id={game.id}
+                name={game.name}
+                geners={game.genres}
+                summary={game.summary}
+                img={
+                  game.cover
+                    ? game.cover.url
+                    : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgxr1R7VtfzTnb7T1xo3RWbgrPNbf3RgvJ63abVkeyzxq1gLGb50lacEnZof8bSf4h4Ww&usqp=CAU'
+                }
+              />
+            ))}
+          </div>
+        ) : (
+          <div className={classes.section__noResult}>
+            <h2>No search results</h2>
+          </div>
+        )}
       </>
     );
   }

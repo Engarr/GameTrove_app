@@ -5,9 +5,6 @@
   border-bottom: 1px solid var(--greenYellow);
   a {
     color: var(--color);
-    h2 {
-      padding: 10px 20px;
-    }
   }
   &__img {
     width: 200px;
@@ -15,6 +12,31 @@
     img {
       height: 100%;
       width: 100%;
+    }
+  }
+  &__descContainer {
+    padding: 10px 20px;
+  }
+  &__geners {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 10px;
+    p {
+      margin-right: 10px;
+    }
+    span {
+      background-color: rgb(102, 102, 102);
+      color: white;
+      border-radius: 2px;
+      padding: 5px 10px;
+      margin-right: 5px;
+    }
+  }
+  &__summary {
+    width: 50%;
+    a {
+      color: var(--blue);
     }
   }
 }

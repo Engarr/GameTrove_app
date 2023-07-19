@@ -5,7 +5,9 @@
   flex-direction: column;
   width: 100%;
   font-family: 'Bai Jamjuree', sans-serif;
-  // min-height: 100vh;
+  &__noResult {
+    text-align: center;
+  }
 }
 .gamesContainer {
   // display: grid;
