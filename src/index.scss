@@ -2,16 +2,10 @@
 html {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-  position: relative;
-  font-family: 'Bai Jamjuree', 'Oswald', 'Passion One', cursive sans-serif;
-  background-color: var(--background-color);
-  color: var(--color);
-}
+
 a {
   text-decoration: none;
 }
@@ -59,6 +53,14 @@ ul {
   --greenYellow: rgb(92, 145, 14);
   --orange: orange;
   --card-background: rgb(52, 53, 65, 0.6);
+}
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  position: relative;
+  font-family: 'Bai Jamjuree', 'Oswald', 'Passion One', cursive sans-serif;
+  background-color: var(--background-color);
+  color: var(--color);
 }
 .showUp {
   animation: slider-left-to-right linear forwards 0.5s;

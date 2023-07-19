@@ -3,11 +3,12 @@ import { AiFillHeart } from 'react-icons/ai';
 import { useSelector } from 'react-redux';
 import classes from './GameDetailBanner.module.scss';
 import { GameDetailType } from '../../Types/types';
-import Spiner from '../Spinner/Spiner';
+import Spiner from '../Spinner/Spinner/Spiner';
 import bgc from '../../asset/bgc.png';
 import bgcLight from '../../asset/bgc-light.png';
 import { colorMode } from '../../store/slice/ThemeSlice';
 import Card from '../Banner/Card/Card';
+import ErrorComponent from '../Spinner/ErrorComponent/ErrorComponent';
 
 interface PropsType {
   data: GameDetailType;
@@ -20,17 +21,12 @@ const GameDetailBanner = ({ data, isLoading, isError }: PropsType) => {
   if (isLoading) {
     content = (
       <div className={classes.spinnerContainer}>
-        <Spiner message="Loading..." />
+        <Spiner message="Loading" />
       </div>
     );
   } else if (isError) {
     content = (
-      <div className={classes.errorContainer}>
-        <h3>
-          <span>Error:</span>
-          There was a problem retrieving information. Try refreshing the page
-        </h3>
-      </div>
+      <ErrorComponent message="Data loading error. Please try again later" />
     );
   } else if (data) {
     const imageUrl = data.cover.url.replace('t_thumb', 't_1080p');

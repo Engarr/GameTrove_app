@@ -45,12 +45,23 @@ const NavBarRight = ({
             </div>
             <ThemeMode />
           </div>
-          <IoIosArrowUp
-            className={`${classes.arrow} ${
-              isActiveRightBar ? classes.arrowRotate : ''
-            }`}
+          <div
+            className={classes.arrowBox}
             onClick={activeHandler}
-          />
+            onKeyDown={(event) => {
+              if (event.key === 'Enter' || event.key === 'Space') {
+                activeHandler();
+              }
+            }}
+            role="button"
+            tabIndex={0}
+          >
+            <IoIosArrowUp
+              className={`${classes.arrowBox__icon} ${
+                isActiveRightBar ? classes.arrowRotate : ''
+              }`}
+            />
+          </div>
         </div>
       </div>
       <Modal show={isActiveRightBar} handler={activeHandler} />

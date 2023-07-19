@@ -165,7 +165,7 @@ export const getSpecificGames = async (req, res, next) => {
   const { token } = req;
   const { category } = req.query;
   const { platform } = req.query;
-  const page = req.query.page || 1;
+  const page = req.query.page || 100;
   const pageSize = req.query.pageSize || 10;
 
   try {

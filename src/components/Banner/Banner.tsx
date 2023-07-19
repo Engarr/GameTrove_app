@@ -4,12 +4,13 @@ import { Link } from 'react-router-dom';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 import { useGetBannerGamesQuery } from '../../store/api/feedSlice';
 import classes from './Banner.module.scss';
-import Spiner from '../Spinner/Spiner';
+import Spiner from '../Spinner/Spinner/Spiner';
 import Card from './Card/Card';
 import { GameType } from '../../Types/types';
 import bgc from '../../asset/bgc.png';
 import bgcLight from '../../asset/bgc-light.png';
 import { colorMode } from '../../store/slice/ThemeSlice';
+import ErrorComponent from '../Spinner/ErrorComponent/ErrorComponent';
 
 const Banner = () => {
   const { data, isLoading, isError } = useGetBannerGamesQuery<GameType>();
@@ -58,13 +59,10 @@ const Banner = () => {
 
   let content;
   if (isLoading) {
-    content = <Spiner message="Loading..." />;
+    content = <Spiner message="Loading" />;
   } else if (isError) {
     content = (
-      <h3>
-        Error: There was a problem retrieving information. Try refreshing the
-        page
-      </h3>
+      <ErrorComponent message="Data loading error. Please try again later" />
     );
   } else if (data) {
     content = (

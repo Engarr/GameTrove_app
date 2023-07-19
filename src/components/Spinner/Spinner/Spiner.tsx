@@ -1,7 +1,8 @@
 import { Oval } from 'react-loader-spinner';
 import { useSelector } from 'react-redux';
-import classes from './Spinder.module.scss';
-import { colorMode } from '../../store/slice/ThemeSlice';
+import classes from './Spiner.module.scss';
+import { colorMode } from '../../../store/slice/ThemeSlice';
+import Loader from '../Loader/Loader';
 
 interface PropsType {
   // eslint-disable-next-line react/require-default-props
@@ -25,7 +26,11 @@ const Spiner = ({ message }: PropsType) => {
         strokeWidth={5}
         strokeWidthSecondary={3}
       />
-      {message && <p className={classes.text}>{message}</p>}
+      {message && (
+        <div className={classes.spiner__text}>
+          <Loader message={message} />
+        </div>
+      )}
     </div>
   );
 };

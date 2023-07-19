@@ -1,0 +1,19 @@
+.section {
+  position: relative;
+  top: 52px;
+
+  flex-direction: column;
+  width: 100%;
+  font-family: 'Bai Jamjuree', sans-serif;
+  min-height: 100vh;
+}
+.gamesContainer {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  // flex-wrap: wrap;
+}

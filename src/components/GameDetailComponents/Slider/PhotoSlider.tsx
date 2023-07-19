@@ -7,7 +7,8 @@ import { MdZoomInMap } from 'react-icons/md';
 import classes from './PhotoSlider.module.scss';
 import Modal from '../../Modal/Modal';
 import { GameDetailType } from '../../../Types/types';
-import Spiner from '../../Spinner/Spiner';
+import Spiner from '../../Spinner/Spinner/Spiner';
+import ErrorComponent from '../../Spinner/ErrorComponent/ErrorComponent';
 
 interface PropsType {
   data: GameDetailType;
@@ -38,17 +39,12 @@ const PhotoSlider = ({ data, isLoading, isError }: PropsType) => {
   if (isLoading) {
     content = (
       <div className={classes.spinnerContainer}>
-        <Spiner message="Loading..." />
+        <Spiner message="Loading" />
       </div>
     );
   } else if (isError) {
     content = (
-      <div className={classes.errorContainer}>
-        <h3>
-          <span>Error:</span>
-          There was a problem retrieving information. Try refreshing the page
-        </h3>
-      </div>
+      <ErrorComponent message="Data loading error. Please try again later" />
     );
   } else if (data && data.screenshots) {
     const screenshotsUrl = data.screenshots.map((screen) => ({

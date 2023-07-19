@@ -6,10 +6,11 @@ import Card from './Card/Card';
 import classes from './CategoryGameCard.module.scss';
 import { useGetCategoryGamesQuery } from '../../store/api/feedSlice';
 import { CategoryGameData } from '../../Types/types';
-import Spiner from '../Spinner/Spiner';
+import Spiner from '../Spinner/Spinner/Spiner';
 import bgc from '../../asset/bgc.png';
 import bgcLight from '../../asset/bgc-light.png';
 import { colorMode } from '../../store/slice/ThemeSlice';
+import ErrorComponent from '../Spinner/ErrorComponent/ErrorComponent';
 
 const CategoryGameCard = () => {
   const { data, isLoading, isError, refetch } =
@@ -112,10 +113,7 @@ const CategoryGameCard = () => {
     );
   } else if (isError) {
     content = (
-      <h3>
-        Error: There was a problem retrieving information. Try refreshing the
-        page
-      </h3>
+      <ErrorComponent message="Data loading error. Please try again later" />
     );
   } else if (!isLoading && data?.newsGames.length === 0) {
     content = (

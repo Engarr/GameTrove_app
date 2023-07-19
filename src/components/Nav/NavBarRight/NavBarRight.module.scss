@@ -53,25 +53,30 @@
 .active {
   transform: translate(0);
 }
-.arrow {
+.arrowBox {
   position: absolute;
   font-size: 1.4em;
   right: 0%;
   bottom: -35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: var(--color);
   color: var(--background-color);
   padding: 5px;
   width: 25%;
-  transition: background-color 0.3s;
   cursor: pointer;
-  transform: rotateX(180deg);
+  transition: background-color 0.3s;
+  &__icon {
+    transform: rotateX(180deg);
+    transition: transform 0.3s;
+  }
 }
-.arrow:hover {
+.arrowBox:hover {
   background-color: var(--background-color-hover);
 }
 .arrowRotate {
   transform: rotateX(0deg);
-  
 }
 @media only screen and (max-width: 1024px) {
   .nav {

@@ -1,4 +1,4 @@
-.Spiner {
+.spiner {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -6,11 +6,11 @@
   width: 100%;
   height: 100%;
   margin-top: 2em;
-}
-.text {
-  text-align: center;
-  font-size: 1.2em;
-  padding-top: 0em;
-  margin-bottom: 2em;
-  color: var(--color);
+  &__text {
+    text-align: center;
+    font-size: 1.2em;
+    padding-top: 0em;
+    margin-bottom: 2em;
+    color: var(--color);
+  }
 }

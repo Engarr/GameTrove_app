@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MdDarkMode, MdLightMode } from 'react-icons/md';
 import classes from './ThemeMode.module.scss';
@@ -10,6 +11,14 @@ const ThemeMode = () => {
   const toggleModeHandler = () => {
     dispatch(toggleMode());
   };
+  useEffect(() => {
+    const { body } = document;
+    body.classList.add(mode);
+
+    return () => {
+      body.classList.remove(mode);
+    };
+  }, [mode]);
   return (
     <div className={classes.container}>
       <p>Theme:</p>

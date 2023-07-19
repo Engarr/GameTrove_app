@@ -109,7 +109,7 @@ const NavBarLeft = ({
                   }
                 >
                   <Link to={`/games${updatedSearch}`}>
-                    <button type="button">{category.category}</button>
+                    <button type="button">{category.name}</button>
                   </Link>
                 </div>
               );
@@ -134,7 +134,7 @@ const NavBarLeft = ({
                   }
                 >
                   <Link to={`/games${updatedSearch}`}>
-                    <button type="button">{platform.platform}</button>
+                    <button type="button">{platform.name}</button>
                   </Link>
                 </div>
               );
