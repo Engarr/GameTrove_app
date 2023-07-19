@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { useGetSpecificGamesQuery } from '../../store/api/feedSlice';
+import { GameType } from '../../Types/types';
 
 const Games = () => {
   const location = useLocation();
@@ -9,10 +10,8 @@ const Games = () => {
   const platformParam = searchParams.get('platform') as string;
   const queryParams = { category: categoryParam, platform: platformParam };
 
-  const { data, isLoading, isError } = useGetSpecificGamesQuery(queryParams);
-  console.log(isLoading);
-  console.log(data);
-  console.log(isError);
+  const { data, isLoading, isError } =
+    useGetSpecificGamesQuery<GameType>(queryParams);
 
   return <div>Games</div>;
 };

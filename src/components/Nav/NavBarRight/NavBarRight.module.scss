@@ -58,22 +58,20 @@
   font-size: 1.4em;
   right: 0%;
   bottom: -35px;
-  background-color: rgba(255, 255, 255, 0.5);
-  color: black;
+  background-color: var(--color);
+  color: var(--background-color);
   padding: 5px;
   width: 25%;
   transition: background-color 0.3s;
   cursor: pointer;
   transform: rotateX(180deg);
-  border-top-left-radius: 5px;
 }
 .arrow:hover {
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: var(--background-color-hover);
 }
 .arrowRotate {
   transform: rotateX(0deg);
-  border-top-left-radius: 0px;
-  border-bottom-left-radius: 5px;
+  
 }
 @media only screen and (max-width: 1024px) {
   .nav {

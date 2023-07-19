@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { IoIosArrowForward, IoIosClose } from 'react-icons/io';
 import classes from './NavBarLeft.module.scss';
 import Modal from '../../Modal/Modal';
 import { gameCategories, gamePlatforms } from '../../../util/db';
@@ -59,7 +58,7 @@ const NavBarLeft = ({
     <>
       <div className={classes.nav}>
         <div
-          className={`${classes.nav__arrow} ${
+          className={`${classes.nav__filter} ${
             isActiveLeftBar ? classes.arrowRotate : ''
           }`}
           onClick={activeHandler}
@@ -71,7 +70,7 @@ const NavBarLeft = ({
           role="button"
           tabIndex={0}
         >
-          <IoIosArrowForward />
+          <span /> <span /> <span />
         </div>
         <div
           className={`${classes.nav__container} ${
@@ -79,10 +78,20 @@ const NavBarLeft = ({
           } `}
           style={!isPortrait ? { display: 'block' } : {}}
         >
-          <IoIosClose
+          <div
             className={classes[`nav__container--close`]}
             onClick={activeHandler}
-          />
+            onKeyDown={(event) => {
+              if (event.key === 'Enter' || event.key === 'Space') {
+                activeHandler();
+              }
+            }}
+            role="button"
+            tabIndex={0}
+          >
+            <span />
+            <span />
+          </div>
           <h3>Search games by category:</h3>
           <div className={classes[`nav__container--categorys`]}>
             {gameCategories.map((category) => {
