@@ -180,10 +180,11 @@ export const getSpecificGames = async (req, res, next) => {
     }
 
     const query = `
-      fields name, cover.url, platforms.name, genres.name, summary;
-      where ${platformFilter} & ${genresFilter};
+      fields name, cover.url, platforms.name, genres.name, summary, first_release_date;
+      where ${platformFilter} & ${genresFilter} & first_release_date != null;
       offset ${offset};
       limit ${pageSize};
+      sort first_release_date desc;
     `;
     // console.log(query);
     const headers = {
@@ -193,8 +194,26 @@ export const getSpecificGames = async (req, res, next) => {
     const response = await axios.post('https://api.igdb.com/v4/games', query, {
       headers,
     });
+    const countQuery = `
+    where ${platformFilter} & ${genresFilter} & first_release_date != null;
+  `;
+
+    const countResponse = await axios.post(
+      'https://api.igdb.com/v4/games/count',
+      countQuery,
+      {
+        headers,
+      }
+    );
+
+    const totalGames = countResponse.data;
     const games = response.data;
-    res.status(200).json(games);
+    const responseData = {
+      games,
+      totalGames,
+    };
+
+    res.status(200).json(responseData);
   } catch (error) {
     console.error('An error occured:', error);
     throw error;

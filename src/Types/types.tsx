@@ -20,6 +20,7 @@ export interface GameType {
   data: GameData[];
   isLoading: boolean;
   isError: boolean;
+  isFetching: boolean;
 }
 export interface CategoryGameData {
   data: {
