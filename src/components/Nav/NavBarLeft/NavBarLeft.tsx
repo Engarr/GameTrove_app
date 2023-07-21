@@ -106,6 +106,7 @@ const NavBarLeft = ({
               {gameCategories.map((category) => {
                 const searchParams = new URLSearchParams(location.search);
                 searchParams.set('category', category.id.toString());
+                searchParams.set('page', '1');
 
                 const updatedSearch = `?${searchParams.toString()}`;
 
@@ -138,7 +139,7 @@ const NavBarLeft = ({
               {gamePlatforms.map((platform) => {
                 const searchParams = new URLSearchParams(location.search);
                 searchParams.set('platform', platform.id.toString());
-                // searchParams.set('page', actualPage.toString());
+                searchParams.set('page', '1');
                 const updatedSearch = `?${searchParams
                   .toString()
                   .toLocaleLowerCase()}`;

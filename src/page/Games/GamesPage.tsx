@@ -26,7 +26,6 @@ const GamesPage = () => {
     page: pageParam,
   };
   let content;
-
   const { data, isLoading, isError, isFetching } =
     useGetSpecificGamesQuery<ResponseType>(queryParams, {
       refetchOnMountOrArgChange: true,

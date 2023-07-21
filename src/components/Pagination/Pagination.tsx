@@ -22,11 +22,7 @@ const Pagination = ({ totalPages }: PropsType) => {
   const pages = Math.ceil(totalPages / 10);
   const dispatch = useDispatch();
   const activePage = useSelector(actualPage);
-  // console.log(activePage);
   const location = useLocation();
-  // const searchParams = new URLSearchParams(location.search);
-
-  // const [activePage, setActivePage] = useState(activePage);
 
   const nextPageHanlder = () => {
     if (activePage < pages) {
