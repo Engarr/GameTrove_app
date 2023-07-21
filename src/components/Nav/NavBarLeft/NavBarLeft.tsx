@@ -108,8 +108,8 @@ const NavBarLeft = ({
                       : ''
                   }
                 >
-                  <Link to={`/games${updatedSearch}`}>
-                    <button type="button">{category.name}</button>
+                  <Link to={`/games${updatedSearch}`} onClick={activeHandler}>
+                    {category.name}
                   </Link>
                 </div>
               );
@@ -133,8 +133,8 @@ const NavBarLeft = ({
                       : ''
                   }
                 >
-                  <Link to={`/games${updatedSearch}`}>
-                    <button type="button">{platform.name}</button>
+                  <Link to={`/games${updatedSearch}`} onClick={activeHandler}>
+                    {platform.name}
                   </Link>
                 </div>
               );

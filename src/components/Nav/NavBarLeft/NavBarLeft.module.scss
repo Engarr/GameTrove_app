@@ -58,6 +58,8 @@
     transition: transform 0.3s;
     box-shadow: 0 0 2px 0.2px greenyellow;
     padding-top: 20px;
+    width: 400px;
+
     h3 {
       padding: 10px 20px;
       margin: 0.5em;
@@ -107,24 +109,29 @@
     &--categorys,
     &--platforms {
       padding: 10px 20px;
+      text-align: center;
 
-      button {
+      div {
         padding: 5px 10px;
         width: 100%;
         font-family: 'Passion One', sans-serif;
         background-color: rgba(0, 0, 0, 0.2);
         border: none;
-        color: var(--color);
         margin-bottom: 0.3em;
         font-size: 1em;
-        cursor: pointer;
-        transition: color 0.3s, background-color 0.3s;
+        transition: background-color 0.3s;
         text-transform: uppercase;
         letter-spacing: 1px;
+        a {
+          transition: color 0.3s;
+          color: var(--color);
+        }
       }
-      button:hover {
+      div:hover {
         background-color: var(--color);
-        color: var(--background-color);
+        a {
+          color: var(--background-color);
+        }
       }
       &--platforms {
         overflow: visible;
@@ -133,12 +140,14 @@
   }
 
   .activeButton {
-    button {
+    a {
       color: greenyellow;
     }
     button:hover {
       background-color: var(--color);
-      color: var(--background-color);
+      a {
+        color: var(--background-color);
+      }
     }
   }
 }

@@ -38,7 +38,7 @@ const GamdeCard = ({ name, img, id, geners, summary }: PropsType) => {
         {summary && (
           <div className={classes.card__summary}>
             <p>
-              {summary.substring(0, 100)}...
+              {summary.substring(0, 90)}...
               <Link to={`/game/${id}`}>Read more</Link>{' '}
             </p>
           </div>

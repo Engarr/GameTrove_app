@@ -46,3 +46,42 @@
 .card:last-of-type {
   border-bottom: none;
 }
+@media only screen and (max-width: 1024px) {
+  .card {
+    display: flex;
+    flex-direction: column;
+    padding: 5px 15px;
+
+    a {
+      color: var(--color);
+    }
+    &__img {
+      width: 180px;
+      height: 170px;
+    }
+    &__descContainer {
+      padding: 5px 0px;
+      h2 {
+        font-size: 1.1em;
+      }
+    }
+    &__geners {
+      margin: 5px 0;
+      p {
+        margin-right: 5px;
+        font-size: 1em;
+      }
+      span {
+        padding: 5px 5px;
+        margin-right: 2px;
+        font-size: 0.8em;
+      }
+    }
+    &__summary {
+      width: 100%;
+      a {
+        color: var(--blue);
+      }
+    }
+  }
+}
