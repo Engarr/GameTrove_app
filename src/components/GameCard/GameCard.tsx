@@ -11,11 +11,14 @@ interface PropsType {
     name: string;
   }[];
   summary: string;
+  platforms: {
+    id: number;
+    name: string;
+  }[];
 }
 
-const GamdeCard = ({ name, img, id, geners, summary }: PropsType) => {
+const GameCard = ({ name, img, id, geners, summary, platforms }: PropsType) => {
   const newImg = img.replace('t_thumb', 't_1080p');
-
   return (
     <div className={classes.card}>
       <Link to={`/game/${id}`}>
@@ -35,6 +38,14 @@ const GamdeCard = ({ name, img, id, geners, summary }: PropsType) => {
             ))}
           </div>
         )}
+        {platforms && (
+          <div className={classes.card__geners}>
+            <p> Platfomrs:</p>
+            {platforms.map((p) => (
+              <span key={p.id}>{p.name}</span>
+            ))}
+          </div>
+        )}
         {summary && (
           <div className={classes.card__summary}>
             <p>
@@ -48,4 +59,4 @@ const GamdeCard = ({ name, img, id, geners, summary }: PropsType) => {
   );
 };
 
-export default GamdeCard;
+export default GameCard;

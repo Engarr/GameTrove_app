@@ -1,8 +1,8 @@
 .card {
   display: flex;
-  padding: 10px 5px;
+  padding: 10px 20px;
   width: 100%;
-  border-bottom: 1px solid var(--greenYellow);
+  border-bottom: 1px solid var(--color);
   a {
     color: var(--color);
   }
@@ -21,20 +21,22 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin-top: 10px;
+    margin: 8px 0;
     p {
       margin-right: 10px;
+      font-size: 1.1em;
     }
     span {
       background-color: rgb(102, 102, 102);
       color: white;
       border-radius: 2px;
-      padding: 5px 10px;
+      padding: 2px 5px;
       margin-right: 5px;
+      font-size: 0.8em;
     }
   }
   &__summary {
-    width: 50%;
+    width: 80%;
     a {
       color: var(--blue);
     }
@@ -48,9 +50,8 @@
 }
 @media only screen and (max-width: 1024px) {
   .card {
-    display: flex;
     flex-direction: column;
-    padding: 5px 15px;
+    padding: 5px 10px;
 
     a {
       color: var(--color);
@@ -62,25 +63,24 @@
     &__descContainer {
       padding: 5px 0px;
       h2 {
-        font-size: 1.1em;
+        font-size: 1.4em;
+        padding: 5px 0;
       }
     }
     &__geners {
-      margin: 5px 0;
+      margin: 2px 0;
       p {
-        margin-right: 5px;
+        margin-right: 10px;
         font-size: 1em;
-      }
-      span {
-        padding: 5px 5px;
-        margin-right: 2px;
-        font-size: 0.8em;
       }
     }
     &__summary {
       width: 100%;
-      a {
-        color: var(--blue);
+      p {
+        font-size: 0.9em;
+        a {
+          color: var(--blue);
+        }
       }
     }
   }

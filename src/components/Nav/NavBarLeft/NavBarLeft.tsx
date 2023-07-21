@@ -59,7 +59,9 @@ const NavBarLeft = ({
   const pageHandler = (pageNumber: number) => {
     dispatch(switchPage(pageNumber));
   };
-
+  const boxStyle = isPortrait
+    ? { left: '50%', transform: 'translateX(-50%)' }
+    : {};
   return (
     <>
       <div className={classes.nav}>
@@ -82,7 +84,7 @@ const NavBarLeft = ({
           className={`${classes.nav__container} ${
             isActiveLeftBar ? classes.active : ''
           } `}
-          style={!isPortrait ? { display: 'block' } : {}}
+          style={!isPortrait ? { flexDirection: 'row' } : {}}
         >
           <div
             className={classes[`nav__container--close`]}
@@ -98,67 +100,71 @@ const NavBarLeft = ({
             <span />
             <span />
           </div>
-          <h3>Search games by category:</h3>
-          <div className={classes[`nav__container--categorys`]}>
-            {gameCategories.map((category) => {
-              const searchParams = new URLSearchParams(location.search);
-              searchParams.set('category', category.id.toString());
+          <div className={classes[`nav__container--box`]} style={boxStyle}>
+            <h3>Search games by category:</h3>
+            <div className={classes[`nav__container--categorys`]}>
+              {gameCategories.map((category) => {
+                const searchParams = new URLSearchParams(location.search);
+                searchParams.set('category', category.id.toString());
 
-              const updatedSearch = `?${searchParams.toString()}`;
+                const updatedSearch = `?${searchParams.toString()}`;
 
-              return (
-                <div
-                  key={category.id}
-                  className={
-                    activeCategory === category.id.toString()
-                      ? classes.activeButton
-                      : ''
-                  }
-                >
-                  <Link
-                    to={`/games${updatedSearch}`}
-                    onClick={() => {
-                      activeHandler();
-                      pageHandler(1);
-                    }}
+                return (
+                  <div
+                    key={category.id}
+                    className={
+                      activeCategory === category.id.toString()
+                        ? classes.activeButton
+                        : ''
+                    }
                   >
-                    {category.name}
-                  </Link>
-                </div>
-              );
-            })}
+                    <Link
+                      to={`/games${updatedSearch}`}
+                      onClick={() => {
+                        activeHandler();
+                        pageHandler(1);
+                      }}
+                    >
+                      {category.name}
+                    </Link>
+                  </div>
+                );
+              })}
+            </div>
           </div>
-          <h3>Search games by platform:</h3>
-          <div className={classes[`nav__container--platforms`]}>
-            {gamePlatforms.map((platform) => {
-              const searchParams = new URLSearchParams(location.search);
-              searchParams.set('platform', platform.id.toString());
-              // searchParams.set('page', actualPage.toString());
-              const updatedSearch = `?${searchParams
-                .toString()
-                .toLocaleLowerCase()}`;
+          <div className={classes[`nav__container--box`]} style={boxStyle}>
+            <h3>Search games by platform:</h3>
+            <div className={classes[`nav__container--platforms`]}>
+              {gamePlatforms.map((platform) => {
+                const searchParams = new URLSearchParams(location.search);
+                searchParams.set('platform', platform.id.toString());
+                // searchParams.set('page', actualPage.toString());
+                const updatedSearch = `?${searchParams
+                  .toString()
+                  .toLocaleLowerCase()}`;
 
-              return (
-                <div
-                  key={platform.id}
-                  className={
-                    activePlatform === platform.id.toString()
-                      ? classes.activeButton
-                      : ''
-                  }
-                >
-                  <Link
-                    to={`/games${updatedSearch}`}
-                    onClick={() => {
-                      activeHandler();
-                      pageHandler(1);
-                    }}
+                return (
+                  <div
+                    key={platform.id}
+                    className={
+                      activePlatform === platform.id.toString()
+                        ? classes.activeButton
+                        : ''
+                    }
                   >
-                    {platform.name}
-                  </Link>
-                </div>
-              );
-            })}
+                    <Link
+                      to={`/games${updatedSearch}`}
+                      onClick={() => {
+                        activeHandler();
+                        pageHandler(1);
+                      }}
+                    >
+                      {platform.name}
+                    </Link>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

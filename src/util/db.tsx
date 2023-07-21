@@ -36,9 +36,15 @@ export const gameCategories: CategoryType[] = [
 
 export const gamePlatforms: PlatformType[] = [
   { id: 6, name: 'PC', platform: 'platform' },
+  { id: 7, name: 'PlayStation', platform: 'platform' },
   { id: 8, name: 'PlayStation 2', platform: 'platform' },
   { id: 9, name: 'PlayStation 3', platform: 'platform' },
-  { id: 11, name: 'Xbox', platform: 'platform' },
+  { id: 11, name: 'XBOX', platform: 'platform' },
+  { id: 12, name: 'X360', platform: 'platform' },
+  { id: 49, name: 'XONE', platform: 'platform' },
   { id: 130, name: 'Nintendo Switch', platform: 'platform' },
   { id: 34, name: 'Android', platform: 'platform' },
+  { id: 39, name: 'iOS', platform: 'platform' },
+  { id: 162, name: 'Oculus VR', platform: 'platform' },
+  { id: 165, name: 'PlayStation VR', platform: 'platform' },
 ];

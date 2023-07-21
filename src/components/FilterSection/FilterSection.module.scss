@@ -40,7 +40,7 @@
 }
 @media only screen and (max-width: 1024px) {
   .filters {
-    padding: 10px 5px;
+    padding: 20px 5px;
     justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;
@@ -50,6 +50,7 @@
     }
     &__container {
       display: flex;
+      flex-direction: column;
       &--box {
         display: flex;
         margin-right: 5px;

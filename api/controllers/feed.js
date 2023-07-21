@@ -184,13 +184,12 @@ export const getSpecificGames = async (req, res, next) => {
     }
 
     const query = `
-      fields name, cover.url, platforms.name, genres.name, summary, first_release_date;
+      fields name, cover.url, platforms.name, genres.name, summary,age_ratings.rating_cover_url, first_release_date;
       where ${platformFilter} & ${genresFilter} & first_release_date != null;
       offset ${offset};
       limit ${pageSize};
       sort first_release_date desc;
     `;
-    // console.log(query);
     const headers = {
       'Client-ID': process.env.VITE_CLIENT_ID,
       Authorization: `Bearer ${token}`,
@@ -199,8 +198,8 @@ export const getSpecificGames = async (req, res, next) => {
       headers,
     });
     const countQuery = `
-    where ${platformFilter} & ${genresFilter} & first_release_date != null;
-  `;
+      where ${platformFilter} & ${genresFilter} & first_release_date != null;
+    `;
 
     const countResponse = await axios.post(
       'https://api.igdb.com/v4/games/count',
@@ -216,10 +215,20 @@ export const getSpecificGames = async (req, res, next) => {
       games,
       totalGames,
     };
-
     res.status(200).json(responseData);
   } catch (error) {
     console.error('An error occured:', error);
     throw error;
   }
 };
+// const categoriesResponse = await axios.post(
+//   'https://api.igdb.com/v4/platforms',
+//   'fields *; limit 500;',
+//   {
+//     headers: {
+//       'Client-ID': process.env.VITE_CLIENT_ID,
+//       Authorization: `Bearer ${token}`,
+//     },
+//   }
+// );
+// const send = categoriesResponse.data;

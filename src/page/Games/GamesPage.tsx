@@ -1,12 +1,11 @@
 import { useLocation } from 'react-router-dom';
-
 import { useGetSpecificGamesQuery } from '../../store/api/feedSlice';
 import { GameData } from '../../Types/types';
 import classes from './GamePage.module.scss';
 import FilterSection from '../../components/FilterSection/FilterSection';
 import Spiner from '../../components/Spinner/Spinner/Spiner';
 import ErrorComponent from '../../components/Spinner/ErrorComponent/ErrorComponent';
-import GamdeCard from '../../components/GameCard/GamdeCard';
+import GameCard from '../../components/GameCard/GameCard';
 import Pagination from '../../components/Pagination/Pagination';
 
 interface ResponseType {
@@ -17,7 +16,6 @@ interface ResponseType {
 }
 const GamesPage = () => {
   const location = useLocation();
-
   const searchParams = new URLSearchParams(location.search);
   const categoryParam = searchParams.get('category') as string;
   const platformParam = searchParams.get('platform') as string;
@@ -28,11 +26,11 @@ const GamesPage = () => {
     page: pageParam,
   };
   let content;
+
   const { data, isLoading, isError, isFetching } =
     useGetSpecificGamesQuery<ResponseType>(queryParams, {
       refetchOnMountOrArgChange: true,
     });
-
   if (isLoading) {
     content = <Spiner message="Loading" />;
   } else if (isError) {
@@ -47,30 +45,36 @@ const GamesPage = () => {
           platformParam={platformParam}
         />
 
-        <Pagination totalPages={data.totalGames.count} />
-
         {isFetching ? (
           <Spiner />
         ) : (
+          // eslint-disable-next-line react/jsx-no-useless-fragment
           <>
-            <div className={classes.gamesContainer}>
-              {data.games.map((game) => (
-                <GamdeCard
-                  key={game.id}
-                  id={game.id}
-                  name={game.name}
-                  geners={game.genres}
-                  summary={game.summary}
-                  img={
-                    game.cover
-                      ? game.cover.url
-                      : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgxr1R7VtfzTnb7T1xo3RWbgrPNbf3RgvJ63abVkeyzxq1gLGb50lacEnZof8bSf4h4Ww&usqp=CAU'
-                  }
-                />
-              ))}
-            </div>
-            {/* Pagination */}
-            <Pagination totalPages={data.totalGames.count} />
+            {data.games.length === 0 ? (
+              <ErrorComponent message="Ups... There is no such a game. Please change filters" />
+            ) : (
+              <div>
+                <Pagination totalPages={data.totalGames.count} />
+                <div className={classes.gamesContainer}>
+                  {data.games.map((game) => (
+                    <GameCard
+                      key={game.id}
+                      id={game.id}
+                      name={game.name}
+                      geners={game.genres}
+                      summary={game.summary}
+                      platforms={game.platforms}
+                      img={
+                        game.cover
+                          ? game.cover.url
+                          : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgxr1R7VtfzTnb7T1xo3RWbgrPNbf3RgvJ63abVkeyzxq1gLGb50lacEnZof8bSf4h4Ww&usqp=CAU'
+                      }
+                    />
+                  ))}
+                </div>
+                <Pagination totalPages={data.totalGames.count} />
+              </div>
+            )}
           </>
         )}
       </>

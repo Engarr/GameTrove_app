@@ -14,6 +14,10 @@ export interface GameData {
     name: string;
   }[];
   summary: string;
+  platforms: {
+    id: number;
+    name: string;
+  }[];
 }
 
 export interface GameType {

@@ -1,7 +1,6 @@
 .section {
   position: relative;
   top: 52px;
-
   flex-direction: column;
   width: 100%;
   font-family: 'Bai Jamjuree', sans-serif;
@@ -10,12 +9,21 @@
   }
 }
 .gamesContainer {
-  // display: grid;
-  // gap: 1rem;
-  // grid-template-columns: repeat(3, 1fr);
-
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   flex-direction: column;
+  max-width: 1224px;
+  overflow: hidden;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--background-color-menu);
+}
+@media only screen and (max-width: 1024px) {
+  .gamesContainer {
+    max-width: 100%;
+    left: 0%;
+    transform: translateX(0%);
+  }
 }

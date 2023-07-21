@@ -31,6 +31,30 @@
     animation: shake 0.5s ease-in-out;
   }
 }
+.arrowUp {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 90%;
+  right: 2%;
+  font-size: 2em;
+  background-color: var(--card-background);
+  color: greenyellow;
+  border: none;
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+  z-index: 100;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.isVisible {
+  opacity: 1;
+}
+.isNotVisible {
+  opacity: 0;
+}
 
 @keyframes shake {
   0% {
@@ -60,5 +84,11 @@
       letter-spacing: 2px;
       color: var(--color);
     }
+  }
+  .arrowUp {
+    top: 85%;
+    right: 2%;
+    font-size: 1.2em;
+    padding: 4px;
   }
 }

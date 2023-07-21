@@ -47,3 +47,46 @@
 .disabled {
   opacity: 0;
 }
+@media only screen and (max-width: 1024px) {
+  .container {
+    padding: 20px 0px;
+  }
+  .pagination {
+    &__icon {
+      margin: 0 2px;
+      font-size: 20px;
+    }
+    &__next,
+    &__prev {
+      font-size: 25px;
+    }
+    button,
+    &__activePage {
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      padding: 5px 10px;
+      margin-right: 5px;
+      border: none;
+      height: 30px;
+      width: 50px;
+      font-size: 1em;
+      background-color: transparent;
+      transition: opacity 0.3s;
+      a,
+      p {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.2em;
+      }
+      a {
+        color: var(--color);
+      }
+    }
+    &__activePage {
+      font-weight: bold;
+      color: var(--greenYellow);
+    }
+  }
+}
