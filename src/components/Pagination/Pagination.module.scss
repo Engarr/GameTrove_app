@@ -1,12 +1,49 @@
 .container {
   display: flex;
+  padding: 20px 40px;
 }
 .pagination {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  button{
-    margin: 10px;
+  &__icon {
+    font-weight: bold;
+    color: var(--greenYellow);
+    margin: 0 5px;
   }
+  &__next,
+  &__prev {
+    color: var(--greenYellow);
+    font-weight: bold;
+    font-size: 20px;
+  }
+  button,
+  &__activePage {
+    padding: 5px 10px;
+    margin-right: 15px;
+    background-color: transparent;
+    border: none;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+
+    transition: opacity 0.3s;
+    font-size: 1em;
+    a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--color);
+    }
+  }
+  &__activePage {
+    font-size: 1em;
+    font-weight: bold;
+    color: var(--greenYellow);
+  }
+}
+.disabled {
+  opacity: 0;
 }

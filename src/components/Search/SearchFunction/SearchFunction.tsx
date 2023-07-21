@@ -14,24 +14,23 @@ interface DataType {
   }[];
   isLoading: boolean;
   isError: boolean;
+  isFetching: boolean;
 }
 interface PropsType {
   isHideHandler: () => void;
   searchInput: string;
 }
 const SearchFunction = ({ isHideHandler, searchInput }: PropsType) => {
-  const { data, isLoading, isError } = useGetSearchgameQuery<DataType>(
-    searchInput,
-    {
+  const { data, isLoading, isError, isFetching } =
+    useGetSearchgameQuery<DataType>(searchInput, {
       refetchOnMountOrArgChange: true,
-    }
-  );
+    });
   const handleClickLink = useCallback(() => {
     isHideHandler();
   }, [isHideHandler]);
 
   let searchContent;
-  if (isLoading) {
+  if (isLoading || isFetching) {
     searchContent = (
       <div className={classes.searchLoading}>
         <p>

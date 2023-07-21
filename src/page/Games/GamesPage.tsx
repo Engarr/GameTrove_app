@@ -58,6 +58,7 @@ const GamesPage = () => {
                 />
               ))}
             </div>
+            <Pagination totalPages={data.totalGames.count} />
           </>
         ) : (
           <div className={classes.section__noResult}>

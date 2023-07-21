@@ -1,7 +1,18 @@
-import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { MdLastPage, MdFirstPage } from 'react-icons/md';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  MdLastPage,
+  MdFirstPage,
+  MdNavigateNext,
+  MdNavigateBefore,
+} from 'react-icons/md';
 import classes from './Pagination.module.scss';
+import {
+  changePageUp,
+  changePageDown,
+  actualPage,
+  switchPage,
+} from '../../store/slice/PaginationSlice';
 
 interface PropsType {
   totalPages: number;
@@ -9,26 +20,27 @@ interface PropsType {
 
 const Pagination = ({ totalPages }: PropsType) => {
   const pages = Math.ceil(totalPages / 10);
-
+  const dispatch = useDispatch();
+  const activePage = useSelector(actualPage);
+  // console.log(activePage);
   const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const page = Number(searchParams.get('page'));
+  // const searchParams = new URLSearchParams(location.search);
 
-  const [activePage, setActivePage] = useState(page || 1);
+  // const [activePage, setActivePage] = useState(activePage);
 
   const nextPageHanlder = () => {
     if (activePage < pages) {
-      setActivePage((prev) => prev + 1);
+      dispatch(changePageUp());
     }
   };
 
   const prevPageHandler = () => {
     if (activePage > 1) {
-      setActivePage((prev) => prev - 1);
+      dispatch(changePageDown());
     }
   };
   const pageHandler = (pageNumber: number) => {
-    setActivePage(pageNumber);
+    dispatch(switchPage(pageNumber));
   };
   const updatePageInLink = (newPage: number) => {
     const updatedSearchParams = new URLSearchParams(location.search);
@@ -40,51 +52,66 @@ const Pagination = ({ totalPages }: PropsType) => {
   return (
     <div className={classes.container}>
       <div className={classes.pagination}>
-        {activePage !== 1 && (
-          <>
-            <button
-              type="button"
-              onClick={() => {
-                pageHandler(1);
-              }}
-            >
-              <Link to={`/games${updatePageInLink(1)}`}>
-                <MdFirstPage />1
-              </Link>
-            </button>
-            <button type="button" onClick={prevPageHandler}>
-              <Link to={`/games${updatePageInLink(activePage - 1)}`}>Prev</Link>
-            </button>
-          </>
-        )}
+        <button
+          type="button"
+          onClick={() => {
+            pageHandler(1);
+          }}
+          disabled={activePage === 1}
+          className={`${activePage === 1 ? classes.disabled : ''}`}
+        >
+          <Link to={`/games${updatePageInLink(1)}`}>
+            <MdFirstPage className={classes.pagination__icon} />1
+          </Link>
+        </button>
+        <button
+          type="button"
+          onClick={prevPageHandler}
+          disabled={activePage === 1}
+          className={`${activePage === 1 ? classes.disabled : ''}`}
+        >
+          <Link to={`/games${updatePageInLink(activePage - 1)}`}>
+            <MdNavigateBefore className={classes.pagination__prev} />
+          </Link>
+        </button>
+        <div className={classes.pagination__activePage}>
+          <p>{activePage}</p>
+        </div>
 
-        <p>{activePage}</p>
-        {activePage < pages && (
-          <button type="button" onClick={nextPageHanlder}>
-            <Link to={`/games${updatePageInLink(activePage + 1)}`}>
-              {activePage + 1}
-            </Link>
-          </button>
-        )}
+        <button
+          type="button"
+          onClick={nextPageHanlder}
+          disabled={activePage >= pages}
+          className={`${activePage >= pages ? classes.disabled : ''}`}
+        >
+          <Link to={`/games${updatePageInLink(activePage + 1)}`}>
+            {activePage + 1}
+          </Link>
+        </button>
 
-        {activePage !== pages && (
-          <>
-            <button type="button" onClick={nextPageHanlder}>
-              <Link to={`/games${updatePageInLink(activePage + 1)}`}>Next</Link>
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                pageHandler(pages);
-              }}
-            >
-              <Link to={`/games${updatePageInLink(pages)}`}>
-                <MdLastPage />
-                {pages}
-              </Link>
-            </button>
-          </>
-        )}
+        <button
+          type="button"
+          onClick={nextPageHanlder}
+          disabled={activePage === pages}
+          className={`${activePage === pages ? classes.disabled : ''}`}
+        >
+          <Link to={`/games${updatePageInLink(activePage + 1)}`}>
+            <MdNavigateNext className={classes.pagination__next} />
+          </Link>
+        </button>
+        <button
+          type="button"
+          onClick={() => {
+            pageHandler(pages);
+          }}
+          disabled={activePage === pages}
+          className={`${activePage === pages ? classes.disabled : ''}`}
+        >
+          <Link to={`/games${updatePageInLink(pages)}`}>
+            {pages}
+            <MdLastPage className={classes.pagination__icon} />
+          </Link>
+        </button>
       </div>
     </div>
   );
