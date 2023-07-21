@@ -1,4 +1,5 @@
 import { useLocation } from 'react-router-dom';
+
 import { useGetSpecificGamesQuery } from '../../store/api/feedSlice';
 import { GameData } from '../../Types/types';
 import classes from './GamePage.module.scss';
@@ -16,17 +17,23 @@ interface ResponseType {
 }
 const GamesPage = () => {
   const location = useLocation();
+
   const searchParams = new URLSearchParams(location.search);
   const categoryParam = searchParams.get('category') as string;
   const platformParam = searchParams.get('platform') as string;
-  const queryParams = { category: categoryParam, platform: platformParam };
+  const pageParam = searchParams.get('page') as string;
+  const queryParams = {
+    category: categoryParam,
+    platform: platformParam,
+    page: pageParam,
+  };
   let content;
   const { data, isLoading, isError, isFetching } =
     useGetSpecificGamesQuery<ResponseType>(queryParams, {
       refetchOnMountOrArgChange: true,
     });
 
-  if (isLoading || isFetching) {
+  if (isLoading) {
     content = <Spiner message="Loading" />;
   } else if (isError) {
     content = (
@@ -39,9 +46,13 @@ const GamesPage = () => {
           categoryParam={categoryParam}
           platformParam={platformParam}
         />
-        {data.games.length !== 0 ? (
+
+        <Pagination totalPages={data.totalGames.count} />
+
+        {isFetching ? (
+          <Spiner />
+        ) : (
           <>
-            <Pagination totalPages={data.totalGames.count} />
             <div className={classes.gamesContainer}>
               {data.games.map((game) => (
                 <GamdeCard
@@ -58,12 +69,9 @@ const GamesPage = () => {
                 />
               ))}
             </div>
+            {/* Pagination */}
             <Pagination totalPages={data.totalGames.count} />
           </>
-        ) : (
-          <div className={classes.section__noResult}>
-            <h2>No search results</h2>
-          </div>
         )}
       </>
     );

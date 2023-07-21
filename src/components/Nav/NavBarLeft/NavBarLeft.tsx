@@ -1,5 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { switchPage } from '../../../store/slice/PaginationSlice';
 import classes from './NavBarLeft.module.scss';
 import Modal from '../../Modal/Modal';
 import { gameCategories, gamePlatforms } from '../../../util/db';
@@ -18,9 +20,9 @@ const NavBarLeft = ({
   setIsActiveRightBar,
 }: PropsType) => {
   const location = useLocation();
+  const dispatch = useDispatch();
   const [activeCategory, setActiveCategory] = useState<null | string>(null);
   const [activePlatform, setActivePlatform] = useState<null | string>(null);
-
   const [isPortrait, setIsPortrait] = useState(
     window.matchMedia('(orientation: portrait)').matches
   );
@@ -53,6 +55,10 @@ const NavBarLeft = ({
       setIsActiveRightBar(false);
     }
   }, [isActiveRightBar, setIsActiveLeftBar, setIsActiveRightBar]);
+
+  const pageHandler = (pageNumber: number) => {
+    dispatch(switchPage(pageNumber));
+  };
 
   return (
     <>
@@ -97,6 +103,7 @@ const NavBarLeft = ({
             {gameCategories.map((category) => {
               const searchParams = new URLSearchParams(location.search);
               searchParams.set('category', category.id.toString());
+
               const updatedSearch = `?${searchParams.toString()}`;
 
               return (
@@ -108,7 +115,13 @@ const NavBarLeft = ({
                       : ''
                   }
                 >
-                  <Link to={`/games${updatedSearch}`} onClick={activeHandler}>
+                  <Link
+                    to={`/games${updatedSearch}`}
+                    onClick={() => {
+                      activeHandler();
+                      pageHandler(1);
+                    }}
+                  >
                     {category.name}
                   </Link>
                 </div>
@@ -120,6 +133,7 @@ const NavBarLeft = ({
             {gamePlatforms.map((platform) => {
               const searchParams = new URLSearchParams(location.search);
               searchParams.set('platform', platform.id.toString());
+              // searchParams.set('page', actualPage.toString());
               const updatedSearch = `?${searchParams
                 .toString()
                 .toLocaleLowerCase()}`;
@@ -133,7 +147,13 @@ const NavBarLeft = ({
                       : ''
                   }
                 >
-                  <Link to={`/games${updatedSearch}`} onClick={activeHandler}>
+                  <Link
+                    to={`/games${updatedSearch}`}
+                    onClick={() => {
+                      activeHandler();
+                      pageHandler(1);
+                    }}
+                  >
                     {platform.name}
                   </Link>
                 </div>

@@ -36,10 +36,10 @@ const productsApiSlice = apiSlice.injectEndpoints({
     }),
     getSpecificGames: builder.query<
       void,
-      { category: string; platform: string }
+      { category: string; platform: string; page: string }
     >({
-      query: ({ category, platform }) => ({
-        url: `feed/filteredGames?category=${category}&platform=${platform}`,
+      query: ({ category, platform, page }) => ({
+        url: `feed/filteredGames?category=${category}&platform=${platform}&page=${page}`,
         method: 'POST',
       }),
     }),

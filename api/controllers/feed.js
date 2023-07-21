@@ -165,8 +165,12 @@ export const getSpecificGames = async (req, res, next) => {
   const { token } = req;
   const { category } = req.query;
   const { platform } = req.query;
-  const page = req.query.page || 1;
+  let { page } = req.query;
   const pageSize = req.query.pageSize || 10;
+
+  if (page === 'null') {
+    page = '1';
+  }
   try {
     const offset = (page - 1) * pageSize;
     let genresFilter = 'genres != null';

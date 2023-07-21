@@ -123,6 +123,7 @@
         text-transform: uppercase;
         letter-spacing: 1px;
         a {
+          padding: 5px 50px;
           transition: color 0.3s;
           color: var(--color);
         }
