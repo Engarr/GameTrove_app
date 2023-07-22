@@ -15,6 +15,7 @@ const Card = ({ imageUrl, cardId, setIsActive }: PropsType) => {
         setIsActive(false);
       }
       const cardRect = cardRef.current.getBoundingClientRect();
+      // console.log(cardRect);
       const offsetX =
         ((event.pageX - cardRect.left) / cardRect.width - 0.5) * 50;
       const offsetY =
@@ -22,7 +23,7 @@ const Card = ({ imageUrl, cardId, setIsActive }: PropsType) => {
 
       cardRef.current.style.setProperty('--rotateX', `${offsetY}deg`);
       cardRef.current.style.setProperty('--rotateY', `${offsetX}deg`);
-      cardRef.current.style.setProperty('--reset', '0s');
+      cardRef.current.style.setProperty('--reset', '0');
     }
   };
 

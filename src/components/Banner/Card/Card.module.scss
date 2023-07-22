@@ -4,6 +4,7 @@
   transform-style: preserve-3d;
   transform: perspective(5000px) rotateY(var(--rotateY)) rotateX(var(--rotateX));
   transition: transform var(--reset);
+  transition-timing-function: linear;
   img {
     box-shadow: 0 0 2px var(--black-white);
     width: 250px;

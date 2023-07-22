@@ -1,10 +1,10 @@
 .cardsContainer {
-  width: 100%;
+  position: relative;
   overflow-x: auto;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  position: relative;
+  width: 100%;
   scrollbar-width: thin;
   scrollbar-color: transparent transparent;
 
@@ -19,10 +19,14 @@
     cursor: pointer;
     overflow: hidden;
 
-    img {
+    a {
       position: relative;
       height: 100%;
       width: 90%;
+      img {
+        height: 100%;
+        width: 100%;
+      }
     }
     &-rating {
       position: absolute;
@@ -39,22 +43,26 @@
     }
     &-name {
       position: absolute;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+
       background-color: var(--greenYellow);
       z-index: 10;
-      color: var(--black-white);
+      color: black;
       width: 90%;
       bottom: 0%;
       height: 0px;
-      padding: 50px 0px;
+      padding: 0px 0px;
       font-weight: bold;
       text-align: center;
       font-size: 1.1em;
-      opacity: 0;
+      opacity: 1;
       transition: opacity 0.3s, height 0.5s;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      p,
+      a {
+        position: relative;
+        top: 30%;
+      }
       a {
         color: var(--blue);
         transition: color 0.3s;
@@ -71,25 +79,13 @@
   }
   &--card:hover &--card-name {
     bottom: 0;
-    height: 50px;
+    height: 150px;
   }
 }
-.shadow {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.692);
-  z-index: 1;
-  height: 100%;
-  width: 90%;
-  backdrop-filter: blur(1px);
-  opacity: 0;
-  transition: backdrop-filter 0.3s, opacity 0.3s;
-}
 
-.cardsContainer::-webkit-scrollbar {
-  display: none;
-}
+// .cardsContainer::-webkit-scrollbar {
+//   display: none;
+// }
 @media only screen and (max-width: 1024px) {
   .cardsContainer {
     &--card {

@@ -36,14 +36,16 @@ const Card = ({ cardsContainerRef, data }: PropsType) => {
             return (
               <div className={classes[`cardsContainer--card`]} key={game.id}>
                 {game.cover ? (
-                  <img src={imageUrl} alt={game.name} width={250} />
+                  <Link to={`/game/${game.id}`}>
+                    <img src={imageUrl} alt={game.name} width={250} />
+                  </Link>
                 ) : (
                   <div>No cover image</div>
                 )}
                 <div className={classes[`cardsContainer--card-rating`]}>
                   {game.rating.toFixed(0)}
                 </div>
-                <div className={classes.shadow} />
+
                 <div className={classes[`cardsContainer--card-name`]}>
                   <p>{game.name} </p>
                   <p>

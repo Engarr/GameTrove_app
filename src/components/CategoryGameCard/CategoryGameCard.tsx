@@ -19,12 +19,14 @@ const CategoryGameCard = () => {
   let bacgroundImg =
     'https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg';
   const [scrollPosition, setScrollPosition] = useState(0);
+  // const [scrollXPosition, setScrollXPosition] = useState(0);
   const [activePosition, setActivePosition] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const cardsContainerRef = useRef<HTMLDivElement>(null);
   const isMobile = useMediaQuery({ maxWidth: 736 });
   const isMediumMobile = useMediaQuery({ maxWidth: 1024 });
   let diverse = 3;
+  const caruselRef = null;
 
   if (isMobile) {
     diverse = 1;
@@ -41,7 +43,6 @@ const CategoryGameCard = () => {
   const handleNextClick = () => {
     if (cardsContainerRef.current) {
       const containerWidth = cardsContainerRef.current.offsetWidth;
-
       const cardWidth = containerWidth;
 
       const maxScrollPosition =
@@ -98,12 +99,42 @@ const CategoryGameCard = () => {
     }
   };
 
+  // const scrollPositionHandler = () => {
+  //   if (cardsContainerRef.current && data) {
+  //     const horizontalPosition = cardsContainerRef.current.scrollLeft;
+  //     const containerWidth = cardsContainerRef.current.offsetWidth;
+  //     const maxHorizontalScroll =
+  //       cardsContainerRef.current.scrollWidth -
+  //       cardsContainerRef.current.clientWidth;
+  //     console.log(horizontalPosition);
+  //     console.log(maxHorizontalScroll / containerWidth);
+  //     // console.log(horizontalPosition);
+  //     setScrollXPosition(horizontalPosition);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   const container = cardsContainerRef.current;
+
+  //   if (container) {
+  //     container.addEventListener('scroll', scrollPositionHandler);
+  //   }
+
+  //   return () => {
+  //     if (container) {
+  //       container.removeEventListener('scroll', scrollPositionHandler);
+  //     }
+  //   };
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
+
   if (data && data.newsGames[currentIndex]?.cover) {
     bacgroundImg = data.newsGames[currentIndex].cover.url.replace(
       't_thumb',
       't_1080p'
     );
   }
+
   let content;
   if (isLoading) {
     content = (
@@ -145,7 +176,7 @@ const CategoryGameCard = () => {
           className={classes[`container__img--bottom`]}
         />
         <div className={classes.container__shadow} />
-        <div className={classes.container__carouselBox}>
+        <div className={classes.container__carouselBox} ref={caruselRef}>
           {scrollPosition !== 0 && (
             <button
               type="button"

@@ -13,7 +13,7 @@ const Nav = () => {
   const [arrowIsVisible, setArrowIsVisible] = useState(false);
 
   const scrollPositionHandler = () => {
-    const position = window.pageYOffset;
+    const position = window.scrollY;
     if (position > 400) {
       setArrowIsVisible(true);
     } else {

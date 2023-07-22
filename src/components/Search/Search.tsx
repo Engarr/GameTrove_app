@@ -31,6 +31,7 @@ const Search = ({ setIsActiveRightBar, setIsActiveLeftBar }: PropsType) => {
             setIsActiveLeftBar(false);
           }}
         />
+
         <div
           className={`${classes.search__inputBox} ${
             isHide ? classes.hide : classes.show

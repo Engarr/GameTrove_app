@@ -19,7 +19,6 @@ const GamesPage = () => {
   const searchParams = new URLSearchParams(location.search);
   const categoryParam = searchParams.get('category') as string;
   const platformParam = searchParams.get('platform') as string;
-  console.log(location.search);
   const pageParam = searchParams.get('page') as string;
   const queryParams = {
     category: categoryParam,
