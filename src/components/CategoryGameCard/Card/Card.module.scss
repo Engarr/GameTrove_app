@@ -83,9 +83,9 @@
   }
 }
 
-// .cardsContainer::-webkit-scrollbar {
-//   display: none;
-// }
+.cardsContainer::-webkit-scrollbar {
+  display: none;
+}
 @media only screen and (max-width: 1024px) {
   .cardsContainer {
     &--card {
