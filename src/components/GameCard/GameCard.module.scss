@@ -26,13 +26,17 @@
       margin-right: 10px;
       font-size: 1.1em;
     }
-    span {
+    a {
       background-color: rgb(102, 102, 102);
       color: white;
       border-radius: 2px;
       padding: 2px 5px;
       margin-right: 5px;
       font-size: 0.8em;
+      transition: color 0.3s;
+    }
+    a:hover {
+      color: var(--blue);
     }
   }
   &__summary {

@@ -19,6 +19,7 @@ const GamesPage = () => {
   const searchParams = new URLSearchParams(location.search);
   const categoryParam = searchParams.get('category') as string;
   const platformParam = searchParams.get('platform') as string;
+  console.log(location.search);
   const pageParam = searchParams.get('page') as string;
   const queryParams = {
     category: categoryParam,
@@ -43,9 +44,12 @@ const GamesPage = () => {
           categoryParam={categoryParam}
           platformParam={platformParam}
         />
+        {data.games.length !== 0 && (
+          <Pagination totalPages={data.totalGames.count} />
+        )}
 
         {isFetching ? (
-          <Spiner />
+          <Spiner message="Loading" />
         ) : (
           // eslint-disable-next-line react/jsx-no-useless-fragment
           <>
@@ -53,7 +57,6 @@ const GamesPage = () => {
               <ErrorComponent message="Ups... There is no such a game. Please change filters" />
             ) : (
               <div>
-                <Pagination totalPages={data.totalGames.count} />
                 <div className={classes.gamesContainer}>
                   {data.games.map((game) => (
                     <GameCard

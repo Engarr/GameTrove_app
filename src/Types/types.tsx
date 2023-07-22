@@ -62,6 +62,10 @@ export interface GameDetailType {
     id: number;
     name: string;
   }[];
+  platforms: {
+    id: number;
+    name: string;
+  }[];
   rating: number;
   rating_count: number;
   screenshots: {

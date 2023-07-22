@@ -47,8 +47,9 @@
       display: flex;
     }
     &--genre {
-      margin: 0.5em 0;
-
+      margin: 0.8em 0;
+      display: flex;
+      flex-direction: column;
       a {
         color: var(--blue);
         margin-right: 0.2em;

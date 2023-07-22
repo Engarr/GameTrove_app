@@ -54,13 +54,24 @@ const GameDetailDesc = ({ data, isLoading }: PropsType) => {
       <div className={classes.productContainer__descriptionBox}>
         <h2>About the game:</h2>
         <div className={classes[`productContainer__descriptionBox--genre`]}>
-          <h3>Genre: </h3>
-          {data.genres &&
-            data.genres.map((genre) => (
-              <Link to="/" key={genre.id}>
-                {genre.name}
-              </Link>
-            ))}
+          <div>
+            <h3>Genre: </h3>
+            {data.genres &&
+              data.genres.map((genre) => (
+                <Link to={`/games?category=${genre.id}`} key={genre.id}>
+                  {genre.name}
+                </Link>
+              ))}
+          </div>
+          <div>
+            <h3>Platforms:</h3>
+            {data.platforms &&
+              data.platforms.map((platform) => (
+                <Link to={`/games?platform=${platform.id}`} key={platform.id}>
+                  {platform.name}
+                </Link>
+              ))}
+          </div>
         </div>
 
         <div className={classes[`productContainer__descriptionBox--summary`]}>

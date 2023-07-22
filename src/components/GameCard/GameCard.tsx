@@ -34,7 +34,9 @@ const GameCard = ({ name, img, id, geners, summary, platforms }: PropsType) => {
           <div className={classes.card__geners}>
             <p> Geners:</p>
             {geners.map((g) => (
-              <span key={g.id}>{g.name}</span>
+              <Link to={`/games?category=${g.id}`} key={g.id}>
+                {g.name}
+              </Link>
             ))}
           </div>
         )}
@@ -42,7 +44,9 @@ const GameCard = ({ name, img, id, geners, summary, platforms }: PropsType) => {
           <div className={classes.card__geners}>
             <p> Platfomrs:</p>
             {platforms.map((p) => (
-              <span key={p.id}>{p.name}</span>
+              <Link to={`/games?platform=${p.id}`} key={p.id}>
+                {p.name}
+              </Link>
             ))}
           </div>
         )}
