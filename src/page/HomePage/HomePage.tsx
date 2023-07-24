@@ -1,5 +1,6 @@
 import Banner from '../../components/Banner/Banner';
 import CategoryGameCard from '../../components/CategoryGameCard/CategoryGameCard';
+import CommingSoon from '../../components/CommingSoonSection/CommingSoon';
 import classes from './HomePage.module.scss';
 
 const HomePage = () => {
@@ -7,6 +8,7 @@ const HomePage = () => {
     <section className={classes.homeWrapper}>
       <Banner />
       <CategoryGameCard />
+      <CommingSoon />
     </section>
   );
 };

@@ -1,0 +1,59 @@
+.tollbarBox {
+  background-color: var(--glass);
+  padding: 10px 20px;
+  border-radius: 2px;
+  text-align: center;
+
+  button {
+    position: relative;
+    background-color: transparent;
+    padding: 5px 10px;
+    border: none;
+    margin: 0 4px;
+    cursor: pointer;
+    color: var(--color);
+    letter-spacing: 1px;
+    font-size: 1em;
+    font-family: 'Bai Jamjuree', sans-serif;
+    &.active {
+      font-weight: bold;
+      color: var(--greenYellow);
+    }
+    &.active::before {
+      opacity: 1;
+    }
+    &.active::after {
+      width: 100%;
+    }
+  }
+  button::before {
+    content: '⏶';
+    position: absolute;
+    bottom: -30%;
+    left: 50%;
+    font-size: 12px;
+    transform: translateX(-50%);
+    width: 100%;
+    color: var(--greenYellow);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  button::after {
+    content: '';
+    position: absolute;
+    bottom: -21%;
+    left: 50%;
+    font-size: 10px;
+    transform: translateX(-50%);
+    width: 0%;
+    color: var(--greenYellow);
+    border-bottom: 2px solid var(--greenYellow);
+    transition: width 0.3s;
+  }
+  button:hover::after {
+    width: 100%;
+  }
+  button:hover::before {
+    opacity: 1;
+  }
+}

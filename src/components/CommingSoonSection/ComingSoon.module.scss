@@ -1,0 +1,14 @@
+.wrapper {
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+  max-width: 1400px;
+  h2 {
+    margin: 1em 0;
+    font-family: 'Bai Jamjuree', sans-serif;
+    span {
+      color: var(--greenYellow);
+      font-weight: bold;
+    }
+  }
+}

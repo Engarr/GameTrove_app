@@ -107,8 +107,8 @@ const CategoryGameCard = () => {
   //       cardsContainerRef.current.scrollWidth -
   //       cardsContainerRef.current.clientWidth;
   //     console.log(horizontalPosition);
-  //     console.log(maxHorizontalScroll / containerWidth);
-  //     // console.log(horizontalPosition);
+  //     console.log(maxHorizontalScroll);
+
   //     setScrollXPosition(horizontalPosition);
   //   }
   // };

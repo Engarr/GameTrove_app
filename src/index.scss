@@ -28,6 +28,7 @@ ul {
   --blue: #25b8fe;
   --blue-hover: #089de2;
   --card-background: rgb(236, 236, 241, 0.4);
+  --glass: rgba(255, 255, 255, 0.2);
 }
 .dark {
   --background-color: rgb(68, 73, 80);
@@ -41,6 +42,7 @@ ul {
   --orange: orange;
   --card-background: rgb(236, 236, 241, 0.4);
   --game-card-bgc: rgb(78, 83, 90);
+  --glass: rgba(255, 255, 255, 0.1);
 }
 .light {
   --background-color: rgb(241, 236, 236);
@@ -54,6 +56,7 @@ ul {
   --orange: orange;
   --card-background: rgb(52, 53, 65, 0.6);
   --game-card-bgc: rgb(235, 230, 230);
+  --glass: rgba(0, 0, 0, 0.1);
 }
 body {
   max-width: 100vw;

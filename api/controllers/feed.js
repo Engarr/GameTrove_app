@@ -176,13 +176,21 @@ export const getSpecificGames = async (req, res, next) => {
     let genresFilter = 'genres != null';
     let platformFilter = 'platforms != null';
 
-    if (category !== 'null') {
+    if (category !== 'null' && category !== '1') {
       genresFilter += ` & genres = ${category}`;
-    }
-    if (platform !== 'null') {
-      platformFilter += ` & platforms = ${platform}`;
+    } else if (category === '1') {
+      genresFilter = `genres != null`;
     }
 
+    if (platform !== 'null' && platform !== '0') {
+      platformFilter += ` & platforms = ${platform}`;
+    } else if (platform === '0') {
+      platformFilter = `platforms != null`;
+    }
+    // console.log('Geners', category);
+    // console.log('Geners Filter', genresFilter);
+    // console.log('platform', platform);
+    // console.log('platform Filter', platformFilter);
     const query = `
       fields name, cover.url, platforms.name, genres.name, summary,age_ratings.rating_cover_url, first_release_date;
       where ${platformFilter} & ${genresFilter} & first_release_date != null;
@@ -210,6 +218,7 @@ export const getSpecificGames = async (req, res, next) => {
     );
 
     const totalGames = countResponse.data;
+
     const games = response.data;
     const responseData = {
       games,

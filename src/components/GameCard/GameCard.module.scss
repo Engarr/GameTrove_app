@@ -21,7 +21,9 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin: 8px 0;
+    
+
+    flex-wrap: wrap;
     p {
       margin-right: 10px;
       font-size: 1.1em;
@@ -31,7 +33,7 @@
       color: white;
       border-radius: 2px;
       padding: 2px 5px;
-      margin-right: 5px;
+      margin: 2px;
       font-size: 0.8em;
       transition: color 0.3s;
     }

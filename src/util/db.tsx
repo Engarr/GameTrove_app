@@ -9,6 +9,7 @@ interface PlatformType {
   platform: string;
 }
 export const gameCategories: CategoryType[] = [
+  { id: 1, name: 'All', genres: 'geners' },
   { id: 4, name: 'Fighting', genres: 'geners' },
   { id: 5, name: 'Shooter', genres: 'geners' },
   { id: 7, name: 'Music', genres: 'geners' },
@@ -35,6 +36,7 @@ export const gameCategories: CategoryType[] = [
 ];
 
 export const gamePlatforms: PlatformType[] = [
+  { id: 0, name: 'All', platform: 'platform' },
   { id: 6, name: 'PC', platform: 'platform' },
   { id: 7, name: 'PlayStation', platform: 'platform' },
   { id: 8, name: 'PlayStation 2', platform: 'platform' },
@@ -47,4 +49,5 @@ export const gamePlatforms: PlatformType[] = [
   { id: 39, name: 'iOS', platform: 'platform' },
   { id: 162, name: 'Oculus VR', platform: 'platform' },
   { id: 165, name: 'PlayStation VR', platform: 'platform' },
+  { id: 169, name: 'Xbox Series X|S', platform: 'platform' },
 ];

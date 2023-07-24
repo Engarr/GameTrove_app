@@ -1,6 +1,7 @@
 .cardsContainer {
   position: relative;
-  overflow-x: auto;
+  // overflow-x: auto;
+  overflow: hidden;
   display: flex;
   justify-content: flex-start;
   align-items: center;

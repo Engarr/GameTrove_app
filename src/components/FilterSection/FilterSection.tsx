@@ -25,10 +25,8 @@ const FilterSection = ({ categoryParam, platformParam }: PropsType) => {
       (platform) => platform.id === Number(platformIdToFind)
     );
   }, []);
-
   const foundCategory = findCategoryById(categoryParam);
   const foundPlatform = findPlatformById(platformParam);
-
   const resultArray = useCallback(() => {
     const arr = [];
     if (foundCategory) {
@@ -50,7 +48,7 @@ const FilterSection = ({ categoryParam, platformParam }: PropsType) => {
           {combinedResults.map((item) => (
             <div key={item.id} className={classes[`filters__container--box`]}>
               <p>{item.genres ? item.genres : item.platform}:</p>
-              <button type="button">{item.name}</button>
+              <span>{item.name}</span>
             </div>
           ))}
         </div>
