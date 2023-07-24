@@ -51,3 +51,16 @@ export const gamePlatforms: PlatformType[] = [
   { id: 165, name: 'PlayStation VR', platform: 'platform' },
   { id: 169, name: 'Xbox Series X|S', platform: 'platform' },
 ];
+export const comingGamePlatforms: PlatformType[] = [
+  { id: 0, name: 'All', platform: 'platform' },
+  { id: 6, name: 'PC', platform: 'platform' },
+  { id: 130, name: 'Nintendo Switch', platform: 'platform' },
+  { id: 34, name: 'Android', platform: 'platform' },
+  { id: 39, name: 'iOS', platform: 'platform' },
+  { id: 169, name: 'Xbox Series X|S', platform: 'platform' },
+  { id: 41, name: 'Wii U', platform: 'platform' },
+  { id: 14, name: 'Mac', platform: 'platform' },
+  { id: 49, name: 'Xbox one', platform: 'platform' },
+  { id: 48, name: 'PlayStation 4', platform: 'platform' },
+  { id: 167, name: 'PlayStation 5', platform: 'platform' },
+];

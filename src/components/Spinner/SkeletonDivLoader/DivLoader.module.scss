@@ -1,0 +1,33 @@
+.loadingDiv {
+  margin-top: 1em;
+  background-color: rgba(0, 0, 0, 0.541);
+  height: 500px;
+  z-index: 10;
+  overflow: hidden;
+  &__shadow {
+    position: relative;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: placeHolderShimmer;
+    animation-timing-function: linear;
+    background-color: rgba(68, 73, 80, 0.3);
+    background: linear-gradient(
+      to right,
+      var(--div-loader-first) 7%,
+      var(--div-loader-second) 28%,
+      var(--div-loader-first) 43%
+    );
+    background-size: 800px 104px;
+    height: 100%;
+    width: 100%;
+  }
+}
+@keyframes placeHolderShimmer {
+  0% {
+    background-position: -800px 0;
+  }
+  100% {
+    background-position: 800px 0;
+  }
+}

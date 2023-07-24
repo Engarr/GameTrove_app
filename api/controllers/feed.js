@@ -161,6 +161,7 @@ export const searchGames = async (req, res, next) => {
     throw error;
   }
 };
+
 export const getSpecificGames = async (req, res, next) => {
   const { token } = req;
   const { category } = req.query;
@@ -177,20 +178,17 @@ export const getSpecificGames = async (req, res, next) => {
     let platformFilter = 'platforms != null';
 
     if (category !== 'null' && category !== '1') {
-      genresFilter += ` & genres = ${category}`;
+      genresFilter += ` & genres = [${category}]`;
     } else if (category === '1') {
       genresFilter = `genres != null`;
     }
 
     if (platform !== 'null' && platform !== '0') {
-      platformFilter += ` & platforms = ${platform}`;
+      platformFilter += ` & platforms = [${platform}]`;
     } else if (platform === '0') {
       platformFilter = `platforms != null`;
     }
-    // console.log('Geners', category);
-    // console.log('Geners Filter', genresFilter);
-    // console.log('platform', platform);
-    // console.log('platform Filter', platformFilter);
+
     const query = `
       fields name, cover.url, platforms.name, genres.name, summary,age_ratings.rating_cover_url, first_release_date;
       where ${platformFilter} & ${genresFilter} & first_release_date != null;
@@ -230,9 +228,43 @@ export const getSpecificGames = async (req, res, next) => {
     throw error;
   }
 };
+
+export const getComingGames = async (req, res, next) => {
+  const { token } = req;
+  const { platform } = req.params;
+  try {
+    const today = Math.floor(Date.now() / 1000);
+    let filters = 'platforms != null';
+    if (platform !== 'null' && platform !== '0') {
+      filters += ` & platforms = [${platform}]`;
+    } else if (platform === '0') {
+      filters = `platforms != null`;
+    }
+    filters += ` & first_release_date > ${today}`;
+    const query = `
+    fields name, cover.url, first_release_date, platforms.name;
+    where ${filters} & follows != null;
+    sort follows desc ;
+    limit 11;
+    `;
+    const headers = {
+      'Client-ID': process.env.VITE_CLIENT_ID,
+      Authorization: `Bearer ${token}`,
+    };
+    const response = await axios.post('https://api.igdb.com/v4/games', query, {
+      headers,
+    });
+    const games = response.data;
+    res.status(200).json(games);
+  } catch (error) {
+    console.error('An error occured:', error);
+    throw error;
+  }
+};
+
 // const categoriesResponse = await axios.post(
-//   'https://api.igdb.com/v4/platforms',
-//   'fields *; limit 500;',
+//   'https://api.igdb.com/v4/games',
+//   'fields *; where id = 208303;',
 //   {
 //     headers: {
 //       'Client-ID': process.env.VITE_CLIENT_ID,
@@ -241,3 +273,4 @@ export const getSpecificGames = async (req, res, next) => {
 //   }
 // );
 // const send = categoriesResponse.data;
+// console.log(send);

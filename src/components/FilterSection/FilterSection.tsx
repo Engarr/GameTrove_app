@@ -43,7 +43,9 @@ const FilterSection = ({ categoryParam, platformParam }: PropsType) => {
   return (
     <div className={classes.wrapper}>
       <div className={classes.filters}>
-        <h2>Filters:</h2>
+        <div>
+          <h2>Filters:</h2>
+        </div>
         <div className={classes.filters__container}>
           {combinedResults.map((item) => (
             <div key={item.id} className={classes[`filters__container--box`]}>

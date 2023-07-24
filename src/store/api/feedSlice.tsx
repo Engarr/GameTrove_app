@@ -43,6 +43,12 @@ const productsApiSlice = apiSlice.injectEndpoints({
         method: 'POST',
       }),
     }),
+    getComingGames: builder.query<void, number>({
+      query: (platform) => ({
+        url: `feed/comingGames/${platform}`,
+        method: 'POST',
+      }),
+    }),
   }),
 });
 
@@ -53,4 +59,5 @@ export const {
   useGetGameDetailsQuery,
   useGetSearchgameQuery,
   useGetSpecificGamesQuery,
+  useGetComingGamesQuery,
 } = productsApiSlice;

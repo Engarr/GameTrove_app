@@ -1,18 +1,18 @@
 import { useState } from 'react';
 import { MdExpandMore } from 'react-icons/md';
-import { gamePlatforms } from '../../../util/db';
+import { comingGamePlatforms } from '../../../util/db';
 import classes from './ToolBar.module.scss';
 
 interface PropsType {
-  setActiveSearch: React.Dispatch<React.SetStateAction<string>>;
-  activeSearch: string;
+  setActiveSearch: React.Dispatch<React.SetStateAction<number>>;
+  activeSearch: number;
 }
 
 const ToolBar = ({ setActiveSearch, activeSearch }: PropsType) => {
-  const activeSearchHandler = (name: string) => {
+  const activeSearchHandler = (name: number) => {
     setActiveSearch(name);
   };
-  const [isActive, setisActive] = useState(true);
+  const [isActive, setisActive] = useState(false);
 
   const activeBarHandler = () => {
     setisActive((prev) => !prev);
@@ -26,13 +26,14 @@ const ToolBar = ({ setActiveSearch, activeSearch }: PropsType) => {
       <div
         className={`${classes.tollbarBox} ${isActive ? classes.activeBar : ''}`}
       >
-        {gamePlatforms.map((platform) => (
+        {comingGamePlatforms.map((platform) => (
           <button
-            className={activeSearch === platform.name ? classes.active : ''}
+            className={activeSearch === platform.id ? classes.active : ''}
             type="button"
             key={platform.id}
             onClick={() => {
-              activeSearchHandler(platform.name);
+              activeSearchHandler(platform.id);
+              activeBarHandler();
             }}
           >
             {platform.name}

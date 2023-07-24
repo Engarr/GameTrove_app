@@ -82,7 +82,12 @@ const GamesPage = () => {
     );
   }
 
-  return <section className={classes.section}>{content}</section>;
+  return (
+    <section className={classes.section}>
+      <h2 className={classes.section__title}>Game encyclopedia</h2>
+      {content}
+    </section>
+  );
 };
 
 export default GamesPage;

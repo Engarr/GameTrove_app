@@ -6,6 +6,7 @@ import {
   getGameDetails,
   searchGames,
   getSpecificGames,
+  getComingGames,
 } from '../controllers/feed.js';
 import getToken from '../middleware/getToken.js';
 
@@ -17,5 +18,6 @@ router.post('/categoryGames', getToken, getCategoryGames);
 router.post('/game/:gameId', getToken, getGameDetails);
 router.post(`/search`, getToken, searchGames);
 router.post(`/filteredGames`, getToken, getSpecificGames);
+router.post(`/comingGames/:platform`, getToken, getComingGames);
 
 export default router;

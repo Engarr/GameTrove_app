@@ -1,0 +1,11 @@
+.card {
+  display: flex;
+  z-index: 100;
+  h5 {
+    letter-spacing: 1px;
+    margin-bottom: 0.2em;
+  }
+  &__desc {
+    padding: 5px 10px;
+  }
+}

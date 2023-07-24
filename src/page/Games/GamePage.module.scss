@@ -4,6 +4,11 @@
   flex-direction: column;
   width: 100%;
   font-family: 'Bai Jamjuree', sans-serif;
+  &__title {
+    margin-top: 2em;
+    text-transform: uppercase;
+    text-align: center;
+  }
   &__noResult {
     text-align: center;
   }

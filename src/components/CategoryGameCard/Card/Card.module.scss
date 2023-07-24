@@ -1,6 +1,5 @@
 .cardsContainer {
   position: relative;
-  // overflow-x: auto;
   overflow: hidden;
   display: flex;
   justify-content: flex-start;
@@ -50,15 +49,17 @@
       color: black;
       width: 90%;
       bottom: 0%;
-      height: 0px;
+      height: 50px;
       padding: 0px 0px;
       font-weight: bold;
       text-align: center;
       font-size: 1.1em;
-      opacity: 1;
-      transition: opacity 0.3s, height 0.5s;
+      opacity: 0;
+      transition: opacity 0.3s, height 0.5s, transform 0.3s;
       border-top-left-radius: 20px;
       border-top-right-radius: 20px;
+      overflow: hidden;
+      transform: translateY(100%);
       p,
       a {
         position: relative;
@@ -79,8 +80,8 @@
     opacity: 1;
   }
   &--card:hover &--card-name {
-    bottom: 0;
     height: 150px;
+    transform: translateY(0%);
   }
 }
 
