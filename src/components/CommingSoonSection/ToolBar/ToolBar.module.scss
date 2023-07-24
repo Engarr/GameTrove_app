@@ -57,3 +57,42 @@
     opacity: 1;
   }
 }
+.expand {
+  opacity: 0;
+}
+@media only screen and (max-width: 1024px) {
+  .expand {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    font-size: 2em;
+    opacity: 1;
+    transition: transform 0.3s;
+  }
+  .arrowDown {
+    transform: rotate(180deg);
+  }
+
+  .tollbarBox {
+    padding: 0px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    height: 0;
+    opacity: 0;
+    transition: opacity 0.3s, height 0.3s;
+    border-bottom: 1px solid var(--color);
+    &.activeBar {
+      height: 380px;
+      opacity: 1;
+    }
+
+    button {
+      padding: 5px 20px;
+
+      font-size: 0.8em;
+    }
+  }
+}

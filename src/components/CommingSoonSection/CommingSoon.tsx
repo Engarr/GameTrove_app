@@ -10,7 +10,7 @@ const CommingSoon = () => {
         Coming Soon to: <span>{activeSearch}</span>
       </h2>
       <ToolBar setActiveSearch={setActiveSearch} activeSearch={activeSearch} />
-      {/* <div></div> */}
+      <div>sad</div>
     </section>
   );
 };
