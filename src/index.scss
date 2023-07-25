@@ -30,7 +30,6 @@ ul {
   --card-background: rgb(236, 236, 241, 0.4);
   --div-loader-first: rgba(68, 73, 80, 0.95);
   --div-loader-second: rgb(187, 187, 187, 0.4);
-  
 }
 .dark {
   --background-color: rgb(68, 73, 80);
@@ -50,6 +49,7 @@ ul {
   --card-background: rgb(236, 236, 241, 0.4);
   --div-loader-first: rgba(68, 73, 80, 0.95);
   --div-loader-second: rgb(187, 187, 187, 0.4);
+  --track_active_color: rgba(27, 27, 27, 0.4);
 }
 .light {
   --background-color: rgb(241, 236, 236);
@@ -68,6 +68,7 @@ ul {
   --platforms-card-bgc: rgb(190, 190, 190);
   --div-loader-first: rgba(241, 236, 236);
   --div-loader-second: rgba(173 174 175);
+  --track_active_color: rgba(216, 216, 16, 0.8);
 }
 body {
   max-width: 100vw;

@@ -5,8 +5,10 @@ export interface ColorModeState {
   colorMode: string;
 }
 
+const localStorageMode = localStorage.getItem('theme');
+const defaultColorMode = localStorageMode || 'dark';
 const initialState: ColorModeState = {
-  colorMode: 'dark',
+  colorMode: defaultColorMode,
 };
 
 const modeSlice = createSlice({
