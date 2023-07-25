@@ -22,18 +22,11 @@ const ThemeMode = () => {
   return (
     <div className={classes.container}>
       <p>Theme:</p>
-      <div
-        onKeyDown={(event) => {
-          if (event.key === 'Enter' || event.key === ' ') {
-            toggleModeHandler();
-          }
-        }}
-        role="button"
-        tabIndex={0}
-        onClick={toggleModeHandler}
-        className={classes.container__icon}
-      >
-        {mode === 'dark' ? <MdDarkMode /> : <MdLightMode />}
+      <div>
+        <label className={classes.switch} htmlFor="theme">
+          <input type="checkbox" id="theme" onClick={toggleModeHandler} />
+          <span className={classes.slider} />
+        </label>
       </div>
     </div>
   );

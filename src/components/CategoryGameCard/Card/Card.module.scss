@@ -43,7 +43,6 @@
     }
     &-name {
       position: absolute;
-
       background-color: var(--greenYellow);
       z-index: 10;
       color: black;
@@ -56,8 +55,6 @@
       font-size: 1.1em;
       opacity: 0;
       transition: opacity 0.3s, height 0.5s, transform 0.3s;
-      border-top-left-radius: 20px;
-      border-top-right-radius: 20px;
       overflow: hidden;
       transform: translateY(100%);
       p,
