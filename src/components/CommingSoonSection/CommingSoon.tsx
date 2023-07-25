@@ -5,6 +5,7 @@ import classes from './ComingSoon.module.scss';
 import { useGetComingGamesQuery } from '../../store/api/feedSlice';
 import { comingGamePlatforms } from '../../util/db';
 import DivLoader from '../Spinner/SkeletonDivLoader/DivLoader';
+import ErrorComponent from '../Spinner/ErrorComponent/ErrorComponent';
 
 interface DataType {
   data: {
@@ -47,6 +48,10 @@ const CommingSoon = () => {
   let comingContent;
   if (isLoading || isFetching) {
     comingContent = <DivLoader />;
+  } else if (isError) {
+    comingContent = (
+      <ErrorComponent message="Page loading error. Please try again later" />
+    );
   } else if (data) {
     comingContent = (
       <div className={classes.wrapper__gamesContainer}>

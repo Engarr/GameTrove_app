@@ -8,11 +8,24 @@
     margin-left: 10px;
     width: 100%;
     h5 {
+      position: relative;
       letter-spacing: 2px;
       font-size: 1em;
-
       margin-bottom: 0.2em;
+      color: var(--color);
     }
+    h5::before {
+      content: '';
+      position: absolute;
+      bottom: -20%;
+      width: 0%;
+      border-bottom: 2px solid var(--blue);
+      transition: width 0.3s;
+    }
+    h5:hover::before {
+      width: 100%;
+    }
+
     &--release {
       margin: 0.2em 0;
       background-color: var(--game-card-bgc);

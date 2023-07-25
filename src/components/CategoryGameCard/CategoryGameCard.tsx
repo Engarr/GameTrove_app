@@ -99,35 +99,6 @@ const CategoryGameCard = () => {
     }
   };
 
-  // const scrollPositionHandler = () => {
-  //   if (cardsContainerRef.current && data) {
-  //     const horizontalPosition = cardsContainerRef.current.scrollLeft;
-  //     const containerWidth = cardsContainerRef.current.offsetWidth;
-  //     const maxHorizontalScroll =
-  //       cardsContainerRef.current.scrollWidth -
-  //       cardsContainerRef.current.clientWidth;
-  //     console.log(horizontalPosition);
-  //     console.log(maxHorizontalScroll);
-
-  //     setScrollXPosition(horizontalPosition);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   const container = cardsContainerRef.current;
-
-  //   if (container) {
-  //     container.addEventListener('scroll', scrollPositionHandler);
-  //   }
-
-  //   return () => {
-  //     if (container) {
-  //       container.removeEventListener('scroll', scrollPositionHandler);
-  //     }
-  //   };
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
-
   if (data && data.newsGames[currentIndex]?.cover) {
     bacgroundImg = data.newsGames[currentIndex].cover.url.replace(
       't_thumb',

@@ -36,7 +36,9 @@ const ComingGameCard = ({ img, date, id, name, platforms }: PropsType) => {
         </Link>
       </div>
       <div className={classes.card__desc}>
-        <h5>{name}</h5>
+        <Link to={`/game/${id}`}>
+          <h5>{name}</h5>
+        </Link>
         <div className={classes[`card__desc--release`]}>
           {daysDifference !== 0 ? (
             <>
