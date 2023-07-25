@@ -71,6 +71,9 @@ const CommingSoon = () => {
           {platformName?.name}
         </span>
       </h2>
+      <p>
+        <span>**</span>According to the most expected
+      </p>
       <ToolBar setActiveSearch={setActiveSearch} activeSearch={activeSearch} />
       {comingContent}
     </section>

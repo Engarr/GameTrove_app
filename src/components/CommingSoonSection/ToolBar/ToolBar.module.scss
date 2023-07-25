@@ -94,5 +94,11 @@
 
       font-size: 0.8em;
     }
+    button::before {
+      display: none;
+    }
+    button::after {
+      bottom: 5%;
+    }
   }
 }

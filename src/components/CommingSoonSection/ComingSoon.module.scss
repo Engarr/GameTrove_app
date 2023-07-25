@@ -6,7 +6,7 @@
   font-family: 'Bai Jamjuree', sans-serif;
   height: auto;
   h2 {
-    margin: 1em 0;
+    margin: 1em 0 0 0;
     padding: 10px 5px;
     span {
       color: var(--greenYellow);
@@ -14,8 +14,14 @@
       margin-left: 5px;
     }
   }
+  p {
+    font-size: 0.9em;
+    letter-spacing: 1px;
+    span {
+      color: var(--blue);
+    }
+  }
   &__gamesContainer {
-    padding: 10px 20px;
     width: 100%;
     height: auto;
     top: 0;
@@ -24,9 +30,6 @@
     gap: 1rem;
     background-color: var(--glass);
     margin-top: 5px;
-    h5 {
-      font-size: 1.2em;
-    }
   }
 }
 .fadeIn {
@@ -49,7 +52,6 @@
       height: 600px;
       top: 0;
       display: grid;
-
       grid-template-columns: repeat(1, 1fr);
     }
     h2 {

@@ -32,29 +32,33 @@ const ComingGameCard = ({ img, date, id, name, platforms }: PropsType) => {
     <div className={classes.card}>
       <div>
         <Link to={`/game/${id}`}>
-          <img src={imageUrl} alt="" width={150} />
+          <img src={imageUrl} alt="" width={120} />
         </Link>
       </div>
       <div className={classes.card__desc}>
         <h5>{name}</h5>
-        <div>
+        <div className={classes[`card__desc--release`]}>
           {daysDifference !== 0 ? (
             <>
               <p>Planned release date:</p>
-              <span>
-                {day}-{month}-{year}
-              </span>
-              <p>Left:{daysDifference.toFixed()} days</p>
+              <p>
+                <span>{day}</span>-<span>{month}</span>-<span>{year}</span>
+              </p>
+              <p className={classes[`card__desc--release-left`]}>
+                Left: <span>{daysDifference.toFixed()}</span>days
+              </p>
             </>
           ) : (
             <p>Today release!</p>
           )}
         </div>
-        <div>
+        <div className={classes[`card__desc--platforms`]}>
           <p>Platfroms:</p>
-          {platforms.map((platform) => (
-            <p key={platform.id}>{platform.name}</p>
-          ))}
+          <div>
+            {platforms.map((platform) => (
+              <span key={platform.id}>{platform.name}</span>
+            ))}
+          </div>
         </div>
       </div>
     </div>

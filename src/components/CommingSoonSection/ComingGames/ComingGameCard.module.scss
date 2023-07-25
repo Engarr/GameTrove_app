@@ -1,11 +1,85 @@
 .card {
   display: flex;
   z-index: 100;
-  h5 {
-    letter-spacing: 1px;
-    margin-bottom: 0.2em;
-  }
+  padding: 10px;
+  color: var(--color);
+
   &__desc {
-    padding: 5px 10px;
+    margin-left: 10px;
+    width: 100%;
+    h5 {
+      letter-spacing: 2px;
+      font-size: 1em;
+
+      margin-bottom: 0.2em;
+    }
+    &--release {
+      margin: 0.2em 0;
+      background-color: var(--game-card-bgc);
+      p:first-of-type {
+        font-size: 1.1em;
+        letter-spacing: 1px;
+      }
+      p {
+        span:first-of-type {
+          padding: 0px 5px 0px 0px;
+        }
+        span {
+          padding: 0px 5px;
+          font-weight: bold;
+          color: var(--blue);
+        }
+      }
+      &-left {
+        span {
+          color: var(--blue);
+        }
+      }
+    }
+    &--platforms {
+      p {
+        font-size: 1.1em;
+        letter-spacing: 1px;
+      }
+      div {
+        display: flex;
+        flex-wrap: wrap;
+        span {
+          margin: 2px;
+          padding: 2px;
+          background-color: var(--platforms-card-bgc);
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 1024px) {
+  .card {
+    padding: 5px;
+
+    &__desc {
+      margin-left: 5px;
+
+      h5 {
+        letter-spacing: 1px;
+      }
+      &--release {
+        p:first-of-type {
+          font-size: 1em;
+        }
+      }
+      &--platforms {
+        p {
+          font-size: 1em;
+        }
+        div {
+          display: flex;
+          flex-wrap: wrap;
+          span {
+            margin: 1px;
+          }
+        }
+      }
+    }
   }
 }
