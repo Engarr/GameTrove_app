@@ -7,6 +7,7 @@
   z-index: 300;
   height: 52px;
   text-shadow: 0 0 0.5em white;
+  box-shadow: 0 0 2px var(--black-white);
   &__logo {
     a {
       font-family: 'Passion One', sans-serif;
@@ -27,7 +28,7 @@
       color: var(--greenYellow);
     }
   }
-  &__logo:hover .logo__icon {
+  &__logo:hover &__logo--icon {
     animation: shake 0.5s ease-in-out;
   }
 }

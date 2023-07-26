@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Nav from '../../components/Nav/Nav/Nav';
+import Footer from '../../components/Footer/Footer';
 
 const RootLayout = () => {
   const location = useLocation();
@@ -11,6 +12,7 @@ const RootLayout = () => {
     <section>
       <Nav />
       <Outlet />
+      <Footer />
     </section>
   );
 };
