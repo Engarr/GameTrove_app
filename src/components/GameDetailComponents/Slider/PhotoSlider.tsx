@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 import { useInView } from 'react-intersection-observer';
@@ -34,6 +34,18 @@ const PhotoSlider = ({ data, isLoading, isError }: PropsType) => {
   const activeHandler = () => {
     setBigIsActive((prev) => !prev);
   };
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      activeHandler();
+    }
+  };
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   let content;
 
   if (isLoading) {

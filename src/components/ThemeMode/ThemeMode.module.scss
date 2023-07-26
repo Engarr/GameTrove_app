@@ -20,6 +20,7 @@
   display: inline-block;
   width: var(--switch_width);
   height: var(--switch_height);
+ 
 }
 
 .switch input {
@@ -39,7 +40,7 @@
   bottom: 0;
   background-color: var(--track_active_color);
   transition: 0.15s;
-  border-radius: 5px;
+  border-radius: 25px;
 }
 
 .slider:before {
@@ -49,7 +50,7 @@
   height: var(--switch_height);
   width: var(--switch_height);
   border: 2px solid var(--outline_color);
-  border-radius: 5px;
+  border-radius: 25px;
   left: -2px;
   bottom: -2px;
   background-color: var(--thumb_color);
