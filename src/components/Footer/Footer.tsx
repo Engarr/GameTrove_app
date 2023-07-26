@@ -10,7 +10,6 @@ import classes from './Footer.module.scss';
 
 const Footer = () => {
   const year = new Date().getFullYear();
-  console.log(year);
   return (
     <section className={classes.footerContainer}>
       <div className={classes.footerContainer__logo}>

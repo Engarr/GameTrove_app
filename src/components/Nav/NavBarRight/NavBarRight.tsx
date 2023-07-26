@@ -1,5 +1,6 @@
 import { IoIosArrowUp } from 'react-icons/io';
 import { PiUserPlusFill, PiUserFill } from 'react-icons/pi';
+import { Link } from 'react-router-dom';
 import classes from './NavBarRight.module.scss';
 import Modal from '../../Modal/Modal';
 import ThemeMode from '../../ThemeMode/ThemeMode';
@@ -32,16 +33,20 @@ const NavBarRight = ({
         >
           <div className={classes.nav__buttons}>
             <div>
-              <button type="button">
-                Login
-                <PiUserFill className={classes[`nav__buttons--icon`]} />
-              </button>
+              <Link to="/account?mode=login">
+                <button type="button" onClick={activeHandler}>
+                  Login
+                  <PiUserFill className={classes[`nav__buttons--icon`]} />
+                </button>
+              </Link>
             </div>
             <div>
-              <button type="button">
-                Join us
-                <PiUserPlusFill className={classes[`nav__buttons--icon`]} />
-              </button>
+              <Link to="/account?mode=register">
+                <button type="button" onClick={activeHandler}>
+                  Join us
+                  <PiUserPlusFill className={classes[`nav__buttons--icon`]} />
+                </button>
+              </Link>
             </div>
             <ThemeMode />
           </div>

@@ -3,6 +3,7 @@ import RootLayout from './page/RootLayout/RootLayout';
 import Home from './page/HomePage/HomePage';
 import GameDetail from './page/GameDetailPage/GameDetail';
 import GamesPage from './page/Games/GamesPage';
+import MyAccount from './page/MyAccount/MyAccount';
 
 const App = () => {
   const router = createBrowserRouter([
@@ -17,6 +18,7 @@ const App = () => {
         },
         { path: '/game/:gameId', element: <GameDetail /> },
         { path: '/games', element: <GamesPage /> },
+        { path: '/account', element: <MyAccount /> },
       ],
     },
   ]);

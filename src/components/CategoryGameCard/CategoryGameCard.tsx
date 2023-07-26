@@ -169,7 +169,6 @@ const CategoryGameCard = () => {
             </button>
           )}
           <Card cardsContainerRef={cardsContainerRef} data={data} />
-
           <div className={classes.rectangleBox}>
             {dotItems.map((dot, index) => (
               <div
