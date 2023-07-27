@@ -39,7 +39,7 @@ ul {
   --nav-background: black;
   --black-white: white;
   --white-black: rgb(0, 0, 0);
-  --logo: rgba(122, 216, 15, 0.986);
+  --logo: linear-gradient(to right, #b0e633 0%, #53ef7d 100%);
   --greenYellow: rgb(173, 255, 47);
   --greenYellow-hover: rgb(138, 224, 10);
   --orange: orange;
@@ -61,7 +61,7 @@ ul {
   --nav-background: rgb(252, 251, 251);
   --black-white: black;
   --white-black: rgb(253, 253, 253);
-  --logo: rgb(92, 145, 14);
+  --logo: linear-gradient(to right, #b2ee28 0%, #40c463 100%);
   --greenYellow: rgb(92, 145, 14);
   --greenYellow-hover: rgb(100, 160, 9);
   --orange: orange;
@@ -98,5 +98,22 @@ body {
   100% {
     -webkit-transform: translateX(0%);
     transform: translateX(0%);
+  }
+}
+@keyframes shake {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+  75% {
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform: rotate(0deg);
   }
 }

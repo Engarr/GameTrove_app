@@ -1,3 +1,4 @@
+
 .nav {
   position: relative;
   top: 0;
@@ -55,28 +56,38 @@
 }
 .arrowBox {
   position: absolute;
-  font-size: 1.4em;
-  right: 0%;
-  bottom: -35px;
+  font-size: 2.5em;
+  right: 2%;
+  bottom: -37px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--color);
-  color: var(--background-color);
   padding: 5px;
-  width: 25%;
   cursor: pointer;
-  transition: background-color 0.3s;
   &__icon {
+    transition: color 0.3s;
+    color: var(--color);
     transform: rotateX(180deg);
     transition: transform 0.3s;
+    animation: arrowDown 1s ease-in infinite alternate-reverse;
   }
 }
-.arrowBox:hover {
-  background-color: var(--background-color-hover);
+.arrowBox:hover .arrowBox__icon {
+  color: var(--greenYellow);
 }
 .arrowRotate {
   transform: rotateX(0deg);
+  animation: none;
+}
+@keyframes arrowDown {
+  to {
+    transform: rotateX(180deg) translateY(-10px);
+  }
+}
+@keyframes grow {
+  to {
+    width: width + 5px;
+  }
 }
 @media only screen and (max-width: 1024px) {
   .nav {

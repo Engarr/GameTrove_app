@@ -4,6 +4,10 @@ const { Schema } = mongoose;
 
 const userSchema = new Schema(
   {
+    userName: {
+      type: String,
+      required: true,
+    },
     email: {
       type: String,
       required: true,
@@ -12,30 +16,6 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    products: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Product',
-      },
-    ],
-    orders: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'OrderModel',
-      },
-    ],
-    cart: [
-      {
-        productId: {
-          type: String,
-          required: true,
-        },
-        quantity: {
-          type: Number,
-          required: true,
-        },
-      },
-    ],
     wishLists: [
       {
         type: Schema.Types.ObjectId,

@@ -18,6 +18,7 @@ const AuthForm = () => {
     password: '',
     repeatPassword: '',
   });
+
   const handleUserDataChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserData((prevData) => ({
       ...prevData,
@@ -37,7 +38,6 @@ const AuthForm = () => {
     e.preventDefault();
     try {
       const { userName, email, password, repeatPassword } = userData;
-      console.log(userName);
       const response = await putRegisterUser({
         userName,
         email,
@@ -95,12 +95,12 @@ const AuthForm = () => {
             </div>
             {!isLogin && (
               <div>
-                <label htmlFor="password">
+                <label htmlFor="repeatPassword">
                   Repeat Your password:
                   <input
                     type="text"
-                    id="password"
-                    name="password"
+                    id="repeatPassword"
+                    name="repeatPassword"
                     onChange={handleUserDataChange}
                   />
                 </label>

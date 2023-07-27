@@ -1,3 +1,5 @@
+@import url('../../../index.scss');
+
 .navBarBox {
   display: flex;
   position: fixed;
@@ -6,7 +8,6 @@
   background-color: var(--nav-background);
   z-index: 300;
   height: 52px;
-  text-shadow: 0 0 0.5em white;
   box-shadow: 0 0 2px var(--black-white);
   &__logo {
     a {
@@ -19,17 +20,18 @@
     &--icon {
       margin-left: 0.2em;
       transform: rotate(10deg);
-      color: var(--logo);
+      color: var(--greenYellow);
+      animation: shake 2s ease-in-out infinite alternate-reverse;
     }
 
     p {
       font-size: 1.2em;
       letter-spacing: 2px;
-      color: var(--greenYellow);
+      background: var(--logo);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
-  }
-  &__logo:hover &__logo--icon {
-    animation: shake 0.5s ease-in-out;
   }
 }
 .arrowUp {
@@ -60,23 +62,6 @@
   opacity: 0;
 }
 
-@keyframes shake {
-  0% {
-    transform: rotate(0deg);
-  }
-  25% {
-    transform: rotate(-5deg);
-  }
-  50% {
-    transform: rotate(5deg);
-  }
-  75% {
-    transform: rotate(-5deg);
-  }
-  100% {
-    transform: rotate(0deg);
-  }
-}
 @media only screen and (max-width: 1024px) {
   .logo {
     font-family: 'Passion One', sans-serif;
