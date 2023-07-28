@@ -76,3 +76,29 @@ export interface GameDetailType {
   summary: string;
   videos: { id: number; video_id: string }[];
 }
+export type ErrorsData = {
+  email?: string;
+  password?: string;
+  newPassword?: string;
+  repeatPassword?: string;
+  userName?: string;
+};
+export type Error = {
+  location: string;
+  msg: string;
+  path: string;
+  type: string;
+  value: string;
+};
+export type AuthResponseType = {
+  error: {
+    status: number;
+    data: {
+      errors: Error[];
+      message: string;
+    };
+  };
+  data: {
+    token: string;
+  };
+};

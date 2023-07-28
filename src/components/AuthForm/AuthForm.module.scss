@@ -12,20 +12,23 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 50%;
+  min-width: none;
   height: 600px;
   padding: 10px 20px;
 
   &__inner {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+    height: auto;
+    padding: 20px 0px;
     width: 100%;
-    height: inherit;
     background: rgba(255, 255, 255, 0.05);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
     backdrop-filter: blur(5px);
     border-radius: 8px;
     transition: transform 0.3s;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
   }
 }
 
@@ -53,9 +56,9 @@
   animation-name: move-down1;
 }
 .formBox {
-  width: 50%;
+  width: 70%;
   text-align: center;
-  margin-top: 2em;
+
   h4 {
     opacity: 1;
     font-size: 2em;
@@ -67,6 +70,11 @@
   div {
     opacity: 0;
     animation: showUp 0.5s forwards linear;
+    &.error {
+      input {
+        border: 1px solid rgb(247, 99, 99);
+      }
+    }
     label {
       display: flex;
       flex-direction: column;
@@ -86,7 +94,7 @@
         width: 100%;
         margin: 10px 0;
         outline: none;
-        transition: box-shadow 0.3s;
+        transition: box-shadow 0.3s, border 0.3s;
         border-radius: 2px;
       }
       input:focus {
@@ -113,6 +121,9 @@
   &__switch {
     margin-top: 0.8em;
     font-size: 0.9em;
+    p {
+      color: var(--color);
+    }
     a {
       margin-left: 5px;
       color: var(--blue);
@@ -123,6 +134,7 @@
     }
   }
 }
+
 .fadeIn {
   animation: showUp 0.5s linear;
 }
