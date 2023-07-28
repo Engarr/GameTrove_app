@@ -57,8 +57,11 @@ const AuthForm = () => {
         ? await postLoginUser({ email, password })
         : await putRegisterUser({ userName, email, password, repeatPassword });
       const resData = response as AuthResponseType;
-      console.log(resData.data);
       if (resData.error) {
+        if (resData.error.status === 401) {
+          toast.error(resData.error.data.message);
+          return;
+        }
         if (resData.error.status === 422 || resData.error.status === 401) {
           const errorsObj: { [key: string]: string } = {};
           resData.error.data.errors.forEach((error) => {
@@ -69,7 +72,6 @@ const AuthForm = () => {
         }
       }
       if (resData.data) {
-        console.log('object');
         if (isLogin) {
           const { token } = resData.data;
           localStorage.setItem('token', token);
@@ -105,6 +107,7 @@ const AuthForm = () => {
       repeatPassword: '',
     });
   }, [isLogin]);
+
   return (
     <section className={classes.authWrapper}>
       <div className={classes.card}>

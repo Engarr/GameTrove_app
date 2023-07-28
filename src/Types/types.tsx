@@ -93,6 +93,7 @@ export type Error = {
 export type AuthResponseType = {
   error: {
     status: number;
+    message: string;
     data: {
       errors: Error[];
       message: string;

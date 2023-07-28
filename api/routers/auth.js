@@ -48,6 +48,16 @@ router.put(
   ],
   signup
 );
-router.post('/login', login);
+router.post(
+  '/login',
+  [
+    body('email', 'Please enter a valid email address.')
+      .isEmail()
+      .normalizeEmail()
+      .trim(),
+    body('password', 'This field can not be empty').trim().not().isEmpty(),
+  ],
+  login
+);
 
 export default router;
