@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MdKeyboardArrowUp } from 'react-icons/md';
 import { IoGameControllerOutline } from 'react-icons/io5';
+import Toast from '../../Toast/Toast';
 import Search from '../../Search/Search';
 import NavBarLeft from '../NavBarLeft/NavBarLeft';
 import NavBarRight from '../NavBarRight/NavBarRight';
@@ -77,6 +78,7 @@ const Nav = () => {
       >
         <MdKeyboardArrowUp />
       </button>
+      <Toast />
     </div>
   );
 };

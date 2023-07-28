@@ -100,5 +100,12 @@ export type AuthResponseType = {
   };
   data: {
     token: string;
+    message: string;
   };
+};
+export type UserDataType = {
+  userName: string;
+  email: string;
+  password: string;
+  repeatPassword: string;
 };

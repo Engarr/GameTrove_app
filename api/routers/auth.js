@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { body } from 'express-validator';
-import { signup } from '../controllers/auth.js';
+import { login, signup } from '../controllers/auth.js';
 import User from '../model/user.js';
 
 const router = Router();
@@ -37,16 +37,17 @@ router.put(
     )
       .isLength({ min: 5 })
       .matches(/^(?=.*[A-Z])(?=.*[!@#$&*])/),
-    // body('repeatPassword').custom((value, { req }) => {
-    //   if (value !== req.body.password) {
-    //     return Promise.reject(
-    //       new CustomError('The passwords must be identical')
-    //     );
-    //   }
-    //   return true;
-    // }),
+    body('repeatPassword').custom((value, { req }) => {
+      if (value !== req.body.password) {
+        return Promise.reject(
+          new CustomError('The passwords must be identical')
+        );
+      }
+      return true;
+    }),
   ],
   signup
 );
+router.post('/login', login);
 
 export default router;

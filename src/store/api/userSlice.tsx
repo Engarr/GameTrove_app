@@ -3,7 +3,7 @@ import apiSlice from './apiSlice';
 const userSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     putRegisterUser: builder.mutation<
-      ResponseType,
+      void,
       {
         userName: string;
         email: string;
@@ -17,8 +17,21 @@ const userSlice = apiSlice.injectEndpoints({
         body: { userName, email, password, repeatPassword },
       }),
     }),
+    postLoginUser: builder.mutation<
+      void,
+      {
+        email: string;
+        password: string;
+      }
+    >({
+      query: ({ email, password }) => ({
+        url: `auth/login`,
+        method: 'POST',
+        body: { email, password },
+      }),
+    }),
   }),
 });
 
-// eslint-disable-next-line import/prefer-default-export
-export const { usePutRegisterUserMutation } = userSlice;
+export const { usePutRegisterUserMutation, usePostLoginUserMutation } =
+  userSlice;

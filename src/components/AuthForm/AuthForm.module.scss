@@ -33,7 +33,7 @@
 }
 
 .card__inner:hover {
-  transform: scale(1.01) rotate(0.1deg);
+  transform: rotate(-0.2deg);
 }
 
 .circle {
@@ -46,12 +46,12 @@
 }
 
 .circle:nth-child(1) {
-  top: -25px;
+  top: -10%;
   left: -25px;
 }
 
 .circle:nth-child(2) {
-  bottom: -45px;
+  bottom: 20%;
   right: -5px;
   animation-name: move-down1;
 }
@@ -103,6 +103,7 @@
     }
   }
   button {
+    font-family: 'Bai Jamjuree', sans-serif;
     margin-top: 2em;
     padding: 10px 50px;
     text-align: center;
@@ -173,7 +174,7 @@
   }
 
   .card__inner:hover {
-    transform: scale(1.01) rotate(0.1deg);
+    transform: rotate(0.1deg);
   }
 
   .circle {
@@ -182,12 +183,12 @@
   }
 
   .circle:nth-child(1) {
-    top: -55px;
+    top: -8%;
     left: -10px;
   }
 
   .circle:nth-child(2) {
-    bottom: -55px;
+    bottom: 10%;
     right: -25px;
   }
   .formBox {

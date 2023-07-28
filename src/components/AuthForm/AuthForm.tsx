@@ -1,21 +1,28 @@
 import { useState, useEffect } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams, useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 import classes from './AuthForm.module.scss';
-import { usePutRegisterUserMutation } from '../../store/api/userSlice';
-import { AuthResponseType, ErrorsData } from '../../Types/types';
-import Input from '../UI/input';
+import {
+  usePutRegisterUserMutation,
+  usePostLoginUserMutation,
+} from '../../store/api/userSlice';
+import { AuthResponseType, ErrorsData, UserDataType } from '../../Types/types';
+import Input from '../UI/Input';
 
 const AuthForm = () => {
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const mode = searchParams.get('mode') || 'login';
   const [fadeIn, setFadeIn] = useState(false);
   const [backendErrors, setBackendErrors] = useState<ErrorsData>({});
   const [putRegisterUser, { isLoading: isRegisterLoading }] =
     usePutRegisterUserMutation();
+  const [postLoginUser, { isLoading: isLoginLoading }] =
+    usePostLoginUserMutation();
 
   const isLogin = mode === 'login';
   const buttonContent = mode === 'login' ? 'Login' : 'Register';
-  const [userData, setUserData] = useState({
+  const [userData, setUserData] = useState<UserDataType>({
     userName: '',
     email: '',
     password: '',
@@ -41,26 +48,43 @@ const AuthForm = () => {
     return () => clearTimeout(timer);
   }, [mode]);
 
-  useEffect((e: React.ChangeEvent<HTMLInputElement>) => {}, [userData]);
   const userDataSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const { userName, email, password, repeatPassword } = userData;
-      const response = await putRegisterUser({
-        userName,
-        email,
-        password,
-        repeatPassword,
-      });
+
+      const response = isLogin
+        ? await postLoginUser({ email, password })
+        : await putRegisterUser({ userName, email, password, repeatPassword });
       const resData = response as AuthResponseType;
-      if (resData.error.status === 422 || resData.error.status === 401) {
-        const errorsObj: { [key: string]: string } = {};
-        resData.error.data.errors.forEach((error) => {
-          errorsObj[error.path] = error.msg;
-        });
-        setBackendErrors(errorsObj);
+      console.log(resData.data);
+      if (resData.error) {
+        if (resData.error.status === 422 || resData.error.status === 401) {
+          const errorsObj: { [key: string]: string } = {};
+          resData.error.data.errors.forEach((error) => {
+            errorsObj[error.path] = error.msg;
+          });
+
+          setBackendErrors(errorsObj);
+        }
+      }
+      if (resData.data) {
+        console.log('object');
+        if (isLogin) {
+          const { token } = resData.data;
+          localStorage.setItem('token', token);
+          const expiration = new Date();
+          expiration.setHours(expiration.getHours() + 24);
+          localStorage.setItem('expiration', expiration.toISOString());
+          toast.success('You have successfully logged in!');
+          navigate('/');
+        } else {
+          toast.success('The account has been created. You can log in now');
+          navigate('/account?mode=login');
+        }
       }
     } catch (err) {
+      console.log(err);
       throw new Error(
         isLogin
           ? 'The user could not be authenticated'
@@ -68,6 +92,19 @@ const AuthForm = () => {
       );
     }
   };
+  useEffect(() => {
+    setUserData({
+      userName: '',
+      email: '',
+      password: '',
+      repeatPassword: '',
+    });
+    setBackendErrors({
+      email: '',
+      password: '',
+      repeatPassword: '',
+    });
+  }, [isLogin]);
   return (
     <section className={classes.authWrapper}>
       <div className={classes.card}>
@@ -76,14 +113,17 @@ const AuthForm = () => {
         <div className={classes.card__inner}>
           <form onSubmit={userDataSubmit} className={classes.formBox}>
             <h4 className={fadeIn ? classes.fadeIn : ''}>{mode}</h4>
-            <Input
-              data="userName"
-              type="text"
-              onChange={handleUserDataChange}
-              msg="Your name:"
-              error={backendErrors.userName}
-              classesCss={backendErrors.userName ? classes.error : ''}
-            />
+            {!isLogin && (
+              <Input
+                data="userName"
+                type="text"
+                onChange={handleUserDataChange}
+                msg="Your name:"
+                error={backendErrors.userName}
+                classesCss={backendErrors.userName ? classes.error : ''}
+              />
+            )}
+
             <Input
               data="email"
               type="text"
