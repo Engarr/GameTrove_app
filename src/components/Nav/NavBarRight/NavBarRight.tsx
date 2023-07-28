@@ -1,6 +1,7 @@
 import { IoIosArrowUp } from 'react-icons/io';
 import { PiUserPlusFill, PiUserFill } from 'react-icons/pi';
-import { Link } from 'react-router-dom';
+import { AiOutlineLogout } from 'react-icons/ai';
+import { Form, Link, useRouteLoaderData } from 'react-router-dom';
 import classes from './NavBarRight.module.scss';
 import Modal from '../../Modal/Modal';
 import ThemeMode from '../../ThemeMode/ThemeMode';
@@ -17,12 +18,62 @@ const NavBarRight = ({
   isActiveLeftBar,
   setIsActiveLeftBar,
 }: PropsType) => {
+  const token = useRouteLoaderData('root');
+
   const activeHandler = () => {
     setIsActiveRightBar((prev) => !prev);
     if (isActiveLeftBar) {
       setIsActiveLeftBar(false);
     }
   };
+  let content;
+  if (!token) {
+    content = (
+      <>
+        <div>
+          <Link to="/account?mode=login">
+            <button type="button" onClick={activeHandler}>
+              Login
+              <PiUserFill className={classes[`nav__buttons--icon`]} />
+            </button>
+          </Link>
+        </div>
+        <div>
+          <Link to="/account?mode=register">
+            <button type="button" onClick={activeHandler}>
+              Join us
+              <PiUserPlusFill className={classes[`nav__buttons--icon`]} />
+            </button>
+          </Link>
+        </div>
+      </>
+    );
+  } else {
+    content = (
+      <>
+        <div>
+          <Link to="/account">
+            <button type="button" onClick={activeHandler}>
+              My account
+              <PiUserFill className={classes[`nav__buttons--icon`]} />
+            </button>
+          </Link>
+        </div>
+        <div>
+          <Form action="/logout" method="post">
+            <button
+              className={classes.logoutButton}
+              type="submit"
+              onClick={activeHandler}
+            >
+              Wyloguj się
+              <AiOutlineLogout className={classes[`nav__buttons--icon`]} />
+            </button>
+          </Form>
+        </div>
+      </>
+    );
+  }
   return (
     <>
       <div className={classes.nav}>
@@ -32,22 +83,7 @@ const NavBarRight = ({
           }`}
         >
           <div className={classes.nav__buttons}>
-            <div>
-              <Link to="/account?mode=login">
-                <button type="button" onClick={activeHandler}>
-                  Login
-                  <PiUserFill className={classes[`nav__buttons--icon`]} />
-                </button>
-              </Link>
-            </div>
-            <div>
-              <Link to="/account?mode=register">
-                <button type="button" onClick={activeHandler}>
-                  Join us
-                  <PiUserPlusFill className={classes[`nav__buttons--icon`]} />
-                </button>
-              </Link>
-            </div>
+            {content}
             <ThemeMode />
           </div>
           <div

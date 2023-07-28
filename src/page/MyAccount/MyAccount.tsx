@@ -1,10 +1,15 @@
+import { useRouteLoaderData } from 'react-router-dom';
 import AuthForm from '../../components/AuthForm/AuthForm';
+import UserPage from '../UserPage/UserPage';
 
 const MyAccount = () => {
+  const token = useRouteLoaderData('root');
   let content;
-
-  // eslint-disable-next-line prefer-const
-  content = <AuthForm />;
+  if (!token) {
+    content = <AuthForm />;
+  } else {
+    content = <UserPage />;
+  }
 
   return <div>{content}</div>;
 };

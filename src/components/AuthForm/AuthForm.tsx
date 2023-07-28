@@ -75,6 +75,7 @@ const AuthForm = () => {
         if (isLogin) {
           const { token } = resData.data;
           localStorage.setItem('token', token);
+          console.log(token);
           const expiration = new Date();
           expiration.setHours(expiration.getHours() + 24);
           localStorage.setItem('expiration', expiration.toISOString());
