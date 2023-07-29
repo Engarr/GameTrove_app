@@ -62,6 +62,16 @@
       margin: 0.5em;
       text-transform: uppercase;
       font-size: 1.2em;
+      text-align: center;
+    }
+    &--box {
+      h4 {
+        // margin: 1em 0;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding: 15px 20px;
+      }
     }
     &--close {
       position: absolute;
@@ -113,28 +123,42 @@
     &--platforms {
       padding: 10px 20px;
       text-align: center;
-
       div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         padding: 5px 10px;
         width: 100%;
-        font-family: 'Passion One', sans-serif;
-        background-color: rgba(0, 0, 0, 0.2);
+        background-color: rgba(0, 0, 0, 0.1);
         border: none;
         margin-bottom: 0.3em;
-        font-size: 1em;
         transition: background-color 0.3s;
         text-transform: uppercase;
         letter-spacing: 1px;
+
         a {
-          padding: 5px 50px;
-          transition: color 0.3s;
-          color: var(--color);
+          font-family: 'Passion One', sans-serif;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 10px 15px;
+          font-size: 15px;
+          outline: none;
+          border: none;
+          border-radius: 2px;
+          transition: box-shadow 0.3s, letter-spacing 0.3s;
+          background: rgba(30, 30, 30, 0.7);
+          color: greenyellow;
+          box-shadow: 0 0 2px var(--color), inset 0 0 2px var(--color);
+          width: 200px;
+          cursor: pointer;
+          letter-spacing: 1px;
         }
       }
       div:hover {
-        background-color: var(--color);
         a {
-          color: var(--background-color);
+          color: white;
+          letter-spacing: 2px;
         }
       }
     }
@@ -142,13 +166,7 @@
 
   .activeButton {
     a {
-      color: greenyellow;
-    }
-    button:hover {
-      background-color: var(--color);
-      a {
-        color: var(--background-color);
-      }
+      border: 2px solid greenyellow;
     }
   }
 }
