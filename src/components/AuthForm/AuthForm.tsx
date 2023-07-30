@@ -8,6 +8,8 @@ import {
 } from '../../store/api/userSlice';
 import { AuthResponseType, ErrorsData, UserDataType } from '../../Types/types';
 import Input from '../UI/Input';
+import Spiner from '../Spinner/Spinner/Spiner';
+import Loader from '../Spinner/Loader/Loader';
 
 const AuthForm = () => {
   const navigate = useNavigate();
@@ -108,6 +110,12 @@ const AuthForm = () => {
       repeatPassword: '',
     });
   }, [isLogin]);
+  const submutButtonContent =
+    isRegisterLoading || isLoginLoading ? (
+      <Loader message="Loading" color="black" />
+    ) : (
+      buttonContent
+    );
 
   return (
     <section className={classes.authWrapper}>
@@ -156,7 +164,7 @@ const AuthForm = () => {
               />
             )}
             <button type="submit" className={fadeIn ? classes.fadeIn : ''}>
-              {buttonContent}
+              {submutButtonContent}
             </button>
             <div className={classes.formBox__switch}>
               {isLogin ? (

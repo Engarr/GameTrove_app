@@ -28,7 +28,7 @@ const Spiner = ({ message }: PropsType) => {
       />
       {message && (
         <div className={classes.spiner__text}>
-          <Loader message={message} />
+          <Loader message={message} color="var(--greenYellow)" />
         </div>
       )}
     </div>
