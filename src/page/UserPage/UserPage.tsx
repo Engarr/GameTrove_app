@@ -1,7 +1,8 @@
-import React from 'react';
+import classes from './UserPgae.module.scss';
+import Tabs from '../../components/Tabs/Tabs';
 
 const UserPage = () => {
-  return <div>UserPage</div>;
+  return <Tabs />;
 };
 
 export default UserPage;

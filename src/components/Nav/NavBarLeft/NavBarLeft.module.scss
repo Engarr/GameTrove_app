@@ -154,6 +154,9 @@
           cursor: pointer;
           letter-spacing: 1px;
         }
+        a:focus {
+          box-shadow: 0 0 5px var(--black-white);
+        }
       }
       div:hover {
         a {

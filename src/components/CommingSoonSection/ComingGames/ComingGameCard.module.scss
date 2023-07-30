@@ -13,17 +13,10 @@
       font-size: 1em;
       margin-bottom: 0.2em;
       color: var(--color);
+      transition: color 0.3s;
     }
-    h5::before {
-      content: '';
-      position: absolute;
-      bottom: -20%;
-      width: 0%;
-      border-bottom: 2px solid var(--blue);
-      transition: width 0.3s;
-    }
-    h5:hover::before {
-      width: 100%;
+    h5:hover {
+      color: var(--blue);
     }
 
     &--release {

@@ -32,9 +32,7 @@
   }
 }
 
-.card__inner:hover {
-  transform: rotate(-0.2deg);
-}
+
 
 .circle {
   position: absolute;
@@ -51,7 +49,7 @@
 }
 
 .circle:nth-child(2) {
-  bottom: 20%;
+  bottom: 5%;
   right: -5px;
   animation-name: move-down1;
 }

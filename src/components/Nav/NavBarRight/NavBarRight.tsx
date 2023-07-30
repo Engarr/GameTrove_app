@@ -31,19 +31,15 @@ const NavBarRight = ({
     content = (
       <>
         <div>
-          <Link to="/account?mode=login">
-            <button type="button" onClick={activeHandler}>
-              Login
-              <PiUserFill className={classes[`nav__buttons--icon`]} />
-            </button>
+          <Link to="/account?mode=login" onClick={activeHandler}>
+            Login
+            <PiUserFill className={classes[`nav__buttons--icon`]} />
           </Link>
         </div>
         <div>
-          <Link to="/account?mode=register">
-            <button type="button" onClick={activeHandler}>
-              Join us
-              <PiUserPlusFill className={classes[`nav__buttons--icon`]} />
-            </button>
+          <Link to="/account?mode=register" onClick={activeHandler}>
+            Join us
+            <PiUserPlusFill className={classes[`nav__buttons--icon`]} />
           </Link>
         </div>
       </>
@@ -52,11 +48,9 @@ const NavBarRight = ({
     content = (
       <>
         <div>
-          <Link to="/account">
-            <button type="button" onClick={activeHandler}>
-              My account
-              <PiUserFill className={classes[`nav__buttons--icon`]} />
-            </button>
+          <Link to="/account" onClick={activeHandler}>
+            My account
+            <PiUserFill className={classes[`nav__buttons--icon`]} />
           </Link>
         </div>
         <div>
