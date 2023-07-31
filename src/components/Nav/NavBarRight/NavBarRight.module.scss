@@ -14,6 +14,7 @@
     background-color: var(--background-color-menu);
     transition: transform 0.3s;
     box-shadow: 0 0 2px 1px greenyellow;
+   
   }
   &__buttons {
     text-align: center;
@@ -67,24 +68,29 @@
 }
 .arrowBox {
   position: absolute;
-  font-size: 2.5em;
+  font-size: 2.2em;
   right: 2%;
-  bottom: -37px;
+  bottom: -45px;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 5px;
+  padding: 4px;
   cursor: pointer;
+  background-color: var(--background-color);
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  
+
   &__icon {
     transition: color 0.3s;
     color: var(--color);
     transform: rotateX(180deg);
-    transition: transform 0.3s;
-    animation: arrowDown 1s ease-in infinite alternate-reverse;
+    transition: transform 0.3s, color 0.3s;
+    animation: arrowDown 2s ease-in infinite alternate-reverse;
   }
 }
 .arrowBox:hover .arrowBox__icon {
-  color: var(--greenYellow);
+  color: var(--greenYellow-hover);
 }
 .arrowRotate {
   transform: rotateX(0deg);
