@@ -32,7 +32,7 @@ const Tabs = () => {
           }}
           className={toggleState === 2 ? classes.activeTab : ''}
         >
-          Whislist
+          Wishlist
           <BsFillClipboardHeartFill
             className={classes[`container____blocTtabs--icons`]}
           />

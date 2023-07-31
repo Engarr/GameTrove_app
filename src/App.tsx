@@ -19,7 +19,10 @@ const App = () => {
           index: true,
           element: <Home />,
         },
-        { path: '/game/:gameId', element: <GameDetail /> },
+        {
+          path: '/game/:gameId',
+          element: <GameDetail />,
+        },
         { path: '/games', element: <GamesPage /> },
         { path: '/account', element: <MyAccount /> },
         {

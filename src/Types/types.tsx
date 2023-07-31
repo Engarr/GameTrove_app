@@ -110,3 +110,6 @@ export type UserDataType = {
   password: string;
   repeatPassword: string;
 };
+export type WishlistResponseType = {
+  message: string;
+};

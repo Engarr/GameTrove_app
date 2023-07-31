@@ -1,0 +1,40 @@
+.heart,
+.blockHeart {
+  margin-top: 0.2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+}
+.heart {
+  cursor: pointer;
+  &__icon {
+    font-size: 1.6em;
+    color: white;
+    transition: color 0.3s;
+  }
+  &:hover &__icon {
+    color: red;
+  }
+}
+.blockHeart {
+  position: relative;
+  cursor: not-allowed;
+  p {
+    position: absolute;
+    font-weight: bold;
+    color: var(--background-color);
+    background-color: var(--color);
+    width: 100%;
+    left: 25px;
+    top: 5px;
+    padding: 7px;
+    width: 200px;
+    border-radius: 20px;
+    display: none;
+  }
+  &:hover p {
+    display: block;
+  }
+}

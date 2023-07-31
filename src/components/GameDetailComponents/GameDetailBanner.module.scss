@@ -60,15 +60,6 @@
         font-weight: bold;
       }
     }
-    &--heart {
-      font-size: 1.4em;
-      margin-top: 0.2em;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    &--heart:hover {
-      color: red;
-    }
   }
   &__transition {
     position: absolute;

@@ -18,8 +18,8 @@ const userSchema = new Schema(
     },
     wishLists: [
       {
-        type: Schema.Types.ObjectId,
-        ref: 'Product',
+        type: Number,
+        required: true,
       },
     ],
     isAdmin: {

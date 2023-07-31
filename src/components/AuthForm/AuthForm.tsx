@@ -8,7 +8,6 @@ import {
 } from '../../store/api/userSlice';
 import { AuthResponseType, ErrorsData, UserDataType } from '../../Types/types';
 import Input from '../UI/Input';
-import Spiner from '../Spinner/Spinner/Spiner';
 import Loader from '../Spinner/Loader/Loader';
 
 const AuthForm = () => {
@@ -77,7 +76,6 @@ const AuthForm = () => {
         if (isLogin) {
           const { token } = resData.data;
           localStorage.setItem('token', token);
-          console.log(token);
           const expiration = new Date();
           expiration.setHours(expiration.getHours() + 24);
           localStorage.setItem('expiration', expiration.toISOString());
@@ -89,7 +87,6 @@ const AuthForm = () => {
         }
       }
     } catch (err) {
-      console.log(err);
       throw new Error(
         isLogin
           ? 'The user could not be authenticated'

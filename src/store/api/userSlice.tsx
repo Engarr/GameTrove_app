@@ -1,4 +1,5 @@
 import apiSlice from './apiSlice';
+import { WishlistResponseType } from '../../Types/types';
 
 const userSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -30,8 +31,34 @@ const userSlice = apiSlice.injectEndpoints({
         body: { email, password },
       }),
     }),
+    postWishlistGame: builder.mutation<
+      WishlistResponseType,
+      { gameId: string; userId: string }
+    >({
+      query: ({ gameId, userId }) => ({
+        url: 'auth/addToWishlist',
+        method: 'POST',
+        body: {
+          gameId,
+          userId,
+        },
+      }),
+    }),
+    getUserId: builder.query<void, string>({
+      query: (token) => ({
+        url: `auth/getUserInfo`,
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+    }),
   }),
 });
 
-export const { usePutRegisterUserMutation, usePostLoginUserMutation } =
-  userSlice;
+export const {
+  usePutRegisterUserMutation,
+  usePostLoginUserMutation,
+  usePostWishlistGameMutation,
+  useGetUserIdQuery,
+} = userSlice;

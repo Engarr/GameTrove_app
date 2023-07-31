@@ -1,4 +1,5 @@
 import { redirect } from 'react-router-dom';
+import { useGetUserIdQuery } from '../store/api/userSlice';
 
 export const getTokenDuration = () => {
   const storedExpirationDate = localStorage.getItem('expiration');

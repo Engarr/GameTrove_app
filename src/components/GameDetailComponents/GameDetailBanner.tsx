@@ -1,6 +1,5 @@
-import React from 'react';
-import { AiFillHeart } from 'react-icons/ai';
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import classes from './GameDetailBanner.module.scss';
 import { GameDetailType } from '../../Types/types';
 import Spiner from '../Spinner/Spinner/Spiner';
@@ -9,14 +8,20 @@ import bgcLight from '../../asset/bgc-light.png';
 import { colorMode } from '../../store/slice/ThemeSlice';
 import Card from '../Banner/Card/Card';
 import ErrorComponent from '../Spinner/ErrorComponent/ErrorComponent';
+import Wishlist from '../Wishlist/Wishlist';
 
 interface PropsType {
   data: GameDetailType;
   isLoading: boolean;
   isError: boolean;
+  userId: string | null;
 }
-const GameDetailBanner = ({ data, isLoading, isError }: PropsType) => {
+
+const GameDetailBanner = ({ data, isLoading, isError, userId }: PropsType) => {
   const mode = useSelector(colorMode);
+  const param = useParams<{ gameId?: string }>();
+  const { gameId } = param;
+
   let content;
   if (isLoading) {
     content = (
@@ -59,8 +64,7 @@ const GameDetailBanner = ({ data, isLoading, isError }: PropsType) => {
           <p>
             <span>Release date:</span> {month} {year}
           </p>
-
-          <AiFillHeart className={classes[`productContainer__name--heart`]} />
+          <Wishlist userId={userId} gameId={gameId} />
         </div>
       </div>
     );

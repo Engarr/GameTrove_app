@@ -1,6 +1,11 @@
 import { Router } from 'express';
 import { body } from 'express-validator';
-import { login, signup } from '../controllers/auth.js';
+import {
+  login,
+  signup,
+  getUserId,
+  putOnWishlist,
+} from '../controllers/auth.js';
 import User from '../model/user.js';
 
 const router = Router();
@@ -59,5 +64,7 @@ router.post(
   ],
   login
 );
+router.post('/getUserInfo', getUserId);
+router.post('/addToWishlist', putOnWishlist);
 
 export default router;

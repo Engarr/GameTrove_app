@@ -86,3 +86,53 @@ export const login = async (req, res, next) => {
     next(err);
   }
 };
+export const getUserId = async (req, res, next) => {
+  const authHeader = req.get('Authorization');
+  const token = authHeader.split(' ')[1];
+
+  try {
+    if (token) {
+      const decodedToken = jwt.decode(token, process.env.VITE_SECRET_TOKEN);
+      const { userId } = decodedToken;
+      res.status(200).json({ userId });
+    } else {
+      res.status(200).json({ userId: null });
+    }
+  } catch (err) {
+    if (!err) {
+      err.statusCode = 500;
+      err.message = 'Something went wrong...';
+    }
+    next(err);
+  }
+};
+export const putOnWishlist = async (req, res, next) => {
+  const { userId } = req.body;
+  const { gameId } = req.body;
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      res.status(401).json({
+        message: 'There is no such user',
+      });
+      const err = new Error(
+        'The user with this email address could not be found'
+      );
+      err.statusCode = 401;
+      throw err;
+    }
+    const isAdded = user.wishLists.includes(gameId);
+    if (!isAdded) {
+      user.wishLists.push(gameId);
+      await user.save();
+      res.status(200).json({ message: 'Game has been added to your wishlist' });
+    } else if (isAdded) {
+      res.status(201).json({ message: 'Game is already on your wishlist' });
+    }
+  } catch (err) {
+    if (!err) {
+      err.statusCode = 500;
+      err.message = 'Something went wrong...';
+    }
+  }
+};
