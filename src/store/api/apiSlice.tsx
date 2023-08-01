@@ -5,7 +5,7 @@ const apiSlice = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_APP_API_URL,
   }),
-  tagTypes: ['Search'],
+  tagTypes: ['Search', 'WishlistAction'],
   endpoints: () => ({}),
 });
 export default apiSlice;

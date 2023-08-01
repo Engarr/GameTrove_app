@@ -4,7 +4,6 @@ import { toast } from 'react-hot-toast';
 import { AiFillHeart } from 'react-icons/ai';
 import {
   usePostWishlistGameMutation,
-  useGetIsOnWishlistQuery,
   useGetUserIdQuery,
 } from '../../store/api/userSlice';
 import classes from './Wishlist.module.scss';
@@ -12,6 +11,7 @@ import classes from './Wishlist.module.scss';
 interface UserIdType {
   data: {
     userId: string;
+    isAdded: boolean;
   };
   isLoading: boolean;
 }
@@ -20,15 +20,19 @@ const Wishlist = () => {
   const token = useRouteLoaderData('root') as string;
   const param = useParams<{ gameId: string }>();
   const [skip, setSkip] = useState(true);
-  const { gameId } = param;
-
+  const [isOnWishlist, setIsOnWishlist] = useState(false);
+  const gameId: string = param.gameId as string;
   let userId: string | null = null;
 
   const [onAddOrRemoveToWishlist] = usePostWishlistGameMutation();
   const { data: userData, isLoading: userDataLoading } =
-    useGetUserIdQuery<UserIdType>(token, {
-      skip,
-    });
+    useGetUserIdQuery<UserIdType>(
+      { token, gameId },
+      {
+        skip,
+        refetchOnMountOrArgChange: true,
+      }
+    );
   useEffect(() => {
     if (token) {
       setSkip(false);
@@ -36,20 +40,15 @@ const Wishlist = () => {
       setSkip(true);
     }
   }, [token]);
+  useEffect(() => {
+    if (userData) {
+      setIsOnWishlist(userData.isAdded);
+    }
+  }, [userData]);
 
   if (userData && !userDataLoading) {
     userId = userData.userId;
   }
-
-  const { data, isSuccess, isLoading, isError } = useGetIsOnWishlistQuery(
-    {
-      token,
-      gameId,
-    },
-    {
-      skip,
-    }
-  );
 
   const addToWishlistHandler = async () => {
     try {
@@ -69,13 +68,14 @@ const Wishlist = () => {
       throw new Error('Ups... Could not to add game to wishlist');
     }
   };
+  const isOnListCSS = isOnWishlist ? classes.active : '';
   const content = userId ? (
     <button
       type="button"
       className={classes.heart}
       onClick={addToWishlistHandler}
     >
-      <AiFillHeart className={classes.heart__icon} />
+      <AiFillHeart className={`${classes.heart__icon} ${isOnListCSS}`} />
     </button>
   ) : (
     <button

@@ -15,7 +15,6 @@ interface DataType {
 
 const GameDetail = () => {
   const param = useParams<{ gameId: string }>();
-
   const { gameId } = param;
 
   const { data, isLoading, isError } = useGetGameDetailsQuery<DataType>(

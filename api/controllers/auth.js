@@ -89,12 +89,24 @@ export const login = async (req, res, next) => {
 export const getUserId = async (req, res, next) => {
   const authHeader = req.get('Authorization');
   const token = authHeader.split(' ')[1];
-
+  const { gameId } = req.params;
   try {
     if (token) {
       const decodedToken = jwt.decode(token, process.env.VITE_SECRET_TOKEN);
       const { userId } = decodedToken;
-      res.status(200).json({ userId });
+      const user = await User.findById(userId);
+      if (!user) {
+        res.status(401).json({
+          message: 'There is no such user',
+        });
+        const err = new Error(
+          'The user with this email address could not be found'
+        );
+        err.statusCode = 401;
+        throw err;
+      }
+      const isAdded = user.wishLists.includes(gameId);
+      res.status(200).json({ userId, isAdded });
     } else {
       res.status(200).json({ userId: null });
     }
@@ -138,29 +150,5 @@ export const putWishlist = async (req, res, next) => {
       err.statusCode = 500;
       err.message = 'Something went wrong...';
     }
-  }
-};
-export const isOnWishlist = async (req, res, next) => {
-  const { userId } = req.body;
-  const { gameId } = req.params;
-  /// tu trzeba jeszcze pobranie z tokena
-  try {
-    const user = await User.findById(userId);
-    if (!user) {
-      throw new Error('There is no such user');
-    }
-
-    const isProduct = user.wishLists.some(
-      (product) => product.toString() === gameId.toString()
-    );
-
-    res.status(200).json({
-      isOnWishlist: isProduct,
-    });
-  } catch (err) {
-    if (!err) {
-      err.status(500);
-    }
-    next(err);
   }
 };
