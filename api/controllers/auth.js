@@ -106,7 +106,7 @@ export const getUserId = async (req, res, next) => {
     next(err);
   }
 };
-export const putOnWishlist = async (req, res, next) => {
+export const putWishlist = async (req, res, next) => {
   const { userId } = req.body;
   const { gameId } = req.body;
   try {
@@ -127,12 +127,40 @@ export const putOnWishlist = async (req, res, next) => {
       await user.save();
       res.status(200).json({ message: 'Game has been added to your wishlist' });
     } else if (isAdded) {
-      res.status(201).json({ message: 'Game is already on your wishlist' });
+      user.wishLists.pull(gameId);
+      await user.save();
+      res
+        .status(201)
+        .json({ message: 'Game has been removed from your wishlist' });
     }
   } catch (err) {
     if (!err) {
       err.statusCode = 500;
       err.message = 'Something went wrong...';
     }
+  }
+};
+export const isOnWishlist = async (req, res, next) => {
+  const { userId } = req.body;
+  const { gameId } = req.params;
+  /// tu trzeba jeszcze pobranie z tokena
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      throw new Error('There is no such user');
+    }
+
+    const isProduct = user.wishLists.some(
+      (product) => product.toString() === gameId.toString()
+    );
+
+    res.status(200).json({
+      isOnWishlist: isProduct,
+    });
+  } catch (err) {
+    if (!err) {
+      err.status(500);
+    }
+    next(err);
   }
 };

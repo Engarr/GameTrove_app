@@ -44,6 +44,15 @@ const userSlice = apiSlice.injectEndpoints({
         },
       }),
     }),
+    getIsOnWishlist: builder.query<void, { gameId: string; token: string }>({
+      query: ({ token, gameId }) => ({
+        url: `auth/getWishlist/${gameId}`,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+      // providesTags: [{ type: 'WishlistAction' }],
+    }),
     getUserId: builder.query<void, string>({
       query: (token) => ({
         url: `auth/getUserInfo`,
@@ -61,4 +70,5 @@ export const {
   usePostLoginUserMutation,
   usePostWishlistGameMutation,
   useGetUserIdQuery,
+  useGetIsOnWishlistQuery,
 } = userSlice;

@@ -1,21 +1,60 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
+import { useParams, useRouteLoaderData } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { AiFillHeart } from 'react-icons/ai';
-import { usePostWishlistGameMutation } from '../../store/api/userSlice';
+import {
+  usePostWishlistGameMutation,
+  useGetIsOnWishlistQuery,
+  useGetUserIdQuery,
+} from '../../store/api/userSlice';
 import classes from './Wishlist.module.scss';
 
-interface PropsType {
-  userId: string | null;
-  gameId: string | undefined;
+interface UserIdType {
+  data: {
+    userId: string;
+  };
+  isLoading: boolean;
 }
 
-const Wishlist = ({ userId, gameId }: PropsType) => {
-  const [onAddToWishlist] = usePostWishlistGameMutation();
+const Wishlist = () => {
+  const token = useRouteLoaderData('root') as string;
+  const param = useParams<{ gameId: string }>();
+  const [skip, setSkip] = useState(true);
+  const { gameId } = param;
+
+  let userId: string | null = null;
+
+  const [onAddOrRemoveToWishlist] = usePostWishlistGameMutation();
+  const { data: userData, isLoading: userDataLoading } =
+    useGetUserIdQuery<UserIdType>(token, {
+      skip,
+    });
+  useEffect(() => {
+    if (token) {
+      setSkip(false);
+    } else {
+      setSkip(true);
+    }
+  }, [token]);
+
+  if (userData && !userDataLoading) {
+    userId = userData.userId;
+  }
+
+  const { data, isSuccess, isLoading, isError } = useGetIsOnWishlistQuery(
+    {
+      token,
+      gameId,
+    },
+    {
+      skip,
+    }
+  );
 
   const addToWishlistHandler = async () => {
     try {
       if (gameId && userId) {
-        const response = await onAddToWishlist({
+        const response = await onAddOrRemoveToWishlist({
           gameId,
           userId,
         });

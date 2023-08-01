@@ -14,6 +14,7 @@ const Toast = () => {
             padding: '16px',
             border: '2px solid rgb(138, 224, 10)',
             fontFamily: 'Bai Jamjuree, sans-serif',
+            textAlign: 'center',
           },
           success: {
             iconTheme: {

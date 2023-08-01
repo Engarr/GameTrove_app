@@ -4,7 +4,8 @@ import {
   login,
   signup,
   getUserId,
-  putOnWishlist,
+  putWishlist,
+  isOnWishlist,
 } from '../controllers/auth.js';
 import User from '../model/user.js';
 
@@ -65,6 +66,7 @@ router.post(
   login
 );
 router.post('/getUserInfo', getUserId);
-router.post('/addToWishlist', putOnWishlist);
+router.post('/addToWishlist', putWishlist);
+router.post('/isOnWishlist/:gameId', isOnWishlist);
 
 export default router;
