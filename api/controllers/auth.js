@@ -86,7 +86,7 @@ export const login = async (req, res, next) => {
     next(err);
   }
 };
-export const getUserId = async (req, res, next) => {
+export const getUserInfo = async (req, res, next) => {
   const authHeader = req.get('Authorization');
   const token = authHeader.split(' ')[1];
   const { gameId } = req.params;

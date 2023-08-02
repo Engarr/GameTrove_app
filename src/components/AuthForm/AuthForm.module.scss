@@ -32,8 +32,6 @@
   }
 }
 
-
-
 .circle {
   position: absolute;
   width: 150px;
@@ -113,6 +111,10 @@
     cursor: pointer;
     transition: background-color 0.3s;
     color: var(--white-black);
+    &.demoButton {
+      padding: 5px 20px;
+      margin-top: 0.5em;
+    }
   }
   button:hover {
     background-color: var(--greenYellow-hover);

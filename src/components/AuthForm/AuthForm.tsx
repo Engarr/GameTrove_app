@@ -94,6 +94,27 @@ const AuthForm = () => {
       );
     }
   };
+  const sendDemoRequest = async () => {
+    try {
+      const response = await postLoginUser({
+        email: 'demo@poczta.pl',
+        password: 'haslo123Q!',
+      });
+
+      const resData = response as AuthResponseType;
+      if (resData.data) {
+        const { token } = resData.data;
+        localStorage.setItem('token', token);
+        const expiration = new Date();
+        expiration.setHours(expiration.getHours() + 24);
+        localStorage.setItem('expiration', expiration.toISOString());
+        toast.success('Zostałeś pomyślnie zalogowany. Witaj!');
+        navigate('/');
+      }
+    } catch (err) {
+      throw new Error('Coś poszło nie tak, spróbuj ponownie później');
+    }
+  };
   useEffect(() => {
     setUserData({
       userName: '',
@@ -106,7 +127,7 @@ const AuthForm = () => {
       password: '',
       repeatPassword: '',
     });
-  }, [isLogin]);
+  }, [mode]);
   const submutButtonContent =
     isRegisterLoading || isLoginLoading ? (
       <Loader message="Loading" color="black" />
@@ -128,6 +149,7 @@ const AuthForm = () => {
                 type="text"
                 onChange={handleUserDataChange}
                 msg="Your name:"
+                value={userData.userName}
                 error={backendErrors.userName}
                 classesCss={backendErrors.userName ? classes.error : ''}
               />
@@ -136,6 +158,7 @@ const AuthForm = () => {
             <Input
               data="email"
               type="text"
+              value={userData.email}
               onChange={handleUserDataChange}
               msg="Your email:"
               error={backendErrors.email}
@@ -144,6 +167,7 @@ const AuthForm = () => {
             <Input
               data="password"
               type="password"
+              value={userData.password}
               onChange={handleUserDataChange}
               msg="Your password:"
               error={backendErrors.password}
@@ -154,6 +178,7 @@ const AuthForm = () => {
               <Input
                 data="repeatPassword"
                 type="password"
+                value={userData.repeatPassword}
                 onChange={handleUserDataChange}
                 msg="Repeat password:"
                 error={backendErrors.repeatPassword}
@@ -175,6 +200,13 @@ const AuthForm = () => {
                   <Link to="/account?mode=login">Login</Link>
                 </p>
               )}
+              <button
+                type="button"
+                className={classes.demoButton}
+                onClick={sendDemoRequest}
+              >
+                Try demo
+              </button>
             </div>
           </form>
         </div>
