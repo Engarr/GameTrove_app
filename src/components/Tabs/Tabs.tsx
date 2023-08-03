@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { IoOptionsOutline } from 'react-icons/io5';
 import { BsFillClipboardHeartFill } from 'react-icons/bs';
 import classes from './Tabs.module.scss';
+import WishlistTab from './WishlistTab/WishlistTab';
 
 const Tabs = () => {
   const [toggleState, setToggleState] = useState<number>(1);
@@ -20,7 +21,7 @@ const Tabs = () => {
           }}
           className={toggleState === 1 ? classes.activeTab : ''}
         >
-          My account
+          Settings
           <IoOptionsOutline
             className={classes[`container____blocTtabs--icons`]}
           />
@@ -55,7 +56,7 @@ const Tabs = () => {
               : classes.content
           }
         >
-          2
+          <WishlistTab />
         </div>
       </div>
     </div>

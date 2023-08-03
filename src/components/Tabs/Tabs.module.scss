@@ -1,16 +1,14 @@
 .container {
-  display: grid;
-  grid-template-columns: 1fr 5fr;
-  top: 25px;
+  display: flex;
+  flex-direction: column;
   position: relative;
-  height: 100vh;
-  max-width: 1240px;
+  max-width: 90%;
+  top: 30%;
   left: 50%;
-  transform: translate(-50%);
+  transform: translate(-50%, -50%);
 
   &____blocTtabs {
     display: flex;
-    flex-direction: column;
     margin-top: 2em;
 
     button {
@@ -19,21 +17,23 @@
       align-items: center;
       font-family: 'Passion One', sans-serif;
       padding: 10px 15px;
-      margin-bottom: 2px;
+      margin-right: 2px;
       font-size: 1.2em;
       outline: none;
       border: none;
-      background-color: var(--background-color-hover);
-      border-bottom: 1px solid var(--color);
+      background-color: var(--background-color);
       color: var(--color);
-      width: 100%;
+      width: 200px;
       cursor: pointer;
       letter-spacing: 1px;
-
-      transition: box-shadow 0.3s, letter-spacing 0.3s, letter-spacing 0.3s;
+      border: 1px solid var(--background-color-hover);
+      transition: box-shadow 0.3s, letter-spacing 0.3s, letter-spacing 0.3s,
+        background-color 0.3s;
+      border-top-left-radius: 10px;
       &.activeTab {
-        border-bottom: 1px solid var(--greenYellow);
+        background-color: var(--background-color-hover);
         color: var(--greenYellow);
+        border: none;
       }
     }
     &--icons {
@@ -44,7 +44,7 @@
     }
   }
   &__contentTabs {
-    margin-top: 2em;
+    // margin-top: 2em;
   }
 }
 .content {
