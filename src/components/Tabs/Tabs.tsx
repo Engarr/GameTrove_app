@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { IoOptionsOutline } from 'react-icons/io5';
 import { BsFillClipboardHeartFill } from 'react-icons/bs';
 import classes from './Tabs.module.scss';
@@ -6,10 +6,18 @@ import WishlistTab from './WishlistTab/WishlistTab';
 
 const Tabs = () => {
   const [toggleState, setToggleState] = useState<number>(1);
+  const [skipSearch, setSkipSearch] = useState(true);
 
   const tabsHandler = (index: number) => {
     setToggleState(index);
   };
+  useEffect(() => {
+    if (toggleState === 2) {
+      setSkipSearch(false);
+      return;
+    }
+    setSkipSearch(true);
+  }, [toggleState]);
 
   return (
     <div className={classes.container}>
@@ -56,7 +64,7 @@ const Tabs = () => {
               : classes.content
           }
         >
-          <WishlistTab />
+          <WishlistTab skipSearch={skipSearch} />
         </div>
       </div>
     </div>

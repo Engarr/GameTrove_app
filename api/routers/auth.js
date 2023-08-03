@@ -5,8 +5,11 @@ import {
   signup,
   getUserInfo,
   putWishlist,
+  getUserWishlist,
 } from '../controllers/auth.js';
 import User from '../model/user.js';
+import isAuth from '../middleware/isAuth.js';
+import getToken from '../middleware/getToken.js';
 
 const router = Router();
 
@@ -64,7 +67,8 @@ router.post(
   ],
   login
 );
-router.post('/getUserInfo/:gameId', getUserInfo);
+router.post('/getUserInfo/:gameId', isAuth, getUserInfo);
 router.post('/addToWishlist', putWishlist);
+router.post('/getUserWishlist', isAuth, getToken, getUserWishlist);
 
 export default router;

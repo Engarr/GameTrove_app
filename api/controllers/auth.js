@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt';
+import axios from 'axios';
 import { validationResult } from 'express-validator';
 import jwt from 'jsonwebtoken';
 import User from '../model/user.js';
@@ -87,13 +88,10 @@ export const login = async (req, res, next) => {
   }
 };
 export const getUserInfo = async (req, res, next) => {
-  const authHeader = req.get('Authorization');
-  const token = authHeader.split(' ')[1];
   const { gameId } = req.params;
+  const { userId } = req;
   try {
-    if (token) {
-      const decodedToken = jwt.decode(token, process.env.VITE_SECRET_TOKEN);
-      const { userId } = decodedToken;
+    if (userId) {
       const user = await User.findById(userId);
       if (!user) {
         res.status(401).json({
@@ -106,7 +104,9 @@ export const getUserInfo = async (req, res, next) => {
         throw err;
       }
       const isAdded = user.wishLists.includes(gameId);
-      res.status(200).json({ userId, isAdded });
+      const userWishlist = user.wishLists;
+
+      res.status(200).json({ userId, isAdded, userWishlist });
     } else {
       res.status(200).json({ userId: null });
     }
@@ -145,6 +145,41 @@ export const putWishlist = async (req, res, next) => {
         .status(201)
         .json({ message: 'Game has been removed from your wishlist' });
     }
+  } catch (err) {
+    if (!err) {
+      err.statusCode = 500;
+      err.message = 'Something went wrong...';
+    }
+  }
+};
+
+export const getUserWishlist = async (req, res, next) => {
+  const { userId } = req;
+  const { token } = req;
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      res.status(401).json({
+        message: 'There is no such user',
+      });
+      const err = new Error(
+        'The user with this email address could not be found'
+      );
+      err.statusCode = 401;
+      throw err;
+    }
+    const wishlistArr = user.wishLists;
+    const query = `fields name, cover.url; where id = (${wishlistArr}); limit 10;`;
+
+    const headers = {
+      'Client-ID': process.env.VITE_CLIENT_ID,
+      Authorization: `Bearer ${token}`,
+    };
+    const response = await axios.post('https://api.igdb.com/v4/games', query, {
+      headers,
+    });
+    const games = response.data;
+    res.status(200).json(games);
   } catch (err) {
     if (!err) {
       err.statusCode = 500;

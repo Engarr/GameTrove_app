@@ -56,6 +56,16 @@ const userSlice = apiSlice.injectEndpoints({
       }),
       providesTags: [{ type: 'WishlistAction' }],
     }),
+    getUserWishlist: builder.query<void, string>({
+      query: (token) => ({
+        url: `auth/getUserWishlist`,
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+      providesTags: [{ type: 'WishlistAction' }],
+    }),
   }),
 });
 
@@ -64,4 +74,5 @@ export const {
   usePostLoginUserMutation,
   usePostWishlistGameMutation,
   useGetUserIdQuery,
+  useGetUserWishlistQuery,
 } = userSlice;
