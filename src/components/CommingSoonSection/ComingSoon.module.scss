@@ -23,6 +23,8 @@
     }
   }
   &__gamesContainer {
+    position: relative;
+
     width: 100%;
     height: auto;
     top: 0;
@@ -32,6 +34,10 @@
     background-color: var(--glass);
     margin-top: 5px;
   }
+}
+
+.error {
+  text-align: center;
 }
 .fadeIn {
   animation: fadeInAnimation 0.8s ease-in-out;

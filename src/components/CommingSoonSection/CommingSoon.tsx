@@ -31,7 +31,7 @@ const CommingSoon = () => {
   const [activeSearch, setActiveSearch] = useState(0);
   const [fadeIn, setFadeIn] = useState(false);
   const [skip, setSkip] = useState(true);
-  const emptyCards = 5;
+  const emptyCards = 6;
   const options = {
     threshold: 0,
     triggerOnce: true,
@@ -103,7 +103,13 @@ const CommingSoon = () => {
         <span>**</span>According to the most expected
       </p>
       <ToolBar setActiveSearch={setActiveSearch} activeSearch={activeSearch} />
-      <div className={classes.wrapper__gamesContainer}>{comingContent}</div>
+      <div
+        className={`${
+          isError ? classes.error : classes.wrapper__gamesContainer
+        }`}
+      >
+        {comingContent}
+      </div>
     </section>
   );
 };

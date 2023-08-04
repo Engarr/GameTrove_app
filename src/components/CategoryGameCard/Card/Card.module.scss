@@ -19,13 +19,23 @@
     cursor: pointer;
     overflow: hidden;
 
-    a {
+    &-img {
       position: relative;
       height: 100%;
       width: 90%;
+      border-radius: 10px;
+      overflow: hidden;
+      background: black;
       img {
         height: 100%;
         width: 100%;
+        opacity: 0.8;
+        transition: opacity 0.5s;
+      }
+      &:hover {
+        img {
+          opacity: 1;
+        }
       }
     }
     &-rating {
@@ -43,7 +53,7 @@
     }
     &-name {
       position: absolute;
-      background-color: rgba(255, 255, 255, 0.5);
+      background-color: rgba(255, 255, 255, 0.7);
       backdrop-filter: blur(5px);
       z-index: 10;
       color: black;

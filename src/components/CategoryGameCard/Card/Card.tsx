@@ -36,7 +36,10 @@ const Card = ({ cardsContainerRef, data }: PropsType) => {
             return (
               <div className={classes[`cardsContainer--card`]} key={game.id}>
                 {game.cover ? (
-                  <Link to={`/game/${game.id}`}>
+                  <Link
+                    to={`/game/${game.id}`}
+                    className={classes[`cardsContainer--card-img`]}
+                  >
                     <img src={imageUrl} alt={game.name} width={250} />
                   </Link>
                 ) : (
