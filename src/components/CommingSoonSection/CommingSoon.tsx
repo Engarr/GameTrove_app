@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
 import ToolBar from './ToolBar/ToolBar';
 import ComingGameCard from './ComingGames/ComingGameCard';
 import classes from './ComingSoon.module.scss';
@@ -29,9 +30,23 @@ interface DataType {
 const CommingSoon = () => {
   const [activeSearch, setActiveSearch] = useState(0);
   const [fadeIn, setFadeIn] = useState(false);
-  const { data, isLoading, isError, isFetching } =
-    useGetComingGamesQuery<DataType>(activeSearch);
+  const [skip, setSkip] = useState(true);
+  const emptyCards = 5;
+  const options = {
+    threshold: 0,
+    triggerOnce: true,
+  };
+  const { ref: locationRef, inView } = useInView(options);
 
+  const { data, isLoading, isError, isFetching } =
+    useGetComingGamesQuery<DataType>(activeSearch, {
+      skip,
+    });
+  useEffect(() => {
+    if (inView) {
+      setSkip(false);
+    }
+  }, [inView]);
   useEffect(() => {
     setFadeIn(true);
 
@@ -47,14 +62,22 @@ const CommingSoon = () => {
   );
   let comingContent;
   if (isLoading || isFetching) {
-    comingContent = <DivLoader />;
+    comingContent = (
+      <>
+        {Array.from({ length: emptyCards }, (_, index) => (
+          <div className={classes.emptyCard} key={index}>
+            <DivLoader />
+          </div>
+        ))}
+      </>
+    );
   } else if (isError) {
     comingContent = (
       <ErrorComponent message="Page loading error. Please try again later" />
     );
   } else if (data) {
     comingContent = (
-      <div className={classes.wrapper__gamesContainer}>
+      <>
         {data.map((game) => (
           <ComingGameCard
             key={game.id}
@@ -65,11 +88,11 @@ const CommingSoon = () => {
             platforms={game.platforms}
           />
         ))}
-      </div>
+      </>
     );
   }
   return (
-    <section className={classes.wrapper}>
+    <section className={classes.wrapper} ref={locationRef}>
       <h2>
         Upcoming games for the platform:
         <span className={fadeIn ? classes.fadeIn : ''}>
@@ -80,7 +103,7 @@ const CommingSoon = () => {
         <span>**</span>According to the most expected
       </p>
       <ToolBar setActiveSearch={setActiveSearch} activeSearch={activeSearch} />
-      {comingContent}
+      <div className={classes.wrapper__gamesContainer}>{comingContent}</div>
     </section>
   );
 };

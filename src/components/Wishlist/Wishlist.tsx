@@ -15,13 +15,14 @@ interface UserIdType {
   };
   isLoading: boolean;
 }
-
-const Wishlist = () => {
+interface PropsType {
+  gameId: string;
+}
+const Wishlist = ({ gameId }: PropsType) => {
   const token = useRouteLoaderData('root') as string;
-  const param = useParams<{ gameId: string }>();
+
   const [skip, setSkip] = useState(true);
   const [isOnWishlist, setIsOnWishlist] = useState(false);
-  const gameId: string = param.gameId as string;
   let userId: string | null = null;
 
   const [onAddOrRemoveToWishlist] = usePostWishlistGameMutation();

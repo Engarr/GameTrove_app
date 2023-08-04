@@ -3,9 +3,9 @@
   flex-direction: column;
   position: relative;
   max-width: 90%;
-  top: 30%;
+  top: 0%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, 0%);
 
   &____blocTtabs {
     display: flex;
@@ -54,5 +54,5 @@
   display: block;
   background-color: var(--background-color-hover);
   padding: 10px 20px;
-  min-height: 400px;
+  // min-height: 400px;
 }

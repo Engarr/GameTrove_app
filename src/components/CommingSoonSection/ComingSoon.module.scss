@@ -28,7 +28,7 @@
     top: 0;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
+    gap: 0.5rem;
     background-color: var(--glass);
     margin-top: 5px;
   }
@@ -36,7 +36,13 @@
 .fadeIn {
   animation: fadeInAnimation 0.8s ease-in-out;
 }
-
+.emptyCard {
+  max-height: 200px;
+  overflow: hidden;
+  margin: 5px;
+  border-radius: 5px;
+  box-shadow: 2px -1px 10px rgba(255, 255, 255, 0.3);
+}
 @keyframes fadeInAnimation {
   from {
     opacity: 0.2;

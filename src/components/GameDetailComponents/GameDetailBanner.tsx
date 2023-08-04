@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import classes from './GameDetailBanner.module.scss';
 import { GameDetailType } from '../../Types/types';
 import Spiner from '../Spinner/Spinner/Spiner';
@@ -17,7 +18,8 @@ interface PropsType {
 
 const GameDetailBanner = ({ data, isLoading, isError }: PropsType) => {
   const mode = useSelector(colorMode);
-
+  const param = useParams<{ gameId: string }>();
+  const gameId = param.gameId as string;
   let content;
   if (isLoading) {
     content = (
@@ -60,7 +62,7 @@ const GameDetailBanner = ({ data, isLoading, isError }: PropsType) => {
           <p>
             <span>Release date:</span> {month} {year}
           </p>
-          <Wishlist />
+          <Wishlist gameId={gameId} />
         </div>
       </div>
     );

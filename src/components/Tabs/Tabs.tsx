@@ -20,7 +20,7 @@ const Tabs = () => {
   }, [toggleState]);
 
   return (
-    <div className={classes.container}>
+    <section className={classes.container}>
       <div className={classes.container____blocTtabs}>
         <button
           type="button"
@@ -67,7 +67,7 @@ const Tabs = () => {
           <WishlistTab skipSearch={skipSearch} />
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
