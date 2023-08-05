@@ -54,5 +54,16 @@
   display: block;
   background-color: var(--background-color-hover);
   padding: 10px 20px;
-  // min-height: 400px;
+}
+@media only screen and (max-width: 1024px) {
+  .container {
+    max-width: 100%;
+    top: 5%;
+    left: 0%;
+    transform: translate(0%, 0%);
+    padding: 5px;
+  }
+  .activeContent {
+    margin-bottom: 2em;
+  }
 }

@@ -1,4 +1,5 @@
-import { useRouteLoaderData } from 'react-router-dom';
+import { Link, useRouteLoaderData } from 'react-router-dom';
+import { TfiMoreAlt } from 'react-icons/tfi';
 import { useGetUserWishlistQuery } from '../../../store/api/userSlice';
 import classes from './WishlistTab.module.scss';
 import DivLoader from '../../Spinner/SkeletonDivLoader/DivLoader';
@@ -55,6 +56,12 @@ const WishlistTaba = ({ skipSearch }: PropsType) => {
               <div className={classes.gameCard__heart}>
                 <Wishlist gameId={newGameId} />
               </div>
+              {/* <div className={classes.gameCard__name}> */}
+              <Link to={`/game/${game.id}`}>
+                {game.name}
+                <TfiMoreAlt />
+              </Link>
+              {/* </div> */}
               <img src={newImg} alt={game.name} />
             </div>
           );

@@ -11,6 +11,7 @@ import bgc from '../../asset/bgc.png';
 import bgcLight from '../../asset/bgc-light.png';
 import { colorMode } from '../../store/slice/ThemeSlice';
 import ErrorComponent from '../Spinner/ErrorComponent/ErrorComponent';
+import DivLoader from '../Spinner/SkeletonDivLoader/DivLoader';
 
 const Banner = () => {
   const { data, isLoading, isError } = useGetBannerGamesQuery<GameType>();
@@ -59,7 +60,17 @@ const Banner = () => {
 
   let content;
   if (isLoading) {
-    content = <Spiner message="Loading" />;
+    content = (
+      <div className={classes.loadingBox}>
+        <DivLoader />
+        <div className={classes.loadingBox__spinner}>
+          <Spiner message="Loading" />
+        </div>
+        <div className={classes.loadingBox__card}>
+          <DivLoader />
+        </div>
+      </div>
+    );
   } else if (isError) {
     content = (
       <ErrorComponent message="Data loading error. Please try again later" />
