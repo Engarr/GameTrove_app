@@ -55,12 +55,23 @@
 .active {
   background-color: greenyellow;
 }
-.spinnerContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 2em;
-  height: 800px;
+.loadingContainer {
+  position: relative;
+  width: 100%;
+  &__cardBox {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    transform: translate(-50%, -50%);
+  }
+  &__emptyCard {
+    width: 350px;
+    height: 450px;
+    margin: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
 }
 .container {
   background-color: #fff;
@@ -241,6 +252,15 @@
     &__preBtn:hover,
     &__nextBtn:hover {
       color: var(--color);
+    }
+  }
+  .loadingContainer {
+    height: 400px;
+    overflow: hidden;
+
+    &__emptyCard {
+      width: 250px;
+      height: 350px;
     }
   }
 }

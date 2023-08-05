@@ -11,6 +11,7 @@ import bgc from '../../asset/bgc.png';
 import bgcLight from '../../asset/bgc-light.png';
 import { colorMode } from '../../store/slice/ThemeSlice';
 import ErrorComponent from '../Spinner/ErrorComponent/ErrorComponent';
+import DivLoader from '../Spinner/SkeletonDivLoader/DivLoader';
 
 const CategoryGameCard = () => {
   const { data, isLoading, isError, refetch } =
@@ -107,21 +108,22 @@ const CategoryGameCard = () => {
   }
 
   let content;
-  if (isLoading) {
+  if (isLoading || (!isLoading && data?.newsGames.length === 0)) {
     content = (
-      <div className={classes.spinnerContainer}>
-        <Spiner message="Loading" />
+      <div className={classes.loadingContainer}>
+        <DivLoader />
+        <div className={classes.loadingContainer__cardBox}>
+          {Array.from({ length: diverse }, (_, index) => (
+            <div className={classes.loadingContainer__emptyCard} key={index}>
+              <DivLoader />
+            </div>
+          ))}
+        </div>
       </div>
     );
   } else if (isError) {
     content = (
       <ErrorComponent message="Data loading error. Please try again later" />
-    );
-  } else if (!isLoading && data?.newsGames.length === 0) {
-    content = (
-      <div className={classes.spinnerContainer}>
-        <Spiner message="Loading" />
-      </div>
     );
   } else if (data) {
     const totalCards = data.newsGames.length;

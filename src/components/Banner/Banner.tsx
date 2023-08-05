@@ -63,12 +63,16 @@ const Banner = () => {
     content = (
       <div className={classes.loadingBox}>
         <DivLoader />
-        <div className={classes.loadingBox__spinner}>
-          <Spiner message="Loading" />
-        </div>
+        <div className={classes.loadingBox__spinner} />
         <div className={classes.loadingBox__card}>
           <DivLoader />
         </div>
+        <img
+          src={mode === 'dark' ? bgc : bgcLight}
+          alt=""
+          height={20}
+          className={classes.banner__img}
+        />
       </div>
     );
   } else if (isError) {
