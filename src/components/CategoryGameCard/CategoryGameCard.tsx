@@ -6,7 +6,6 @@ import Card from './Card/Card';
 import classes from './CategoryGameCard.module.scss';
 import { useGetCategoryGamesQuery } from '../../store/api/feedSlice';
 import { CategoryGameData } from '../../Types/types';
-import Spiner from '../Spinner/Spinner/Spiner';
 import bgc from '../../asset/bgc.png';
 import bgcLight from '../../asset/bgc-light.png';
 import { colorMode } from '../../store/slice/ThemeSlice';
@@ -111,7 +110,7 @@ const CategoryGameCard = () => {
   if (isLoading || (!isLoading && data?.newsGames.length === 0)) {
     content = (
       <div className={classes.loadingContainer}>
-        <DivLoader />
+        {/* <DivLoader /> */}
         <div className={classes.loadingContainer__cardBox}>
           {Array.from({ length: diverse }, (_, index) => (
             <div className={classes.loadingContainer__emptyCard} key={index}>
