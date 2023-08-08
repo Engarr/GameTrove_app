@@ -62,9 +62,11 @@ const Banner = () => {
   if (isLoading) {
     content = (
       <div className={classes.loadingBox}>
-        <DivLoader />
-        <div className={classes.loadingBox__spinner} />
+        {/* <DivLoader /> */}
         <div className={classes.loadingBox__card}>
+          <DivLoader />
+        </div>
+        <div className={classes.loadingBox__textBox}>
           <DivLoader />
         </div>
         <img
