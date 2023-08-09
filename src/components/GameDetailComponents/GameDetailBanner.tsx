@@ -2,13 +2,13 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import classes from './GameDetailBanner.module.scss';
 import { GameDetailType } from '../../Types/types';
-import Spiner from '../Spinner/Spinner/Spiner';
 import bgc from '../../asset/bgc.png';
 import bgcLight from '../../asset/bgc-light.png';
 import { colorMode } from '../../store/slice/ThemeSlice';
 import Card from '../Banner/Card/Card';
 import ErrorComponent from '../Spinner/ErrorComponent/ErrorComponent';
 import Wishlist from '../Wishlist/Wishlist';
+import DivLoader from '../Spinner/SkeletonDivLoader/DivLoader';
 
 interface PropsType {
   data: GameDetailType;
@@ -23,8 +23,19 @@ const GameDetailBanner = ({ data, isLoading, isError }: PropsType) => {
   let content;
   if (isLoading) {
     content = (
-      <div className={classes.spinnerContainer}>
-        <Spiner message="Loading" />
+      <div className={classes.loadingBox}>
+        <div className={classes.loadingBox__card}>
+          <DivLoader />
+        </div>
+        <div className={classes.loadingBox__textBox}>
+          <DivLoader />
+        </div>
+        <img
+          src={mode === 'dark' ? bgc : bgcLight}
+          alt=""
+          height={20}
+          className={classes.banner__img}
+        />
       </div>
     );
   } else if (isError) {

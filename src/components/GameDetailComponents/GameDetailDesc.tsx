@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import classes from './GameDetailDesc.module.scss';
 import { GameDetailType } from '../../Types/types';
+import DivLoader from '../Spinner/SkeletonDivLoader/DivLoader';
 
 interface PropsType {
   data: GameDetailType;
@@ -44,7 +45,23 @@ const GameDetailDesc = ({ data, isLoading }: PropsType) => {
     }
   };
   let content;
-  if (!isLoading && data) {
+  if (isLoading) {
+    content = (
+      <div className={classes.loadingContainer}>
+        <div className={classes.loadingContainer__ctx}>
+          <div className={classes[`loadingContainer__ctx--loadingBox`]}>
+            <DivLoader />
+          </div>
+          <div className={classes[`loadingContainer__ctx--loadingBox`]}>
+            <DivLoader />
+          </div>
+          <div className={classes[`loadingContainer__ctx--loadingBox`]}>
+            <DivLoader />
+          </div>
+        </div>
+      </div>
+    );
+  } else if (!isLoading && data) {
     let descLength;
     if (data.summary) {
       descLength = data.summary.length;

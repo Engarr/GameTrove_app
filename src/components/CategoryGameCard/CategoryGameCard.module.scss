@@ -7,7 +7,6 @@
 
   &__title {
     margin: 2em 0;
-
     width: 100%;
     padding: 10px 20px;
     position: relative;
@@ -206,11 +205,11 @@
     margin-top: 72px;
     &__title {
       width: 100%;
-
+      
       h2 {
         padding: 5px;
         letter-spacing: 1px;
-        font-size: 1em;
+        font-size: 1.4em;
         color: var(--color);
         z-index: 20;
         span {

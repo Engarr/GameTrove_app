@@ -14,7 +14,6 @@
     background-color: var(--background-color-menu);
     transition: transform 0.3s;
     box-shadow: 0 0 2px 1px greenyellow;
-   
   }
   &__buttons {
     text-align: center;
@@ -79,7 +78,6 @@
   background-color: var(--background-color);
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
-  
 
   &__icon {
     transition: color 0.3s;
@@ -127,10 +125,12 @@
   .active {
     transform: translate(0);
   }
-  .arrow {
-    width: 30%;
-    transform: rotateX(180deg);
-    color: black;
+  .arrowBox {
+    font-size: 1.4em;
+    right: 0%;
+    bottom: -32px;
+
+    width: 50px;
   }
   .arrowRotate {
     transform: rotateX(0deg);

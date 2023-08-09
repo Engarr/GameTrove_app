@@ -23,7 +23,6 @@ const VideoSlider = ({ data, isLoading }: PropsType) => {
     setActiveIndex((prev: number) => prev - 1);
   };
   let content;
-
   if (data && !isLoading) {
     const videoIds = data.videos.map((video) => video.video_id);
     const videosUrlArr = videoIds.map((video, index) => ({

@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 import { useGetBannerGamesQuery } from '../../store/api/feedSlice';
 import classes from './Banner.module.scss';
-import Spiner from '../Spinner/Spinner/Spiner';
 import Card from './Card/Card';
 import { GameType } from '../../Types/types';
 import bgc from '../../asset/bgc.png';
