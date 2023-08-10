@@ -103,12 +103,7 @@
     &--card {
       height: 350px;
 
-      img {
-        position: relative;
-        border-radius: 0px;
-        height: 100%;
-        width: 100%;
-      }
+    
       &-rating {
         padding: 15px;
         opacity: 1;
@@ -152,7 +147,7 @@
     &--card-name {
       height: 100px;
       transform: translateY(0%);
-      width: 100%;
+      width: 90%;
       opacity: 0.8;
     }
   }
