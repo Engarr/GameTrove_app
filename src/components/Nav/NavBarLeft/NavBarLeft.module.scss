@@ -6,12 +6,13 @@
   font-family: 'Bai Jamjuree', sans-serif;
 
   ::-webkit-scrollbar {
-    width: 0.4em;
-    background-color: var(--color);
+    width: 0.3em;
+    background-color: var(--color-hover);
   }
   ::-webkit-scrollbar-thumb {
     background-color: greenyellow;
-    border-radius: 5px;
+    border-radius: 2px;
+    width: 0.1em;
   }
   &__filter {
     position: fixed;
@@ -107,71 +108,6 @@
         transform: rotate(-45deg);
       }
     }
-    &--categorys,
-    &--platforms {
-      overflow-x: hidden;
-      overflow-y: scroll;
-      height: 300px;
-    }
-    &--platforms {
-      overflow-x: hidden;
-      overflow-y: scroll;
-      height: 200px;
-    }
-    &--categorys,
-    &--platforms {
-      padding: 10px 20px;
-      text-align: center;
-      background-color: rgba(0, 0, 0, 0.1);
-      box-shadow: -2px 0 2px 0.2px var(--color) inset;
-      div {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 5px 10px;
-        width: 100%;
-
-        border: none;
-        margin-bottom: 0.3em;
-        transition: background-color 0.3s;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-
-        a {
-          font-family: 'Passion One', sans-serif;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          padding: 10px 15px;
-          font-size: 15px;
-          outline: none;
-          border: none;
-          border-radius: 2px;
-          transition: box-shadow 0.3s, letter-spacing 0.3s;
-          background: rgba(30, 30, 30, 0.7);
-          color: greenyellow;
-          box-shadow: 0 0 2px var(--color), inset 0 0 2px var(--color);
-          width: 200px;
-          cursor: pointer;
-          letter-spacing: 1px;
-        }
-        a:focus {
-          box-shadow: 0 0 5px var(--black-white);
-        }
-      }
-      div:hover {
-        a {
-          color: white;
-          letter-spacing: 2px;
-        }
-      }
-    }
-  }
-
-  .activeButton {
-    a {
-      border: 2px solid greenyellow;
-    }
   }
 }
 .active {
@@ -211,32 +147,7 @@
         cursor: pointer;
         transition: color 0.3s;
       }
-      &--categorys,
-      &--platforms {
-        height: 200px;
-      }
-
-      &--categorys,
-      &--platforms {
-        padding: 0px 10px;
-
-        div {
-          padding: 5px 10px;
-          width: 100%;
-          font-size: 1em;
-          position: relative;
-
-          a {
-            padding: 5px 0px;
-          }
-        }
-        div:hover {
-          background-color: var(--color);
-          a {
-            color: var(--background-color);
-          }
-        }
-      }
+      
     }
     &__container::-webkit-scrollbar {
       display: none;

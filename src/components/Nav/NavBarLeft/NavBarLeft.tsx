@@ -1,10 +1,11 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { switchPage } from '../../../store/slice/PaginationSlice';
 import classes from './NavBarLeft.module.scss';
 import Modal from '../../Modal/Modal';
 import { gameCategories, gamePlatforms } from '../../../util/db';
+import FilterList from './CategoryItem/FilterList';
 
 interface PropsType {
   isActiveLeftBar: boolean;
@@ -101,71 +102,22 @@ const NavBarLeft = ({
             <span />
           </div>
           <div className={classes[`nav__container--box`]} style={boxStyle}>
-            <h3>Search games by category:</h3>
-            <div className={classes[`nav__container--categorys`]}>
-              {gameCategories.map((category) => {
-                const searchParams = new URLSearchParams(location.search);
-                searchParams.set('category', category.id.toString());
-                searchParams.set('page', '1');
-
-                const updatedSearch = `?${searchParams.toString()}`;
-
-                return (
-                  <div
-                    key={category.id}
-                    className={
-                      activeCategory === category.id.toString()
-                        ? classes.activeButton
-                        : ''
-                    }
-                  >
-                    <Link
-                      to={`/games${updatedSearch}`}
-                      onClick={() => {
-                        activeHandler();
-                        pageHandler(1);
-                      }}
-                    >
-                      {category.name}
-                    </Link>
-                  </div>
-                );
-              })}
-            </div>
+            <FilterList
+              data={gameCategories}
+              activeHandler={activeHandler}
+              pageHandler={pageHandler}
+              activeCategory={activeCategory}
+              title="category"
+            />
           </div>
           <div className={classes[`nav__container--box`]} style={boxStyle}>
-            <h3>Search games by platform:</h3>
-            <div className={classes[`nav__container--platforms`]}>
-              {gamePlatforms.map((platform) => {
-                const searchParams = new URLSearchParams(location.search);
-                searchParams.set('platform', platform.id.toString());
-                searchParams.set('page', '1');
-                const updatedSearch = `?${searchParams
-                  .toString()
-                  .toLocaleLowerCase()}`;
-
-                return (
-                  <div
-                    key={platform.id}
-                    className={
-                      activePlatform === platform.id.toString()
-                        ? classes.activeButton
-                        : ''
-                    }
-                  >
-                    <Link
-                      to={`/games${updatedSearch}`}
-                      onClick={() => {
-                        activeHandler();
-                        pageHandler(1);
-                      }}
-                    >
-                      {platform.name}
-                    </Link>
-                  </div>
-                );
-              })}
-            </div>
+            <FilterList
+              data={gamePlatforms}
+              activeHandler={activeHandler}
+              pageHandler={pageHandler}
+              title="platform"
+              activePlatform={activePlatform}
+            />
           </div>
         </div>
       </div>

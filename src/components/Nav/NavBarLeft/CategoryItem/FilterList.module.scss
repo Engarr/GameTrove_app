@@ -1,0 +1,112 @@
+.filterListContainer {
+  position: relative;
+  width: 80%;
+  left: 50%;
+  transform: translateX(-50%);
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: 300px;
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 20px;
+    width: 100%;
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    a {
+      position: relative;
+      font-family: 'Passion One', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 5px 15px;
+      font-size: 1.2em;
+      outline: none;
+      border: none;
+      transition: letter-spacing 0.3s;
+      color: var(--color);
+      width: 100%;
+      cursor: pointer;
+      letter-spacing: 0px;
+    }
+    a::before {
+      content: '⏶';
+      position: absolute;
+      bottom: -10%;
+      left: 50%;
+      text-align: center;
+      font-size: 12px;
+      transform: translateX(-50%);
+      width: 100%;
+      color: var(--greenYellow);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    a::after {
+      content: '';
+      position: absolute;
+      bottom: 0%;
+      left: 50%;
+      font-size: 10px;
+      transform: translateX(-50%);
+      width: 0%;
+      color: var(--greenYellow);
+      border-bottom: 2px solid var(--greenYellow);
+      transition: width 0.3s;
+    }
+    a:hover::after {
+      width: 80%;
+    }
+    a:hover::before {
+      opacity: 1;
+    }
+    a:focus {
+      border-bottom: 1px solid var(--color);
+      letter-spacing: 1px;
+    }
+    &.activeButton {
+      a {
+        color: var(--greenYellow);
+        letter-spacing: 1px;
+      }
+      a::after {
+        width: 80%;
+      }
+      a::before {
+        opacity: 1;
+      }
+    }
+  }
+  div:hover {
+    a {
+      letter-spacing: 1px;
+    }
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .filterListContainer {
+    padding: 0px 10px;
+    height: 200px;
+
+    div {
+      padding: 5px 10px;
+      width: 100%;
+      font-size: 1em;
+      position: relative;
+
+      a {
+        padding: 5px 0px;
+      }
+      a:hover::after {
+        width: 0%;
+      }
+      a:hover::before {
+        opacity: 0;
+      }
+    }
+  }
+}
