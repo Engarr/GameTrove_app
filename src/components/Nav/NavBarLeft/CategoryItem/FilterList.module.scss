@@ -24,7 +24,6 @@
       align-items: center;
       padding: 5px 15px;
       font-size: 1.2em;
-      outline: none;
       border: none;
       transition: letter-spacing 0.3s;
       color: var(--color);
@@ -63,10 +62,7 @@
     a:hover::before {
       opacity: 1;
     }
-    a:focus {
-      border-bottom: 1px solid var(--color);
-      letter-spacing: 1px;
-    }
+    
     &.activeButton {
       a {
         color: var(--greenYellow);
