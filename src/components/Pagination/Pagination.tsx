@@ -111,25 +111,7 @@ const Pagination = ({ totalPages }: PropsType) => {
             </Link>
           </button>
         </div>
-        <div className={classes.pagination__inputContainer}>
-          <input
-            type="number"
-            onChange={gotToPageHandler}
-            value={gotToPage && gotToPage > 0 ? gotToPage : ''}
-          />
-          {gotToPage !== null && gotToPage > 0 ? (
-            <Link
-              to={`/games${updatePageInLink(gotToPage)}`}
-              onClick={() => {
-                pageHandler(gotToPage);
-              }}
-            >
-              Go
-            </Link>
-          ) : (
-            ''
-          )}
-        </div>
+
         <div>
           <button
             type="button"
@@ -145,6 +127,25 @@ const Pagination = ({ totalPages }: PropsType) => {
             </Link>
           </button>
         </div>
+      </div>
+      <div className={classes.pagination__inputContainer}>
+        <input
+          type="number"
+          onChange={gotToPageHandler}
+          value={gotToPage && gotToPage > 0 ? gotToPage : ''}
+        />
+        {gotToPage !== null && gotToPage > 0 ? (
+          <Link
+            to={`/games${updatePageInLink(gotToPage)}`}
+            onClick={() => {
+              pageHandler(gotToPage);
+            }}
+          >
+            Go
+          </Link>
+        ) : (
+          <p>Go</p>
+        )}
       </div>
     </div>
   );

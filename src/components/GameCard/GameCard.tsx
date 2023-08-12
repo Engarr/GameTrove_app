@@ -1,6 +1,7 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import classes from './GameCard.module.scss';
+import { switchPage } from '../../store/slice/PaginationSlice';
 
 interface PropsType {
   name: string;
@@ -18,6 +19,11 @@ interface PropsType {
 }
 
 const GameCard = ({ name, img, id, geners, summary, platforms }: PropsType) => {
+  const dispatch = useDispatch();
+  const resetPageHandler = () => {
+    dispatch(switchPage(1));
+  };
+
   const newImg = img.replace('t_thumb', 't_1080p');
   return (
     <div className={classes.card}>
@@ -34,7 +40,11 @@ const GameCard = ({ name, img, id, geners, summary, platforms }: PropsType) => {
           <div className={classes.card__geners}>
             <p> Geners:</p>
             {geners.map((g) => (
-              <Link to={`/games?category=${g.id}`} key={g.id}>
+              <Link
+                to={`/games?category=${g.id}`}
+                key={g.id}
+                onClick={resetPageHandler}
+              >
                 {g.name}
               </Link>
             ))}
@@ -44,7 +54,11 @@ const GameCard = ({ name, img, id, geners, summary, platforms }: PropsType) => {
           <div className={classes.card__geners}>
             <p> Platfomrs:</p>
             {platforms.map((p) => (
-              <Link to={`/games?platform=${p.id}`} key={p.id}>
+              <Link
+                to={`/games?platform=${p.id}&page=1`}
+                key={p.id}
+                onClick={resetPageHandler}
+              >
                 {p.name}
               </Link>
             ))}

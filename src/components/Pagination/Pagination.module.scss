@@ -1,14 +1,21 @@
 .container {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   padding: 20px 40px;
 }
 .pagination {
-  width: 100%;
+  width: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
+
   div {
     width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
   }
 
   &__icon {
@@ -32,7 +39,6 @@
     display: flex;
     justify-content: center;
     align-items: flex-end;
-
     transition: opacity 0.3s;
     font-size: 1em;
     a {
@@ -51,10 +57,17 @@
   &__inputContainer {
     position: relative;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    width: 100px;
+
     a {
-      color: var(--color);
+      color: var(--blue);
+      margin-left: 2px;
+      font-weight: bold;
+    }
+    p {
+      color: grey;
       margin-left: 2px;
     }
     input::-webkit-outer-spin-button,
@@ -65,24 +78,15 @@
 
     input[type='number'] {
       appearance: textfield;
-      width: 90%;
+      width: 80%;
       text-align: center;
       background-color: transparent;
       border: none;
       outline: none;
+      border-bottom: 1px solid var(--color);
       color: var(--color);
       font-size: 1em;
     }
-  }
-  &__inputContainer::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    border-bottom: 1px solid var(--color);
-    width: 80%;
-    left: 50%;
-    transform: translateX(-50%);
   }
 }
 .disabled {
@@ -93,24 +97,25 @@
     padding: 20px 0px;
   }
   .pagination {
+    width: 100%;
+
     &__icon {
       margin: 0 2px;
       font-size: 20px;
     }
     &__next,
     &__prev {
-      font-size: 25px;
+      font-size: 20px;
     }
     button,
     &__activePage {
       display: flex;
       justify-content: center;
       text-align: center;
-      padding: 5px 10px;
+      padding: 5px;
       margin-right: 5px;
       border: none;
       height: 30px;
-      width: 50px;
       font-size: 1em;
       background-color: transparent;
       transition: opacity 0.3s;
