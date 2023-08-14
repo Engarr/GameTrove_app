@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import classes from './GameCard.module.scss';
-import { switchPage } from '../../store/slice/PaginationSlice';
+import { switchPage } from '../../../store/slice/PaginationSlice';
 
 interface PropsType {
   name: string;

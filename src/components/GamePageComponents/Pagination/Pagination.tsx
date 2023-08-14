@@ -13,7 +13,7 @@ import {
   changePageDown,
   actualPage,
   switchPage,
-} from '../../store/slice/PaginationSlice';
+} from '../../../store/slice/PaginationSlice';
 
 interface PropsType {
   totalPages: number;

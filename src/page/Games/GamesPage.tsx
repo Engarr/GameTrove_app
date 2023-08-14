@@ -5,8 +5,10 @@ import classes from './GamePage.module.scss';
 import FilterSection from '../../components/FilterSection/FilterSection';
 import Spiner from '../../components/Spinner/Spinner/Spiner';
 import ErrorComponent from '../../components/Spinner/ErrorComponent/ErrorComponent';
-import GameCard from '../../components/GameCard/GameCard';
-import Pagination from '../../components/Pagination/Pagination';
+import GameCard from '../../components/GamePageComponents/GameCard/GameCard';
+import Pagination from '../../components/GamePageComponents/Pagination/Pagination';
+
+import LoadingCard from '../../components/GamePageComponents/LoadingComponent/LoadingCard';
 
 interface ResponseType {
   data: { games: GameData[]; totalGames: { count: number } };
@@ -48,14 +50,17 @@ const GamesPage = () => {
         )}
 
         {isFetching ? (
-          <Spiner message="Loading" />
+          <LoadingCard />
         ) : (
           // eslint-disable-next-line react/jsx-no-useless-fragment
           <>
             {data.games.length === 0 ? (
-              <ErrorComponent message="Ups... There is no such a game. Please change filters" />
+              <>
+                <Pagination totalPages={data.totalGames.count} />
+                <ErrorComponent message="Ups... There is no such a game. Please change filters" />
+              </>
             ) : (
-              <div>
+              <>
                 <div className={classes.gamesContainer}>
                   {data.games.map((game) => (
                     <GameCard
@@ -74,7 +79,7 @@ const GamesPage = () => {
                   ))}
                 </div>
                 <Pagination totalPages={data.totalGames.count} />
-              </div>
+              </>
             )}
           </>
         )}

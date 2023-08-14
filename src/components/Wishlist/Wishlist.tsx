@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, useRouteLoaderData } from 'react-router-dom';
+import { useRouteLoaderData } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { AiFillHeart } from 'react-icons/ai';
 import {
