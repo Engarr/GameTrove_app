@@ -1,0 +1,26 @@
+.dotBox {
+  position: absolute;
+  display: flex;
+  bottom: 10%;
+  cursor: pointer;
+  transition: color 0.3s;
+  border-radius: 10px;
+  z-index: 20;
+  div {
+    padding: 10px 10px;
+    font-size: 1.2em;
+  }
+}
+.activeDot {
+  color: greenyellow;
+}
+@media only screen and (max-width: 1024px) {
+  .dotBox {
+    bottom: -10%;
+    border-radius: 5px;
+    div {
+      padding: 5px 10px;
+      font-size: 1.2em;
+    }
+  }
+}

@@ -1,16 +1,14 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 import { useGetBannerGamesQuery } from '../../store/api/feedSlice';
 import classes from './Banner.module.scss';
-import Card from './Card/Card';
 import { GameType } from '../../Types/types';
-import bgc from '../../asset/bgc.png';
-import bgcLight from '../../asset/bgc-light.png';
 import { colorMode } from '../../store/slice/ThemeSlice';
 import ErrorComponent from '../Spinner/ErrorComponent/ErrorComponent';
-import DivLoader from '../Spinner/SkeletonDivLoader/DivLoader';
+import BannerLoader from './BannerLoader/BannerLoader';
+import SlideDots from './SlideDots/SlideDots';
+import BannerCtx from './BannerCtx/BannerCtx';
 
 const Banner = () => {
   const { data, isLoading, isError } = useGetBannerGamesQuery<GameType>();
@@ -19,7 +17,6 @@ const Banner = () => {
   const [isActive, setIsActive] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const cardRef = useRef<HTMLDivElement>(null);
   const goToSlide = (slideIndex: number) => {
     setCurrentIndex(slideIndex);
   };
@@ -59,23 +56,7 @@ const Banner = () => {
 
   let content;
   if (isLoading) {
-    content = (
-      <div className={classes.loadingBox}>
-        {/* <DivLoader /> */}
-        <div className={classes.loadingBox__card}>
-          <DivLoader />
-        </div>
-        <div className={classes.loadingBox__textBox}>
-          <DivLoader />
-        </div>
-        <img
-          src={mode === 'dark' ? bgc : bgcLight}
-          alt=""
-          height={20}
-          className={classes.banner__img}
-        />
-      </div>
-    );
+    content = <BannerLoader mode={mode} />;
   } else if (isError) {
     content = (
       <ErrorComponent message="Data loading error. Please try again later" />
@@ -91,79 +72,27 @@ const Banner = () => {
           const imageUrl = item.cover.url.replace('t_thumb', 't_1080p');
 
           return (
-            <div
+            <BannerCtx
               key={item.id}
-              className={`${classes.banner} 
-            ${
-              index === currentIndex
-                ? classes.activeBaner
-                : classes.inactiveBanner
-            }
-            `}
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
-              style={{ backgroundImage: `url(${imageUrl})` }}
-            >
-              <div className={classes.banner__shadow} />
-              <img
-                src={mode === 'dark' ? bgc : bgcLight}
-                alt=""
-                height={20}
-                className={classes.banner__img}
-              />
-              <div className={classes.banner__content} ref={cardRef}>
-                <div className={classes.banner__rec}>
-                  <p>recommended</p>
-                </div>
-
-                <Card
-                  imageUrl={imageUrl}
-                  cardId={index}
-                  setIsActive={setIsActive}
-                />
-
-                <div className={classes[`banner__content--infoBox`]}>
-                  <div className={classes[`banner__content--infoBox-rating`]}>
-                    <p>{item.aggregated_rating.toFixed(0)}</p>
-                    <span>
-                      Based on {item.aggregated_rating_count} critic ratings
-                    </span>
-                  </div>
-                  <div className={classes[`banner__content--infoBox-name`]}>
-                    <p>{item.name}</p>
-
-                    <button type="button">
-                      <Link to={`/game/${item.id}`}>Read more</Link>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
+              item={item}
+              index={index}
+              setIsActive={setIsActive}
+              imageUrl={imageUrl}
+              setIsHovered={setIsHovered}
+              currentIndex={currentIndex}
+              mode={mode}
+            />
           );
         })}
         <IoIosArrowForward
           className={classes.wrapper__arrowRight}
           onClick={handleNextBanner}
         />
-
-        <div className={classes.dotBox}>
-          {data.map((item, slideIndex) => (
-            <div
-              key={item.id}
-              onClick={() => goToSlide(slideIndex)}
-              onKeyDown={(event) => {
-                if (event.key === 'Enter') {
-                  goToSlide(slideIndex);
-                }
-              }}
-              role="button"
-              tabIndex={0}
-              className={slideIndex === currentIndex ? classes.activeDot : ''}
-            >
-              ●
-            </div>
-          ))}
-        </div>
+        <SlideDots
+          data={data}
+          goToSlide={goToSlide}
+          currentIndex={currentIndex}
+        />
       </>
     );
   }
