@@ -1,0 +1,31 @@
+.loadingContainer {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  background-color: var(--background-color-hover);
+  &__cardBox {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    transform: translate(-50%, -50%);
+  }
+  &__emptyCard {
+    width: 350px;
+    height: 450px;
+    margin: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+}
+@media only screen and (max-width: 736px) {
+  .loadingContainer {
+    height: 400px;
+    overflow: hidden;
+
+    &__emptyCard {
+      width: 250px;
+      height: 350px;
+    }
+  }
+}

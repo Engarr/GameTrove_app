@@ -10,7 +10,8 @@ import bgc from '../../asset/bgc.png';
 import bgcLight from '../../asset/bgc-light.png';
 import { colorMode } from '../../store/slice/ThemeSlice';
 import ErrorComponent from '../Spinner/ErrorComponent/ErrorComponent';
-import DivLoader from '../Spinner/SkeletonDivLoader/DivLoader';
+import CategoryGameLoader from './CategoryGameLoader/CategoryGameLoader';
+import SlideDots from '../Banner/SlideDots/SlideDots';
 
 const CategoryGameCard = () => {
   const { data, isLoading, isError, refetch } =
@@ -108,18 +109,7 @@ const CategoryGameCard = () => {
 
   let content;
   if (isLoading || (!isLoading && data?.newsGames.length === 0)) {
-    content = (
-      <div className={classes.loadingContainer}>
-        {/* <DivLoader /> */}
-        <div className={classes.loadingContainer__cardBox}>
-          {Array.from({ length: diverse }, (_, index) => (
-            <div className={classes.loadingContainer__emptyCard} key={index}>
-              <DivLoader />
-            </div>
-          ))}
-        </div>
-      </div>
-    );
+    content = <CategoryGameLoader diverse={diverse} />;
   } else if (isError) {
     content = (
       <ErrorComponent message="Data loading error. Please try again later" />
@@ -170,27 +160,13 @@ const CategoryGameCard = () => {
             </button>
           )}
           <Card cardsContainerRef={cardsContainerRef} data={data} />
-          <div className={classes.rectangleBox}>
-            {dotItems.map((dot, index) => (
-              <div
-                key={dot.id}
-                className={`${classes.rectangleBox__dot} ${
-                  index === activePosition ? classes.active : ''
-                } `}
-                onClick={() => {
-                  barSlider(index);
-                }}
-                onKeyDown={(event) => {
-                  if (event.key === 'Enter') {
-                    barSlider(index);
-                  }
-                }}
-                role="button"
-                tabIndex={0}
-                aria-label={`Dot ${dot.id}`}
-              />
-            ))}
-          </div>
+        </div>
+        <div className={classes.rectangleBox}>
+          <SlideDots
+            data={dotItems}
+            goToSlide={barSlider}
+            currentIndex={activePosition}
+          />
         </div>
       </div>
     );
