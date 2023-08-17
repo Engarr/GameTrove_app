@@ -20,32 +20,31 @@ const AuthForm = () => {
     usePutRegisterUserMutation();
   const [postLoginUser, { isLoading: isLoginLoading }] =
     usePostLoginUserMutation();
-
   const isLogin = mode === 'login';
   const buttonContent = mode === 'login' ? 'Login' : 'Register';
-  const [userData, setUserData] = useState<UserDataType>({
+  const initialUserData = {
     userName: '',
     email: '',
     password: '',
     repeatPassword: '',
-  });
+  };
+  const [userData, setUserData] = useState<UserDataType>(initialUserData);
   const handleUserDataChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
     setUserData((prevData) => ({
       ...prevData,
-      [e.target.name]: e.target.value,
+      [name]: value,
     }));
     setBackendErrors((prevErrors) => ({
       ...prevErrors,
-      [e.target.name]: '',
+      [name]: '',
     }));
   };
   useEffect(() => {
     setFadeIn(true);
-
     const timer = setTimeout(() => {
       setFadeIn(false);
     }, 500);
-
     return () => clearTimeout(timer);
   }, [mode]);
 
@@ -58,33 +57,34 @@ const AuthForm = () => {
         ? await postLoginUser({ email, password })
         : await putRegisterUser({ userName, email, password, repeatPassword });
       const resData = response as AuthResponseType;
+
       if (resData.error) {
-        if (resData.error.status === 401) {
-          toast.error(resData.error.data.message);
-          return;
-        }
-        if (resData.error.status === 422 || resData.error.status === 401) {
+        const { status, data } = resData.error;
+
+        if (status === 401) {
+          toast.error(data.message);
+        } else if (status === 422) {
           const errorsObj: { [key: string]: string } = {};
-          resData.error.data.errors.forEach((error) => {
+          data.errors.forEach((error) => {
             errorsObj[error.path] = error.msg;
           });
-
           setBackendErrors(errorsObj);
         }
       }
       if (resData.data) {
-        if (isLogin) {
-          const { token } = resData.data;
-          localStorage.setItem('token', token);
-          const expiration = new Date();
-          expiration.setHours(expiration.getHours() + 24);
-          localStorage.setItem('expiration', expiration.toISOString());
-          toast.success('You have successfully logged in!');
-          navigate('/');
-        } else {
-          toast.success('The account has been created. You can log in now');
-          navigate('/account?mode=login');
-        }
+        const { token } = resData.data;
+        localStorage.setItem('token', token);
+        const expiration = new Date();
+        expiration.setHours(expiration.getHours() + 24);
+        localStorage.setItem('expiration', expiration.toISOString());
+        toast.success('You have successfully logged in!');
+        navigate('/');
+        toast.success(
+          isLogin
+            ? 'You have successfully logged in!'
+            : 'The account has been created. You can log in now'
+        );
+        navigate(isLogin ? '/' : '/account?mode=login');
       }
     } catch (err) {
       throw new Error(
@@ -108,33 +108,29 @@ const AuthForm = () => {
         const expiration = new Date();
         expiration.setHours(expiration.getHours() + 24);
         localStorage.setItem('expiration', expiration.toISOString());
-        toast.success('Zostałeś pomyślnie zalogowany. Witaj!');
+        toast.success('You have successfully logged in. Hello!');
         navigate('/');
       }
     } catch (err) {
-      throw new Error('Coś poszło nie tak, spróbuj ponownie później');
+      throw new Error('Something went wrong, please try again later');
     }
   };
   useEffect(() => {
-    setUserData({
-      userName: '',
-      email: '',
-      password: '',
-      repeatPassword: '',
-    });
-    setBackendErrors({
-      email: '',
-      password: '',
-      repeatPassword: '',
-    });
+    setUserData(initialUserData);
+    setBackendErrors({});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mode]);
+
   const submutButtonContent =
     isRegisterLoading || isLoginLoading ? (
       <Loader message="Loading" color="black" />
     ) : (
       buttonContent
     );
-
+  const switchLinkText = isLogin ? 'Sign up now' : 'Login';
+  const switchLinkTo = isLogin
+    ? '/account?mode=register'
+    : '/account?mode=login';
   return (
     <section className={classes.authWrapper}>
       <div className={classes.card}>
@@ -189,17 +185,12 @@ const AuthForm = () => {
               {submutButtonContent}
             </button>
             <div className={classes.formBox__switch}>
-              {isLogin ? (
-                <p>
-                  Don&apos;t have an account?
-                  <Link to="/account?mode=register">Sign up now</Link>
-                </p>
-              ) : (
-                <p>
-                  You already have account?
-                  <Link to="/account?mode=login">Login</Link>
-                </p>
-              )}
+              <p>
+                {isLogin
+                  ? `Don't have an account?`
+                  : `You already have an account?`}
+                <Link to={switchLinkTo}>{switchLinkText}</Link>
+              </p>
               <button
                 type="button"
                 className={classes.demoButton}
