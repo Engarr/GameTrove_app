@@ -30,3 +30,21 @@
     overflow: hidden;
   }
 }
+@media only screen and (max-width: 1024px) {
+  .loadingBox {
+    height: 350px;
+
+    &__card {
+      top: 17%;
+      left: 5%;
+      height: 180px;
+      width: 140px;
+    }
+    &__textBox {
+      width: 50%;
+      height: 65px;
+      top: 75%;
+      left: 5%;
+    }
+  }
+}
