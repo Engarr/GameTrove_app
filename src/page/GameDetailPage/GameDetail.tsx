@@ -3,8 +3,8 @@ import { useGetGameDetailsQuery } from '../../store/api/feedSlice';
 import classes from './GameDetail.module.scss';
 import { GameDetailType } from '../../Types/types';
 import Slider from '../../components/GameDetailComponents/Slider/PhotoSlider';
-import GameDetailBanner from '../../components/GameDetailComponents/GameDetailBanner';
-import GameDetailDesc from '../../components/GameDetailComponents/GameDetailDesc';
+import GameDetailBanner from '../../components/GameDetailComponents/GameDetailBanner/GameDetailBanner';
+import GameDetailDesc from '../../components/GameDetailComponents/GameDetalDesc/GameDetailDesc';
 import VideoSlider from '../../components/GameDetailComponents/Slider/VideoSlider';
 
 interface DataType {

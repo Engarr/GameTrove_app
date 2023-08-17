@@ -11,7 +11,7 @@ import bgcLight from '../../asset/bgc-light.png';
 import { colorMode } from '../../store/slice/ThemeSlice';
 import ErrorComponent from '../Spinner/ErrorComponent/ErrorComponent';
 import CategoryGameLoader from './CategoryGameLoader/CategoryGameLoader';
-import SlideDots from '../Banner/SlideDots/SlideDots';
+import SlideDots from '../SlideDots/SlideDots';
 
 const CategoryGameCard = () => {
   const { data, isLoading, isError, refetch } =
