@@ -5,8 +5,8 @@ import ComingGameCard from './ComingGames/ComingGameCard';
 import classes from './ComingSoon.module.scss';
 import { useGetComingGamesQuery } from '../../store/api/feedSlice';
 import { comingGamePlatforms } from '../../util/db';
-import DivLoader from '../Spinner/SkeletonDivLoader/DivLoader';
 import ErrorComponent from '../Spinner/ErrorComponent/ErrorComponent';
+import ComingSoonLoader from './CominSoonLoader/ComingSoonLoader';
 
 interface DataType {
   data: {
@@ -31,7 +31,7 @@ const CommingSoon = () => {
   const [activeSearch, setActiveSearch] = useState(0);
   const [fadeIn, setFadeIn] = useState(false);
   const [skip, setSkip] = useState(true);
-  const emptyCards = 6;
+
   const options = {
     threshold: 0,
     triggerOnce: true,
@@ -62,28 +62,7 @@ const CommingSoon = () => {
   );
   let comingContent;
   if (isLoading || isFetching) {
-    comingContent = (
-      <>
-        {Array.from({ length: emptyCards }, (_, index) => (
-          <div className={classes.emptyCard} key={index}>
-            <div className={classes.emptyCard__img}>
-              <DivLoader />
-            </div>
-            <div className={classes.emptyCard__textBox}>
-              <div className={classes[`emptyCard__textBox--text`]}>
-                <DivLoader />
-              </div>
-              <div className={classes[`emptyCard__textBox--text`]}>
-                <DivLoader />
-              </div>
-              <div className={classes[`emptyCard__textBox--text`]}>
-                <DivLoader />
-              </div>
-            </div>
-          </div>
-        ))}
-      </>
-    );
+    comingContent = <ComingSoonLoader />;
   } else if (isError) {
     comingContent = (
       <ErrorComponent message="Page loading error. Please try again later" />
