@@ -1,10 +1,10 @@
 import { IoIosArrowUp } from 'react-icons/io';
-import { PiUserPlusFill, PiUserFill } from 'react-icons/pi';
-import { AiOutlineLogout } from 'react-icons/ai';
-import { Form, Link, useRouteLoaderData } from 'react-router-dom';
+import { useRouteLoaderData } from 'react-router-dom';
 import classes from './NavBarRight.module.scss';
 import Modal from '../../Modal/Modal';
 import ThemeMode from '../../ThemeMode/ThemeMode';
+import UnregisteredCtx from './UnregisteredCtx/UnregisteredCtx';
+import LogedIn from './LogedIn/LogedIn';
 
 interface PropsType {
   isActiveLeftBar: boolean;
@@ -28,45 +28,9 @@ const NavBarRight = ({
   };
   let content;
   if (!token) {
-    content = (
-      <>
-        <div>
-          <Link to="/account?mode=login" onClick={activeHandler}>
-            Login
-            <PiUserFill className={classes[`nav__buttons--icon`]} />
-          </Link>
-        </div>
-        <div>
-          <Link to="/account?mode=register" onClick={activeHandler}>
-            Join us
-            <PiUserPlusFill className={classes[`nav__buttons--icon`]} />
-          </Link>
-        </div>
-      </>
-    );
+    content = <UnregisteredCtx activeHandler={activeHandler} />;
   } else {
-    content = (
-      <>
-        <div>
-          <Link to="/account" onClick={activeHandler}>
-            My account
-            <PiUserFill className={classes[`nav__buttons--icon`]} />
-          </Link>
-        </div>
-        <div>
-          <Form action="/logout" method="post">
-            <button
-              className={classes.logoutButton}
-              type="submit"
-              onClick={activeHandler}
-            >
-              Wyloguj się
-              <AiOutlineLogout className={classes[`nav__buttons--icon`]} />
-            </button>
-          </Form>
-        </div>
-      </>
-    );
+    content = <LogedIn activeHandler={activeHandler} />;
   }
   return (
     <>
