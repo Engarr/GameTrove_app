@@ -53,7 +53,7 @@ const WishlistTaba = ({ skipSearch }: PropsType) => {
       </div>
     </div>;
   }
-  if (data && data.length === 0) {
+  if (data && data.length > 0) {
     content = (
       <>
         {data.map((game) => {
