@@ -5,6 +5,7 @@ import UserPage from '../UserPage/UserPage';
 const MyAccount = () => {
   const token = useRouteLoaderData('root');
   let content;
+
   if (!token) {
     content = <AuthForm />;
   } else {

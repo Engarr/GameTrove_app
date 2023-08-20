@@ -34,7 +34,6 @@ const WishlistTaba = ({ skipSearch }: PropsType) => {
     });
 
   let content;
-  console.log(data[0].addedAt);
   if (isLoading || isFetching) {
     content = (
       <>
@@ -46,7 +45,15 @@ const WishlistTaba = ({ skipSearch }: PropsType) => {
       </>
     );
   }
-  if (data && data.length > 0) {
+  if (data && data.length === 0) {
+    <div className={classes.emptyWishlist}>
+      <h2>Nothing added to the wishlist yet.</h2>
+      <div className={classes.emptyWishlist__link}>
+        <Link to="/games">Check some games!</Link>
+      </div>
+    </div>;
+  }
+  if (data && data.length === 0) {
     content = (
       <>
         {data.map((game) => {

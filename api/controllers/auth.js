@@ -198,6 +198,7 @@ export const getUserWishlist = async (req, res, next) => {
         addedAt: matching ? matching.addedAt : null,
       };
     });
+    console.log(combinedList);
     res.status(200).json(combinedList);
   } catch (err) {
     if (!err) {
