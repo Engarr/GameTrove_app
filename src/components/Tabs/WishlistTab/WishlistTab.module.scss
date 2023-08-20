@@ -3,6 +3,7 @@
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: center;
+ 
 }
 .emptyCard,
 .gameCard {
@@ -10,7 +11,7 @@
   height: 400px;
   width: 250px;
   overflow: hidden;
-  border-radius: 5px;
+  border-radius: 2px;
   margin: 30px 0px 0px 20px;
 }
 .gameCard {
@@ -23,7 +24,7 @@
     top: 2%;
     padding: 5px;
     background-color: rgba(255, 255, 255, 0.6);
-    border-radius: 5px;
+    border-radius: 2px;
     z-index: 100;
   }
   img {
@@ -59,7 +60,7 @@
   a {
     opacity: 1;
   }
-  box-shadow: 0 0 20px 1px rgba(172, 255, 47, 0.404);
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.4);
 }
 .emptyWishlist {
   margin-top: 50px;

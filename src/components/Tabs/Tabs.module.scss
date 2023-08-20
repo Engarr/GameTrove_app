@@ -2,10 +2,6 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  max-width: 90%;
-  top: 0%;
-  left: 50%;
-  transform: translate(-50%, 0%);
 
   &____blocTtabs {
     display: flex;
@@ -17,23 +13,22 @@
       align-items: center;
       font-family: 'Passion One', sans-serif;
       padding: 10px 15px;
-      margin-right: 2px;
       font-size: 1.2em;
       outline: none;
       border: none;
       background-color: var(--background-color);
       color: var(--color);
-      width: 200px;
+      width: 150px;
       cursor: pointer;
       letter-spacing: 1px;
       border: 1px solid var(--background-color-hover);
       transition: box-shadow 0.3s, letter-spacing 0.3s, letter-spacing 0.3s,
-        background-color 0.3s;
-      border-top-left-radius: 10px;
+        width 0.3s, background-color 0.3s;
       &.activeTab {
         background-color: var(--background-color-hover);
         color: var(--greenYellow);
         border: none;
+        width: 200px;
       }
     }
     &--icons {
@@ -45,6 +40,7 @@
   }
   &__contentTabs {
     // margin-top: 2em;
+    
   }
 }
 .content {
@@ -54,6 +50,7 @@
   display: block;
   background-color: var(--background-color-hover);
   padding: 10px 20px;
+  min-height: 100vh;
 }
 @media only screen and (max-width: 1024px) {
   .container {
