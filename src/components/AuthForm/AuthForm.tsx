@@ -72,19 +72,22 @@ const AuthForm = () => {
         }
       }
       if (resData.data) {
-        const { token } = resData.data;
-        localStorage.setItem('token', token);
-        const expiration = new Date();
-        expiration.setHours(expiration.getHours() + 24);
-        localStorage.setItem('expiration', expiration.toISOString());
-        toast.success('You have successfully logged in!');
-        navigate('/');
+        if (isLogin) {
+          const { token } = resData.data;
+          localStorage.setItem('token', token);
+          const expiration = new Date();
+          expiration.setHours(expiration.getHours() + 24);
+          localStorage.setItem('expiration', expiration.toISOString());
+          navigate('/');
+        } else {
+          navigate('/account?mode=login');
+        }
+
         toast.success(
           isLogin
             ? 'You have successfully logged in!'
             : 'The account has been created. You can log in now'
         );
-        navigate(isLogin ? '/' : '/account?mode=login');
       }
     } catch (err) {
       throw new Error(
