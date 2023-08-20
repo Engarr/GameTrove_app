@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useId } from 'react';
 import { useRouteLoaderData } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { AiFillHeart } from 'react-icons/ai';
@@ -14,6 +14,7 @@ interface UserIdType {
     isAdded: boolean;
   };
   isLoading: boolean;
+  isSuccess: boolean;
 }
 interface PropsType {
   gameId: string;
@@ -26,14 +27,18 @@ const Wishlist = ({ gameId }: PropsType) => {
   let userId: string | null = null;
 
   const [onAddOrRemoveToWishlist] = usePostWishlistGameMutation();
-  const { data: userData, isLoading: userDataLoading } =
-    useGetUserIdQuery<UserIdType>(
-      { token, gameId },
-      {
-        skip,
-        refetchOnMountOrArgChange: true,
-      }
-    );
+  const {
+    data: userData,
+    isLoading: userDataLoading,
+    isSuccess,
+  } = useGetUserIdQuery<UserIdType>(
+    { token, gameId },
+    {
+      skip,
+      refetchOnMountOrArgChange: true,
+    }
+  );
+
   useEffect(() => {
     if (token) {
       setSkip(false);
@@ -41,6 +46,7 @@ const Wishlist = ({ gameId }: PropsType) => {
       setSkip(true);
     }
   }, [token]);
+
   useEffect(() => {
     if (userData) {
       setIsOnWishlist(userData.isAdded);
@@ -53,7 +59,7 @@ const Wishlist = ({ gameId }: PropsType) => {
 
   const addToWishlistHandler = async () => {
     try {
-      if (gameId && userId) {
+      if (gameId && userId && isSuccess && !userDataLoading) {
         const response = await onAddOrRemoveToWishlist({
           gameId,
           userId,
@@ -70,24 +76,31 @@ const Wishlist = ({ gameId }: PropsType) => {
     }
   };
   const isOnListCSS = isOnWishlist ? classes.active : '';
-  const content = token ? (
-    <button
-      type="button"
-      className={classes.heart}
-      onClick={addToWishlistHandler}
-    >
-      <AiFillHeart className={`${classes.heart__icon} ${isOnListCSS}`} />
-    </button>
-  ) : (
-    <button
-      type="button"
-      className={classes.blockHeart}
-      onClick={addToWishlistHandler}
-    >
-      <AiFillHeart className={classes.heart__icon} />
-      <p>You have to create account</p>
-    </button>
-  );
+  let content;
+  if (userDataLoading && !isSuccess && !userId) {
+    content = <div />;
+  } else if (isSuccess && !userDataLoading && userId) {
+    content = (
+      <button
+        type="button"
+        className={classes.heart}
+        onClick={addToWishlistHandler}
+      >
+        <AiFillHeart className={`${classes.heart__icon} ${isOnListCSS}`} />
+      </button>
+    );
+  } else {
+    content = (
+      <button
+        type="button"
+        className={classes.blockHeart}
+        onClick={addToWishlistHandler}
+      >
+        <AiFillHeart className={classes.heart__icon} />
+        <p>You have to create account</p>
+      </button>
+    );
+  }
 
   return content;
 };
