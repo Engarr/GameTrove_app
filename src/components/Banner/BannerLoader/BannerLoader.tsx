@@ -1,5 +1,5 @@
 import classes from './BannerLoader.module.scss';
-import DivLoader from '../../Spinner/SkeletonDivLoader/DivLoader';
+import DivLoader from '../../UI/SkeletonDivLoader/DivLoader';
 import bgc from '../../../asset/bgc.png';
 import bgcLight from '../../../asset/bgc-light.png';
 

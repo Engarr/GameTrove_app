@@ -1,4 +1,4 @@
-import DivLoader from '../../Spinner/SkeletonDivLoader/DivLoader';
+import DivLoader from '../../UI/SkeletonDivLoader/DivLoader';
 import classes from './LoadingCard.module.scss';
 
 const LoadingCard = () => {

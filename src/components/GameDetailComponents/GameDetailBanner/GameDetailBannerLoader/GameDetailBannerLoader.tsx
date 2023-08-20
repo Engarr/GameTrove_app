@@ -1,5 +1,5 @@
 import classes from './GameDetailBannerLoader.module.scss';
-import DivLoader from '../../../Spinner/SkeletonDivLoader/DivLoader';
+import DivLoader from '../../../UI/SkeletonDivLoader/DivLoader';
 
 const GameDetailBannerLoader = () => {
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './CategoryGameLoader.module.scss';
-import DivLoader from '../../Spinner/SkeletonDivLoader/DivLoader';
+import DivLoader from '../../UI/SkeletonDivLoader/DivLoader';
 
 interface PropsType {
   diverse: number;

@@ -9,7 +9,7 @@ import { CategoryGameData } from '../../Types/types';
 import bgc from '../../asset/bgc.png';
 import bgcLight from '../../asset/bgc-light.png';
 import { colorMode } from '../../store/slice/ThemeSlice';
-import ErrorComponent from '../Spinner/ErrorComponent/ErrorComponent';
+import ErrorComponent from '../UI/ErrorComponent/ErrorComponent';
 import CategoryGameLoader from './CategoryGameLoader/CategoryGameLoader';
 import SlideDots from '../SlideDots/SlideDots';
 

@@ -5,7 +5,7 @@ import { useGetBannerGamesQuery } from '../../store/api/feedSlice';
 import classes from './Banner.module.scss';
 import { GameType } from '../../Types/types';
 import { colorMode } from '../../store/slice/ThemeSlice';
-import ErrorComponent from '../Spinner/ErrorComponent/ErrorComponent';
+import ErrorComponent from '../UI/ErrorComponent/ErrorComponent';
 import BannerLoader from './BannerLoader/BannerLoader';
 import SlideDots from '../SlideDots/SlideDots';
 import BannerCtx from './BannerCtx/BannerCtx';

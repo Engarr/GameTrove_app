@@ -5,7 +5,7 @@ import ComingGameCard from './ComingGames/ComingGameCard';
 import classes from './ComingSoon.module.scss';
 import { useGetComingGamesQuery } from '../../store/api/feedSlice';
 import { comingGamePlatforms } from '../../util/db';
-import ErrorComponent from '../Spinner/ErrorComponent/ErrorComponent';
+import ErrorComponent from '../UI/ErrorComponent/ErrorComponent';
 import ComingSoonLoader from './CominSoonLoader/ComingSoonLoader';
 
 interface DataType {

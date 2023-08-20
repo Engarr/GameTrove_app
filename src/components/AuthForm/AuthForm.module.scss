@@ -51,94 +51,7 @@
   right: -5px;
   animation-name: move-down1;
 }
-.formBox {
-  width: 70%;
-  text-align: center;
 
-  h4 {
-    opacity: 1;
-    font-size: 2em;
-    color: var(--greenYellow);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: 10px 20px;
-  }
-  div {
-    opacity: 0;
-    animation: showUp 0.5s forwards linear;
-    &.error {
-      input {
-        border: 1px solid rgb(247, 99, 99);
-      }
-    }
-    label {
-      display: flex;
-      flex-direction: column;
-      text-align: left;
-      font-weight: bold;
-      color: var(--color);
-      letter-spacing: 1.5px;
-      input {
-        position: relative;
-        left: 50%;
-        transform: translateX(-50%);
-        background-color: transparent;
-        border: 1px solid var(--black-white);
-        color: var(--color);
-        padding: 6px 20px;
-        font-size: 1em;
-        width: 100%;
-        margin: 10px 0;
-        outline: none;
-        transition: box-shadow 0.3s, border 0.3s;
-        border-radius: 2px;
-      }
-      input:focus {
-        box-shadow: 0 0 5px var(--black-white);
-      }
-    }
-  }
-  button {
-    font-family: 'Bai Jamjuree', sans-serif;
-    margin-top: 2em;
-    padding: 10px 50px;
-    text-align: center;
-    border-radius: 2px;
-    border: none;
-    text-transform: uppercase;
-    background-color: var(--greenYellow);
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    color: var(--white-black);
-    &.demoButton {
-      padding: 5px 20px;
-      margin-top: 0.5em;
-    }
-  }
-  button:hover {
-    background-color: var(--greenYellow-hover);
-  }
-  &__switch {
-    margin-top: 0.8em;
-    font-size: 0.9em;
-    p {
-      color: var(--color);
-    }
-    a {
-      margin-left: 5px;
-      color: var(--blue);
-      transition: color 0.3s;
-    }
-    a:hover {
-      color: var(--blue-hover);
-    }
-  }
-}
-
-.fadeIn {
-  animation: showUp 0.5s linear;
-}
 @keyframes move-up6 {
   to {
     transform: translateY(-10px);
@@ -150,20 +63,12 @@
     transform: translateY(10px);
   }
 }
-@keyframes showUp {
-  from {
-    opacity: 0.2;
-  }
-  to {
-    opacity: 1;
-  }
-}
+
 @media only screen and (max-width: 1023px) {
   .authWrapper {
     overflow: hidden;
     // min-height: 550px;
   }
-
   .card {
     left: 0%;
     transform: translate(-0%, -50%);
@@ -190,39 +95,5 @@
   .circle:nth-child(2) {
     bottom: 10%;
     right: -25px;
-  }
-  .formBox {
-    width: 95%;
-
-    margin-top: 1em;
-    h4 {
-      font-size: 1.5em;
-
-      padding: 5px 10px;
-    }
-    div {
-      opacity: 0;
-      animation: showUp 0.5s forwards linear;
-      label {
-        letter-spacing: 1px;
-        input {
-          margin: 5px 0;
-        }
-      }
-    }
-    button {
-      margin-top: 1em;
-    }
-    button:hover {
-      background-color: var(--greenYellow);
-    }
-    &__switch {
-      margin-top: 1em;
-      font-size: 1em;
-
-      a:hover {
-        color: var(--blue);
-      }
-    }
   }
 }

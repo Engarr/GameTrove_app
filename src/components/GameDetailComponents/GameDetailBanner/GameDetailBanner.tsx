@@ -6,8 +6,8 @@ import bgc from '../../../asset/bgc.png';
 import bgcLight from '../../../asset/bgc-light.png';
 import { colorMode } from '../../../store/slice/ThemeSlice';
 import Card from '../../Banner/Card/Card';
-import ErrorComponent from '../../Spinner/ErrorComponent/ErrorComponent';
-import Wishlist from '../../Wishlist/Wishlist';
+import ErrorComponent from '../../UI/ErrorComponent/ErrorComponent';
+import Wishlist from '../../WishlistButton/Wishlist';
 import GameDetailBannerLoader from './GameDetailBannerLoader/GameDetailBannerLoader';
 
 interface PropsType {

@@ -7,7 +7,7 @@ import { MdZoomInMap } from 'react-icons/md';
 import classes from './PhotoSlider.module.scss';
 import Modal from '../../Modal/Modal';
 import { GameDetailType } from '../../../Types/types';
-import ErrorComponent from '../../Spinner/ErrorComponent/ErrorComponent';
+import ErrorComponent from '../../UI/ErrorComponent/ErrorComponent';
 import LoadingContext from './LoadingContext';
 
 interface PropsType {

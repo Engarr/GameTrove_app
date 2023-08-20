@@ -3,8 +3,8 @@ import { useGetSpecificGamesQuery } from '../../store/api/feedSlice';
 import { GameData } from '../../Types/types';
 import classes from './GamePage.module.scss';
 import FilterSection from '../../components/FilterSection/FilterSection';
-import Spiner from '../../components/Spinner/Spinner/Spiner';
-import ErrorComponent from '../../components/Spinner/ErrorComponent/ErrorComponent';
+import Spiner from '../../components/UI/Spinner/Spiner';
+import ErrorComponent from '../../components/UI/ErrorComponent/ErrorComponent';
 import GameCard from '../../components/GamePageComponents/GameCard/GameCard';
 import Pagination from '../../components/GamePageComponents/Pagination/Pagination';
 

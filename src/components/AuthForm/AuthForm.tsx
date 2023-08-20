@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useSearchParams, useNavigate } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import classes from './AuthForm.module.scss';
 import {
@@ -7,8 +7,8 @@ import {
   usePostLoginUserMutation,
 } from '../../store/api/userSlice';
 import { AuthResponseType, ErrorsData, UserDataType } from '../../Types/types';
-import Input from '../UI/Input';
-import Loader from '../Spinner/Loader/Loader';
+import Loader from '../UI/Loader/Loader';
+import Form from './Form/Form';
 
 const AuthForm = () => {
   const navigate = useNavigate();
@@ -127,79 +127,24 @@ const AuthForm = () => {
     ) : (
       buttonContent
     );
-  const switchLinkText = isLogin ? 'Sign up now' : 'Login';
-  const switchLinkTo = isLogin
-    ? '/account?mode=register'
-    : '/account?mode=login';
+
   return (
     <section className={classes.authWrapper}>
       <div className={classes.card}>
         <div className={classes.circle} />
         <div className={classes.circle} />
         <div className={classes.card__inner}>
-          <form onSubmit={userDataSubmit} className={classes.formBox}>
-            <h4 className={fadeIn ? classes.fadeIn : ''}>{mode}</h4>
-            {!isLogin && (
-              <Input
-                data="userName"
-                type="text"
-                onChange={handleUserDataChange}
-                msg="Your name:"
-                value={userData.userName}
-                error={backendErrors.userName}
-                classesCss={backendErrors.userName ? classes.error : ''}
-              />
-            )}
-
-            <Input
-              data="email"
-              type="text"
-              value={userData.email}
-              onChange={handleUserDataChange}
-              msg="Your email:"
-              error={backendErrors.email}
-              classesCss={backendErrors.email ? classes.error : ''}
-            />
-            <Input
-              data="password"
-              type="password"
-              value={userData.password}
-              onChange={handleUserDataChange}
-              msg="Your password:"
-              error={backendErrors.password}
-              classesCss={backendErrors.password ? classes.error : ''}
-            />
-
-            {!isLogin && (
-              <Input
-                data="repeatPassword"
-                type="password"
-                value={userData.repeatPassword}
-                onChange={handleUserDataChange}
-                msg="Repeat password:"
-                error={backendErrors.repeatPassword}
-                classesCss={backendErrors.repeatPassword ? classes.error : ''}
-              />
-            )}
-            <button type="submit" className={fadeIn ? classes.fadeIn : ''}>
-              {submutButtonContent}
-            </button>
-            <div className={classes.formBox__switch}>
-              <p>
-                {isLogin
-                  ? `Don't have an account?`
-                  : `You already have an account?`}
-                <Link to={switchLinkTo}>{switchLinkText}</Link>
-              </p>
-              <button
-                type="button"
-                className={classes.demoButton}
-                onClick={sendDemoRequest}
-              >
-                Try demo
-              </button>
-            </div>
-          </form>
+          <Form
+            backendErrors={backendErrors}
+            userData={userData}
+            isLogin={isLogin}
+            fadeIn={fadeIn}
+            mode={mode}
+            onSubmit={userDataSubmit}
+            onDataChange={handleUserDataChange}
+            sendDemoRequest={sendDemoRequest}
+            submutButtonContent={submutButtonContent}
+          />
         </div>
       </div>
     </section>

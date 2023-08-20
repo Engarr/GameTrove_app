@@ -2,8 +2,8 @@ import { Link, useRouteLoaderData } from 'react-router-dom';
 import { TfiMoreAlt } from 'react-icons/tfi';
 import { useGetUserWishlistQuery } from '../../../store/api/userSlice';
 import classes from './WishlistTab.module.scss';
-import DivLoader from '../../Spinner/SkeletonDivLoader/DivLoader';
-import Wishlist from '../../Wishlist/Wishlist';
+import DivLoader from '../../UI/SkeletonDivLoader/DivLoader';
+import Wishlist from '../../WishlistButton/Wishlist';
 
 interface UserWislistType {
   data: {

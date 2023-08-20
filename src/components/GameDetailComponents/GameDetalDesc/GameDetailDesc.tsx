@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import classes from './GameDetailDesc.module.scss';
 import { GameDetailType } from '../../../Types/types';
-import DivLoader from '../../Spinner/SkeletonDivLoader/DivLoader';
+import DivLoader from '../../UI/SkeletonDivLoader/DivLoader';
 
 interface PropsType {
   data: GameDetailType;
