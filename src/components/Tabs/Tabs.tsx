@@ -55,7 +55,7 @@ const Tabs = () => {
               : classes.content
           }
         >
-          1
+          COMMING SOON!
         </div>
         <div
           className={

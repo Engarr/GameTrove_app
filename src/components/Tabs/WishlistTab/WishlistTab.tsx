@@ -13,6 +13,7 @@ interface UserWislistType {
       url: string;
     };
     name: string;
+    addedAt: string;
   }[];
   isLoading: boolean;
   isError: boolean;
@@ -33,7 +34,7 @@ const WishlistTaba = ({ skipSearch }: PropsType) => {
     });
 
   let content;
-
+  console.log(data[0].addedAt);
   if (isLoading || isFetching) {
     content = (
       <>

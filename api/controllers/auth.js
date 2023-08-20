@@ -103,7 +103,9 @@ export const getUserInfo = async (req, res, next) => {
         err.statusCode = 401;
         throw err;
       }
-      const isAdded = user.wishLists.includes(gameId);
+      const isAdded = user.wishLists.some(
+        (game) => game.gameNumber.toString() === gameId
+      );
       const userWishlist = user.wishLists;
 
       res.status(200).json({ userId, isAdded, userWishlist });
@@ -133,13 +135,20 @@ export const putWishlist = async (req, res, next) => {
       err.statusCode = 401;
       throw err;
     }
-    const isAdded = user.wishLists.includes(gameId);
+
+    const isAdded = user.wishLists.some(
+      (game) => game.gameNumber.toString() === gameId.toString()
+    );
+
     if (!isAdded) {
-      user.wishLists.push(gameId);
+      user.wishLists.push({ gameNumber: gameId });
       await user.save();
       res.status(200).json({ message: 'Game has been added to your wishlist' });
-    } else if (isAdded) {
-      user.wishLists.pull(gameId);
+    } else {
+      user.wishLists = user.wishLists.filter(
+        (game) => game.gameNumber.toString() !== gameId.toString()
+      );
+
       await user.save();
       res
         .status(201)
@@ -168,7 +177,7 @@ export const getUserWishlist = async (req, res, next) => {
       err.statusCode = 401;
       throw err;
     }
-    const wishlistArr = user.wishLists;
+    const wishlistArr = user.wishLists.map((game) => game.gameNumber);
     const query = `fields name, cover.url; where id = (${wishlistArr}); limit 10;`;
 
     const headers = {
@@ -179,7 +188,17 @@ export const getUserWishlist = async (req, res, next) => {
       headers,
     });
     const games = response.data;
-    res.status(200).json(games);
+
+    const combinedList = games.map((game) => {
+      const matching = user.wishLists.find(
+        (item) => item.gameNumber.toString() === game.id.toString()
+      );
+      return {
+        ...game,
+        addedAt: matching ? matching.addedAt : null,
+      };
+    });
+    res.status(200).json(combinedList);
   } catch (err) {
     if (!err) {
       err.statusCode = 500;

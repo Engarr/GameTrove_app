@@ -1,6 +1,21 @@
 import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
+const wishListItemSchema = new Schema({
+  gameNumber: {
+    type: Number,
+    required: true,
+  },
+  addedAt: {
+    type: Date,
+    default: () => {
+      const now = new Date();
+      const utcOffset = 2;
+      const localTime = new Date(now.getTime() + utcOffset * 60 * 60 * 1000);
+      return localTime;
+    },
+  },
+});
 
 const userSchema = new Schema(
   {
@@ -16,12 +31,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    wishLists: [
-      {
-        type: Number,
-        required: true,
-      },
-    ],
+    wishLists: [wishListItemSchema],
     isAdmin: {
       type: Boolean,
       default: false,
