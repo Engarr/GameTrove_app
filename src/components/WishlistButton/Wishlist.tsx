@@ -70,7 +70,7 @@ const Wishlist = ({ gameId }: PropsType) => {
     }
   };
   const isOnListCSS = isOnWishlist ? classes.active : '';
-  const content = userId ? (
+  const content = token ? (
     <button
       type="button"
       className={classes.heart}
