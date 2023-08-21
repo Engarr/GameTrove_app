@@ -177,6 +177,11 @@ export const getUserWishlist = async (req, res, next) => {
       err.statusCode = 401;
       throw err;
     }
+
+    if (user.wishLists.length === 0) {
+      res.status(200).json([]);
+      return;
+    }
     const wishlistArr = user.wishLists.map((game) => game.gameNumber);
     const query = `fields name, cover.url; where id = (${wishlistArr}); limit 10;`;
 

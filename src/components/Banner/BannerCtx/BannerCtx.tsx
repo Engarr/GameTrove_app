@@ -56,7 +56,12 @@ const BannerCtx = ({
           <p>recommended</p>
         </div>
 
-        <Card imageUrl={imageUrl} cardId={index} setIsActive={setIsActive} />
+        <Card
+          imageUrl={imageUrl}
+          cardId={index}
+          setIsActive={setIsActive}
+          gameId={item.id}
+        />
 
         <div className={classes[`banner__content--infoBox`]}>
           <div className={classes[`banner__content--infoBox-rating`]}>

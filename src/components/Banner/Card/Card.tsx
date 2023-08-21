@@ -1,13 +1,15 @@
 import { SetStateAction, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import classes from './Card.module.scss';
 
 interface PropsType {
   imageUrl: string;
   cardId: number;
+  gameId: number;
   setIsActive?: React.Dispatch<SetStateAction<boolean>>;
 }
 
-const Card = ({ imageUrl, cardId, setIsActive }: PropsType) => {
+const Card = ({ imageUrl, cardId, setIsActive, gameId }: PropsType) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const rotateElement = (event: MouseEvent) => {
     if (cardRef.current) {
@@ -57,6 +59,7 @@ const Card = ({ imageUrl, cardId, setIsActive }: PropsType) => {
 
   return (
     <div className={classes.img} id={`card-img-${cardId}`} ref={cardRef}>
+      <Link to={`/game/${gameId}`} />
       <img src={imageUrl} alt="game_picture" />
     </div>
   );

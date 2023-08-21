@@ -2,8 +2,9 @@ import { Link, useRouteLoaderData } from 'react-router-dom';
 import { TfiMoreAlt } from 'react-icons/tfi';
 import { useGetUserWishlistQuery } from '../../../store/api/userSlice';
 import classes from './WishlistTab.module.scss';
-import DivLoader from '../../UI/SkeletonDivLoader/DivLoader';
 import Wishlist from '../../WishlistButton/Wishlist';
+import Loader from './Loader/Loader';
+import EmptyList from './EmptyList/EmptyList';
 
 interface UserWislistType {
   data: {
@@ -25,7 +26,6 @@ interface PropsType {
 
 const WishlistTaba = ({ skipSearch }: PropsType) => {
   const token = useRouteLoaderData('root') as string;
-  const emptyCards = 5;
 
   const { data, isLoading, isFetching } =
     useGetUserWishlistQuery<UserWislistType>(token, {
@@ -35,23 +35,10 @@ const WishlistTaba = ({ skipSearch }: PropsType) => {
 
   let content;
   if (isLoading || isFetching) {
-    content = (
-      <>
-        {Array.from({ length: emptyCards }, (_, index) => (
-          <div className={classes.emptyCard} key={index}>
-            <DivLoader />
-          </div>
-        ))}
-      </>
-    );
+    content = <Loader />;
   }
   if (data && data.length === 0) {
-    <div className={classes.emptyWishlist}>
-      <h2>Nothing added to the wishlist yet.</h2>
-      <div className={classes.emptyWishlist__link}>
-        <Link to="/games">Check some games!</Link>
-      </div>
-    </div>;
+    content = <EmptyList />;
   }
   if (data && data.length > 0) {
     content = (
@@ -64,12 +51,12 @@ const WishlistTaba = ({ skipSearch }: PropsType) => {
               <div className={classes.gameCard__heart}>
                 <Wishlist gameId={newGameId} />
               </div>
-              {/* <div className={classes.gameCard__name}> */}
-              <Link to={`/game/${game.id}`}>
-                {game.name}
-                <TfiMoreAlt />
-              </Link>
-              {/* </div> */}
+              <div className={classes.gameCard__name}>
+                <Link to={`/game/${game.id}`}>
+                  {game.name}
+                  <TfiMoreAlt />
+                </Link>
+              </div>
               <img src={newImg} alt={game.name} />
             </div>
           );

@@ -1,0 +1,30 @@
+.emptyWishlist {
+  margin-top: 50px;
+  text-align: center;
+  width: 100%;
+  padding: 20px;
+  font-family: 'Bai Jamjuree', sans-serif;
+  &__link {
+    margin-top: 20px;
+    padding: 10px;
+    a {
+      font-size: 1.2em;
+      color: var(--blue);
+    }
+  }
+}
+@media only screen and (max-width: 1024px) {
+  .emptyWishlist {
+    margin-top: 50px;
+    padding: 0px;
+    font-size: 0.7em;
+    &__link {
+      margin: 20px 0;
+      padding: 10px;
+      a {
+        font-size: 1.5em;
+        color: var(--blue);
+      }
+    }
+  }
+}
