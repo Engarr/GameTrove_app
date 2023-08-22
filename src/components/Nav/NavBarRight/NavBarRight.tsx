@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { IoIosArrowUp } from 'react-icons/io';
 import { useRouteLoaderData } from 'react-router-dom';
 import classes from './NavBarRight.module.scss';
@@ -7,25 +8,27 @@ import UnregisteredCtx from './UnregisteredCtx/UnregisteredCtx';
 import LogedIn from './LogedIn/LogedIn';
 
 interface PropsType {
-  isActiveLeftBar: boolean;
-  isActiveRightBar: boolean;
-  setIsActiveRightBar: React.Dispatch<React.SetStateAction<boolean>>;
-  setIsActiveLeftBar: React.Dispatch<React.SetStateAction<boolean>>;
+  isRightNavActive: boolean;
+  isLeftNavActive: boolean;
+  activeRightNavBarHandler: (action: boolean | undefined) => void;
+  activeLeftNavBarHandler: (action: boolean | undefined) => void;
 }
 const NavBarRight = ({
-  isActiveRightBar,
-  setIsActiveRightBar,
-  isActiveLeftBar,
-  setIsActiveLeftBar,
+  isRightNavActive,
+  isLeftNavActive,
+  activeRightNavBarHandler,
+  activeLeftNavBarHandler,
 }: PropsType) => {
   const token = useRouteLoaderData('root');
 
-  const activeHandler = () => {
-    setIsActiveRightBar((prev) => !prev);
-    if (isActiveLeftBar) {
-      setIsActiveLeftBar(false);
+  const activeHandler = useCallback(() => {
+    activeRightNavBarHandler(undefined);
+
+    if (isLeftNavActive) {
+      activeLeftNavBarHandler(false);
     }
-  };
+  }, [isLeftNavActive, activeLeftNavBarHandler, activeRightNavBarHandler]);
+
   let content;
   if (!token) {
     content = <UnregisteredCtx activeHandler={activeHandler} />;
@@ -37,7 +40,7 @@ const NavBarRight = ({
       <div className={classes.nav}>
         <div
           className={`${classes.nav__container} ${
-            isActiveRightBar ? classes.active : ''
+            isRightNavActive ? classes.active : ''
           }`}
         >
           <div className={classes.nav__buttons}>
@@ -57,13 +60,13 @@ const NavBarRight = ({
           >
             <IoIosArrowUp
               className={`${classes.arrowBox__icon} ${
-                isActiveRightBar ? classes.arrowRotate : ''
+                isRightNavActive ? classes.arrowRotate : ''
               }`}
             />
           </div>
         </div>
       </div>
-      <Modal show={isActiveRightBar} handler={activeHandler} />
+      <Modal show={isRightNavActive} handler={activeHandler} />
     </>
   );
 };

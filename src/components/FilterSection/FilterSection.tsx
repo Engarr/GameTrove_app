@@ -1,6 +1,8 @@
-import React, { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
+import { useCallback } from 'react';
 import { gameCategories, gamePlatforms } from '../../util/db';
 import classes from './FilterSection.module.scss';
+import { toggleActiveLeftNavBar } from '../../store/slice/UiSLice';
 
 interface PropsType {
   categoryParam: string;
@@ -14,6 +16,7 @@ interface FilterType {
 }
 
 const FilterSection = ({ categoryParam, platformParam }: PropsType) => {
+  const dispatch = useDispatch();
   const findCategoryById = useCallback((categoryIdToFind: string) => {
     return gameCategories.find(
       (category) => category.id === Number(categoryIdToFind)
@@ -40,6 +43,9 @@ const FilterSection = ({ categoryParam, platformParam }: PropsType) => {
 
   const combinedResults = resultArray();
 
+  const activeLeftNavBar = () => {
+    dispatch(toggleActiveLeftNavBar());
+  };
   return (
     <div className={classes.wrapper}>
       <div className={classes.filters}>
@@ -48,10 +54,15 @@ const FilterSection = ({ categoryParam, platformParam }: PropsType) => {
         </div>
         <div className={classes.filters__container}>
           {combinedResults.map((item) => (
-            <div key={item.id} className={classes[`filters__container--box`]}>
+            <button
+              key={item.id}
+              className={classes[`filters__container--btn`]}
+              onClick={activeLeftNavBar}
+              type="button"
+            >
               <p>{item.genres ? item.genres : item.platform}:</p>
               <span>{item.name}</span>
-            </div>
+            </button>
           ))}
         </div>
       </div>

@@ -8,20 +8,21 @@ import { gameCategories, gamePlatforms } from '../../../util/db';
 import FilterList from './CategoryItem/FilterList';
 
 interface PropsType {
-  isActiveLeftBar: boolean;
-  isActiveRightBar: boolean;
-  setIsActiveRightBar: React.Dispatch<React.SetStateAction<boolean>>;
-  setIsActiveLeftBar: React.Dispatch<React.SetStateAction<boolean>>;
+  isRightNavActive: boolean;
+  isLeftNavActive: boolean;
+  activeRightNavBarHandler: (action: boolean | undefined) => void;
+  activeLeftNavBarHandler: (action: boolean | undefined) => void;
 }
 
 const NavBarLeft = ({
-  isActiveLeftBar,
-  setIsActiveLeftBar,
-  isActiveRightBar,
-  setIsActiveRightBar,
+  isRightNavActive,
+  isLeftNavActive,
+  activeRightNavBarHandler,
+  activeLeftNavBarHandler,
 }: PropsType) => {
   const location = useLocation();
   const dispatch = useDispatch();
+
   const [activeCategory, setActiveCategory] = useState<null | string>(null);
   const [activePlatform, setActivePlatform] = useState<null | string>(null);
   const [isPortrait, setIsPortrait] = useState(
@@ -51,11 +52,12 @@ const NavBarLeft = ({
   }, [location.search]);
 
   const activeHandler = useCallback(() => {
-    setIsActiveLeftBar((prev) => !prev);
-    if (isActiveRightBar) {
-      setIsActiveRightBar(false);
+    activeLeftNavBarHandler(undefined);
+
+    if (isRightNavActive) {
+      activeRightNavBarHandler(false);
     }
-  }, [isActiveRightBar, setIsActiveLeftBar, setIsActiveRightBar]);
+  }, [isRightNavActive, activeLeftNavBarHandler, activeRightNavBarHandler]);
 
   const pageHandler = (pageNumber: number) => {
     dispatch(switchPage(pageNumber));
@@ -68,7 +70,7 @@ const NavBarLeft = ({
       <div className={classes.nav}>
         <div
           className={`${classes.nav__filter} ${
-            isActiveLeftBar ? classes.arrowRotate : ''
+            isLeftNavActive ? classes.arrowRotate : ''
           }`}
           onClick={activeHandler}
           onKeyDown={(event) => {
@@ -83,7 +85,7 @@ const NavBarLeft = ({
         </div>
         <div
           className={`${classes.nav__container} ${
-            isActiveLeftBar ? classes.active : ''
+            isLeftNavActive ? classes.active : ''
           } `}
           style={!isPortrait ? { flexDirection: 'row' } : {}}
         >
@@ -121,7 +123,7 @@ const NavBarLeft = ({
           </div>
         </div>
       </div>
-      <Modal show={isActiveLeftBar} handler={activeHandler} />
+      <Modal show={isLeftNavActive} handler={activeHandler} />
     </>
   );
 };

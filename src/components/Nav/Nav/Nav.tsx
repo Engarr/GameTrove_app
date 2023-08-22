@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { MdKeyboardArrowUp } from 'react-icons/md';
 import { IoGameControllerOutline } from 'react-icons/io5';
 import Toast from '../../Toast/Toast';
@@ -7,10 +8,20 @@ import Search from '../../Search/Search';
 import NavBarLeft from '../NavBarLeft/NavBarLeft';
 import NavBarRight from '../NavBarRight/NavBarRight';
 import classes from './Nav.module.scss';
+import {
+  activeLeftBar,
+  activeRightBar,
+  toggleActiveLeftNavBar,
+  toggleActiveRightNavBar,
+} from '../../../store/slice/UiSLice';
 
 const Nav = () => {
-  const [isActiveLeftBar, setIsActiveLeftBar] = useState(false);
-  const [isActiveRightBar, setIsActiveRightBar] = useState(false);
+  // const [isActiveLeftBar, setIsActiveLeftBar] = useState(false);
+  // const [isActiveRightBar, setIsActiveRightBar] = useState(false);
+  const dispacth = useDispatch();
+  const isLeftNavActive = useSelector(activeLeftBar);
+  const isRightNavActive = useSelector(activeRightBar);
+
   const [arrowIsVisible, setArrowIsVisible] = useState(false);
 
   const scrollPositionHandler = () => {
@@ -32,6 +43,22 @@ const Nav = () => {
     ? classes.isVisible
     : classes.isNotVisible;
 
+  const activeLeftNavBarHandler = (action: boolean | undefined) => {
+    if (action === false) {
+      dispacth(toggleActiveLeftNavBar(action));
+    } else {
+      dispacth(toggleActiveLeftNavBar());
+    }
+  };
+
+  const activeRightNavBarHandler = (action: boolean | undefined) => {
+    if (action === false) {
+      dispacth(toggleActiveRightNavBar(action));
+    } else {
+      dispacth(toggleActiveRightNavBar());
+    }
+  };
+
   return (
     <div>
       <div className={classes.navBarBox}>
@@ -39,8 +66,8 @@ const Nav = () => {
           <Link
             to="/"
             onClick={() => {
-              setIsActiveLeftBar(false);
-              setIsActiveRightBar(false);
+              activeLeftNavBarHandler(false);
+              activeRightNavBarHandler(false);
             }}
           >
             <p>GameTrove</p>
@@ -50,21 +77,25 @@ const Nav = () => {
           </Link>
         </div>
         <Search
-          setIsActiveRightBar={setIsActiveRightBar}
-          setIsActiveLeftBar={setIsActiveLeftBar}
+          setIsActiveRightBar={() => {
+            activeRightNavBarHandler(false);
+          }}
+          setIsActiveLeftBar={() => {
+            activeLeftNavBarHandler(false);
+          }}
         />
       </div>
       <NavBarLeft
-        isActiveRightBar={isActiveRightBar}
-        setIsActiveRightBar={setIsActiveRightBar}
-        isActiveLeftBar={isActiveLeftBar}
-        setIsActiveLeftBar={setIsActiveLeftBar}
+        activeRightNavBarHandler={activeRightNavBarHandler}
+        activeLeftNavBarHandler={activeLeftNavBarHandler}
+        isLeftNavActive={isLeftNavActive}
+        isRightNavActive={isRightNavActive}
       />
       <NavBarRight
-        isActiveRightBar={isActiveRightBar}
-        setIsActiveRightBar={setIsActiveRightBar}
-        isActiveLeftBar={isActiveLeftBar}
-        setIsActiveLeftBar={setIsActiveLeftBar}
+        activeRightNavBarHandler={activeRightNavBarHandler}
+        activeLeftNavBarHandler={activeLeftNavBarHandler}
+        isLeftNavActive={isLeftNavActive}
+        isRightNavActive={isRightNavActive}
       />
       <button
         type="button"
