@@ -166,11 +166,24 @@ export const getSpecificGames = async (req, res, next) => {
   const { token } = req;
   const { category } = req.query;
   const { platform } = req.query;
+  const { sort } = req.query;
   let { page } = req.query;
   const pageSize = req.query.pageSize || 10;
+  let sorting = 'first_release_date desc';
 
   if (page === 'null') {
     page = '1';
+  }
+  if (sort === 'first_release_date asc') {
+    sorting = 'first_release_date asc';
+  } else if (sort === 'first_release_date desc') {
+    sorting = 'first_release_date desc';
+  } else if (sort === 'top_rated') {
+    sorting = 'rating desc';
+  } else if (sort === 'lowest_rated') {
+    sorting = 'rating asc';
+  } else if (sort === 'default') {
+    sorting = 'first_release_date desc';
   }
   try {
     const offset = (page - 1) * pageSize;
@@ -190,11 +203,11 @@ export const getSpecificGames = async (req, res, next) => {
     }
 
     const query = `
-      fields name, cover.url, platforms.name, genres.name, summary,age_ratings.rating_cover_url, first_release_date;
+      fields name, cover.url, platforms.name, genres.name, summary,age_ratings.rating_cover_url, first_release_date, aggregated_rating_count, follows, rating;
       where ${platformFilter} & ${genresFilter} & first_release_date != null;
       offset ${offset};
       limit ${pageSize};
-      sort first_release_date desc;
+      sort ${sorting};
     `;
     const headers = {
       'Client-ID': process.env.VITE_CLIENT_ID,

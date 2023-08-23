@@ -16,8 +16,6 @@ import {
 } from '../../../store/slice/UiSLice';
 
 const Nav = () => {
-  // const [isActiveLeftBar, setIsActiveLeftBar] = useState(false);
-  // const [isActiveRightBar, setIsActiveRightBar] = useState(false);
   const dispacth = useDispatch();
   const isLeftNavActive = useSelector(activeLeftBar);
   const isRightNavActive = useSelector(activeRightBar);

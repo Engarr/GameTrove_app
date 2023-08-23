@@ -22,16 +22,20 @@ const GamesPage = () => {
   const categoryParam = searchParams.get('category') as string;
   const platformParam = searchParams.get('platform') as string;
   const pageParam = searchParams.get('page') as string;
+  const sortParam = searchParams.get('sort') as string;
   const queryParams = {
     category: categoryParam,
     platform: platformParam,
     page: pageParam,
+    sort: sortParam,
   };
+
   let content;
   const { data, isLoading, isError, isFetching } =
     useGetSpecificGamesQuery<ResponseType>(queryParams, {
       refetchOnMountOrArgChange: true,
     });
+
   if (isLoading) {
     content = <Spiner message="Loading" />;
   } else if (isError) {

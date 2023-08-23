@@ -14,6 +14,7 @@ import {
   actualPage,
   switchPage,
 } from '../../../store/slice/PaginationSlice';
+import updateLink from '../../../util/changinParams';
 
 interface PropsType {
   totalPages: number;
@@ -43,12 +44,16 @@ const Pagination = ({ totalPages }: PropsType) => {
   useEffect(() => {
     setGotToPage(0);
   }, [activePage]);
-  const updatePageInLink = (newPage: number) => {
-    const updatedSearchParams = new URLSearchParams(location.search);
-    updatedSearchParams.set('page', newPage.toString());
 
-    return `?${updatedSearchParams.toString()}`;
+  const updatePageInLink = (newPage: number) => {
+    const updatedSearchParams = updateLink({
+      title: 'page',
+      item: newPage,
+      localization: location,
+    });
+    return updatedSearchParams;
   };
+
   const gotToPageHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const pageNumber = Number(e.target.value);
     setGotToPage(pageNumber);
