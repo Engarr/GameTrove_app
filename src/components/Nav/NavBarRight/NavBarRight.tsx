@@ -66,7 +66,11 @@ const NavBarRight = ({
           </div>
         </div>
       </div>
-      <Modal show={isRightNavActive} handler={activeHandler} />
+      <Modal
+        show={isRightNavActive}
+        handler={activeHandler}
+        zIndexNumber="99"
+      />
     </>
   );
 };

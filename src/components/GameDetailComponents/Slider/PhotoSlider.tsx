@@ -117,7 +117,11 @@ const PhotoSlider = ({ data, isLoading, isError }: PropsType) => {
           })}
           {bigIsActive && (
             <>
-              <Modal show={bigIsActive} handler={activeHandler} />
+              <Modal
+                show={bigIsActive}
+                handler={activeHandler}
+                zIndexNumber="90"
+              />
               <div className={classes.screenshotsContainer__bigImg}>
                 {activeIndex + 2 <= screenShotsLength && (
                   <button

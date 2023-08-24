@@ -4,9 +4,10 @@ import classes from './Modal.module.scss';
 interface PropsType {
   show: boolean;
   handler?: () => void;
+  zIndexNumber: string;
 }
 
-const Modal = ({ show, handler }: PropsType) => {
+const Modal = ({ show, handler, zIndexNumber }: PropsType) => {
   if (!show) return null;
 
   const backdropElement = document.getElementById('backdrop');
@@ -15,7 +16,11 @@ const Modal = ({ show, handler }: PropsType) => {
 
   return ReactDOM.createPortal(
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-    <div className={classes.backdrop} onClick={handler} />,
+    <div
+      className={classes.backdrop}
+      onClick={handler}
+      style={{ zIndex: zIndexNumber }}
+    />,
     backdropElement
   );
 };

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BsSearch } from 'react-icons/bs';
 import classes from './Search.module.scss';
 import SearchFunction from './SearchFunction/SearchFunction';
-import SearchModal from '../Modal/SearchModal';
+import Modal from '../Modal/Modal';
 
 interface PropsType {
   setIsActiveLeftBar: React.Dispatch<React.SetStateAction<boolean>>;
@@ -50,7 +50,7 @@ const Search = ({ setIsActiveRightBar, setIsActiveLeftBar }: PropsType) => {
           )}
         </div>
       </div>
-      <SearchModal show={!isHide} handler={isHideHandler} />
+      <Modal show={!isHide} handler={isHideHandler} zIndexNumber="99" />
     </>
   );
 };

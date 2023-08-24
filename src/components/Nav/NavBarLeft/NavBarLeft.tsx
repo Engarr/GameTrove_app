@@ -123,7 +123,7 @@ const NavBarLeft = ({
           </div>
         </div>
       </div>
-      <Modal show={isLeftNavActive} handler={activeHandler} />
+      <Modal show={isLeftNavActive} handler={activeHandler} zIndexNumber="99" />
     </>
   );
 };
