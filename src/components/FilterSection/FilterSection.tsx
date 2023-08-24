@@ -1,9 +1,13 @@
-import { useDispatch } from 'react-redux';
-import { useCallback, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useCallback, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { gameCategories, gamePlatforms, choseOptionsArr } from '../../util/db';
 import classes from './FilterSection.module.scss';
-import { toggleActiveLeftNavBar } from '../../store/slice/UiSLice';
+import {
+  sortingHandler,
+  sortingOption,
+  toggleActiveLeftNavBar,
+} from '../../store/slice/UiSLice';
 import updateLink from '../../util/changinParams';
 import Select from '../UI/Select/Select';
 
@@ -22,8 +26,16 @@ const FilterSection = ({ categoryParam, platformParam }: PropsType) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
+  const sortCriteria = useSelector(sortingOption);
 
-  const [sortCriteria, setSortCriteria] = useState('default');
+  const sortingOptionHandler = (title: string, value: string) => {
+    dispatch(
+      sortingHandler({
+        title,
+        value,
+      })
+    );
+  };
 
   const findCategoryById = useCallback((categoryIdToFind: string) => {
     return gameCategories.find(
@@ -39,7 +51,7 @@ const FilterSection = ({ categoryParam, platformParam }: PropsType) => {
 
   useEffect(() => {
     const updatedSearchParams = updateLink({
-      item: sortCriteria,
+      item: sortCriteria.value,
       title: 'sort',
       localization: location,
     });
@@ -86,7 +98,11 @@ const FilterSection = ({ categoryParam, platformParam }: PropsType) => {
         </div>
         <div className={classes.filters__sorting}>
           <p className={classes[`filters__sorting--title`]}>Sorting options:</p>
-          <Select optionsArr={choseOptionsArr} setValue={setSortCriteria} />
+          <Select
+            optionsArr={choseOptionsArr}
+            setValue={sortingOptionHandler}
+            selectedOption={sortCriteria.title}
+          />
         </div>
       </div>
     </div>

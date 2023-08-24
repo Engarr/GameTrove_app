@@ -8,11 +8,12 @@ interface PropsType {
     value: string;
     icon: JSX.Element;
   }[];
-  setValue: (value: string) => void;
+  selectedOption: string;
+  setValue: (value: string, title: string) => void;
 }
 
-const Select = ({ optionsArr, setValue }: PropsType) => {
-  const [selectedOption, setSelectedOption] = useState('Default sorting');
+const Select = ({ optionsArr, setValue, selectedOption }: PropsType) => {
+  //   const [selectedOption, setSelectedOption] = useState('Default sorting');
   const [isVisible, setIsVisible] = useState(false);
   const selectRef = useRef<HTMLDivElement | null>(null);
 
@@ -52,8 +53,7 @@ const Select = ({ optionsArr, setValue }: PropsType) => {
             <button
               key={option.title}
               onClick={() => {
-                setValue(option.value);
-                setSelectedOption(option.title);
+                setValue(option.title, option.value);
                 visibleHandler();
               }}
               type="button"
