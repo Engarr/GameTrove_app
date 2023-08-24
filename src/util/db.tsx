@@ -1,3 +1,5 @@
+import { FaArrowUp, FaArrowDown, FaSort } from 'react-icons/fa';
+
 interface CategoryType {
   id: number;
   name: string;
@@ -63,4 +65,31 @@ export const comingGamePlatforms: PlatformType[] = [
   { id: 49, name: 'Xbox one', platform: 'platform' },
   { id: 48, name: 'PlayStation 4', platform: 'platform' },
   { id: 167, name: 'PlayStation 5', platform: 'platform' },
+];
+export const choseOptionsArr = [
+  {
+    value: 'default',
+    title: 'Default sorting',
+    icon: <FaSort />,
+  },
+  {
+    value: 'top_rated',
+    title: 'Top rated',
+    icon: <FaArrowUp />,
+  },
+  {
+    value: 'lowest_rated',
+    title: 'Lowest rated',
+    icon: <FaArrowDown />,
+  },
+  {
+    value: 'first_release_date asc',
+    title: 'Release date ascending',
+    icon: <FaArrowUp />,
+  },
+  {
+    value: 'first_release_date desc',
+    title: 'Release date descending',
+    icon: <FaArrowDown />,
+  },
 ];

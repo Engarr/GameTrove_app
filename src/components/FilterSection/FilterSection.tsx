@@ -1,10 +1,11 @@
 import { useDispatch } from 'react-redux';
 import { useCallback, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { gameCategories, gamePlatforms } from '../../util/db';
+import { gameCategories, gamePlatforms, choseOptionsArr } from '../../util/db';
 import classes from './FilterSection.module.scss';
 import { toggleActiveLeftNavBar } from '../../store/slice/UiSLice';
 import updateLink from '../../util/changinParams';
+import Select from '../UI/Select/Select';
 
 interface PropsType {
   categoryParam: string;
@@ -84,28 +85,8 @@ const FilterSection = ({ categoryParam, platformParam }: PropsType) => {
           ))}
         </div>
         <div className={classes.filters__sorting}>
-          <p>Opcje sortowania:</p>
-          <select
-            name="sorting"
-            id="sorting"
-            value={sortCriteria}
-            onChange={(e) => setSortCriteria(e.target.value)}
-          >
-            <option
-              value="default"
-              className={classes[`filters__sorting--options`]}
-            >
-              Default sorting
-            </option>
-            <option value="top_rated">Top rated</option>
-            <option value="lowest_rated">Lowest rated</option>
-            <option value="first_release_date asc">
-              Release date ascending
-            </option>
-            <option value="first_release_date desc">
-              Release date descending
-            </option>
-          </select>
+          <p className={classes[`filters__sorting--title`]}>Sorting options:</p>
+          <Select optionsArr={choseOptionsArr} setValue={setSortCriteria} />
         </div>
       </div>
     </div>

@@ -8,6 +8,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
   h2 {
     font-size: 1.2em;
     margin-right: 10px;
@@ -43,6 +44,16 @@
       }
     }
   }
+  &__sorting {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    align-items: center;
+    &--title {
+      font-weight: bold;
+      margin-right: 10px;
+    }
+  }
 }
 @media only screen and (max-width: 1024px) {
   .filters {
@@ -69,6 +80,18 @@
         button {
           padding: 0px 5px;
         }
+      }
+    }
+    &__sorting {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      // width: 100%;
+      // justify-content: flex-end;
+      // align-items: center;
+      p {
+        margin: 10px 0;
       }
     }
   }
