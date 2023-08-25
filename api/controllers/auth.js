@@ -169,7 +169,7 @@ export const getUserWishlist = async (req, res, next) => {
     const user = await User.findById(userId);
     if (!user) {
       res.status(401).json({
-        message: 'There is no such user',
+        message: 'There is no such user.',
       });
       const err = new Error(
         'The user with this email address could not be found'
