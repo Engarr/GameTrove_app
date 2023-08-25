@@ -48,7 +48,9 @@
   border-radius: 50%;
   padding: 5px;
   cursor: pointer;
-  z-index: 90;
+  z-index: 90
+  
+  ;
   opacity: 0;
   transition: opacity 0.3s, background-color 0.3s;
 }
