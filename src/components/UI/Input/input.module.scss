@@ -1,4 +1,5 @@
 .inputBox {
+  position: relative;
   p {
     color: rgb(247, 99, 99);
     font-weight: bold;
@@ -6,4 +7,9 @@
     margin-bottom: 8px;
     font-size: 0.9em;
   }
+}
+.eyeBox {
+  position: absolute;
+  top: 50%;
+  right: 2%;
 }
