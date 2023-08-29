@@ -10,8 +10,10 @@ import FilterList from './CategoryItem/FilterList';
 interface PropsType {
   isRightNavActive: boolean;
   isLeftNavActive: boolean;
+  isSearchBarActive: boolean;
   activeRightNavBarHandler: (action: boolean | undefined) => void;
   activeLeftNavBarHandler: (action: boolean | undefined) => void;
+  activeSearchHandler: (action: boolean | undefined) => void;
 }
 
 const NavBarLeft = ({
@@ -19,6 +21,8 @@ const NavBarLeft = ({
   isLeftNavActive,
   activeRightNavBarHandler,
   activeLeftNavBarHandler,
+  activeSearchHandler,
+  isSearchBarActive,
 }: PropsType) => {
   const location = useLocation();
   const dispatch = useDispatch();
@@ -54,10 +58,17 @@ const NavBarLeft = ({
   const activeHandler = useCallback(() => {
     activeLeftNavBarHandler(undefined);
 
-    if (isRightNavActive) {
+    if (isRightNavActive || isSearchBarActive) {
       activeRightNavBarHandler(false);
+      activeSearchHandler(false);
     }
-  }, [isRightNavActive, activeLeftNavBarHandler, activeRightNavBarHandler]);
+  }, [
+    isRightNavActive,
+    activeLeftNavBarHandler,
+    activeRightNavBarHandler,
+    activeSearchHandler,
+    isSearchBarActive,
+  ]);
 
   const pageHandler = (pageNumber: number) => {
     dispatch(switchPage(pageNumber));

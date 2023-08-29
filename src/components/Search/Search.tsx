@@ -1,24 +1,34 @@
-import React, { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { BsSearch } from 'react-icons/bs';
 import classes from './Search.module.scss';
 import SearchFunction from './SearchFunction/SearchFunction';
 import Modal from '../Modal/Modal';
 
 interface PropsType {
-  setIsActiveLeftBar: React.Dispatch<React.SetStateAction<boolean>>;
-  setIsActiveRightBar: React.Dispatch<React.SetStateAction<boolean>>;
+  activeSearchHandler: (action: boolean | undefined) => void;
+  setIsActiveLeftBar: (action: boolean | undefined) => void;
+  setIsActiveRightBar: (action: boolean | undefined) => void;
+  isSearchBarActive: boolean;
 }
-const Search = ({ setIsActiveRightBar, setIsActiveLeftBar }: PropsType) => {
-  const [isHide, setIsHide] = useState(true);
+const Search = ({
+  setIsActiveRightBar,
+  setIsActiveLeftBar,
+  activeSearchHandler,
+  isSearchBarActive,
+}: PropsType) => {
   const [searchInput, setSearchInput] = useState('');
 
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInput(e.target.value);
   };
-  const isHideHandler = () => {
-    setIsHide((prev) => !prev);
+
+  const isHideHandler = useCallback(() => {
+    activeSearchHandler(undefined);
     setSearchInput('');
-  };
+    if (isSearchBarActive) {
+      activeSearchHandler(false);
+    }
+  }, [activeSearchHandler, isSearchBarActive]);
 
   return (
     <>
@@ -34,7 +44,7 @@ const Search = ({ setIsActiveRightBar, setIsActiveLeftBar }: PropsType) => {
 
         <div
           className={`${classes.search__inputBox} ${
-            isHide ? classes.hide : classes.show
+            !isSearchBarActive ? classes.hide : classes.show
           }`}
         >
           <input
@@ -42,7 +52,7 @@ const Search = ({ setIsActiveRightBar, setIsActiveLeftBar }: PropsType) => {
             value={searchInput}
             onChange={inputHandler}
           />
-          {!isHide && searchInput !== '' && (
+          {!isSearchBarActive && searchInput !== '' && (
             <SearchFunction
               isHideHandler={isHideHandler}
               searchInput={searchInput}
@@ -50,7 +60,11 @@ const Search = ({ setIsActiveRightBar, setIsActiveLeftBar }: PropsType) => {
           )}
         </div>
       </div>
-      <Modal show={!isHide} handler={isHideHandler} zIndexNumber="99" />
+      <Modal
+        show={isSearchBarActive}
+        handler={isHideHandler}
+        zIndexNumber="99"
+      />
     </>
   );
 };

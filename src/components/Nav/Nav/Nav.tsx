@@ -11,14 +11,17 @@ import classes from './Nav.module.scss';
 import {
   activeLeftBar,
   activeRightBar,
+  activeSearchBar,
   toggleActiveLeftNavBar,
   toggleActiveRightNavBar,
+  toggleActiveSearchBar,
 } from '../../../store/slice/UiSLice';
 
 const Nav = () => {
   const dispacth = useDispatch();
   const isLeftNavActive = useSelector(activeLeftBar);
   const isRightNavActive = useSelector(activeRightBar);
+  const isSearchBarActive = useSelector(activeSearchBar);
 
   const [arrowIsVisible, setArrowIsVisible] = useState(false);
 
@@ -56,6 +59,13 @@ const Nav = () => {
       dispacth(toggleActiveRightNavBar());
     }
   };
+  const activeSearchHandler = (action: boolean | undefined) => {
+    if (action === false) {
+      dispacth(toggleActiveSearchBar(action));
+    } else {
+      dispacth(toggleActiveSearchBar());
+    }
+  };
 
   return (
     <div>
@@ -66,6 +76,7 @@ const Nav = () => {
             onClick={() => {
               activeLeftNavBarHandler(false);
               activeRightNavBarHandler(false);
+              activeSearchHandler(false);
             }}
           >
             <p>GameTrove</p>
@@ -81,19 +92,25 @@ const Nav = () => {
           setIsActiveLeftBar={() => {
             activeLeftNavBarHandler(false);
           }}
+          activeSearchHandler={activeSearchHandler}
+          isSearchBarActive={isSearchBarActive}
         />
       </div>
       <NavBarLeft
         activeRightNavBarHandler={activeRightNavBarHandler}
         activeLeftNavBarHandler={activeLeftNavBarHandler}
+        activeSearchHandler={activeSearchHandler}
         isLeftNavActive={isLeftNavActive}
         isRightNavActive={isRightNavActive}
+        isSearchBarActive={isSearchBarActive}
       />
       <NavBarRight
         activeRightNavBarHandler={activeRightNavBarHandler}
         activeLeftNavBarHandler={activeLeftNavBarHandler}
+        activeSearchHandler={activeSearchHandler}
         isLeftNavActive={isLeftNavActive}
         isRightNavActive={isRightNavActive}
+        isSearchBarActive={isSearchBarActive}
       />
       <button
         type="button"

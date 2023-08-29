@@ -10,24 +10,35 @@ import LogedIn from './LogedIn/LogedIn';
 interface PropsType {
   isRightNavActive: boolean;
   isLeftNavActive: boolean;
+  isSearchBarActive: boolean;
   activeRightNavBarHandler: (action: boolean | undefined) => void;
   activeLeftNavBarHandler: (action: boolean | undefined) => void;
+  activeSearchHandler: (action: boolean | undefined) => void;
 }
 const NavBarRight = ({
   isRightNavActive,
   isLeftNavActive,
   activeRightNavBarHandler,
   activeLeftNavBarHandler,
+  activeSearchHandler,
+  isSearchBarActive,
 }: PropsType) => {
   const token = useRouteLoaderData('root');
 
   const activeHandler = useCallback(() => {
     activeRightNavBarHandler(undefined);
 
-    if (isLeftNavActive) {
+    if (isLeftNavActive || isSearchBarActive) {
       activeLeftNavBarHandler(false);
+      activeSearchHandler(false);
     }
-  }, [isLeftNavActive, activeLeftNavBarHandler, activeRightNavBarHandler]);
+  }, [
+    activeRightNavBarHandler,
+    isLeftNavActive,
+    isSearchBarActive,
+    activeLeftNavBarHandler,
+    activeSearchHandler,
+  ]);
 
   let content;
   if (!token) {
