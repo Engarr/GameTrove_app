@@ -3,6 +3,7 @@ import { IoOptionsOutline } from 'react-icons/io5';
 import { BsFillClipboardHeartFill } from 'react-icons/bs';
 import classes from './Tabs.module.scss';
 import WishlistTab from './WishlistTab/WishlistTab';
+import Settings from './SettingsTab/Settings';
 
 const Tabs = () => {
   const [toggleState, setToggleState] = useState<number>(1);
@@ -55,7 +56,7 @@ const Tabs = () => {
               : classes.content
           }
         >
-          COMMING SOON!
+          <Settings />
         </div>
         <div
           className={

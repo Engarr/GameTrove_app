@@ -1,4 +1,5 @@
 import axios from 'axios';
+import getSimiliarGameInfo from '../util/getSimilarGameInfo.js';
 
 export const getGames = async (req, res, next) => {
   const { token } = req;
@@ -110,13 +111,14 @@ export const getCategoryGames = async (req, res, next) => {
     throw error;
   }
 };
+
 export const getGameDetails = async (req, res, next) => {
   const { gameId } = req.params;
   const { token } = req;
   try {
     const query = `
     fields
-    name, cover.url, aggregated_rating, aggregated_rating_count, first_release_date, follows, genres.name, rating, rating_count, screenshots.url, storyline, summary, videos.video_id, platforms.name;
+    name, cover.url, aggregated_rating, aggregated_rating_count, first_release_date, follows, genres.name, rating, rating_count, screenshots.url, storyline, summary, videos.video_id, platforms.name, similar_games;
     where id = ${gameId};
     `;
     const headers = {
@@ -126,9 +128,15 @@ export const getGameDetails = async (req, res, next) => {
     const response = await axios.post('https://api.igdb.com/v4/games', query, {
       headers,
     });
+    const idsArr = response.data[0].similar_games;
+    const similarGamesInfo = await getSimiliarGameInfo(idsArr, token);
     const gameDetails = response.data;
+    const data = {
+      gameDetails: gameDetails[0],
+      similarGamesInfo,
+    };
 
-    res.status(200).json(gameDetails[0]);
+    res.status(200).json(data);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('An error occured:', error);

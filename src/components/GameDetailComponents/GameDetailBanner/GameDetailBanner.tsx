@@ -21,7 +21,7 @@ const GameDetailBanner = ({ data, isLoading, isError }: PropsType) => {
   const param = useParams<{ gameId: string }>();
   const gameId = param.gameId as string;
   let content;
-  if (isLoading) {
+  if (isLoading && !data) {
     content = <GameDetailBannerLoader />;
   } else if (isError) {
     content = (

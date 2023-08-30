@@ -7,8 +7,20 @@ import GameDetailBanner from '../../components/GameDetailComponents/GameDetailBa
 import GameDetailDesc from '../../components/GameDetailComponents/GameDetalDesc/GameDetailDesc';
 import VideoSlider from '../../components/GameDetailComponents/Slider/VideoSlider';
 
+interface SimilarGameType {
+  id: number;
+  cover: {
+    id: number;
+    url: string;
+  };
+  name: string;
+}
+
 interface DataType {
-  data: GameDetailType;
+  data: {
+    gameDetails: GameDetailType;
+    similarGamesInfo: SimilarGameType;
+  };
   isLoading: boolean;
   isError: boolean;
 }
@@ -23,10 +35,20 @@ const GameDetail = () => {
 
   return (
     <section className={classes.detailWrapper}>
-      <GameDetailBanner data={data} isLoading={isLoading} isError={isError} />
-      <GameDetailDesc data={data} isLoading={isLoading} />
-      <Slider data={data} isLoading={isLoading} isError={isError} />
-      {data && data.videos && <VideoSlider data={data} isLoading={isLoading} />}
+      <GameDetailBanner
+        data={data?.gameDetails}
+        isLoading={isLoading}
+        isError={isError}
+      />
+      <GameDetailDesc data={data?.gameDetails} isLoading={isLoading} />
+      <Slider
+        data={data?.gameDetails}
+        isLoading={isLoading}
+        isError={isError}
+      />
+      {data && data.gameDetails.videos && (
+        <VideoSlider data={data?.gameDetails} isLoading={isLoading} />
+      )}
     </section>
   );
 };
