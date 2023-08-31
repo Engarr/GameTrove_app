@@ -1,25 +1,17 @@
 import { useParams } from 'react-router-dom';
 import { useGetGameDetailsQuery } from '../../store/api/feedSlice';
 import classes from './GameDetail.module.scss';
-import { GameDetailType } from '../../Types/types';
-import Slider from '../../components/GameDetailComponents/Slider/PhotoSlider';
+import { GameDetailType, SimilarGameType } from '../../Types/types';
+import PhotoSlider from '../../components/GameDetailComponents/Slider/PhotoSlider';
 import GameDetailBanner from '../../components/GameDetailComponents/GameDetailBanner/GameDetailBanner';
 import GameDetailDesc from '../../components/GameDetailComponents/GameDetalDesc/GameDetailDesc';
 import VideoSlider from '../../components/GameDetailComponents/Slider/VideoSlider';
-
-interface SimilarGameType {
-  id: number;
-  cover: {
-    id: number;
-    url: string;
-  };
-  name: string;
-}
+import SimilarGames from '../../components/GameDetailComponents/SimilarGames/SimilarGames';
 
 interface DataType {
   data: {
     gameDetails: GameDetailType;
-    similarGamesInfo: SimilarGameType;
+    similarGamesInfo: SimilarGameType[];
   };
   isLoading: boolean;
   isError: boolean;
@@ -41,13 +33,16 @@ const GameDetail = () => {
         isError={isError}
       />
       <GameDetailDesc data={data?.gameDetails} isLoading={isLoading} />
-      <Slider
+      <PhotoSlider
         data={data?.gameDetails}
         isLoading={isLoading}
         isError={isError}
       />
       {data && data.gameDetails.videos && (
         <VideoSlider data={data?.gameDetails} isLoading={isLoading} />
+      )}
+      {data && data.similarGamesInfo.length > 0 && (
+        <SimilarGames data={data.similarGamesInfo} />
       )}
     </section>
   );

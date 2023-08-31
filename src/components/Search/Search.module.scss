@@ -4,7 +4,7 @@
   align-items: center;
   font-size: 0.9em;
   text-shadow: none;
- 
+
   &__icon {
     padding-right: 10px;
     transition: transform 0.3s, color 0.3s;
@@ -109,7 +109,9 @@
 .searchLoading {
   color: var(--greenYellow);
   text-shadow: none;
-  font-size: 0.9em;
+  p {
+    font-size: 0.7em;
+  }
   span {
     opacity: 0;
     padding-left: 2px;

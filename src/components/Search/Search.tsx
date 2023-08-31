@@ -52,7 +52,7 @@ const Search = ({
             value={searchInput}
             onChange={inputHandler}
           />
-          {!isSearchBarActive && searchInput !== '' && (
+          {isSearchBarActive && searchInput !== '' && (
             <SearchFunction
               isHideHandler={isHideHandler}
               searchInput={searchInput}

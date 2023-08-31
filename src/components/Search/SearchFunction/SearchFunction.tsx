@@ -25,6 +25,7 @@ const SearchFunction = ({ isHideHandler, searchInput }: PropsType) => {
     useGetSearchgameQuery<DataType>(searchInput, {
       refetchOnMountOrArgChange: true,
     });
+
   const handleClickLink = useCallback(() => {
     isHideHandler();
   }, [isHideHandler]);

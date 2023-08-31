@@ -113,3 +113,12 @@ export type UserDataType = {
 export type WishlistResponseType = {
   message: string;
 };
+
+export type SimilarGameType = {
+  id: number;
+  cover: {
+    id: number;
+    url: string;
+  };
+  name: string;
+};
