@@ -14,14 +14,20 @@ interface PropsType {
   data: GameDetailType;
   isLoading: boolean;
   isError: boolean;
+  isFetching: boolean;
 }
 
-const GameDetailBanner = ({ data, isLoading, isError }: PropsType) => {
+const GameDetailBanner = ({
+  data,
+  isLoading,
+  isError,
+  isFetching,
+}: PropsType) => {
   const mode = useSelector(colorMode);
   const param = useParams<{ gameId: string }>();
   const gameId = param.gameId as string;
   let content;
-  if (isLoading && !data) {
+  if ((isLoading && !data) || isFetching) {
     content = <GameDetailBannerLoader />;
   } else if (isError) {
     content = (

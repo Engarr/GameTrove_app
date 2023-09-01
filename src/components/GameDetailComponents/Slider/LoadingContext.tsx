@@ -8,7 +8,7 @@ const LoadingContext = () => {
         <DivLoader />
       </div>
       <div className={classes.loadingContainer__emptyCard}>
-        <DivLoader />d
+        <DivLoader />
       </div>
       <div className={classes.loadingContainer__emptyCard}>
         <DivLoader />

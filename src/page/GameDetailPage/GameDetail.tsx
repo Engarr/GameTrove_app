@@ -15,15 +15,15 @@ interface DataType {
   };
   isLoading: boolean;
   isError: boolean;
+  isFetching: boolean;
 }
 
 const GameDetail = () => {
   const param = useParams<{ gameId: string }>();
   const { gameId } = param;
 
-  const { data, isLoading, isError } = useGetGameDetailsQuery<DataType>(
-    gameId as string
-  );
+  const { data, isLoading, isError, isFetching } =
+    useGetGameDetailsQuery<DataType>(gameId as string);
 
   return (
     <section className={classes.detailWrapper}>
@@ -31,18 +31,28 @@ const GameDetail = () => {
         data={data?.gameDetails}
         isLoading={isLoading}
         isError={isError}
+        isFetching={isFetching}
       />
-      <GameDetailDesc data={data?.gameDetails} isLoading={isLoading} />
+      <GameDetailDesc
+        data={data?.gameDetails}
+        isLoading={isLoading}
+        isFetching={isFetching}
+      />
       <PhotoSlider
         data={data?.gameDetails}
         isLoading={isLoading}
         isError={isError}
+        isFetching={isFetching}
       />
-      {data && data.gameDetails.videos && (
-        <VideoSlider data={data?.gameDetails} isLoading={isLoading} />
-      )}
-      {data && data.similarGamesInfo.length > 0 && (
-        <SimilarGames data={data.similarGamesInfo} />
+      {!isFetching && (
+        <>
+          {data && data.gameDetails.videos && (
+            <VideoSlider data={data?.gameDetails} isLoading={isLoading} />
+          )}
+          {data && data.similarGamesInfo.length > 0 && (
+            <SimilarGames data={data.similarGamesInfo} />
+          )}
+        </>
       )}
     </section>
   );

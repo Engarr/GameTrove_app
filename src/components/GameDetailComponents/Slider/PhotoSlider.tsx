@@ -14,9 +14,10 @@ interface PropsType {
   data: GameDetailType;
   isLoading: boolean;
   isError: boolean;
+  isFetching: boolean;
 }
 
-const PhotoSlider = ({ data, isLoading, isError }: PropsType) => {
+const PhotoSlider = ({ data, isLoading, isError, isFetching }: PropsType) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const options = {
     threshold: 0,
@@ -48,7 +49,7 @@ const PhotoSlider = ({ data, isLoading, isError }: PropsType) => {
   }, []);
   let content;
 
-  if (isLoading) {
+  if (isLoading || isFetching) {
     content = <LoadingContext />;
   } else if (isError) {
     content = (

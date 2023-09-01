@@ -7,8 +7,9 @@ import DivLoader from '../../UI/SkeletonDivLoader/DivLoader';
 interface PropsType {
   data: GameDetailType;
   isLoading: boolean;
+  isFetching: boolean;
 }
-const GameDetailDesc = ({ data, isLoading }: PropsType) => {
+const GameDetailDesc = ({ data, isLoading, isFetching }: PropsType) => {
   const [substring, setSubstring] = useState(100);
   const [animatedText, setAnimatedText] = useState('');
 
@@ -45,7 +46,7 @@ const GameDetailDesc = ({ data, isLoading }: PropsType) => {
     }
   };
   let content;
-  if (isLoading) {
+  if (isLoading || isFetching) {
     content = (
       <div className={classes.loadingContainer}>
         <div className={classes.loadingContainer__ctx}>

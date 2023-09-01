@@ -1,3 +1,20 @@
+@import '../../../../index.scss';
+
+.title {
+  position: relative;
+  padding: 10px 15px;
+  text-transform: uppercase;
+  transform: translateX(-100%);
+}
+.title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 2%;
+  border-bottom: 2px solid var(--greenYellow);
+  width: 40%;
+  transform: translateX(-150%);
+}
 .sliderContainer {
   margin-top: 2em;
   padding: 20px;
