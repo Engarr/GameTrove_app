@@ -18,14 +18,15 @@
 .sliderContainer {
   margin-top: 2em;
   padding: 20px;
-  min-height: 500px;
+  min-height: 350px;
   display: flex;
   align-items: center;
+  position: relative;
 
   &__cardsBox {
     display: flex;
 
-    animation: scroll 40s linear infinite;
+    animation: scroll 30s linear infinite;
   }
   &__cardsBox:hover {
     animation-play-state: paused;
@@ -71,7 +72,34 @@
     }
   }
 }
+.shadow__left,
+.shadow__right {
+  position: absolute;
+  height: 480px;
 
+  width: 100px;
+  z-index: 5;
+}
+.shadow__left {
+  left: -2%;
+  background: rgb(79, 82, 89);
+  background: linear-gradient(
+    90deg,
+    var(--background-color) 37%,
+    var(--background-color) 60%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+.shadow__right {
+  right: 0%;
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    var(--background-color) 70%,
+    var(--background-color) 100%
+  );
+}
 @keyframes scroll {
   0% {
     transform: translateX(0);

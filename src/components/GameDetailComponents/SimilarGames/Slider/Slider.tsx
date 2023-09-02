@@ -22,6 +22,8 @@ const Slider = ({ data }: PropsType) => {
         Similar Games:
       </h2>
       <div className={classes.sliderContainer}>
+        <div className={classes.shadow__right} />
+        <div className={classes.shadow__left} />
         <div className={classes.sliderContainer__cardsBox}>
           {data.map((game) => {
             let imageUrl =
@@ -49,6 +51,7 @@ const Slider = ({ data }: PropsType) => {
               </div>
             );
           })}
+          Dd
         </div>
       </div>
     </>
