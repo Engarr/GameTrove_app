@@ -18,7 +18,7 @@
 .sliderContainer {
   margin-top: 2em;
   padding: 20px;
-  min-height: 350px;
+  min-height: 550px;
   display: flex;
   align-items: center;
   position: relative;
@@ -106,5 +106,47 @@
   }
   100% {
     transform: translateX(calc(-300px * 10));
+  }
+}
+@media only screen and (max-width: 765px) {
+  .title::after {
+    width: 80%;
+  }
+  .sliderContainer {
+    min-height: 300px;
+    &__cardsBox {
+      animation: scroll 50s linear infinite;
+    }
+
+    &__card {
+      padding: 10px 10px;
+      height: 280px;
+      min-width: 200px;
+
+      a {
+        width: 150px;
+        font-size: 0.8em;
+        padding: 5px 2px;
+      }
+    }
+    &__card:hover {
+      img {
+        transform: translateZ(10px);
+      }
+      a {
+        opacity: 1;
+      }
+    }
+  }
+  .shadow__left,
+  .shadow__right {
+    height: 330px;
+    width: 100px;
+  }
+  .shadow__left {
+    left: -16%;
+  }
+  .shadow__right {
+    right: -12%;
   }
 }

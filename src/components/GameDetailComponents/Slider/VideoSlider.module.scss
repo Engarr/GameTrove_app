@@ -99,6 +99,9 @@
 @media only screen and (max-width: 1024px) {
   .videoWrapper {
     position: relative;
+    h2::after {
+      width: 80%;
+    }
   }
   .videoContainer {
     height: 350px;

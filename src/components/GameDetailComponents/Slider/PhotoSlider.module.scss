@@ -2,6 +2,7 @@
 
 .photoWrapper {
   h2 {
+    margin-top: 1em;
     position: relative;
     padding: 10px 15px;
     text-transform: uppercase;
@@ -181,6 +182,11 @@
   right: 300px;
 }
 @media only screen and (max-width: 1024px) {
+  .photoWrapper {
+    h2::after {
+      width: 80%;
+    }
+  }
   .screenshotsContainer {
     margin-top: 2em;
 
