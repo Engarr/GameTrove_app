@@ -1,10 +1,31 @@
 .wishContainer {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: center;
 }
-
+.container {
+  display: flex;
+  flex-direction: column;
+  h2 {
+    position: relative;
+    font-family: 'Bai Jamjuree', sans-serif;
+    text-align: left;
+    margin: 2em 0;
+  }
+  h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    border-bottom: 1px solid greenyellow;
+    width: 100%;
+  }
+  &__cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 4em;
+  }
+}
 .gameCard {
   background-color: var(--background-color);
   height: 400px;

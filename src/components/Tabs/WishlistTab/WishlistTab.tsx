@@ -42,26 +42,29 @@ const WishlistTaba = ({ skipSearch }: PropsType) => {
   }
   if (data && data.length > 0) {
     content = (
-      <>
-        {data.map((game) => {
-          const newImg = game.cover.url.replace('t_thumb', 't_1080p');
-          const newGameId = game.id.toString();
-          return (
-            <div key={game.id} className={classes.gameCard}>
-              <div className={classes.gameCard__heart}>
-                <Wishlist gameId={newGameId} />
+      <div className={classes.container}>
+        <h2>Games you like</h2>
+        <div className={classes.container__cards}>
+          {data.map((game) => {
+            const newImg = game.cover.url.replace('t_thumb', 't_1080p');
+            const newGameId = game.id.toString();
+            return (
+              <div key={game.id} className={classes.gameCard}>
+                <div className={classes.gameCard__heart}>
+                  <Wishlist gameId={newGameId} />
+                </div>
+                <div className={classes.gameCard__name}>
+                  <Link to={`/game/${game.id}`}>
+                    {game.name}
+                    <TfiMoreAlt />
+                  </Link>
+                </div>
+                <img src={newImg} alt={game.name} />
               </div>
-              <div className={classes.gameCard__name}>
-                <Link to={`/game/${game.id}`}>
-                  {game.name}
-                  <TfiMoreAlt />
-                </Link>
-              </div>
-              <img src={newImg} alt={game.name} />
-            </div>
-          );
-        })}
-      </>
+            );
+          })}
+        </div>
+      </div>
     );
   }
   return <div className={classes.wishContainer}>{content}</div>;

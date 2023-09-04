@@ -23,7 +23,7 @@ const LogedIn = ({ activeHandler }: PropsType) => {
             type="submit"
             onClick={activeHandler}
           >
-            Wyloguj się
+            Logout
             <AiOutlineLogout className={classes[`nav__buttons--icon`]} />
           </button>
         </Form>

@@ -45,7 +45,9 @@ export const ChangeDataForm = ({
             value=""
           />
         )}
-        <button type="button">Save changes</button>
+        <button type="button" className={classes.saveBtn}>
+          Save changes
+        </button>
       </div>
     </>
   );

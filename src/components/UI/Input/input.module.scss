@@ -16,7 +16,8 @@
     text-align: left;
     font-weight: bold;
     color: var(--color);
-    letter-spacing: 1px;
+    letter-spacing: 2px;
+    font-family: 'Bai Jamjuree', sans-serif;
     input {
       position: relative;
       left: 50%;
@@ -50,4 +51,8 @@
   top: 50%;
   transform: translateY(-50%);
   right: 2%;
+  cursor: pointer;
+  &:hover {
+    color: var(--greenYellow);
+  }
 }
