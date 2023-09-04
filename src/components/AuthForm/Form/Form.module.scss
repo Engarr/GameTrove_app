@@ -13,37 +13,6 @@
   div {
     opacity: 0;
     animation: showUp 0.5s forwards linear;
-    &.error {
-      input {
-        border: 1px solid rgb(247, 99, 99);
-      }
-    }
-    label {
-      display: flex;
-      flex-direction: column;
-      text-align: left;
-      font-weight: bold;
-      color: var(--color);
-      letter-spacing: 1.5px;
-      input {
-        position: relative;
-        left: 50%;
-        transform: translateX(-50%);
-        background-color: transparent;
-        border: 1px solid var(--black-white);
-        color: var(--color);
-        padding: 6px 20px;
-        font-size: 1em;
-        width: 100%;
-        margin: 10px 0;
-        outline: none;
-        transition: box-shadow 0.3s, border 0.3s;
-        border-radius: 2px;
-      }
-      input:focus {
-        box-shadow: 0 0 5px var(--black-white);
-      }
-    }
   }
   button {
     font-family: 'Bai Jamjuree', sans-serif;

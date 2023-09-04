@@ -1,0 +1,57 @@
+.container {
+  position: relative;
+  display: flex;
+  margin-top: 50px;
+}
+
+.tabsBox {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  &__icon {
+    font-size: 1.2em;
+    transition: font-size 0.3s, color 0.3s;
+  }
+  button {
+    background-color: var(--background-color);
+    color: var(--color);
+    border: none;
+    padding: 10px 20px;
+    width: 200px;
+    text-align-last: left;
+    margin-top: 5px;
+    cursor: pointer;
+    transition: width 0.3s, letter-spacing 0.3s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Bai Jamjuree', sans-serif;
+    &.active {
+      width: 220px;
+    }
+  }
+  button:hover {
+    letter-spacing: 1px;
+  }
+}
+.formBox {
+  width: 30%;
+  position: relative;
+  margin-left: 2em;
+  left: 30%;
+  transform: translate(-50%);
+  h3 {
+    text-align: center;
+    font-family: 'Bai Jamjuree', sans-serif;
+    letter-spacing: 1px;
+  }
+  &__inputBox {
+    margin-top: 20px;
+    label {
+    }
+  }
+}
+.activeIcon {
+  color: var(--greenYellow);
+  font-size: 1.4em;
+}

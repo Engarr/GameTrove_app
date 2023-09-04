@@ -93,3 +93,33 @@ export const choseOptionsArr = [
     icon: <FaArrowDown />,
   },
 ];
+
+export const settingArr = [
+  {
+    id: 0,
+    title: 'Delete account:',
+    action: 'deleteAccount',
+    firstInputType: 'password',
+    msgFirstInput: 'Enter your account password',
+    seccondInputType: '',
+    msgSecondInput: '',
+  },
+  {
+    id: 1,
+    title: 'Change Password',
+    action: 'changePassword',
+    firstInputType: 'password',
+    msgFirstInput: 'Enter your old password',
+    seccondInputType: 'password',
+    msgSecondInput: 'Enter new password',
+  },
+  {
+    id: 2,
+    title: 'Change Email',
+    action: 'changeEmail',
+    firstInputType: 'text',
+    msgFirstInput: 'Enter your new email',
+    seccondInputType: 'password',
+    msgSecondInput: 'Enter your password',
+  },
+];

@@ -8,7 +8,6 @@ interface PropsType {
   type: string;
   msg: string;
   error: string | undefined;
-  classesCss: string;
   value: string;
   passwordInput?: boolean;
 }
@@ -19,7 +18,6 @@ const Input = ({
   type,
   msg,
   error,
-  classesCss,
   value,
   passwordInput,
 }: PropsType) => {
@@ -30,27 +28,30 @@ const Input = ({
   };
 
   return (
-    <div className={`${classes.inputBox} ${classesCss}`}>
+    <div className={classes.inputBox}>
       <label htmlFor={data}>
         {msg}
-        <input
-          type={passwordInput && !isHidePassword ? 'text' : type}
-          id={data}
-          name={data}
-          onChange={onChange}
-          value={value}
-        />
-      </label>
-      {error && <p>{error}</p>}
-      {passwordInput && (
-        <div className={classes.eyeBox}>
-          {isHidePassword ? (
-            <AiFillEyeInvisible onClick={visibleHandler} />
-          ) : (
-            <AiFillEye onClick={visibleHandler} />
+        <div className={classes.inputBox__input}>
+          <input
+            type={passwordInput && !isHidePassword ? 'text' : type}
+            id={data}
+            name={data}
+            onChange={onChange}
+            value={value}
+            className={error && classes.error}
+          />
+          {passwordInput && (
+            <div className={classes.eyeBox}>
+              {isHidePassword ? (
+                <AiFillEyeInvisible onClick={visibleHandler} />
+              ) : (
+                <AiFillEye onClick={visibleHandler} />
+              )}
+            </div>
           )}
         </div>
-      )}
+      </label>
+      {error && <p>{error}</p>}
     </div>
   );
 };

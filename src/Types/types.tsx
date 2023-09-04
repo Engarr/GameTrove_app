@@ -122,3 +122,12 @@ export type SimilarGameType = {
   };
   name: string;
 };
+export type SettingsType = {
+  id: number;
+  title: string;
+  action: string;
+  firstInputType: string;
+  seccondInputType: string;
+  msgFirstInput: string;
+  msgSecondInput: string;
+};

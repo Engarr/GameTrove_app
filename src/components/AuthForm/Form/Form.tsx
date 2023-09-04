@@ -27,8 +27,6 @@ const Form = ({
   submutButtonContent,
   sendDemoRequest,
 }: PropsType) => {
-  const passwordInput = true;
-
   const switchLinkText = isLogin ? 'Sign up now' : 'Login';
   const switchLinkTo = isLogin
     ? '/account?mode=register'
@@ -44,7 +42,6 @@ const Form = ({
           msg="Your name:"
           value={userData.userName}
           error={backendErrors.userName}
-          classesCss={backendErrors.userName ? classes.error : ''}
         />
       )}
 
@@ -55,7 +52,6 @@ const Form = ({
         onChange={onDataChange}
         msg="Your email:"
         error={backendErrors.email}
-        classesCss={backendErrors.email ? classes.error : ''}
       />
       <Input
         data="password"
@@ -64,8 +60,7 @@ const Form = ({
         onChange={onDataChange}
         msg="Your password:"
         error={backendErrors.password}
-        classesCss={backendErrors.password ? classes.error : ''}
-        passwordInput={passwordInput}
+        passwordInput
       />
 
       {!isLogin && (
@@ -76,8 +71,7 @@ const Form = ({
           onChange={onDataChange}
           msg="Repeat password:"
           error={backendErrors.repeatPassword}
-          classesCss={backendErrors.repeatPassword ? classes.error : ''}
-          passwordInput={passwordInput}
+          passwordInput
         />
       )}
       <button type="submit" className={fadeIn ? classes.fadeIn : ''}>

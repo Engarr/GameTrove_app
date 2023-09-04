@@ -1,0 +1,16 @@
+.formBox {
+  width: 30%;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+  h3 {
+    text-align: center;
+    font-family: 'Bai Jamjuree', sans-serif;
+    letter-spacing: 1px;
+  }
+  &__inputBox {
+    margin-top: 20px;
+    label {
+    }
+  }
+}
