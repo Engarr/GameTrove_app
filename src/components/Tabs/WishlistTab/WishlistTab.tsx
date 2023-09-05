@@ -34,7 +34,7 @@ const WishlistTaba = ({ skipSearch }: PropsType) => {
     });
 
   let content;
-  if (isLoading || isFetching) {
+  if (isLoading) {
     content = <Loader />;
   }
   if (data && data.length === 0) {
@@ -43,7 +43,6 @@ const WishlistTaba = ({ skipSearch }: PropsType) => {
   if (data && data.length > 0) {
     content = (
       <div className={classes.container}>
-        <h2>Games you like</h2>
         <div className={classes.container__cards}>
           {data.map((game) => {
             const newImg = game.cover.url.replace('t_thumb', 't_1080p');
@@ -67,7 +66,12 @@ const WishlistTaba = ({ skipSearch }: PropsType) => {
       </div>
     );
   }
-  return <div className={classes.wishContainer}>{content}</div>;
+  return (
+    <div className={classes.wishContainer}>
+      <h2>Games you like</h2>
+      {content}
+    </div>
+  );
 };
 
 export default WishlistTaba;

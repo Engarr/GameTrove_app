@@ -4,7 +4,7 @@ import classes from './EmptyList.module.scss';
 const EmptyList = () => {
   return (
     <div className={classes.emptyWishlist}>
-      <h2>Nothing added to the wishlist yet.</h2>
+      <h3>Nothing added yet</h3>
       <div className={classes.emptyWishlist__link}>
         <Link to="/games">Check some games!</Link>
       </div>
