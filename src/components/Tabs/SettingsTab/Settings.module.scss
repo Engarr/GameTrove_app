@@ -65,3 +65,38 @@
   color: var(--greenYellow);
   font-size: 1.4em;
 }
+@media only screen and (max-width: 1024px) {
+  .container {
+    margin-top: 30px;
+
+    h2 {
+      font-size: 1.2em;
+      margin-bottom: 1em;
+      width: 100%;
+    }
+  }
+  .wrapper {
+    flex-direction: column;
+  }
+  .tabsBox {
+    margin-bottom: 1em;
+
+    &__icon {
+      font-size: 1.4em;
+    }
+    button {
+      padding: 5px 10px;
+      width: 70%;
+      &.active {
+        width: 80%;
+      }
+    }
+  }
+  .formBox {
+    width: 100%;
+    margin-left: 0em;
+    left: 0%;
+    transform: translate(0%);
+  }
+  
+}
