@@ -117,9 +117,9 @@ export const settingArr = [
     id: 2,
     title: 'Change Email',
     action: 'changeEmail',
-    firstInputType: 'text',
-    msgFirstInput: 'Enter your new email',
-    seccondInputType: 'password',
-    msgSecondInput: 'Enter your password',
+    firstInputType: 'password',
+    msgFirstInput: 'Enter your password',
+    seccondInputType: 'text',
+    msgSecondInput: 'Enter your new email',
   },
 ];

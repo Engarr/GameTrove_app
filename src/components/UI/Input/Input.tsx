@@ -38,7 +38,7 @@ const Input = ({
             name={data}
             onChange={onChange}
             value={value}
-            className={error && classes.error}
+            className={error ? classes.error : ''}
           />
           {passwordInput && (
             <div className={classes.eyeBox}>

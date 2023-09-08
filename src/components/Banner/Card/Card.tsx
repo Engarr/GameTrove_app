@@ -60,7 +60,7 @@ const Card = ({ imageUrl, cardId, setIsActive, gameId }: PropsType) => {
   return (
     <div className={classes.img} id={`card-img-${cardId}`} ref={cardRef}>
       {gameId && <Link to={`/game/${gameId}`} />}
-      <img src={imageUrl} alt="game_picture" />
+      <img src={imageUrl} alt="game_picture" loading="lazy" />
     </div>
   );
 };

@@ -45,7 +45,28 @@ const userSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: [{ type: 'WishlistAction' }],
     }),
-
+    postUserChanges: builder.mutation<
+      void,
+      {
+        newPassword: string | undefined;
+        email: string | undefined;
+        password: string;
+        token: string;
+        actionType: string;
+      }
+    >({
+      query: ({ newPassword, password, email, token, actionType }) => ({
+        url: `auth/changeUserData`,
+        method: 'POST',
+        body: {
+          newPassword,
+          password,
+          email,
+          token,
+          actionType,
+        },
+      }),
+    }),
     getUserId: builder.query<void, { token: string; gameId: string }>({
       query: ({ token, gameId }) => ({
         url: `auth/getUserInfo/${gameId}`,
@@ -75,4 +96,5 @@ export const {
   usePostWishlistGameMutation,
   useGetUserIdQuery,
   useGetUserWishlistQuery,
+  usePostUserChangesMutation,
 } = userSlice;

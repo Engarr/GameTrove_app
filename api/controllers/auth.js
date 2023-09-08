@@ -211,3 +211,55 @@ export const getUserWishlist = async (req, res, next) => {
     }
   }
 };
+export const changeData = async (req, res, next) => {
+  const id = req.userId;
+  const { newPassword } = req.body;
+  const { email } = req.body;
+  const { password } = req.body;
+  const { actionType } = req.body;
+  console.log(req.body);
+
+  if (password === '') {
+    res.status(401).json({ msg: 'Password field can not be empty!' });
+    return;
+  }
+
+  const user = await User.findById(id);
+  if (!user) {
+    res.status(401).json({
+      message: 'There is no such user.',
+    });
+    const err = new Error('The user with this id could not be found');
+    err.statusCode = 401;
+    throw err;
+  }
+  const isEqual = await bcrypt.compare(password, user.password);
+
+  if (!isEqual) {
+    res.status(401).json({ msg: 'Wrong password!' });
+    return;
+  }
+  if (actionType === 'changePassword') {
+    const hashedPassword = await bcrypt.hash(newPassword, 12);
+    user.password = hashedPassword;
+    await user.save();
+    res.status(200).json({ msg: 'Password has been changed!' });
+  } else if (actionType === 'changeEmail') {
+    const isEmail = await User.findOne({ email });
+    if (isEmail) {
+      res.status(401).json({ msg: 'Email already exist in our base' });
+      return;
+    }
+    user.email = email;
+    await user.save();
+    res.status(200).json({ msg: 'Email address has been changed!' });
+  }
+  if (actionType === 'deleteAccount') {
+    const result = await User.deleteOne({ _id: id });
+    if (result.deletedCount === 1) {
+      res.status(200).json({ msg: 'The account has been deleted!' });
+    } else {
+      res.status(500).json({ msg: 'Failed to delete account.' });
+    }
+  }
+};

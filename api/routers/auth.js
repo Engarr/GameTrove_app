@@ -6,6 +6,7 @@ import {
   getUserInfo,
   putWishlist,
   getUserWishlist,
+  changeData,
 } from '../controllers/auth.js';
 import User from '../model/user.js';
 import isAuth from '../middleware/isAuth.js';
@@ -70,5 +71,6 @@ router.post(
 router.post('/getUserInfo/:gameId', isAuth, getUserInfo);
 router.post('/addToWishlist', putWishlist);
 router.post('/getUserWishlist', isAuth, getToken, getUserWishlist);
+router.post('/changeUserData', isAuth, changeData);
 
 export default router;

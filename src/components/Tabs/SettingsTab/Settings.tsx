@@ -13,9 +13,10 @@ const Settings = () => {
     setSettings(settingArr[number]);
     setActiveTab(number);
   };
+
   return (
     <div className={classes.container}>
-      <h2>Welcome to your account management center</h2>
+      <h2>Account management center</h2>
       <div className={classes.wrapper}>
         <div className={classes.tabsBox}>
           <button
@@ -63,7 +64,7 @@ const Settings = () => {
             msgFirstInput={settings.msgFirstInput}
             seccondInputType={settings.seccondInputType}
             msgSecondInput={settings.msgSecondInput}
-            onChange={() => {}}
+            actionType={settings.action}
           />
         </div>
       </div>

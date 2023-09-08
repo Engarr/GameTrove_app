@@ -131,3 +131,15 @@ export type SettingsType = {
   msgFirstInput: string;
   msgSecondInput: string;
 };
+
+export type SettingsResponseType = {
+  error: {
+    status: number;
+    data: {
+      msg: string;
+    };
+  };
+  data: {
+    msg: string;
+  };
+};

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Link } from 'react-router-dom';
 import classes from './ComingGameCard.module.scss';
 
@@ -32,7 +33,7 @@ const ComingGameCard = ({ img, date, id, name, platforms }: PropsType) => {
     <div className={classes.card}>
       <div>
         <Link to={`/game/${id}`}>
-          <img src={imageUrl} alt="" width={120} />
+          <img src={imageUrl} alt="" width={120} loading="lazy" />
         </Link>
       </div>
       <div className={classes.card__desc}>

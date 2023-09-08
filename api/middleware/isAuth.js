@@ -1,13 +1,13 @@
 import jwt from 'jsonwebtoken';
 
 const isAuth = (req, res, next) => {
-  const authHeader = req.get('Authorization');
+  const authHeader = req.get('Authorization') || req.body.token;
   if (!authHeader) {
     const error = new Error('Not authenticated.');
     error.statusCode = 401;
     throw error;
   }
-  const token = authHeader.split(' ')[1];
+  const token = authHeader.split(' ')[1] || req.body.token;
 
   let decodedToken;
 
@@ -22,6 +22,7 @@ const isAuth = (req, res, next) => {
     error.statusCode = 401;
     throw error;
   }
+
   req.userId = decodedToken.userId;
   next();
 };
