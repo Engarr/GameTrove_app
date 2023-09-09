@@ -4,6 +4,7 @@ import { MdAlternateEmail } from 'react-icons/md';
 import classes from './Settings.module.scss';
 import { settingArr } from '../../../util/db';
 import { ChangeDataForm as Form } from './ChangeDataForm/ChangeDataForm';
+import FormWrapper from '../../FormWrapper/FormWrapper';
 
 const Settings = () => {
   const [activeTab, setActiveTab] = useState(1);
@@ -57,15 +58,17 @@ const Settings = () => {
           </button>
         </div>
         <div className={classes.formBox}>
-          <Form
-            title={settings.title}
-            activeTab={activeTab}
-            firstInputType={settings.firstInputType}
-            msgFirstInput={settings.msgFirstInput}
-            seccondInputType={settings.seccondInputType}
-            msgSecondInput={settings.msgSecondInput}
-            actionType={settings.action}
-          />
+          <FormWrapper>
+            <Form
+              title={settings.title}
+              activeTab={activeTab}
+              firstInputType={settings.firstInputType}
+              msgFirstInput={settings.msgFirstInput}
+              seccondInputType={settings.seccondInputType}
+              msgSecondInput={settings.msgSecondInput}
+              actionType={settings.action}
+            />
+          </FormWrapper>
         </div>
       </div>
     </div>

@@ -14,7 +14,7 @@
     position: absolute;
     bottom: -10px;
     left: 0;
-    border-bottom: 1px solid greenyellow;
+    border-bottom: 1px solid var(--greenYellow);
     width: 100%;
   }
 }
@@ -55,10 +55,11 @@
   }
 }
 .formBox {
-  width: 30%;
-  position: relative;
-  margin-left: 2em;
-  left: 30%;
+  position: absolute;
+  width: 60%;
+  height: 450px;
+  top: 50px;
+  left: 55%;
   transform: translate(-50%);
 }
 .activeIcon {
@@ -93,10 +94,11 @@
     }
   }
   .formBox {
+    position: relative;
     width: 100%;
-    margin-left: 0em;
+    min-height: 400px;
+    top: 0;
     left: 0%;
     transform: translate(0%);
   }
-  
 }

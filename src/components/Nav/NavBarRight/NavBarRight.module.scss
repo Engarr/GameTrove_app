@@ -73,14 +73,14 @@
 
   &__icon {
     transition: color 0.3s;
-    color: greenyellow;
+    color: var(--arrow-right);
     transform: rotateX(180deg);
     transition: transform 0.3s, color 0.3s;
     animation: arrowDown 2s ease-in infinite alternate-reverse;
   }
 }
 .arrowBox:hover .arrowBox__icon {
-  color: var(--greenYellow-hover);
+  color: var(--arrow-right-hover);
 }
 .arrowRotate {
   transform: rotateX(0deg);

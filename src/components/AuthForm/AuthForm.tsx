@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
-import classes from './AuthForm.module.scss';
 import {
   usePutRegisterUserMutation,
   usePostLoginUserMutation,
@@ -9,6 +8,8 @@ import {
 import { AuthResponseType, ErrorsData, UserDataType } from '../../Types/types';
 import Loader from '../UI/Loader/Loader';
 import Form from './Form/Form';
+import FormWrapper from '../FormWrapper/FormWrapper';
+import classes from './AuthForm.module.scss';
 
 const AuthForm = () => {
   const navigate = useNavigate();
@@ -132,11 +133,9 @@ const AuthForm = () => {
     );
 
   return (
-    <section className={classes.authWrapper}>
-      <div className={classes.card}>
-        <div className={classes.circle} />
-        <div className={classes.circle} />
-        <div className={classes.card__inner}>
+    <section className={classes.wrapper}>
+      <div className={classes.wrapper__formContainer}>
+        <FormWrapper>
           <Form
             backendErrors={backendErrors}
             userData={userData}
@@ -148,7 +147,7 @@ const AuthForm = () => {
             sendDemoRequest={sendDemoRequest}
             submutButtonContent={submutButtonContent}
           />
-        </div>
+        </FormWrapper>
       </div>
     </section>
   );

@@ -12,7 +12,7 @@
   }
   div {
     opacity: 0;
-    animation: showUp 0.5s forwards linear;
+    animation: showUp 1s forwards linear;
   }
   button {
     font-family: 'Bai Jamjuree', sans-serif;
@@ -20,12 +20,13 @@
     padding: 10px 50px;
     text-align: center;
     border-radius: 2px;
+    position: relative;
     border: none;
     text-transform: uppercase;
     background-color: var(--greenYellow);
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.3s;
     color: var(--white-black);
     &.demoButton {
       padding: 5px 20px;

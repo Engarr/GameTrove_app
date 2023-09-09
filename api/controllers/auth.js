@@ -217,7 +217,6 @@ export const changeData = async (req, res, next) => {
   const { email } = req.body;
   const { password } = req.body;
   const { actionType } = req.body;
-  console.log(req.body);
 
   if (password === '') {
     res.status(401).json({ msg: 'Password field can not be empty!' });
