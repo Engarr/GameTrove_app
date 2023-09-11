@@ -1,11 +1,48 @@
+@import '../../index.scss';
+
 .detailWrapper {
   position: relative;
   top: 52px;
   background-color: var(--background-color);
   font-family: 'Bai Jamjuree', sans-serif;
   color: var(--color);
-  // height: 10000px;
   width: 100%;
   min-height: 800px;
   overflow: hidden;
+  h2 {
+    margin-top: 1em;
+    position: relative;
+    padding: 10px 5px;
+    text-transform: uppercase;
+    transform: translateX(-100%);
+  }
+  h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 2%;
+    border-bottom: 2px solid var(--greenYellow);
+    width: 40%;
+    transform: translateX(-150%);
+  }
+}
+@keyframes show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@media only screen and (max-width: 1024px) {
+  .detailWrapper {
+    h2 {
+      letter-spacing: 0.5px;
+      position: relative;
+      padding: 0px 0px 5px 5px;
+    }
+    h2::after {
+      width: 90%;
+    }
+  }
 }

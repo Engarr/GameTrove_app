@@ -1,16 +1,16 @@
-h3 {
-  text-align: center;
-  font-family: 'Bai Jamjuree', sans-serif;
-  letter-spacing: 1px;
-  font-size: 1.4em;
-  color: var(--greenYellow);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  padding: 10px 20px;
-  margin-bottom: 1em;
-}
 .formBox__inputBox {
   width: 50%;
+  h3 {
+    text-align: center;
+    font-family: 'Bai Jamjuree', sans-serif;
+    letter-spacing: 1px;
+    font-size: 1.4em;
+    color: var(--greenYellow);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 10px 20px;
+    margin-bottom: 1em;
+  }
 }
 .saveBtn {
   font-family: 'Bai Jamjuree', sans-serif;
@@ -26,7 +26,7 @@ h3 {
   transition: background-color 0.3s;
   color: var(--white-black);
   letter-spacing: 2px;
-  
+
   &:hover {
     background-color: var(--greenYellow-hover);
   }
@@ -40,7 +40,6 @@ h3 {
   .formBox__inputBox {
     width: 100%;
     padding: 10px;
-    
   }
   .saveBtn {
     margin-top: 1em;

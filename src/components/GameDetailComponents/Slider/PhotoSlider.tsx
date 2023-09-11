@@ -65,7 +65,7 @@ const PhotoSlider = ({ data, isLoading, isError, isFetching }: PropsType) => {
     content = (
       <>
         <h2 ref={locationRef} className={`${inView && 'showUp'}`}>
-          Screenshots of the game
+          Screenshots:
         </h2>
         <div className={classes.screenshotsContainer}>
           {activeIndex + 2 <= screenShotsLength && (

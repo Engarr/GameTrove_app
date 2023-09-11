@@ -51,18 +51,9 @@
     left: calc(5% + 270px);
     width: 60%;
     min-height: 300px;
-
-    h2 {
-      letter-spacing: 1px;
-      position: relative;
-    }
-    h2:after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      border: 1px solid var(--greenYellow);
-      width: 100%;
+    h3 {
+      color: var(--greenYellow);
+      margin-right: 10px;
     }
 
     div {
@@ -72,6 +63,7 @@
       margin: 0.8em 0;
       display: flex;
       flex-direction: column;
+
       a {
         color: var(--blue);
         margin-right: 0.2em;
@@ -159,13 +151,9 @@
       width: 100%;
       padding: 0px;
       min-height: 200px;
-      h2 {
-        letter-spacing: 0.5px;
-        position: relative;
-        padding: 0px 0px 5px 5px;
-      }
-      h2:after {
-        width: 70%;
+      h3 {
+        text-align-last: left;
+        margin-bottom: 0;
       }
 
       &--genre {

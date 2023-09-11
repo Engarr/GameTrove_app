@@ -2,21 +2,6 @@
 
 .videoWrapper {
   margin-bottom: 2em;
-  h2 {
-    position: relative;
-    padding: 10px 15px;
-    text-transform: uppercase;
-    transform: translateX(-100%);
-  }
-  h2::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 2%;
-    border-bottom: 2px solid var(--greenYellow);
-    width: 40%;
-    transform: translateX(-150%);
-  }
 }
 
 .videoContainer {
@@ -99,9 +84,6 @@
 @media only screen and (max-width: 1024px) {
   .videoWrapper {
     position: relative;
-    h2::after {
-      width: 80%;
-    }
   }
   .videoContainer {
     height: 350px;
@@ -110,37 +92,14 @@
     &__video {
       width: 100%;
       iframe {
-        width: 100%;
+       
         height: 350px;
       }
     }
   }
-  .leftImgPrev {
-    position: absolute;
-    left: 25%;
-    transform: translate(-50%) scale(0.8);
-    transition: left 1s, transform 1s, opacity 1s;
-    z-index: 1;
-    opacity: 0.5;
-  }
 
   .centerImgActive {
-    position: absolute;
-    transform: translateX(0);
-    left: 50%;
-    transform: translate(-50%) scale(1);
-    transition: left 0.3s, transform 0.3s, opacity 0.3s;
-    z-index: 2;
-    cursor: zoom-in;
-  }
-
-  .rightImgNext {
-    position: absolute;
-    left: 75%;
-    transform: translate(-50%) scale(0.8);
-    transition: left 1s, transform 1s, opacity 1s;
-    z-index: 1;
-    opacity: 0.5;
+    transform: translate(-50%) scale(0.95);
   }
 
   .inactive {
@@ -148,9 +107,9 @@
   }
   .button__prev,
   .button__next {
-    padding: 20px 5px;
+    padding: 10px 5px;
     font-size: 1.2em;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.5);
   }
   .button__prev:hover,
   .button__next:hover {

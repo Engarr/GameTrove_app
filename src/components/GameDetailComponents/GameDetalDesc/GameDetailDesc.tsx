@@ -70,7 +70,7 @@ const GameDetailDesc = ({ data, isLoading, isFetching }: PropsType) => {
 
     content = (
       <div className={classes.productContainer__descriptionBox}>
-        <h2>About the game:</h2>
+        <h2 className="showUp">About the game:</h2>
         <div className={classes[`productContainer__descriptionBox--genre`]}>
           <div>
             <h3>Genre: </h3>
