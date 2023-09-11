@@ -100,7 +100,7 @@ export const settingArr = [
     title: 'Delete account:',
     action: 'deleteAccount',
     firstInputType: 'password',
-    msgFirstInput: 'Enter your account password',
+    msgFirstInput: 'Enter your password',
     seccondInputType: '',
     msgSecondInput: '',
   },

@@ -6,6 +6,7 @@ import classes from './ChangeDataForm.module.scss';
 import { usePostUserChangesMutation } from '../../../../store/api/userSlice';
 import { validateEmail, validatePassword } from '../../../../util/validation';
 import { SettingsResponseType } from '../../../../Types/types';
+import Loader from '../../../UI/Loader/Loader';
 
 interface PropsType {
   title: string;
@@ -40,7 +41,7 @@ export const ChangeDataForm = ({
     email: '',
   });
   const [isDataValid, setIsDataValid] = useState(true);
-  const [postUserChanges, isLoading] = usePostUserChangesMutation();
+  const [postUserChanges, { isLoading }] = usePostUserChangesMutation();
 
   const [errorMsg, setErrorMsg] = useState<string | undefined>('');
 
@@ -114,10 +115,21 @@ export const ChangeDataForm = ({
     setErrorMsg('');
     setIsDataValid(true);
   }, [activeTab]);
+
+  let buttonCtx;
+
+  if (isLoading) {
+    buttonCtx = <Loader message="Saves changes" color="white" />;
+  } else if (actionType === 'deleteAccount') {
+    buttonCtx = 'Delete account';
+  } else {
+    buttonCtx = 'Save changes';
+  }
+
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} className={classes.formBox__inputBox}>
       <h3>{title}</h3>
-      <div className={classes.formBox__inputBox}>
+      <div>
         <Input
           onChange={inputValueHandler}
           data="password"
@@ -142,8 +154,8 @@ export const ChangeDataForm = ({
             }
           />
         )}
-        <button type="submit" className={classes.saveBtn}>
-          {actionType === 'deleteAccount' ? 'Delete account' : 'Save changes'}
+        <button type="submit" className={classes.saveBtn} disabled={isLoading}>
+          {buttonCtx}
         </button>
       </div>
     </form>

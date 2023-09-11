@@ -1,5 +1,19 @@
 .conatiner {
   position: relative;
-  top: 72px;
+  top: 50px;
   min-height: 100vh;
+}
+.image {
+  background-image: url('../../asset/bacground.avif');
+  position: fixed;
+  height: 100%;
+  width: 100%;
+}
+.shadow {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: var(--shadow);
+  backdrop-filter: blur(2px);
+  
 }

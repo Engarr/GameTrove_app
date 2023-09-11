@@ -9,6 +9,9 @@ h3 {
   padding: 10px 20px;
   margin-bottom: 1em;
 }
+.formBox__inputBox {
+  width: 50%;
+}
 .saveBtn {
   font-family: 'Bai Jamjuree', sans-serif;
   margin-top: 2em;
@@ -23,6 +26,7 @@ h3 {
   transition: background-color 0.3s;
   color: var(--white-black);
   letter-spacing: 2px;
+  
   &:hover {
     background-color: var(--greenYellow-hover);
   }
@@ -30,8 +34,13 @@ h3 {
 @media only screen and (max-width: 1024px) {
   h3 {
     padding: 10px 0px;
-    text-align-last: left;
+    text-align-last: center;
     margin-bottom: 0.5em;
+  }
+  .formBox__inputBox {
+    width: 100%;
+    padding: 10px;
+    
   }
   .saveBtn {
     margin-top: 1em;

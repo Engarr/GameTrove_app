@@ -2,6 +2,9 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  max-width: 1200px;
+  left: 50%;
+  transform: translate(-50%);
 
   &____blocTtabs {
     display: flex;
@@ -16,14 +19,15 @@
       font-size: 1.2em;
       outline: none;
       border: none;
-      background-color: var(--background-color);
+      background-color: rgba(136, 135, 135, 0.74);
       color: var(--color);
       width: 150px;
       cursor: pointer;
       letter-spacing: 1px;
-      border: 1px solid var(--background-color-hover);
       transition: box-shadow 0.3s, letter-spacing 0.3s, letter-spacing 0.3s,
         width 0.3s, background-color 0.3s;
+      border-top-right-radius: 10px;
+      border-top-left-radius: 10px;
       &.activeTab {
         background-color: var(--background-color-hover);
         color: var(--greenYellow);
@@ -40,6 +44,8 @@
   }
   &__contentTabs {
     // position: relative;
+    margin-bottom: 2em;
+    
   }
 }
 .content {
