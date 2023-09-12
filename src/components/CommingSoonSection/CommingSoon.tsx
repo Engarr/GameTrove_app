@@ -1,6 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { MdArrowForwardIos } from 'react-icons/md';
 import { useInView } from 'react-intersection-observer';
 import ToolBar from './ToolBar/ToolBar';
 import ComingGameCard from './ComingGames/ComingGameCard';
@@ -9,6 +7,7 @@ import { useGetComingGamesQuery } from '../../store/api/feedSlice';
 import { comingGamePlatforms } from '../../util/db';
 import ErrorComponent from '../UI/ErrorComponent/ErrorComponent';
 import ComingSoonLoader from './CominSoonLoader/ComingSoonLoader';
+import MoreBtn from './MoreBtn/MoreBtn';
 
 interface DataType {
   data: {
@@ -106,20 +105,7 @@ const CommingSoon = () => {
         }`}
       >
         {comingContent}
-        {data && data.length >= 10 && !isFetching && !isLoading && (
-          <button type="button" className={classes.wrapper__moreBtn}>
-            <Link to="/">See more</Link>
-            <MdArrowForwardIos
-              className={`${classes['wrapper__moreBtn--icon']} ${classes['wrapper__moreBtn--icon-one']}`}
-            />
-            <MdArrowForwardIos
-              className={`${classes['wrapper__moreBtn--icon']} ${classes['wrapper__moreBtn--icon-two']}`}
-            />
-            <MdArrowForwardIos
-              className={`${classes['wrapper__moreBtn--icon']} ${classes['wrapper__moreBtn--icon-three']}`}
-            />
-          </button>
-        )}
+        {data && data.length >= 10 && !isFetching && !isLoading && <MoreBtn />}
       </div>
     </section>
   );

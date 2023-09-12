@@ -33,52 +33,6 @@
     background-color: var(--glass);
     margin-top: 5px;
   }
-  &__moreBtn {
-    position: relative;
-    width: 200px;
-    height: 50px;
-    top: 50%;
-    right: -40%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: transparent;
-    border: none;
-    :hover a {
-      color: red;
-    }
-    a {
-      font-size: 1.2em;
-      margin-right: 10px;
-      color: var(--blue);
-      font-weight: bold;
-      transition: color 0.3s, letter-spacing 0.3s;
-    }
-
-    &--icon {
-      font-size: 1em;
-      color: var(--blue);
-      animation: slide;
-      animation-iteration-count: infinite;
-      animation-timing-function: ease-in-out;
-      animation-duration: 2s;
-
-      &-one {
-        animation-delay: 0s;
-      }
-      &-two {
-        animation-delay: 0.3s;
-      }
-      &-three {
-        animation-delay: 0.6s;
-      }
-    }
-  }
-  &__moreBtn:hover a {
-    color: var(--blue-hover);
-    letter-spacing: 0.5px;
-  }
 }
 
 .error {
@@ -119,6 +73,7 @@
       display: grid;
       grid-template-columns: repeat(1, 1fr);
     }
+
     h2 {
       font-size: 1em;
       margin: 0.5em 0;
