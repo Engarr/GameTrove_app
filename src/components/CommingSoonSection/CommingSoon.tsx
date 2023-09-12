@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { MdArrowForwardIos } from 'react-icons/md';
 import { useInView } from 'react-intersection-observer';
 import ToolBar from './ToolBar/ToolBar';
 import ComingGameCard from './ComingGames/ComingGameCard';
@@ -39,9 +41,12 @@ const CommingSoon = () => {
   const { ref: locationRef, inView } = useInView(options);
 
   const { data, isLoading, isError, isFetching } =
-    useGetComingGamesQuery<DataType>(activeSearch, {
-      skip,
-    });
+    useGetComingGamesQuery<DataType>(
+      { platform: activeSearch, limit: 11 },
+      {
+        skip,
+      }
+    );
   useEffect(() => {
     if (inView) {
       setSkip(false);
@@ -101,6 +106,20 @@ const CommingSoon = () => {
         }`}
       >
         {comingContent}
+        {data && data.length >= 10 && !isFetching && !isLoading && (
+          <button type="button" className={classes.wrapper__moreBtn}>
+            <Link to="/">See more</Link>
+            <MdArrowForwardIos
+              className={`${classes['wrapper__moreBtn--icon']} ${classes['wrapper__moreBtn--icon-one']}`}
+            />
+            <MdArrowForwardIos
+              className={`${classes['wrapper__moreBtn--icon']} ${classes['wrapper__moreBtn--icon-two']}`}
+            />
+            <MdArrowForwardIos
+              className={`${classes['wrapper__moreBtn--icon']} ${classes['wrapper__moreBtn--icon-three']}`}
+            />
+          </button>
+        )}
       </div>
     </section>
   );

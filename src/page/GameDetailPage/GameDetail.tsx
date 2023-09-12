@@ -44,10 +44,14 @@ const GameDetail = () => {
         isError={isError}
         isFetching={isFetching}
       />
-      {!isFetching && (
+      {!isFetching && !isError && (
         <>
           {data && data.gameDetails.videos && (
-            <VideoSlider data={data?.gameDetails} isLoading={isLoading} />
+            <VideoSlider
+              data={data?.gameDetails}
+              isLoading={isLoading}
+              isFetching={isFetching}
+            />
           )}
           {data && data.similarGamesInfo.length > 0 && (
             <SimilarGames data={data.similarGamesInfo} />

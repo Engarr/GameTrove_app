@@ -253,6 +253,7 @@ export const getSpecificGames = async (req, res, next) => {
 export const getComingGames = async (req, res, next) => {
   const { token } = req;
   const { platform } = req.params;
+  const { limit } = req.body;
   try {
     const today = Math.floor(Date.now() / 1000);
     let filters = 'platforms != null';
@@ -266,7 +267,7 @@ export const getComingGames = async (req, res, next) => {
     fields name, cover.url, first_release_date, platforms.name;
     where ${filters} & follows != null;
     sort follows desc ;
-    limit 11;
+    limit ${limit};
     `;
     const headers = {
       'Client-ID': process.env.VITE_CLIENT_ID,
@@ -282,16 +283,3 @@ export const getComingGames = async (req, res, next) => {
     throw error;
   }
 };
-
-// const categoriesResponse = await axios.post(
-//   'https://api.igdb.com/v4/games',
-//   'fields *; where id = 208303;',
-//   {
-//     headers: {
-//       'Client-ID': process.env.VITE_CLIENT_ID,
-//       Authorization: `Bearer ${token}`,
-//     },
-//   }
-// );
-// const send = categoriesResponse.data;
-// console.log(send);

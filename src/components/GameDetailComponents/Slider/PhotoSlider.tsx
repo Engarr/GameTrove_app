@@ -41,6 +41,9 @@ const PhotoSlider = ({ data, isLoading, isError, isFetching }: PropsType) => {
     }
   };
   useEffect(() => {
+    setActiveIndex(0);
+  }, [isFetching]);
+  useEffect(() => {
     document.addEventListener('keydown', handleKeyDown);
     return () => {
       document.removeEventListener('keydown', handleKeyDown);

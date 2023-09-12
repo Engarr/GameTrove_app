@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 import { useInView } from 'react-intersection-observer';
 import classes from './VideoSlider.module.scss';
@@ -7,9 +7,10 @@ import { GameDetailType } from '../../../Types/types';
 interface PropsType {
   data: GameDetailType;
   isLoading: boolean;
+  isFetching: boolean;
 }
 
-const VideoSlider = ({ data, isLoading }: PropsType) => {
+const VideoSlider = ({ data, isLoading, isFetching }: PropsType) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const options = {
     threshold: 0,
@@ -22,6 +23,11 @@ const VideoSlider = ({ data, isLoading }: PropsType) => {
   const handleNext = () => {
     setActiveIndex((prev: number) => prev - 1);
   };
+
+  useEffect(() => {
+    setActiveIndex(0);
+  }, [isFetching]);
+
   let content;
   if (data && !isLoading) {
     const videoIds = data.videos.map((video) => video.video_id);

@@ -183,7 +183,7 @@ export const getUserWishlist = async (req, res, next) => {
       return;
     }
     const wishlistArr = user.wishLists.map((game) => game.gameNumber);
-    const query = `fields name, cover.url; where id = (${wishlistArr}); limit 10;`;
+    const query = `fields name, cover.url; where id = (${wishlistArr}); limit 100;`;
 
     const headers = {
       'Client-ID': process.env.VITE_CLIENT_ID,
