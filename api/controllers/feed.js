@@ -129,7 +129,10 @@ export const getGameDetails = async (req, res, next) => {
       headers,
     });
     const idsArr = response.data[0].similar_games;
-    const similarGamesInfo = await getSimiliarGameInfo(idsArr, token);
+    let similarGamesInfo = [];
+    if (idsArr) {
+      similarGamesInfo = await getSimiliarGameInfo(idsArr, token);
+    }
     const gameDetails = response.data;
     const data = {
       gameDetails: gameDetails[0],
