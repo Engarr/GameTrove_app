@@ -5,7 +5,7 @@ import classes from './MoreBtn.module.scss';
 const MoreBtn = () => {
   return (
     <button type="button" className={classes.moreBtn}>
-      <Link to="/">See more</Link>
+      <Link to="/comingGames">See more</Link>
       <MdArrowForwardIos
         className={`${classes.moreBtn__icon} ${classes['moreBtn__icon--one']}`}
       />

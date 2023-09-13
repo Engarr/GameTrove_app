@@ -4,14 +4,11 @@ import { comingGamePlatforms } from '../../../util/db';
 import classes from './ToolBar.module.scss';
 
 interface PropsType {
-  setActiveSearch: React.Dispatch<React.SetStateAction<number>>;
   activeSearch: number;
+  activeSearchHandler: (name: number) => void;
 }
 
-const ToolBar = ({ setActiveSearch, activeSearch }: PropsType) => {
-  const activeSearchHandler = (name: number) => {
-    setActiveSearch(name);
-  };
+const ToolBar = ({ activeSearch, activeSearchHandler }: PropsType) => {
   const [isActive, setisActive] = useState(false);
 
   const activeBarHandler = () => {

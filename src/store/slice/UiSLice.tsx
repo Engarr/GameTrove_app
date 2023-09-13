@@ -10,6 +10,7 @@ export interface UiModeSlice {
     title: string;
     value: string;
   };
+  platform: number;
 }
 
 const initialState: UiModeSlice = {
@@ -21,6 +22,7 @@ const initialState: UiModeSlice = {
     title: 'Default sorting',
     value: 'default',
   },
+  platform: 0,
 };
 
 const uiSlice = createSlice({
@@ -72,6 +74,12 @@ const uiSlice = createSlice({
         activeSearchBar: !state.activeSearchBar,
       };
     },
+    setSearchPlatformHandler(state, action: PayloadAction<number>) {
+      return {
+        ...state,
+        platform: action.payload,
+      };
+    },
   },
 });
 export default uiSlice.reducer;
@@ -81,8 +89,10 @@ export const {
   toggleActiveRightNavBar,
   toggleActiveSearchBar,
   sortingHandler,
+  setSearchPlatformHandler,
 } = uiSlice.actions;
 export const activeLeftBar = (state: State) => state.ui.activeLeftBar;
 export const activeRightBar = (state: State) => state.ui.activeRightBar;
 export const activeSearchBar = (state: State) => state.ui.activeSearchBar;
 export const sortingOption = (state: State) => state.ui.sortingOption;
+export const SearchPlatform = (state: State) => state.ui.platform;

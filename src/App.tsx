@@ -6,6 +6,7 @@ import GamesPage from './page/Games/GamesPage';
 import logout from './page/Logout/Logout';
 import MyAccount from './page/MyAccount/MyAccount';
 import { tokenLoader } from './util/auth';
+import FutureGames from './page/FutureGames/FutureGames';
 
 const App = () => {
   const router = createBrowserRouter([
@@ -25,6 +26,7 @@ const App = () => {
         },
         { path: '/games', element: <GamesPage /> },
         { path: '/account', element: <MyAccount /> },
+        { path: '/comingGames', element: <FutureGames /> },
         {
           path: '/logout',
           action: logout,

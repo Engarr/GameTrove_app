@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
+import { useDispatch, useSelector } from 'react-redux';
 import ToolBar from './ToolBar/ToolBar';
 import ComingGameCard from './ComingGames/ComingGameCard';
 import classes from './ComingSoon.module.scss';
@@ -8,28 +9,39 @@ import { comingGamePlatforms } from '../../util/db';
 import ErrorComponent from '../UI/ErrorComponent/ErrorComponent';
 import ComingSoonLoader from './CominSoonLoader/ComingSoonLoader';
 import MoreBtn from './MoreBtn/MoreBtn';
+import {
+  SearchPlatform,
+  setSearchPlatformHandler,
+} from '../../store/slice/UiSLice';
 
-interface DataType {
+export interface DataResponseType {
   data: {
-    id: number;
-    name: string;
-    cover: {
-      id: number;
-      url: string;
-    };
-    first_release_date: number;
-    platforms: {
+    games: {
       id: number;
       name: string;
+      cover: {
+        id: number;
+        url: string;
+      };
+      first_release_date: number;
+      platforms: {
+        id: number;
+        name: string;
+      }[];
     }[];
-  }[];
+    totalGames: {
+      count: number;
+    };
+  };
   isLoading: boolean;
   isError: boolean;
   isFetching: boolean;
 }
 
 const CommingSoon = () => {
-  const [activeSearch, setActiveSearch] = useState(0);
+  const platform = useSelector(SearchPlatform);
+  const dispacth = useDispatch();
+
   const [fadeIn, setFadeIn] = useState(false);
   const [skip, setSkip] = useState(true);
 
@@ -40,17 +52,22 @@ const CommingSoon = () => {
   const { ref: locationRef, inView } = useInView(options);
 
   const { data, isLoading, isError, isFetching } =
-    useGetComingGamesQuery<DataType>(
-      { platform: activeSearch, limit: 11 },
+    useGetComingGamesQuery<DataResponseType>(
+      { platform, offset: 0 },
       {
         skip,
       }
     );
+
+  const activeSearchHandler = (name: number) => {
+    dispacth(setSearchPlatformHandler(name));
+  };
   useEffect(() => {
     if (inView) {
       setSkip(false);
     }
   }, [inView]);
+
   useEffect(() => {
     setFadeIn(true);
 
@@ -59,10 +76,10 @@ const CommingSoon = () => {
     }, 500);
 
     return () => clearTimeout(timer);
-  }, [activeSearch]);
+  }, [platform]);
 
   const platformName = comingGamePlatforms.find(
-    (platfrom) => platfrom.id === activeSearch
+    (platfrom) => platfrom.id === platform
   );
   let comingContent;
   if (isLoading || isFetching) {
@@ -74,7 +91,7 @@ const CommingSoon = () => {
   } else if (data) {
     comingContent = (
       <>
-        {data.map((game) => (
+        {data.games.map((game) => (
           <ComingGameCard
             key={game.id}
             name={game.name}
@@ -98,14 +115,19 @@ const CommingSoon = () => {
       <p>
         <span>**</span>According to the most expected
       </p>
-      <ToolBar setActiveSearch={setActiveSearch} activeSearch={activeSearch} />
+      <ToolBar
+        activeSearch={platform}
+        activeSearchHandler={activeSearchHandler}
+      />
       <div
         className={`${
           isError ? classes.error : classes.wrapper__gamesContainer
         }`}
       >
         {comingContent}
-        {data && data.length >= 10 && !isFetching && !isLoading && <MoreBtn />}
+        {data && data.totalGames.count >= 10 && !isFetching && !isLoading && (
+          <MoreBtn />
+        )}
       </div>
     </section>
   );
