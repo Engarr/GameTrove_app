@@ -10,6 +10,7 @@ import {
   setSearchPlatformHandler,
 } from '../../store/slice/UiSLice';
 import Spiner from '../../components/UI/Spinner/Spiner';
+import { comingGamePlatforms } from '../../util/db';
 import ErrorComponent from '../../components/UI/ErrorComponent/ErrorComponent';
 import EmptyList from '../../components/Tabs/WishlistTab/EmptyList/EmptyList';
 
@@ -36,6 +37,7 @@ const FutureGames = () => {
     useGetComingGamesQuery<DataResponseType>({
       platform,
       offset: offset.number,
+      limit: 40,
     });
 
   const activeSearchHandler = (name: number) => {
@@ -46,7 +48,7 @@ const FutureGames = () => {
   };
 
   useEffect(() => {
-    const handleScrollPosition = () => {
+    const handleScrollPosition = async () => {
       const windowHeight = window.innerHeight;
       const { scrollY } = window;
       const distanceFromBottom =
@@ -57,10 +59,10 @@ const FutureGames = () => {
           return;
         }
         setOffset((prevOffset) => ({
-          number: 10 * (prevOffset.count + 1),
+          number: 40 * (prevOffset.count + 1),
           count: prevOffset.count + 1,
         }));
-        refetch();
+        await refetch();
       }
     };
 
@@ -140,6 +142,9 @@ const FutureGames = () => {
           </div>
         )}
       </div>
+      {data && data.totalGames.count === loadedGames.length && (
+        <p className={classes.noMoreGames}>There is no more upcoming games</p>
+      )}
     </section>
   );
 };

@@ -255,15 +255,15 @@ export const getSpecificGames = async (req, res, next) => {
 
 export const getComingGames = async (req, res, next) => {
   const { token } = req;
-  const { platform } = req.params;
+  const { platform } = req.body;
   const { offset } = req.body;
-
+  const { limit } = req.body;
   try {
     const today = Math.floor(Date.now() / 1000);
     let filters = 'platforms != null';
-    if (platform !== 'null' && platform !== '0') {
+    if (platform !== 'null' && platform !== 0) {
       filters += ` & platforms = [${platform}]`;
-    } else if (platform === '0') {
+    } else if (platform === 0) {
       filters = `platforms != null`;
     }
     filters += ` & first_release_date > ${today}`;
@@ -271,7 +271,7 @@ export const getComingGames = async (req, res, next) => {
     fields name, cover.url, first_release_date, platforms.name;
     where ${filters} & follows != null;
     sort first_release_date asc;
-    limit 10;
+    limit ${limit};
     offset ${offset};
     `;
     const headers = {

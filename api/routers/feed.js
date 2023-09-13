@@ -18,6 +18,6 @@ router.post('/categoryGames', getToken, getCategoryGames);
 router.post('/game/:gameId', getToken, getGameDetails);
 router.post(`/search`, getToken, searchGames);
 router.post(`/filteredGames`, getToken, getSpecificGames);
-router.post(`/comingGames/:platform`, getToken, getComingGames);
+router.post(`/comingGames`, getToken, getComingGames);
 
 export default router;

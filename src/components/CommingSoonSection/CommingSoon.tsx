@@ -5,7 +5,6 @@ import ToolBar from './ToolBar/ToolBar';
 import ComingGameCard from './ComingGames/ComingGameCard';
 import classes from './ComingSoon.module.scss';
 import { useGetComingGamesQuery } from '../../store/api/feedSlice';
-import { comingGamePlatforms } from '../../util/db';
 import ErrorComponent from '../UI/ErrorComponent/ErrorComponent';
 import ComingSoonLoader from './CominSoonLoader/ComingSoonLoader';
 import MoreBtn from './MoreBtn/MoreBtn';
@@ -52,7 +51,7 @@ const CommingSoon = () => {
 
   const { data, isLoading, isError, isFetching } =
     useGetComingGamesQuery<DataResponseType>(
-      { platform, offset: 0 },
+      { platform: Number(platform), offset: 0, limit: 11 },
       {
         skip,
       }
@@ -67,19 +66,6 @@ const CommingSoon = () => {
     }
   }, [inView]);
 
-  // useEffect(() => {
-  //   setFadeIn(true);
-
-  //   const timer = setTimeout(() => {
-  //     setFadeIn(false);
-  //   }, 500);
-
-  //   return () => clearTimeout(timer);
-  // }, [platform]);
-
-  // const platformName = comingGamePlatforms.find(
-  //   (platfrom) => platfrom.id === platform
-  // );
   let comingContent;
   if (isLoading || isFetching) {
     comingContent = <ComingSoonLoader />;
@@ -119,6 +105,7 @@ const CommingSoon = () => {
           <MoreBtn />
         )}
       </div>
+      {}
     </section>
   );
 };
