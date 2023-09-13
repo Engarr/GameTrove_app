@@ -34,11 +34,11 @@ const WishlistTaba = ({ skipSearch }: PropsType) => {
     });
 
   let content;
-  if (isLoading) {
+  if (isLoading || isFetching) {
     content = <Loader />;
   }
   if (data && data.length === 0) {
-    content = <EmptyList />;
+    content = <EmptyList message="Nothing added yet" />;
   }
   if (data && data.length > 0) {
     content = (

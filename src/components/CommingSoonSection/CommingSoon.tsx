@@ -41,8 +41,7 @@ export interface DataResponseType {
 const CommingSoon = () => {
   const platform = useSelector(SearchPlatform);
   const dispacth = useDispatch();
-
-  const [fadeIn, setFadeIn] = useState(false);
+  // const [fadeIn, setFadeIn] = useState(false);
   const [skip, setSkip] = useState(true);
 
   const options = {
@@ -68,19 +67,19 @@ const CommingSoon = () => {
     }
   }, [inView]);
 
-  useEffect(() => {
-    setFadeIn(true);
+  // useEffect(() => {
+  //   setFadeIn(true);
 
-    const timer = setTimeout(() => {
-      setFadeIn(false);
-    }, 500);
+  //   const timer = setTimeout(() => {
+  //     setFadeIn(false);
+  //   }, 500);
 
-    return () => clearTimeout(timer);
-  }, [platform]);
+  //   return () => clearTimeout(timer);
+  // }, [platform]);
 
-  const platformName = comingGamePlatforms.find(
-    (platfrom) => platfrom.id === platform
-  );
+  // const platformName = comingGamePlatforms.find(
+  //   (platfrom) => platfrom.id === platform
+  // );
   let comingContent;
   if (isLoading || isFetching) {
     comingContent = <ComingSoonLoader />;
@@ -106,15 +105,6 @@ const CommingSoon = () => {
   }
   return (
     <section className={classes.wrapper} ref={locationRef}>
-      <h2>
-        Upcoming games for the platform:
-        <span className={fadeIn ? classes.fadeIn : ''}>
-          {platformName?.name}
-        </span>
-      </h2>
-      <p>
-        <span>**</span>According to the most expected
-      </p>
       <ToolBar
         activeSearch={platform}
         activeSearchHandler={activeSearchHandler}

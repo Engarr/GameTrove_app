@@ -10,6 +10,8 @@ import {
   setSearchPlatformHandler,
 } from '../../store/slice/UiSLice';
 import Spiner from '../../components/UI/Spinner/Spiner';
+import ErrorComponent from '../../components/UI/ErrorComponent/ErrorComponent';
+import EmptyList from '../../components/Tabs/WishlistTab/EmptyList/EmptyList';
 
 interface LoadedGamesType {
   id: number;
@@ -30,16 +32,16 @@ const FutureGames = () => {
   const dispacth = useDispatch();
   const [offset, setOffset] = useState({ number: 0, count: 0 });
   const [loadedGames, setLoadedGames] = useState<LoadedGamesType[]>([]);
-  // const [searchPlatform, setSearchPlatform] = useState(platform);
-
   const { data, isLoading, isError, isFetching, refetch } =
     useGetComingGamesQuery<DataResponseType>({
       platform,
       offset: offset.number,
     });
+
   const activeSearchHandler = (name: number) => {
     dispacth(setSearchPlatformHandler(name));
     setLoadedGames([]);
+    setOffset({ number: 0, count: 0 });
     refetch();
   };
 
@@ -49,26 +51,26 @@ const FutureGames = () => {
       const { scrollY } = window;
       const distanceFromBottom =
         document.body.scrollHeight - (scrollY + windowHeight);
-      if (data) {
-        if (loadedGames.length >= data.totalGames?.count) {
+
+      if (distanceFromBottom === 0) {
+        if (data && data.totalGames.count === loadedGames.length) {
           return;
         }
-        if (distanceFromBottom === 0) {
-          setOffset((prevOffset) => ({
-            number: 10 * (prevOffset.count + 1),
-            count: prevOffset.count + 1,
-          }));
-          refetch();
-        }
+        setOffset((prevOffset) => ({
+          number: 10 * (prevOffset.count + 1),
+          count: prevOffset.count + 1,
+        }));
+        refetch();
       }
     };
+
     window.addEventListener('scroll', handleScrollPosition);
 
     return () => {
       window.removeEventListener('scroll', handleScrollPosition);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [refetch]);
+  }, [refetch, loadedGames.length]);
 
   useEffect(() => {
     if (data) {
@@ -79,9 +81,33 @@ const FutureGames = () => {
 
   let content;
   if (isLoading || isFetching) {
-    content = <Spiner />;
+    content = (
+      <div className={classes.spinerBox}>
+        <Spiner message="Fetching data" />
+      </div>
+    );
   }
-  if (loadedGames) {
+  if (isError) {
+    content = (
+      <div className={classes.errorBox}>
+        <ErrorComponent
+          message="Something went wrong, could not fetch the data."
+          messageTwo="Please try again later"
+        />
+      </div>
+    );
+  }
+  if (loadedGames.length === 0 && !isFetching && !isLoading) {
+    content = (
+      <div className={classes.emptyBox}>
+        <EmptyList
+          message="We couldn't find any upcoming games"
+          messageTwo="check anodther platforms"
+        />
+      </div>
+    );
+  }
+  if (loadedGames.length !== 0) {
     content = (
       <>
         {loadedGames.map((game) => (
@@ -99,12 +125,21 @@ const FutureGames = () => {
   }
   return (
     <section className={classes.wrapper}>
-      <ToolBar
-        activeSearch={platform}
-        activeSearchHandler={activeSearchHandler}
-      />
+      <div className={classes.toolBarBox}>
+        <ToolBar
+          activeSearch={platform}
+          activeSearchHandler={activeSearchHandler}
+        />
+      </div>
 
-      <div className={classes.gamesContainer}>{content}</div>
+      <div className={classes.gamesContainer}>
+        {content}
+        {isFetching && loadedGames.length !== 0 && (
+          <div className={classes.spinerBox}>
+            <Spiner message="Fetching more games" />
+          </div>
+        )}
+      </div>
     </section>
   );
 };

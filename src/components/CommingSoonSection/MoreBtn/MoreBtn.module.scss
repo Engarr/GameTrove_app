@@ -42,7 +42,20 @@
     }
   }
 }
-
+@keyframes slide {
+  0% {
+    opacity: 0.1;
+    transform: translateX(0) scale(0.9);
+  }
+  50% {
+    transform: translateX(5px) scale(1);
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.2;
+    transform: translateX(10px) scale(0.9);
+  }
+}
 @media only screen and (max-width: 1024px) {
   .moreBtn {
     top: 0%;
@@ -55,7 +68,8 @@
     }
 
     &__icon {
-      font-size: 1.2em;
+      font-size: 1em;
+      
     }
   }
   .moreBtn:hover a {

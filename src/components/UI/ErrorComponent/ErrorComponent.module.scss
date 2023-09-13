@@ -4,15 +4,17 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  
 
   &__icon {
     color: rgb(248, 63, 63);
     font-size: 4em;
   }
-  p {
+  &__biggerText {
     padding: 10px 20px;
     font-size: 1.6em;
+  }
+  &__lowerText {
+    font-size: 1.4em;
   }
 }
 @media only screen and (max-width: 1024px) {
@@ -24,9 +26,12 @@
       color: rgb(248, 63, 63);
       font-size: 4em;
     }
-    p {
-      padding: 0px 10px;
+    &__biggerText {
+      padding: 5px 10px;
       font-size: 1em;
+    }
+    &__lowerText {
+      font-size: 0.9em;
     }
   }
 }

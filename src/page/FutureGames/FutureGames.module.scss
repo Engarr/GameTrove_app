@@ -1,7 +1,7 @@
 .wrapper {
   position: relative;
   left: 50%;
-  transform: translate(-50%);
+  transform: translateX(-50%);
   max-width: 1400px;
   font-family: 'Bai Jamjuree', sans-serif;
   height: auto;
@@ -9,6 +9,21 @@
   height: auto;
   margin-top: 72px;
 }
+
+.spinerBox,
+.errorBox,
+.emptyBox {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  left: 50%;
+}
+.toolBarBox {
+  position: relative;
+  margin-top: 100px;
+  margin-bottom: 1em;
+}
+
 .gamesContainer {
   position: relative;
   width: 100%;
@@ -18,16 +33,28 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 0.5rem;
   background-color: var(--glass);
-  margin-top: 5px;
+  margin-top: 15px;
 }
 
 @media only screen and (max-width: 1024px) {
   .wrapper {
     width: 100%;
+    margin-top: 100px;
+  }
+  .toolBarBox {
+    margin-bottom: 2em;
+  }
+  .spinerBox,
+  .errorBox {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    left: 50%;
+    transform: translate(-50%);
   }
   .gamesContainer {
     width: 100%;
-    top: 0;
+
     display: grid;
     grid-template-columns: repeat(1, 1fr);
   }

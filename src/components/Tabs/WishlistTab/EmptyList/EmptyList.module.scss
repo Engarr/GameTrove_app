@@ -7,7 +7,8 @@
   &__link {
     margin-top: 20px;
     padding: 10px;
-    a {
+    a,
+    p {
       font-size: 1.2em;
       color: var(--blue);
     }
@@ -21,7 +22,8 @@
     &__link {
       margin: 20px 0;
       padding: 10px;
-      a {
+      a,
+      p {
         font-size: 1.5em;
         color: var(--blue);
       }

@@ -270,7 +270,7 @@ export const getComingGames = async (req, res, next) => {
     const query = `
     fields name, cover.url, first_release_date, platforms.name;
     where ${filters} & follows != null;
-    sort follows desc;
+    sort first_release_date asc;
     limit 10;
     offset ${offset};
     `;
@@ -283,7 +283,7 @@ export const getComingGames = async (req, res, next) => {
     });
     const countQuery = `
       fields first_release_date, platforms.name;
-      where ${filters};
+      where ${filters} & follows != null;
     `;
     const countResponse = await axios.post(
       'https://api.igdb.com/v4/games/count',

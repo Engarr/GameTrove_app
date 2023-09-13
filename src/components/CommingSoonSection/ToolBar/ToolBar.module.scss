@@ -1,3 +1,22 @@
+.container {
+  h2 {
+    margin: 1em 0 0 0;
+    padding: 10px 5px;
+    span {
+      color: var(--greenYellow);
+      font-weight: bold;
+      margin-left: 5px;
+    }
+  }
+  p {
+    font-size: 0.9em;
+    letter-spacing: 1px;
+    span {
+      color: var(--blue);
+    }
+  }
+}
+
 .tollbarBox {
   background-color: var(--glass);
   padding: 10px 20px;
@@ -60,17 +79,35 @@
 .expand {
   opacity: 0;
 }
+.fadeIn {
+  animation: fadeInAnimation 0.8s ease-in-out;
+}
+
+@keyframes fadeInAnimation {
+  from {
+    opacity: 0.2;
+  }
+  to {
+    opacity: 1;
+  }
+}
 @media only screen and (max-width: 1024px) {
+  .container {
+    h2 {
+      font-size: 1em;
+      margin: 0.5em 0;
+    }
+  }
   .expand {
     position: absolute;
-    right: 5px;
-    top: 5px;
-    font-size: 2em;
+    right: 2%;
+    top: 10px;
+    font-size: 1.5em;
     opacity: 1;
-    transition: transform 0.3s;
+    transition: color 0.3s;
   }
   .arrowDown {
-    transform: rotate(180deg);
+    color: var(--greenYellow);
   }
 
   .tollbarBox {

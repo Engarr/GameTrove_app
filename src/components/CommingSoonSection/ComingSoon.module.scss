@@ -6,22 +6,7 @@
   font-family: 'Bai Jamjuree', sans-serif;
   height: auto;
   margin-bottom: 2em;
-  h2 {
-    margin: 1em 0 0 0;
-    padding: 10px 5px;
-    span {
-      color: var(--greenYellow);
-      font-weight: bold;
-      margin-left: 5px;
-    }
-  }
-  p {
-    font-size: 0.9em;
-    letter-spacing: 1px;
-    span {
-      color: var(--blue);
-    }
-  }
+
   &__gamesContainer {
     position: relative;
     width: 100%;
@@ -38,32 +23,7 @@
 .error {
   text-align: center;
 }
-.fadeIn {
-  animation: fadeInAnimation 0.8s ease-in-out;
-}
 
-@keyframes fadeInAnimation {
-  from {
-    opacity: 0.2;
-  }
-  to {
-    opacity: 1;
-  }
-}
-@keyframes slide {
-  0% {
-    opacity: 0.1;
-    transform: translateX(0) scale(0.9);
-  }
-  50% {
-    transform: translateX(5px) scale(1);
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.2;
-    transform: translateX(10px) scale(0.9);
-  }
-}
 @media only screen and (max-width: 1024px) {
   .wrapper {
     width: 100%;
@@ -72,11 +32,6 @@
       top: 0;
       display: grid;
       grid-template-columns: repeat(1, 1fr);
-    }
-
-    h2 {
-      font-size: 1em;
-      margin: 0.5em 0;
     }
   }
 }
