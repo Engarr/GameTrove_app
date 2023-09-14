@@ -13,6 +13,7 @@ const Slider = ({ data }: PropsType) => {
     triggerOnce: true,
   };
   const { ref: locationRef, inView } = useInView(options);
+
   return (
     <>
       <h2

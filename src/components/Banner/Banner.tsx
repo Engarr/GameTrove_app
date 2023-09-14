@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
+import { useMediaQuery } from 'react-responsive';
 import { useGetBannerGamesQuery } from '../../store/api/feedSlice';
 import classes from './Banner.module.scss';
 import { GameType } from '../../Types/types';
@@ -13,7 +14,7 @@ import BannerCtx from './BannerCtx/BannerCtx';
 const Banner = () => {
   const { data, isLoading, isError } = useGetBannerGamesQuery<GameType>();
   const mode = useSelector(colorMode);
-
+  const isMediumMobile = useMediaQuery({ maxWidth: 1024 });
   const [isActive, setIsActive] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -69,7 +70,8 @@ const Banner = () => {
           onClick={handlePrevBanner}
         />
         {data.map((item, index) => {
-          const imageUrl = item.cover.url.replace('t_thumb', 't_1080p');
+          const imageSize = !isMediumMobile ? 't_1080p' : 't_720p';
+          const imageUrl = item.cover.url.replace('t_thumb', `${imageSize}`);
 
           return (
             <BannerCtx

@@ -10,7 +10,6 @@ import {
   setSearchPlatformHandler,
 } from '../../store/slice/UiSLice';
 import Spiner from '../../components/UI/Spinner/Spiner';
-import { comingGamePlatforms } from '../../util/db';
 import ErrorComponent from '../../components/UI/ErrorComponent/ErrorComponent';
 import EmptyList from '../../components/Tabs/WishlistTab/EmptyList/EmptyList';
 

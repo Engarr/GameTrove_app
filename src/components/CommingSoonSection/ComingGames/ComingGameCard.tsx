@@ -16,7 +16,7 @@ interface PropsType {
 
 const ComingGameCard = ({ img, date, id, name, platforms }: PropsType) => {
   const imageUrl = img
-    ? img.replace('t_thumb', 't_1080p')
+    ? img.replace('t_thumb', 't_cover_big')
     : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgxr1R7VtfzTnb7T1xo3RWbgrPNbf3RgvJ63abVkeyzxq1gLGb50lacEnZof8bSf4h4Ww&usqp=CAU';
   const timestamp = date;
   const now = new Date();
@@ -33,7 +33,7 @@ const ComingGameCard = ({ img, date, id, name, platforms }: PropsType) => {
     <div className={classes.card}>
       <div>
         <Link to={`/game/${id}`}>
-          <img src={imageUrl} alt="" width={120} loading="lazy" />
+          <img src={imageUrl} alt="" width={120} height={150} loading="lazy" />
         </Link>
       </div>
       <div className={classes.card__desc}>

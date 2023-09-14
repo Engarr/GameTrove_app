@@ -101,10 +101,7 @@ const CategoryGameCard = () => {
   };
 
   if (data && data.newsGames[currentIndex]?.cover) {
-    bacgroundImg = data.newsGames[currentIndex].cover.url.replace(
-      't_thumb',
-      't_1080p'
-    );
+    bacgroundImg = data.newsGames[currentIndex].cover.url;
   }
 
   let content;
@@ -123,7 +120,9 @@ const CategoryGameCard = () => {
     content = (
       <div
         className={classes.container}
-        style={{ backgroundImage: `url(${bacgroundImg})` }}
+        style={{
+          backgroundImage: `url(${bacgroundImg})`,
+        }}
       >
         <img
           src={mode === 'dark' ? bgc : bgcLight}

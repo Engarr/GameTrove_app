@@ -34,10 +34,14 @@ const GameDetailBanner = ({
       <ErrorComponent message="Data loading error. Please try again later" />
     );
   } else if (data) {
+    const noImg =
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgxr1R7VtfzTnb7T1xo3RWbgrPNbf3RgvJ63abVkeyzxq1gLGb50lacEnZof8bSf4h4Ww&usqp=CAU';
     const imageUrl = data.cover
-      ? data.cover.url.replace('t_thumb', 't_1080p')
-      : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgxr1R7VtfzTnb7T1xo3RWbgrPNbf3RgvJ63abVkeyzxq1gLGb50lacEnZof8bSf4h4Ww&usqp=CAU';
-
+      ? data.cover.url.replace('t_thumb', 't_720p')
+      : noImg;
+    const backgroundImg = data.cover
+      ? data.cover.url.replace('t_thumb', 't_screenshot_med')
+      : noImg;
     const timestamp = data.first_release_date;
     const date = new Date(timestamp * 1000);
     const month = date.toLocaleString('en-US', { month: 'long' });
@@ -45,7 +49,7 @@ const GameDetailBanner = ({
 
     content = (
       <div
-        style={{ backgroundImage: `url(${imageUrl})` }}
+        style={{ backgroundImage: `url(${backgroundImg})` }}
         className={classes.productContainer__background}
       >
         <div className={classes[`productContainer__background--shadow`]} />

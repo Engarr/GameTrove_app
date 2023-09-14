@@ -30,6 +30,7 @@ const BannerCtx = ({
   setIsActive,
 }: PropsType) => {
   const cardRef = useRef<HTMLDivElement>(null);
+  const bacgroundImg = imageUrl.replace('t_1080p', 't_720p');
   return (
     <div
       key={item.id}
@@ -42,7 +43,7 @@ const BannerCtx = ({
             `}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      style={{ backgroundImage: `url(${imageUrl})` }}
+      style={{ backgroundImage: `url(${bacgroundImg})` }}
     >
       <div className={classes.banner__shadow} />
       <img

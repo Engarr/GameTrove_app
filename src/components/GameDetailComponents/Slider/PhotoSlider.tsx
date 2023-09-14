@@ -59,9 +59,10 @@ const PhotoSlider = ({ data, isLoading, isError, isFetching }: PropsType) => {
       <ErrorComponent message="Data loading error. Please try again later" />
     );
   } else if (data && data.screenshots) {
+    const imageSize = isMediumMobile ? 't_720p' : 't_1080p';
     const screenshotsUrl = data.screenshots.map((screen) => ({
       id: screen.id,
-      url: screen.url.replace('t_thumb', 't_1080p'),
+      url: screen.url.replace('t_thumb', `${imageSize}`),
     }));
     const screenShotsLength = data.screenshots.length;
 
