@@ -37,10 +37,12 @@ const GameDetailBanner = ({
     const noImg =
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgxr1R7VtfzTnb7T1xo3RWbgrPNbf3RgvJ63abVkeyzxq1gLGb50lacEnZof8bSf4h4Ww&usqp=CAU';
     const imageUrl = data.cover
-      ? data.cover.url.replace('t_thumb', 't_720p')
+      ? data.cover.url.replace('t_thumb', 't_720p').replace('.jpg', '.webp')
       : noImg;
     const backgroundImg = data.cover
-      ? data.cover.url.replace('t_thumb', 't_screenshot_med')
+      ? data.cover.url
+          .replace('t_thumb', 't_screenshot_med')
+          .replace('.jpg', '.webp')
       : noImg;
     const timestamp = data.first_release_date;
     const date = new Date(timestamp * 1000);

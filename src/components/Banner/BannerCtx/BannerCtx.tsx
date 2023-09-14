@@ -30,7 +30,9 @@ const BannerCtx = ({
   setIsActive,
 }: PropsType) => {
   const cardRef = useRef<HTMLDivElement>(null);
-  const bacgroundImg = imageUrl.replace('t_1080p', 't_720p');
+  const bacgroundImg = imageUrl
+    .replace('t_1080p', 't_720p')
+    .replace('.jpg', '.webp');
   return (
     <div
       key={item.id}

@@ -62,7 +62,9 @@ const PhotoSlider = ({ data, isLoading, isError, isFetching }: PropsType) => {
     const imageSize = isMediumMobile ? 't_720p' : 't_1080p';
     const screenshotsUrl = data.screenshots.map((screen) => ({
       id: screen.id,
-      url: screen.url.replace('t_thumb', `${imageSize}`),
+      url: screen.url
+        .replace('t_thumb', `${imageSize}`)
+        .replace('.jpg', '.webp'),
     }));
     const screenShotsLength = data.screenshots.length;
 

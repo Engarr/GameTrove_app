@@ -5,9 +5,12 @@
   transform: perspective(5000px) rotateY(var(--rotateY)) rotateX(var(--rotateX));
   transition: transform var(--reset);
   transition-timing-function: linear;
+  width: 250px;
+  height: 350px;
   img {
     box-shadow: 0 0 2px var(--black-white);
-    width: 250px;
+    height: 100%;
+    width: 100%;
   }
   a {
     position: absolute;
@@ -39,10 +42,9 @@
 @media only screen and (max-width: 1024px) {
   .img {
     top: 10%;
-
-    img {
-      width: 125px;
-    }
+    width: 125px;
+    height: 150px;
+    
   }
 
   .img::after {

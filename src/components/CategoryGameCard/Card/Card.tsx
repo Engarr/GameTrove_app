@@ -26,7 +26,9 @@ const Card = ({ cardsContainerRef, data }: PropsType) => {
         {data &&
           data.newsGames.map((game) => {
             const imageUrl = game.cover
-              ? game.cover.url.replace('t_thumb', 't_720p')
+              ? game.cover.url
+                  .replace('t_thumb', 't_720p')
+                  .replace('.jpg', '.webp')
               : '';
             const timestamp = game.first_release_date;
             const date = new Date(timestamp * 1000);

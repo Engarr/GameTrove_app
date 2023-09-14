@@ -71,7 +71,9 @@ const Banner = () => {
         />
         {data.map((item, index) => {
           const imageSize = !isMediumMobile ? 't_1080p' : 't_720p';
-          const imageUrl = item.cover.url.replace('t_thumb', `${imageSize}`);
+          const imageUrl = item.cover.url
+            .replace('t_thumb', `${imageSize}`)
+            .replace('.jpg', '.webp');
 
           return (
             <BannerCtx

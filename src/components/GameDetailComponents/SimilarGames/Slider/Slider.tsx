@@ -31,7 +31,9 @@ const Slider = ({ data }: PropsType) => {
               let imageUrl =
                 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE3CETL_OertJKScoHfblxs6CBrKGVCmVESw&usqp=CAU';
               if (game.cover && game.cover.url) {
-                imageUrl = game.cover.url.replace('t_thumb', 't_720p');
+                imageUrl = game.cover.url
+                  .replace('t_thumb', 't_720p')
+                  .replace('.jpg', '.webp');
               }
               return (
                 <div key={game.id} className={classes.sliderContainer__card}>
@@ -44,7 +46,9 @@ const Slider = ({ data }: PropsType) => {
             let imageUrl =
               'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE3CETL_OertJKScoHfblxs6CBrKGVCmVESw&usqp=CAU';
             if (game.cover && game.cover.url) {
-              imageUrl = game.cover.url.replace('t_thumb', 't_720p');
+              imageUrl = game.cover.url
+                .replace('t_thumb', 't_720p')
+                .replace('.jpg', '.webp');
             }
             return (
               <div key={game.id} className={classes.sliderContainer__card}>

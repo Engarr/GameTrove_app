@@ -5,6 +5,7 @@ import classes from './WishlistTab.module.scss';
 import Wishlist from '../../WishlistButton/Wishlist';
 import Loader from './Loader/Loader';
 import EmptyList from './EmptyList/EmptyList';
+import { useMediaQuery } from 'react-responsive';
 
 interface UserWislistType {
   data: {
@@ -26,6 +27,7 @@ interface PropsType {
 
 const WishlistTaba = ({ skipSearch }: PropsType) => {
   const token = useRouteLoaderData('root') as string;
+  const isMediumMobile = useMediaQuery({ maxWidth: 1024 });
 
   const { data, isLoading, isFetching } =
     useGetUserWishlistQuery<UserWislistType>(token, {
@@ -45,7 +47,8 @@ const WishlistTaba = ({ skipSearch }: PropsType) => {
       <div className={classes.container}>
         <div className={classes.container__cards}>
           {data.map((game) => {
-            const newImg = game.cover.url.replace('t_thumb', 't_1080p');
+            const size = isMediumMobile ? 't_720p' : 't_1080p';
+            const newImg = game.cover.url.replace('t_thumb', `${size}`);
             const newGameId = game.id.toString();
             return (
               <div key={game.id} className={classes.gameCard}>
@@ -58,7 +61,13 @@ const WishlistTaba = ({ skipSearch }: PropsType) => {
                     <TfiMoreAlt />
                   </Link>
                 </div>
-                <img src={newImg} alt={game.name} />
+                <img
+                  src={newImg}
+                  alt={game.name}
+                  loading="lazy"
+                  height={280}
+                  width={200}
+                />
               </div>
             );
           })}

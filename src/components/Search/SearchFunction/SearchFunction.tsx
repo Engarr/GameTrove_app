@@ -61,7 +61,9 @@ const SearchFunction = ({ isHideHandler, searchInput }: PropsType) => {
           let imageUrl =
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE3CETL_OertJKScoHfblxs6CBrKGVCmVESw&usqp=CAU';
           if (game.cover && game.cover.url) {
-            imageUrl = game.cover.url.replace('t_thumb', 't_720p');
+            imageUrl = game.cover.url
+              .replace('t_thumb', 't_cover_small')
+              .replace('.jpg', '.webp');
           }
           return (
             <li key={game.id}>

@@ -16,7 +16,7 @@ interface PropsType {
 
 const ComingGameCard = ({ img, date, id, name, platforms }: PropsType) => {
   const imageUrl = img
-    ? img.replace('t_thumb', 't_cover_big')
+    ? img.replace('t_thumb', 't_cover_big').replace('.jpg', '.webp')
     : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgxr1R7VtfzTnb7T1xo3RWbgrPNbf3RgvJ63abVkeyzxq1gLGb50lacEnZof8bSf4h4Ww&usqp=CAU';
   const timestamp = date;
   const now = new Date();

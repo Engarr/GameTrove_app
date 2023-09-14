@@ -24,7 +24,7 @@ const GameCard = ({ name, img, id, geners, summary, platforms }: PropsType) => {
     dispatch(switchPage(1));
   };
 
-  const newImg = img.replace('t_thumb', 't_1080p');
+  const newImg = img.replace('t_thumb', 't_720p').replace('.jpg', '.webp');
   return (
     <div className={classes.card}>
       <Link to={`/game/${id}`}>
