@@ -36,7 +36,7 @@ const ToolBar = ({ activeSearch, activeSearchHandler }: PropsType) => {
         </span>
       </h2>
       <p>
-        <span>**</span>According to the most expected
+        <span>**</span>Sorting by expected release date
       </p>
       <TbLayoutNavbarExpand
         className={`${classes.expand} ${isActive ? classes.arrowDown : ''}`}

@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { PiTrashSimpleDuotone, PiPassword } from 'react-icons/pi';
+import { Form } from 'react-router-dom';
 import { MdAlternateEmail } from 'react-icons/md';
+import { AiOutlineLogout } from 'react-icons/ai';
 import classes from './Settings.module.scss';
 import { settingArr } from '../../../util/db';
-import { ChangeDataForm as Form } from './ChangeDataForm/ChangeDataForm';
+import { ChangeDataForm as DataChangeForm } from './ChangeDataForm/ChangeDataForm';
 import FormWrapper from '../../FormWrapper/FormWrapper';
 
 const Settings = () => {
@@ -56,10 +58,16 @@ const Settings = () => {
               }`}
             />
           </button>
+          <Form action="/logout" method="post">
+            <button className={classes.logoutButton} type="submit">
+              Logout
+              <AiOutlineLogout className={classes[`nav__buttons--icon`]} />
+            </button>
+          </Form>
         </div>
         <div className={classes.formBox}>
           <FormWrapper>
-            <Form
+            <DataChangeForm
               title={settings.title}
               activeTab={activeTab}
               firstInputType={settings.firstInputType}

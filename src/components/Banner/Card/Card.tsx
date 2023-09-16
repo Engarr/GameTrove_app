@@ -65,7 +65,7 @@ const Card = ({ imageUrl, cardId, setIsActive, gameId }: PropsType) => {
         alt="game_picture"
         loading="lazy"
         width={250}
-        height={300}
+        height={333}
       />
     </div>
   );
